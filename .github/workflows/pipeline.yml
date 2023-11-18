@@ -13,17 +13,23 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: ✋ Cancel Previous Redundant Builds
-        uses: styfle/cancel-workflow-action@0.6.0
+        uses: styfle/cancel-workflow-action@0.12.0
         with:
           access_token: ${{ github.token }}
 
   lint:
+    strategy:
+      matrix:
+        node-version: [18.x]
     name: 💅 Linting
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
       - uses: pnpm/action-setup@v2
         with:
           version: latest
@@ -33,12 +39,18 @@ jobs:
         run: pnpm run lint
 
   build:
+    strategy:
+      matrix:
+        node-version: [18.x]
     name: 👷 Build
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
       - uses: pnpm/action-setup@v2
         with:
           version: latest
@@ -48,13 +60,19 @@ jobs:
         run: pnpm run build
 
   tests:
+    strategy:
+      matrix:
+        node-version: [18.x]
     name: 🧪 Unit Testing
     needs: [lint, build]
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
       - uses: pnpm/action-setup@v2
         with:
           version: latest
