@@ -9,6 +9,10 @@
     "lint:fix": "eslint ./src/**/*.ts ./tests/**/*.ts --fix",
     "prettier": "prettier --check ./src/**/*.ts ./tests/**/*.ts",
     "prettier:fix": "prettier --write ./src/**/*.ts ./tests/**/*.ts",
+    "build": "pnpm run build:clean && pnpm run build:tsc && pnpm run build:di",
+    "build:tsc": "tsc -p tsconfig.prod.json",
+    "build:di": "copy 'src/**/*.{json,yaml,html,png}' dist/src",
+    "build:clean": "rm -r dist; exit 0",
     "test": "pnpm run test:unit",
     "test:unit": "NODE_ENV=test jest"
   },
@@ -34,6 +38,7 @@
     "@types/uuid": "9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "6.11.0",
+    "copy": "0.3.2",
     "eslint": "8.0.1",
     "eslint-config-prettier": "9.0.0",
     "eslint-config-standard-with-typescript": "40.0.0",
