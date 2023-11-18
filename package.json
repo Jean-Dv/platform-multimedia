@@ -61,5 +61,8 @@
       "pnpm run lint:fix",
       "pnpm run prettier:fix"
     ]
+  },
+  "_moduleAliases": {
+    "@Shared": "src/Contexts/Shared"
   }
 }
