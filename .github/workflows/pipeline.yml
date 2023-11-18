@@ -1,0 +1,64 @@
+name: Node CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [develop]
+    types: [opened, synchronize]
+
+jobs:
+  check-skip:
+    name: ✋ Cancel Previous Redundant Builds
+    runs-on: ubuntu-20.04
+    steps:
+      - name: ✋ Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+  lint:
+    name: 💅 Linting
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - name: Install dependencies
+        run: pnpm ci
+      - name: Lint
+        run: pnpm run lint
+
+  build:
+    name: 👷 Build
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - name: Install dependencies
+        run: pnpm ci
+      - name: Build
+        run: pnpm run build
+
+  tests:
+    name: 🧪 Unit Testing
+    needs: [lint, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - name: Install dependencies
+        run: pnpm install
+      - name: Unit tests
+        run: pnpm run test:unit
