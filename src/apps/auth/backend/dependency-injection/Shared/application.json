@@ -1,0 +1,62 @@
+{
+  "services": {
+    "Auth.Shared.MongoConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/Auth/Shared/infrastructure/persistence/mongo/MongoConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "Auth.Shared.RabbitMQConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/Auth/Shared/infrastructure/RabbitMQ/RabbitMQConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "Auth.Shared.domain.EventBus": {
+      "factory": {
+        "class": "../../../../../Contexts/Auth/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory",
+        "method": "create"
+      },
+      "arguments": [
+        "@Auth.Shared.DomainEventFailoverPublisher",
+        "@Auth.Shared.RabbitMQConnection",
+        "@Auth.Shared.RabbitMQqueueFormatter",
+        "@Auth.Shared.RabbitMQConfig"
+      ]
+    },
+    "Auth.Shared.ConnectionManager": {
+      "factory": {
+        "class": "../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory",
+        "method": "createClient"
+      },
+      "arguments": ["auth", "@Auth.Shared.MongoConfig"]
+    },
+    "Auth.Shared.RabbitMQqueueFormatter": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter",
+      "arguments": ["auth"]
+    },
+    "Auth.Shared.RabbitMQConnection": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConnection",
+      "arguments": ["@Auth.Shared.RabbitMQConfig"]
+    },
+    "Auth.Shared.RabbitMQConfigurer": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConfigurer",
+      "arguments": [
+        "@Auth.Shared.RabbitMQConnection",
+        "@Auth.Shared.RabbitMQqueueFormatter"
+      ]
+    },
+    "Auth.Shared.DomainEventFailoverPublisher": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/FailoverPublisher/FailoverPublisher",
+      "arguments": ["@Auth.Shared.ConnectionManager"]
+    },
+    "Auth.Shared.CommandHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers",
+      "arguments": ["!tagged commandHandler"]
+    },
+    "Auth.Shared.domain.CommandBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus",
+      "arguments": ["@Auth.Shared.CommandHandlers"]
+    }
+  }
+}
