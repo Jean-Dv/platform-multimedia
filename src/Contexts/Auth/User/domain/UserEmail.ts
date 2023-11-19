@@ -1,5 +1,5 @@
-import { InvalidArgumentError } from '@Shared/domain/value-objects/InvalidArgumentError'
 import { StringValueObject } from '@Shared/domain/value-objects/StringValueObject'
+import { UserEmailInvalid } from './UserEmailInvalid'
 
 /**
  * Represents the email of a user.
@@ -22,7 +22,7 @@ export class UserEmail extends StringValueObject {
   private ensureEmailIsValid(value: string): void {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     if (!emailRegex.test(value)) {
-      throw new InvalidArgumentError(`The email <${value}> is not valid.`)
+      throw new UserEmailInvalid(`The email <${value}> is not valid.`)
     }
   }
 }

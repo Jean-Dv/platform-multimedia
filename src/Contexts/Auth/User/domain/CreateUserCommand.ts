@@ -1,6 +1,7 @@
 import { Command } from '@Shared/domain/Command'
 
 interface Params {
+  id: string
   firstName: string
   lastName: string
   email: string
@@ -9,6 +10,7 @@ interface Params {
 }
 
 export class CreateUserCommand extends Command {
+  public readonly id: string
   public readonly firstName: string
   public readonly lastName: string
   public readonly email: string
@@ -16,6 +18,7 @@ export class CreateUserCommand extends Command {
   public readonly repeatPassword: string
 
   constructor({
+    id,
     firstName,
     lastName,
     email,
@@ -23,6 +26,7 @@ export class CreateUserCommand extends Command {
     repeatPassword
   }: Params) {
     super()
+    this.id = id
     this.firstName = firstName
     this.lastName = lastName
     this.email = email

@@ -37,12 +37,12 @@ export class User extends AggregateRoot {
    * @returns A new User instance.
    */
   public static create(
+    id: UserId,
     firstName: UserFirstName,
     lastName: UserLastName,
     email: UserEmail,
     password: UserPassword
   ): User {
-    const id = UserId.random()
     const user = new User(id, firstName, lastName, email, password)
     user.record(
       new UserCreatedDomainEvent({

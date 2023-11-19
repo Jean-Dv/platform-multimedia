@@ -1,3 +1,4 @@
+import { type UserId } from '@Auth/Shared/domain/User/UserId'
 import { User } from '@Auth/User/domain/User'
 import { type UserEmail } from '@Auth/User/domain/UserEmail'
 import { type UserFirstName } from '@Auth/User/domain/UserFirstName'
@@ -23,12 +24,14 @@ export class UserCreator {
    * @returns A Promise that resolves once the user is created and events are published.
    */
   public async run(params: {
+    id: UserId
     firstName: UserFirstName
     lastName: UserLastName
     email: UserEmail
     password: UserPassword
   }): Promise<void> {
     const user = User.create(
+      params.id,
       params.firstName,
       params.lastName,
       params.email,

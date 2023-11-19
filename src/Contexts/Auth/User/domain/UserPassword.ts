@@ -1,5 +1,5 @@
-import { InvalidArgumentError } from '@Shared/domain/value-objects/InvalidArgumentError'
 import { StringValueObject } from '@Shared/domain/value-objects/StringValueObject'
+import { UserPasswordIsNotStrong } from './UserPasswordIsNotStrong'
 
 /**
  * Represents the password of a user.
@@ -19,7 +19,7 @@ export class UserPassword extends StringValueObject {
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
     if (passwordRegex.test(value)) {
-      throw new InvalidArgumentError(`The password ${value} is not strong.`)
+      throw new UserPasswordIsNotStrong(`The password ${value} is not strong.`)
     }
   }
 }

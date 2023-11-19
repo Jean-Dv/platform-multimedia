@@ -7,6 +7,7 @@ import { UserLastName } from '@Auth/User/domain/UserLastName'
 import { UserEmail } from '@Auth/User/domain/UserEmail'
 import { UserPassword } from '@Auth/User/domain/UserPassword'
 import { InvalidArgumentError } from '@Shared/domain/value-objects/InvalidArgumentError'
+import { UserId } from '@Auth/Shared/domain/User/UserId'
 
 export class CreateUserCommandHandler
   implements CommandHandler<CreateUserCommand>
@@ -18,6 +19,7 @@ export class CreateUserCommandHandler
   }
 
   public async handle(command: CreateUserCommand): Promise<void> {
+    const id = new UserId(command.id)
     const firstName = new UserFirstName(command.firstName)
     const lastName = new UserLastName(command.lastName)
     const email = new UserEmail(command.email)
@@ -25,6 +27,6 @@ export class CreateUserCommandHandler
     if (!password.equals(new UserPassword(command.repeatPassword))) {
       throw new InvalidArgumentError('Passwords do not match')
     }
-    await this.userCreator.run({ firstName, lastName, email, password })
+    await this.userCreator.run({ id, firstName, lastName, email, password })
   }
 }
