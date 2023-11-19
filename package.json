@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "amqplib": "0.10.3",
+    "convict": "6.2.4",
     "module-alias": "2.2.3",
     "mongodb": "6.3.0",
     "node-dependency-injection": "3.1.0",
@@ -33,6 +34,7 @@
     "@cucumber/cucumber": "10.0.1",
     "@faker-js/faker": "8.3.1",
     "@types/amqplib": "0.10.4",
+    "@types/convict": "6.1.6",
     "@types/jest": "29.5.8",
     "@types/supertest": "2.0.16",
     "@types/uuid": "9.0.7",
