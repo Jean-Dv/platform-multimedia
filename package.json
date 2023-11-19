@@ -63,6 +63,7 @@
     ]
   },
   "_moduleAliases": {
-    "@Shared": "src/Contexts/Shared"
+    "@Shared": "src/Contexts/Shared",
+    "@Auth": "src/Contexts/Auth"
   }
 }
