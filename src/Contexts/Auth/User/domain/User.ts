@@ -11,7 +11,7 @@ export class User extends AggregateRoot {
   public readonly firstName: UserFirstName
   public readonly lastName: UserLastName
   public readonly email: UserEmail
-  public readonly password: UserPassword
+  private password: UserPassword
 
   constructor(
     id: UserId,
@@ -90,5 +90,21 @@ export class User extends AggregateRoot {
       email: this.email.value,
       password: this.password.value
     }
+  }
+
+  /**
+   * Gets the user's password.
+   * @returns The user's password.
+   */
+  public getPassword(): UserPassword {
+    return this.password
+  }
+
+  /**
+   * Sets the user's password.
+   * @param password - The new password to be set.
+   */
+  public setPassword(password: UserPassword): void {
+    this.password = password
   }
 }

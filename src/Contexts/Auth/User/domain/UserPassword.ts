@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import { StringValueObject } from '@Shared/domain/value-objects/StringValueObject'
 import { UserPasswordIsNotStrong } from './UserPasswordIsNotStrong'
 
@@ -21,5 +22,14 @@ export class UserPassword extends StringValueObject {
     if (passwordRegex.test(value)) {
       throw new UserPasswordIsNotStrong(`The password ${value} is not strong.`)
     }
+  }
+
+  /**
+   * Encrypts a user password using bcrypt hashing.
+   * @param userPassword - The user password to be encrypted.
+   * @returns The encrypted user password.
+   */
+  public static encrypt(userPassword: UserPassword): UserPassword {
+    return new UserPassword(bcrypt.hashSync(userPassword.value, 8))
   }
 }
