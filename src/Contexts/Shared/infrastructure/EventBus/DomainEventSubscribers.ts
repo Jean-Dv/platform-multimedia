@@ -22,6 +22,9 @@ export class DomainEventSubscribers {
       'domainEventSubscriber'
     ) as Map<string, Definition>
     const subscribers: Array<DomainEventSubscriber<DomainEvent>> = []
+    if (subscriberDefinitions.size === undefined) {
+      return new DomainEventSubscribers([])
+    }
     subscriberDefinitions.forEach((_definition: Definition, key: string) => {
       const domainEventSubscriber = container.get<
         DomainEventSubscriber<DomainEvent>
