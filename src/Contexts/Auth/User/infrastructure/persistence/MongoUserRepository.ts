@@ -1,6 +1,6 @@
 import { type User } from '@Auth/User/domain/User'
 import { UserPassword } from '@Auth/User/domain/UserPassword'
-import { type UserRepository } from '@Auth/User/domain/UserRepository'
+import { type UserRepository } from '@Auth/Shared/domain/User/UserRepository'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
 
 /**
