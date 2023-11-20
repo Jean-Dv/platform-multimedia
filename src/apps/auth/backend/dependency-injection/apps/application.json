@@ -1,0 +1,8 @@
+{
+  "services": {
+    "Apps.auth.controllers.UserPutController": {
+      "class": "../../controllers/UserPutController",
+      "arguments": ["@Auth.Shared.domain.CommandBus"]
+    }
+  }
+}
