@@ -4,7 +4,7 @@ import { type UserEmail } from '@Auth/User/domain/UserEmail'
 import { type UserFirstName } from '@Auth/User/domain/UserFirstName'
 import { type UserLastName } from '@Auth/User/domain/UserLastName'
 import { type UserPassword } from '@Auth/User/domain/UserPassword'
-import { type UserRepository } from '@Auth/User/domain/UserRepository'
+import { type UserRepository } from '@Auth/Shared/domain/User/UserRepository'
 import { type EventBus } from '@Shared/domain/EventBus'
 
 /**

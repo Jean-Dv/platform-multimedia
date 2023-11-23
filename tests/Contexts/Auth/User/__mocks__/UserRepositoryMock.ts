@@ -1,5 +1,5 @@
 import { type User } from '@Auth/User/domain/User'
-import { type UserRepository } from '@Auth/User/domain/UserRepository'
+import { type UserRepository } from '@Auth/Shared/domain/User/UserRepository'
 
 export class UserRepositoryMock implements UserRepository {
   private readonly saveMock: jest.Mock

@@ -16,13 +16,26 @@ export function register(router: Router): void {
         return value === req.body.password
       })
   ]
+  const schemaOfLogin = [
+    body('email').exists().isEmail(),
+    body('password').exists().isString()
+  ]
   const userPutController = container.get(
     'Apps.auth.controllers.UserPutController'
+  )
+  const loginPostController = container.get(
+    'Apps.auth.controllers.LoginPostController'
   )
   router.put(
     '/auth/register',
     reqSchema,
     validateReqSchema,
     (req: Request, res: Response) => userPutController.run(req, res)
+  )
+  router.post(
+    '/auth/login',
+    schemaOfLogin,
+    validateReqSchema,
+    (req: Request, res: Response) => loginPostController.run(req, res)
   )
 }

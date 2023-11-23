@@ -15,6 +15,19 @@
       "class": "../../../../../Contexts/Auth/User/application/Create/CreateUserCommandHandler",
       "arguments": ["@Auth.User.application.UserCreator"],
       "tags": [{ "name": "commandHandler" }]
+    },
+    "Auth.User.application.UserAuthenticator": {
+      "class": "../../../../../Contexts/Auth/UserAuth/application/authenticate/UserAuthenticator",
+      "arguments": ["@Auth.User.domain.AuthRepository"]
+    },
+    "Auth.User.domain.AuthRepository": {
+      "class": "../../../../../Contexts/Auth/UserAuth/infrastructure/persistence/MongoAuthRepository",
+      "arguments": ["@Auth.Shared.ConnectionManager"]
+    },
+    "Auth.User.AuthenticateUserCommandHandler": {
+      "class": "../../../../../Contexts/Auth/UserAuth/application/authenticate/AuthenticateUserCommandHandler",
+      "arguments": ["@Auth.User.application.UserAuthenticator"],
+      "tags": [{ "name": "commandHandler" }]
     }
   }
 }
