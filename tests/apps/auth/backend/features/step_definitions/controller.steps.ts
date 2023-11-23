@@ -36,6 +36,10 @@ Then('the response content should not be empty', () => {
   assert.notEqual(_response.body.length, 0)
 })
 
+Then('the response content should be:', (body: string) => {
+  assert.deepStrictEqual(_response.body, JSON.parse(body))
+})
+
 Then('the response content should be an array', () => {
   assert.deepStrictEqual(Array.isArray(_response.body.data), true)
 })

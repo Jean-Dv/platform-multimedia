@@ -39,7 +39,7 @@ export class UserAuthenticator {
    */
   private ensureUserExists(auth: Nullable<AuthUser>, email: AuthEmail): void {
     if (auth === null || auth === undefined) {
-      throw new InvalidAuthEmail(`The email <${email.value} is not valid`)
+      throw new InvalidAuthEmail(`The email <${email.value}> is not valid`)
     }
   }
 

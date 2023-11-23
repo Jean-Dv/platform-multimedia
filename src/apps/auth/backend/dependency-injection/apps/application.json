@@ -3,6 +3,10 @@
     "Apps.auth.controllers.UserPutController": {
       "class": "../../controllers/UserPutController",
       "arguments": ["@Auth.Shared.domain.CommandBus"]
+    },
+    "Apps.auth.controllers.LoginPostController": {
+      "class": "../../controllers/LoginPostController",
+      "arguments": ["@Auth.Shared.domain.CommandBus"]
     }
   }
 }
