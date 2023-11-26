@@ -93,6 +93,7 @@
   "_moduleAliases": {
     "@Shared": "src/Contexts/Shared",
     "@Apps": "src/apps",
-    "@Auth": "src/Contexts/Auth"
+    "@Auth": "src/Contexts/Auth",
+    "@Multimedia": "src/Contexts/Multimedia"
   }
 }
