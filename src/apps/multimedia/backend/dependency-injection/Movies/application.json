@@ -1,0 +1,20 @@
+{
+  "services": {
+    "Multimedia.Movies.application.MovieCreator": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/create/MovieCreator",
+      "arguments": [
+        "@Multimedia.Movies.domain.MovieRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Movies.domain.MovieRepository": {
+      "class": "../../../../../Contexts/Multimedia/Movies/infrastructure/persistence/MongoMovieRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Movies.CreateMovieCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/create/CreateMovieCommandHandler",
+      "arguments": ["@Multimedia.Movies.application.MovieCreator"],
+      "tags": [{ "name": "commandHandler" }]
+    }
+}
+}

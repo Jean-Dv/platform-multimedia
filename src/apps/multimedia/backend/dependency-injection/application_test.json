@@ -1,0 +1,13 @@
+{
+  "imports": [
+    {
+      "resource": "./application.json"
+    }
+  ],
+  "services": {
+    "Multimedia.EnvironmentArranger": {
+      "class": "../../../../../tests/Contexts/Shared/infrastructure/persistence/mongo/MongoEnvironmentArranger",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    }
+  }
+}

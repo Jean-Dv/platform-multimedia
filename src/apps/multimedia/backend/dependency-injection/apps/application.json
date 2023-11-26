@@ -1,0 +1,8 @@
+{
+  "services": {
+    "Apps.multimedia.controllers.MoviePutController": {
+      "class": "../../controllers/MoviePutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    }
+  }
+}
