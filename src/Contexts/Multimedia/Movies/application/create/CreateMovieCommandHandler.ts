@@ -10,7 +10,7 @@ import { MovieDuration } from '../../domain/MovieDuration'
 /**
  * Command handler for the CreateMovieCommand.
  */
-export class CreateMovieCommandHander
+export class CreateMovieCommandHandler
   implements CommandHandler<CreateMovieCommand>
 {
   constructor(private readonly movieCreator: MovieCreator) {}
