@@ -1,3 +1,4 @@
+import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { type Movie } from './Movie'
 
 /**
@@ -18,4 +19,12 @@ export interface MovieRepository {
    * @returns A promise that resolves to an array of movie entities.
    */
   searchAll: () => Promise<Movie[]>
+
+  /**
+   * Retrieves movies that match the specified criteria.
+   *
+   * @param criteria - The criteria used for matching movies.
+   * @returns A promise that resolves to an array of matched movies.
+   */
+  matching: (criteria: Criteria) => Promise<Movie[]>
 }

@@ -1,6 +1,7 @@
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
 import { Movie } from '../../domain/Movie'
 import { type MovieRepository } from '../../domain/MovieRepository'
+import { type Criteria } from '@Shared/domain/criteria/Criteria'
 
 interface MovieDocument {
   _id: string
@@ -20,6 +21,18 @@ export class MongoMovieRepository
   public async searchAll(): Promise<Movie[]> {
     const collection = await this.collection()
     const documents = await collection.find<MovieDocument>({}, {}).toArray()
+    return documents.map((document) =>
+      Movie.fromPrimitives({
+        id: document.id,
+        title: document.title,
+        releaseDate: document.releaseDate,
+        duration: document.duration
+      })
+    )
+  }
+
+  public async matching(criteria: Criteria): Promise<Movie[]> {
+    const documents = await this.searchByCriteria<MovieDocument>(criteria)
     return documents.map((document) =>
       Movie.fromPrimitives({
         id: document.id,
