@@ -76,7 +76,12 @@ export class Movie extends AggregateRoot {
    *
    * @returns The plain object containing the movie information.
    */
-  public toPrimitives(): Record<string, unknown> {
+  public toPrimitives(): {
+    id: string
+    title: string
+    releaseDate: Date
+    duration: number
+  } {
     return {
       id: this.id.value,
       title: this.title.value,
