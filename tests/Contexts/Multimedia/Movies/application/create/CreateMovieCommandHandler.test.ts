@@ -1,5 +1,5 @@
-import { CreateMovieCommandHander } from '@Multimedia/Movies/application/create/CreateMovieCommandHandler'
-import { MovieCreator } from '@Multimedia/Movies/application/create/MovieCreator'
+import { CreateMovieCommandHandler } from '@Multimedia/Movies/application/Create/CreateMovieCommandHandler'
+import { MovieCreator } from '@Multimedia/Movies/application/Create/MovieCreator'
 import EventBusMock from '../../../../Shared/domain/EventBusMock'
 import { MovieRepositoryMock } from '../../__mocks__/MovieRepositoryMock'
 import { MovieCreatedDomainEventMother } from '../../domain/MovieCreatedDomainEventMother'
@@ -10,13 +10,13 @@ import { MovieTitleLengthExceeded } from '@Multimedia/Movies/domain/MovieTitleLe
 let repository: MovieRepositoryMock
 let creator: MovieCreator
 let eventBus: EventBusMock
-let handler: CreateMovieCommandHander
+let handler: CreateMovieCommandHandler
 
 beforeEach(() => {
   repository = new MovieRepositoryMock()
   eventBus = new EventBusMock()
   creator = new MovieCreator(repository, eventBus)
-  handler = new CreateMovieCommandHander(creator)
+  handler = new CreateMovieCommandHandler(creator)
 })
 
 describe('CreateMovieCommandHandler', () => {

@@ -1,7 +1,7 @@
 {
   "services": {
     "Multimedia.Movies.application.MovieCreator": {
-      "class": "../../../../../Contexts/Multimedia/Movies/application/create/MovieCreator",
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Create/MovieCreator",
       "arguments": [
         "@Multimedia.Movies.domain.MovieRepository",
         "@Multimedia.Shared.domain.EventBus"
@@ -12,7 +12,7 @@
       "arguments": ["@Multimedia.Shared.ConnectionManager"]
     },
     "Multimedia.Movies.CreateMovieCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Movies/application/create/CreateMovieCommandHandler",
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Create/CreateMovieCommandHandler",
       "arguments": ["@Multimedia.Movies.application.MovieCreator"],
       "tags": [{ "name": "commandHandler" }]
     }
