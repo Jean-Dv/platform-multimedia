@@ -10,4 +10,12 @@ export interface MovieRepository {
    * @param movie The movie entity to be saved.
    */
   save: (movie: Movie) => Promise<void>
+
+  /**
+   * Searches and retrieves all movies entities
+   * from the repository.
+   *
+   * @returns A promise that resolves to an array of movie entities.
+   */
+  searchAll: () => Promise<Movie[]>
 }

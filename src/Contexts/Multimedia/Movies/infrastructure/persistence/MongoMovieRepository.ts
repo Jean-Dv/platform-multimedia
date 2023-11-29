@@ -1,6 +1,14 @@
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
-import { type Movie } from '../../domain/Movie'
+import { Movie } from '../../domain/Movie'
 import { type MovieRepository } from '../../domain/MovieRepository'
+
+interface MovieDocument {
+  _id: string
+  id: string
+  title: string
+  releaseDate: Date
+  duration: number
+}
 
 /**
  * Repository implementation for manage movies in a MongoDB database.
@@ -9,6 +17,19 @@ export class MongoMovieRepository
   extends MongoRepository<Movie>
   implements MovieRepository
 {
+  public async searchAll(): Promise<Movie[]> {
+    const collection = await this.collection()
+    const documents = await collection.find<MovieDocument>({}, {}).toArray()
+    return documents.map((document) =>
+      Movie.fromPrimitives({
+        id: document.id,
+        title: document.title,
+        releaseDate: document.releaseDate,
+        duration: document.duration
+      })
+    )
+  }
+
   /**
    * This method is used to save a user in the database.
    *
