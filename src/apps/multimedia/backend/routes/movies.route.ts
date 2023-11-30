@@ -13,10 +13,16 @@ export function register(router: Router): void {
   const moviePutController = container.get(
     'Apps.multimedia.controllers.MoviePutController'
   )
+  const movieGetController = container.get(
+    'Apps.multimedia.controllers.MovieGetController'
+  )
   router.put(
     '/multimedia/movies/:id',
     reqSchemaOfCreateMovie,
     validateReqSchema,
     (req: Request, res: Response) => moviePutController.run(req, res)
+  )
+  router.get('/multimedia/movies', (req: Request, res: Response) =>
+    movieGetController.run(req, res)
   )
 }

@@ -1,6 +1,11 @@
 import 'module-alias/register'
 import { type EventBus } from '@Shared/domain/EventBus'
-import { AfterAll, BeforeAll, setDefaultTimeout } from '@cucumber/cucumber'
+import {
+  AfterAll,
+  Before,
+  BeforeAll,
+  setDefaultTimeout
+} from '@cucumber/cucumber'
 import { container } from '../../../../../../src/apps/multimedia/backend/dependency-injection'
 import { MultimediaBackendApp } from '../../../../../../src/apps/multimedia/backend/MultimediaBackendApp'
 import { type EnvironmentArranger } from '../../../../../Contexts/Shared/infrastructure/persistence/EnvironmentArranger'
@@ -19,6 +24,10 @@ BeforeAll(async () => {
   await environmentArranger.arrange()
   application = new MultimediaBackendApp()
   await application.start()
+})
+
+Before(async () => {
+  await environmentArranger.arrange()
 })
 
 AfterAll(async () => {

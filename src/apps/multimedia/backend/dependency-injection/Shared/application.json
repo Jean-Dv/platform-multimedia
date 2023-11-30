@@ -57,6 +57,14 @@
     "Multimedia.Shared.domain.CommandBus": {
       "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus",
       "arguments": ["@Multimedia.Shared.CommandHandlers"]
+    },
+    "Multimedia.Shared.QueryHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers",
+      "arguments": ["!tagged queryHandler"]
+    },
+    "Multimedia.Shared.domain.QueryBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus",
+      "arguments": ["@Multimedia.Shared.QueryHandlers"]
     }
   }
 }
