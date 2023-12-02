@@ -1,5 +1,5 @@
 import { StringValueObject } from '@Shared/domain/value-objects/StringValueObject'
-import { ChapterTitleLengthExceeded } from '../../Serie/domain/ChapterTitleLengthExceeded'
+import { ChapterTitleLengthExceeded } from './ChapterTitleLengthExceeded'
 
 /**
  * Represents a chapter title.
