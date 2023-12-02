@@ -1,11 +1,11 @@
 import { type EventBus } from '@Shared/domain/EventBus'
-import { type ChapterRepository } from '../domain/ChapterRepository'
-import { type ChapterId } from '../domain/ChapterId'
-import { type ChapterTitle } from '../domain/ChapterTitle'
+import { type ChapterRepository } from '../../domain/ChapterRepository'
+import { type ChapterId } from '../../domain/ChapterId'
+import { type ChapterTitle } from '../../domain/ChapterTitle'
 import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
-import { type ChapterReleaseDate } from '../domain/ChapterReleaseDate'
-import { type ChapterDuration } from '../domain/ChapterDuration'
-import { Chapter } from '../domain/Chapter'
+import { type ChapterReleaseDate } from '../../domain/ChapterReleaseDate'
+import { type ChapterDuration } from '../../domain/ChapterDuration'
+import { Chapter } from '../../domain/Chapter'
 
 export class ChapterCreator {
   constructor(

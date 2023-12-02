@@ -1,3 +1,4 @@
+import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { type Chapter } from './Chapter'
 
 export interface ChapterRepository {
@@ -7,4 +8,12 @@ export interface ChapterRepository {
    * @param movie The movie entity to be saved.
    */
   save: (chapter: Chapter) => Promise<void>
+
+  /**
+   * Retireves movies that match the specified criteria.
+   *
+   * @param criteria - The criteria used for matching movies.
+   * @returns A promise that resolves to an array of matched movies.
+   */
+  matching: (criteria: Criteria) => Promise<Chapter[]>
 }

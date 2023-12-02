@@ -2,11 +2,11 @@ import { type CommandHandler } from '@Shared/domain/CommandHandler'
 import { type ChapterCreator } from './ChapterCreator'
 import { type Command } from '@Shared/domain/Command'
 import { CreateChapterCommand } from './CreateChapterCommand'
-import { ChapterId } from '../domain/ChapterId'
+import { ChapterId } from '../../domain/ChapterId'
 import { SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
-import { ChapterTitle } from '../domain/ChapterTitle'
-import { ChapterDuration } from '../domain/ChapterDuration'
-import { ChapterReleaseDate } from '../domain/ChapterReleaseDate'
+import { ChapterTitle } from '../../domain/ChapterTitle'
+import { ChapterDuration } from '../../domain/ChapterDuration'
+import { ChapterReleaseDate } from '../../domain/ChapterReleaseDate'
 
 export class CreateChapterCommandHandler
   implements CommandHandler<CreateChapterCommand>

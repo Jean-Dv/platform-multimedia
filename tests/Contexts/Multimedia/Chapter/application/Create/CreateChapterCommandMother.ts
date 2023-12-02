@@ -1,4 +1,4 @@
-import { type CreateChapterCommand } from '@Multimedia/Chapter/application/CreateChapterCommand'
+import { type CreateChapterCommand } from '@Multimedia/Chapter/application/Create/CreateChapterCommand'
 import { type ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
 import { type ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
 import { type ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseDate'
