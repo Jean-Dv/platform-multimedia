@@ -1,5 +1,5 @@
 import { StringValueObject } from '@Shared/domain/value-objects/StringValueObject'
-import { SeasonTitleLengthExceeded } from '../../Series/domain/SeasonTitleLengthExceeded'
+import { SeasonTitleLengthExceeded } from './SeasonTitleLengthExceeded'
 
 /**
  * Represents a season title.
