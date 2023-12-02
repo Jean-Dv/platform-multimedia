@@ -3,7 +3,7 @@ import { Serie } from '@Multimedia/Serie/domain/Serie'
 import { SerieReleaseDate } from '@Multimedia/Serie/domain/SerieReleaseDate'
 import { SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
 import { SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
-import { SerieIdMother } from './SerieIdMother'
+import { SerieIdMother } from '../../Shared/domain/SerieIdMother'
 import { SerieTitleMother } from './SerieTitleMother'
 import { SerieReleaseDateMother } from './SerieReleaseDateMother'
 

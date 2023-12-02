@@ -2,7 +2,7 @@ import { type CreateSerieCommand } from '@Multimedia/Serie/application/Create/Cr
 import { type SerieReleaseDate } from '@Multimedia/Serie/domain/SerieReleaseDate'
 import { type SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
 import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
-import { SerieIdMother } from '../../domain/SerieIdMother'
+import { SerieIdMother } from '../../../Shared/domain/SerieIdMother'
 import { SerieTitleMother } from '../../domain/SerieTitleMother'
 import { SerieReleaseDateMother } from '../../domain/SerieReleaseDateMother'
 
