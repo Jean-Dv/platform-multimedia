@@ -6,7 +6,7 @@ import { SearchSeriesByCriteriaQuery } from '@Multimedia/Serie/application/Searc
 import { SearchSeriesByCriteriaResponseMother } from './SearchSeriesByCriteriaResponseMother'
 import { OrderTypes } from '@Shared/domain/criteria/OrderType'
 
-describe('SearchMoviesByCriteriaQueryHandler', () => {
+describe('SearchSerieByCriteriaQueryHandler', () => {
   let repository: SerieRepositoryMock
 
   beforeEach(() => {
