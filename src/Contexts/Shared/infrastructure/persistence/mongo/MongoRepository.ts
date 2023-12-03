@@ -1,5 +1,7 @@
-import { type Collection, type MongoClient } from 'mongodb'
+import { type Document, type Collection, type MongoClient } from 'mongodb'
 import { type AggregateRoot } from '../../../domain/AggregateRoot'
+import { MongoCriteriaConverter } from './MongoCriteriaConverter'
+import { type Criteria } from '@Shared/domain/criteria/Criteria'
 
 /**
  * This class is a base class for mongo repositories.
@@ -7,7 +9,11 @@ import { type AggregateRoot } from '../../../domain/AggregateRoot'
  * aggregate roots.
  */
 export abstract class MongoRepository<T extends AggregateRoot> {
-  constructor(private readonly _client: Promise<MongoClient>) {}
+  private readonly criteriaConverter: MongoCriteriaConverter
+
+  constructor(private readonly _client: Promise<MongoClient>) {
+    this.criteriaConverter = new MongoCriteriaConverter()
+  }
 
   /**
    * Gets the name of the collection to use.
@@ -47,5 +53,18 @@ export abstract class MongoRepository<T extends AggregateRoot> {
       ...aggregateRoot.toPrimitives()
     }
     await collection.updateOne({ id }, { $set: document }, { upsert: true })
+  }
+
+  protected async searchByCriteria<D extends Document>(
+    criteria: Criteria
+  ): Promise<D[]> {
+    const query = this.criteriaConverter.convert(criteria)
+    const collection = await this.collection()
+    return await collection
+      .find<D>(query.filter, {})
+      .sort(query.sort)
+      .skip(query.skip)
+      .limit(query.limit)
+      .toArray()
   }
 }

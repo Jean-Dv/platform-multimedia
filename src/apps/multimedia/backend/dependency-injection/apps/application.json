@@ -1,0 +1,16 @@
+{
+  "services": {
+    "Apps.multimedia.controllers.MoviePutController": {
+      "class": "../../controllers/MoviePutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.MovieGetController": {
+      "class": "../../controllers/MoviesGetController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.SerieGetController": {
+      "class": "../../controllers/SerieGetController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    }
+  }
+}

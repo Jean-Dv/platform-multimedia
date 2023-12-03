@@ -1,0 +1,19 @@
+{
+  "services": {
+    "Multimedia.Seasons.domain.SeasonRepository": {
+      "class": "../../../../../Contexts/Multimedia/Season/infrastructure/persistence/MongoSeasonRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Seasons.application.SeasonsByCriteriaSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/SearchByCriteria/SeasonsByCriteriaSearcher",
+      "arguments": ["@Multimedia.Seasons.domain.SeasonRepository"]
+    },
+    "Multimedia.Seasons.SearchSeasonsByCriteriaQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/SearchByCriteria/SearchSeasonsByCriteriaQueryHandler",
+      "arguments": [
+        "@Multimedia.Seasons.application.SeasonsByCriteriaSearcher"
+      ],
+      "tags": [{ "name": "queryHandler" }]
+    }
+  }
+}

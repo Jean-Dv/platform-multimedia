@@ -1,0 +1,70 @@
+{
+  "services": {
+    "Multimedia.Shared.MongoConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/Multimedia/Shared/infrastructure/persistence/mongo/MongoConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "Multimedia.Shared.RabbitMQConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/Multimedia/Shared/infrastructure/RabbitMQ/RabbitMQConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "Multimedia.Shared.domain.EventBus": {
+      "factory": {
+        "class": "../../../../../Contexts/Multimedia/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory",
+        "method": "create"
+      },
+      "arguments": [
+        "@Multimedia.Shared.DomainEventFailoverPublisher",
+        "@Multimedia.Shared.RabbitMQConnection",
+        "@Multimedia.Shared.RabbitMQqueueFormatter",
+        "@Multimedia.Shared.RabbitMQConfig"
+      ]
+    },
+    "Multimedia.Shared.ConnectionManager": {
+      "factory": {
+        "class": "../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory",
+        "method": "createClient"
+      },
+      "arguments": ["multimedia", "@Multimedia.Shared.MongoConfig"]
+    },
+    "Multimedia.Shared.RabbitMQqueueFormatter": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter",
+      "arguments": ["multimedia"]
+    },
+    "Multimedia.Shared.RabbitMQConnection": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConnection",
+      "arguments": ["@Multimedia.Shared.RabbitMQConfig"]
+    },
+    "Multimedia.Shared.RabbitMQConfigurer": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConfigurer",
+      "arguments": [
+        "@Multimedia.Shared.RabbitMQConnection",
+        "@Multimedia.Shared.RabbitMQqueueFormatter"
+      ]
+    },
+    "Multimedia.Shared.DomainEventFailoverPublisher": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/FailoverPublisher/FailoverPublisher",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Shared.CommandHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers",
+      "arguments": ["!tagged commandHandler"]
+    },
+    "Multimedia.Shared.domain.CommandBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus",
+      "arguments": ["@Multimedia.Shared.CommandHandlers"]
+    },
+    "Multimedia.Shared.QueryHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers",
+      "arguments": ["!tagged queryHandler"]
+    },
+    "Multimedia.Shared.domain.QueryBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus",
+      "arguments": ["@Multimedia.Shared.QueryHandlers"]
+    }
+  }
+}

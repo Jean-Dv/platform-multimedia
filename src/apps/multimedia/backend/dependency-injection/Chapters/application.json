@@ -1,0 +1,19 @@
+{
+  "services": {
+    "Multimedia.Chapters.domain.ChapterRepository": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/infrastructure/persistence/MongoChapterRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Chapters.application.ChaptersByCriteriaSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/SearchByCriteria/ChaptersByCriteriaSearcher",
+      "arguments": ["@Multimedia.Chapters.domain.ChapterRepository"]
+    },
+    "Multimedia.Chapters.SearchChaptersByCriteriaQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/SearchByCriteria/SearchChaptersByCriteriaQueryHandler",
+      "arguments": [
+        "@Multimedia.Chapters.application.ChaptersByCriteriaSearcher"
+      ],
+      "tags": [{ "name": "queryHandler" }]
+    }
+  }
+}

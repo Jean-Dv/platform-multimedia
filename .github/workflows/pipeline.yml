@@ -133,6 +133,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Configure rabbitmq production
-        run: pnpm run command:auth:rabbitmq
+        run: pnpm run command:auth:rabbitmq && pnpm run command:multimedia:rabbitmq
       - name: E2E tests
         run: pnpm run test:features
