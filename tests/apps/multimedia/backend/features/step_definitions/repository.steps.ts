@@ -11,6 +11,17 @@ import { Serie } from '@Multimedia/Serie/domain/Serie'
 import { SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
 import { SerieReleaseDate } from '@Multimedia/Serie/domain/SerieReleaseDate'
+import { type SeasonRepository } from '@Multimedia/Season/domain/SeasonRepository'
+import { type ChapterRepository } from '@Multimedia/Chapter/domain/ChapterRepository'
+import { Season } from '@Multimedia/Season/domain/Season'
+import { SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
+import { SeasonTitle } from '@Multimedia/Season/domain/SeasonTitle'
+import { SeasonReleaseDate } from '@Multimedia/Season/domain/SeasonReleaseDate'
+import { Chapter } from '@Multimedia/Chapter/domain/Chapter'
+import { ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
+import { ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
+import { ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseDate'
+import { ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
@@ -18,6 +29,14 @@ const moviesRepository: MovieRepository = container.get(
 
 const seriesRepository: SerieRepository = container.get(
   'Multimedia.Series.domain.SerieRepository'
+)
+
+const seasonsRepository: SeasonRepository = container.get(
+  'Multimedia.Seasons.domain.SeasonRepository'
+)
+
+const chaptersRepository: ChapterRepository = container.get(
+  'Multimedia.Chapters.domain.ChapterRepository'
 )
 
 Given('there is the movie:', async (movie: string) => {
@@ -32,13 +51,38 @@ Given('there is the movie:', async (movie: string) => {
   )
 })
 
-Given('there is the serie:', async (movie: string) => {
-  const { id, title, releaseDate } = JSON.parse(movie)
+Given('there is the serie:', async (serie: string) => {
+  const { id, title, releaseDate } = JSON.parse(serie)
   await seriesRepository.save(
     new Serie(
       new SerieId(id),
       new SerieTitle(title),
       new SerieReleaseDate(releaseDate)
+    )
+  )
+})
+
+Given('there is the season:', async (season: string) => {
+  const { id, serieId, title, releaseDate } = JSON.parse(season)
+  await seasonsRepository.save(
+    new Season(
+      new SeasonId(id),
+      new SerieId(serieId),
+      new SeasonTitle(title),
+      new SeasonReleaseDate(releaseDate)
+    )
+  )
+})
+
+Given('there is the chapter:', async (chapter: string) => {
+  const { id, seasonId, title, releaseDate, duration } = JSON.parse(chapter)
+  await chaptersRepository.save(
+    new Chapter(
+      new ChapterId(id),
+      new SeasonId(seasonId),
+      new ChapterTitle(title),
+      new ChapterReleaseDate(releaseDate),
+      new ChapterDuration(duration)
     )
   )
 })
