@@ -11,6 +11,12 @@
     },
     {
       "resource": "./Series/application.json"
+    },
+    {
+      "resource": "./Seasons/application.json"
+    },
+    {
+      "resource": "./Chapters/application.json"
     }
   ]
 }

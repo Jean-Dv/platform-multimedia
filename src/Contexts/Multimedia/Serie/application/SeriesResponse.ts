@@ -1,6 +1,6 @@
 import { type Serie } from '../domain/Serie'
 
-interface SerieResponse {
+export interface SerieResponse {
   id: string
   title: string
   releaseDate: Date
