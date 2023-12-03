@@ -1,7 +1,7 @@
 import { type QueryHandler } from '@Shared/domain/QueryHandler'
 import { SearchSeasonsByCriteriaQuery } from './SearchSeasonsByCriteriaQuery'
 import { type SeasonsResponse } from '../SeasonsResponse'
-import { type SeasonsByCriteriaSearcher } from './SeasonByCriteriaSearcher'
+import { type SeasonsByCriteriaSearcher } from './SeasonsByCriteriaSearcher'
 import { type Query } from '@Shared/domain/Query'
 import { Filters } from '@Shared/domain/criteria/Filters'
 import { Order } from '@Shared/domain/criteria/Order'

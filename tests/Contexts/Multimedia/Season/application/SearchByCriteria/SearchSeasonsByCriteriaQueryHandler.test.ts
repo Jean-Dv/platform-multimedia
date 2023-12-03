@@ -1,7 +1,7 @@
 import { SearchSeasonsByCriteriaQueryHandler } from '@Multimedia/Season/application/SearchByCriteria/SearchSeasonsByCriteriaQueryHandler'
 import { SeasonRepositoryMock } from '../../__mocks__/SeasonRepositoryMock'
 import { SeasonMother } from '../../domain/SeasonMother'
-import { SeasonsByCriteriaSearcher } from '@Multimedia/Season/application/SearchByCriteria/SeasonByCriteriaSearcher'
+import { SeasonsByCriteriaSearcher } from '@Multimedia/Season/application/SearchByCriteria/SeasonsByCriteriaSearcher'
 import { SearchSeasonsByCriteriaQuery } from '@Multimedia/Season/application/SearchByCriteria/SearchSeasonsByCriteriaQuery'
 import { SearchSeasonsByCriteriaResponseMother } from './SearchSeasonsByCriteriaResponseMother'
 import { OrderTypes } from '@Shared/domain/criteria/OrderType'
