@@ -1,0 +1,17 @@
+{
+  "services": {
+    "Multimedia.Series.domain.SerieRepository": {
+      "class": "../../../../../Contexts/Multimedia/Serie/infrastructure/persistence/MongoSerieRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Series.application.SeriesByCriteriaSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/SearchByCriteria/SeriesByCriteriaSearcher",
+      "arguments": ["@Multimedia.Series.domain.SerieRepository"]
+    },
+    "Multimedia.Series.SearchSeriesByCriteriaQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/SearchByCriteria/SearchSeriesByCriteriaQueryHandler",
+      "arguments": ["@Multimedia.Series.application.SeriesByCriteriaSearcher"],
+      "tags": [{ "name": "queryHandler" }]
+    }
+  }
+}
