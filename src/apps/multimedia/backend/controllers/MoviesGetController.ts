@@ -38,7 +38,6 @@ export class MoviesGetController implements Controller {
 
     return params.map((filter: string) => {
       const filterObject: FilterType = JSON.parse(filter.replaceAll("'", '"'))
-      console.log(filterObject)
       const field = filterObject.field
       const operator = filterObject.operator
       const value = filterObject.value
