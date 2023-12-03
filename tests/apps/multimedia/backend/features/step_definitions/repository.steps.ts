@@ -6,13 +6,21 @@ import { type MovieRepository } from '@Multimedia/Movies/domain/MovieRepository'
 import { MovieTitle } from '@Multimedia/Movies/domain/MovieTitle'
 import { Given } from '@cucumber/cucumber'
 import { container } from '../../../../../../src/apps/multimedia/backend/dependency-injection'
+import { type SerieRepository } from '@Multimedia/Serie/domain/SerieRepository'
+import { Serie } from '@Multimedia/Serie/domain/Serie'
+import { SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
+import { SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
+import { SerieReleaseDate } from '@Multimedia/Serie/domain/SerieReleaseDate'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
 )
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-Given('there is the movie:', async (movie: any) => {
+const seriesRepository: SerieRepository = container.get(
+  'Multimedia.Series.domain.SerieRepository'
+)
+
+Given('there is the movie:', async (movie: string) => {
   const { id, title, releaseDate, duration } = JSON.parse(movie)
   await moviesRepository.save(
     new Movie(
@@ -20,6 +28,17 @@ Given('there is the movie:', async (movie: any) => {
       new MovieTitle(title),
       new MovieReleaseDate(releaseDate),
       new MovieDuration(duration)
+    )
+  )
+})
+
+Given('there is the serie:', async (movie: string) => {
+  const { id, title, releaseDate } = JSON.parse(movie)
+  await seriesRepository.save(
+    new Serie(
+      new SerieId(id),
+      new SerieTitle(title),
+      new SerieReleaseDate(releaseDate)
     )
   )
 })
