@@ -1,5 +1,4 @@
 import { type User } from '@Auth/User/domain/User'
-import { UserPassword } from '@Auth/User/domain/UserPassword'
 import { type UserRepository } from '@Auth/Shared/domain/User/UserRepository'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
 
@@ -17,7 +16,6 @@ export class MongoUserRepository
    * @param user The user to save.
    */
   public async save(user: User): Promise<void> {
-    user.setPassword(UserPassword.encrypt(user.getPassword()))
     await this.persist(user.id.value, user)
   }
 

@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import { CreateUserCommand } from '@Auth/User/domain/CreateUserCommand'
 import { type CommandBus } from '@Shared/domain/CommandBus'
 import { type Request, type Response } from 'express'
@@ -31,15 +32,14 @@ export class UserPutController implements Controller {
    */
   public async run(req: UserPutRequest, res: Response): Promise<void> {
     try {
-      const { id, firstName, lastName, email, password, repeatPassword } =
-        req.body
+      const { id, firstName, lastName, email, password } = req.body
+      const encryptedPassword = this.encryptPassword(password)
       const createUserCommand = new CreateUserCommand({
         id,
         firstName,
         lastName,
         email,
-        password,
-        repeatPassword
+        password: encryptedPassword
       })
       await this.commandBus.dispatch(createUserCommand)
       res.status(httpStatus.CREATED).json({
@@ -51,5 +51,15 @@ export class UserPutController implements Controller {
         ok: false
       })
     }
+  }
+
+  /**
+   * Encrypt password
+   *
+   * @param password - The password to be encrypted.
+   * @returns The encrypted password.
+   */
+  private encryptPassword(password: string): string {
+    return bcrypt.hashSync(password, 8)
   }
 }
