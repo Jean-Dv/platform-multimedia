@@ -25,12 +25,7 @@ Feature: Login of user
     }
     """
     Then the response status code should be 200
-    And the response content should be:
-    """
-    {
-      "ok": true
-    }
-    """
+    And the response contains a refresh token
 
   Scenario: A invalid non existing user
     Given I send a POST request to "/auth/login" with body:

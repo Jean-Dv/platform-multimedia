@@ -40,6 +40,10 @@ Then('the response content should be:', (body: string) => {
   assert.deepStrictEqual(_response.body, JSON.parse(body))
 })
 
+Then('the response contains a refresh token', () => {
+  assert.notEqual(_response.body.data.refreshToken, undefined)
+})
+
 Then('the response content should be an array', () => {
   assert.deepStrictEqual(Array.isArray(_response.body.data), true)
 })
