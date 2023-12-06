@@ -22,6 +22,7 @@ import { ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
 import { ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
 import { ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseDate'
 import { ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
+import { MovieUrl } from '@Multimedia/Movies/domain/MovieUrl'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
@@ -40,12 +41,13 @@ const chaptersRepository: ChapterRepository = container.get(
 )
 
 Given('there is the movie:', async (movie: string) => {
-  const { id, title, releaseDate, duration } = JSON.parse(movie)
+  const { id, title, releaseDate, url, duration } = JSON.parse(movie)
   await moviesRepository.save(
     new Movie(
       new MovieId(id),
       new MovieTitle(title),
       new MovieReleaseDate(releaseDate),
+      new MovieUrl(url),
       new MovieDuration(duration)
     )
   )

@@ -7,6 +7,7 @@ interface MovieDocument {
   _id: string
   id: string
   title: string
+  url: string
   releaseDate: Date
   duration: number
 }
@@ -26,6 +27,7 @@ export class MongoMovieRepository
         id: document.id,
         title: document.title,
         releaseDate: document.releaseDate,
+        url: document.url,
         duration: document.duration
       })
     )
@@ -38,6 +40,7 @@ export class MongoMovieRepository
         id: document.id,
         title: document.title,
         releaseDate: document.releaseDate,
+        url: document.url,
         duration: document.duration
       })
     )

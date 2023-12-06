@@ -14,6 +14,13 @@ export class MoviesResponse {
   public readonly movies: MovieResponse[]
 
   constructor(movies: Movie[]) {
-    this.movies = movies.map((movie) => movie.toPrimitives())
+    this.movies = movies.map((movie) => {
+      return {
+        id: movie.id.value,
+        title: movie.title.value,
+        releaseDate: movie.releaseDate.value,
+        duration: movie.duration.value
+      }
+    })
   }
 }

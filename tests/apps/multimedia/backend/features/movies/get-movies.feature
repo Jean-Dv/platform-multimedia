@@ -9,6 +9,7 @@ Feature: Get movies
       "id": "2f728ac4-8849-4e82-a184-0dab8e101a28",
       "title": "The Matrix",
       "releaseDate": "1999-05-21",
+      "url": "https://www.youtube.com/watch?v=m8e-FF8MsqU",
       "duration": 8160
     }
     """
@@ -18,6 +19,7 @@ Feature: Get movies
       "id": "2f728ac4-8849-4e82-a184-0dab8e101a29",
       "title": "The Matrix Reloaded",
       "releaseDate": "2003-05-16",
+      "url": "https://www.youtube.com/watch?v=m8e-FF8MsqU",
       "duration": 8280
     }
     """
@@ -51,6 +53,7 @@ Feature: Get movies
       "id": "2f728ac4-8849-4e82-a184-0dab8e101a28",
       "title": "The Matrix",
       "releaseDate": "1999-05-21",
+      "url": "https://www.youtube.com/watch?v=m8e-FF8MsqU",
       "duration": 8160
     }
     """
@@ -60,6 +63,7 @@ Feature: Get movies
       "id": "2f728ac4-8849-4e82-a184-0dab8e101a29",
       "title": "The Matrix Reloaded",
       "releaseDate": "2003-05-16",
+      "url": "https://www.youtube.com/watch?v=m8e-FF8MsqU",
       "duration": 8280
     }
     """
