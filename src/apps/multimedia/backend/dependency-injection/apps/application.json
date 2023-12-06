@@ -11,6 +11,13 @@
     "Apps.multimedia.controllers.SerieGetController": {
       "class": "../../controllers/SerieGetController",
       "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.ChapterGetByIdController": {
+      "class": "../../controllers/ChapterGetByIdController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.middlewares.AuthenticateMiddleware": {
+      "class": "../../middlewares/AuthenticateMiddleware"
     }
   }
 }
