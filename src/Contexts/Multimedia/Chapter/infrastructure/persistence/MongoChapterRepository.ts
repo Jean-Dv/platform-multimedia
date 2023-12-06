@@ -1,4 +1,5 @@
 import { Chapter } from '@Multimedia/Chapter/domain/Chapter'
+import { type ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
 import { type ChapterRepository } from '@Multimedia/Chapter/domain/ChapterRepository'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
@@ -33,6 +34,23 @@ export class MongoChapterRepository
         duration: document.duration
       })
     })
+  }
+
+  public async search(id: ChapterId): Promise<Chapter | null> {
+    const collection = await this.collection()
+    const document = await collection.findOne<ChapterDocument>({
+      id
+    })
+    return document !== null
+      ? Chapter.fromPrimitives({
+          id: document.id,
+          seasonId: document.seasonId,
+          title: document.title,
+          releaseDate: document.releaseDate,
+          url: document.url,
+          duration: document.duration
+        })
+      : null
   }
 
   protected collectionName(): string {
