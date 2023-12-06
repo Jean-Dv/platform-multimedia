@@ -10,6 +10,8 @@ import { SeasonIdMother } from '../../Shared/domain/SeasonIdMother'
 import { ChapterTitleMother } from './ChapterTitleMother'
 import { ChapterReleaseDateMother } from './ChapterReleaseDateMother'
 import { ChapterDurationMother } from './ChapterDurationMother'
+import { ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
+import { ChapterUrlMother } from './ChapterUrlMother'
 
 export class ChapterMother {
   public static create(
@@ -17,9 +19,10 @@ export class ChapterMother {
     seasonId: SeasonId,
     title: ChapterTitle,
     releaseDate: ChapterReleaseDate,
+    url: ChapterUrl,
     duration: ChapterDuration
   ): Chapter {
-    return new Chapter(id, seasonId, title, releaseDate, duration)
+    return new Chapter(id, seasonId, title, releaseDate, url, duration)
   }
 
   public static from(command: CreateChapterCommand): Chapter {
@@ -28,6 +31,7 @@ export class ChapterMother {
       new SeasonId(command.seasonId),
       new ChapterTitle(command.title),
       new ChapterReleaseDate(new Date(command.releaseDate)),
+      new ChapterUrl(command.url),
       new ChapterDuration(command.duration)
     )
   }
@@ -38,6 +42,7 @@ export class ChapterMother {
       SeasonIdMother.random(),
       ChapterTitleMother.random(),
       ChapterReleaseDateMother.random(),
+      ChapterUrlMother.random(),
       ChapterDurationMother.random()
     )
   }
