@@ -15,6 +15,16 @@ export class ChaptersResponse {
   public readonly chapters: ChapterResponse[]
 
   constructor(chapters: Chapter[]) {
-    this.chapters = chapters.map((chapter) => chapter.toPrimitives())
+    this.chapters = chapters.map((chapter) => {
+      const { id, seasonId, title, duration, releaseDate } =
+        chapter.toPrimitives()
+      return {
+        id,
+        seasonId,
+        title,
+        duration,
+        releaseDate
+      }
+    })
   }
 }

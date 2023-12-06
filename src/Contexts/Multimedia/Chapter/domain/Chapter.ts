@@ -103,6 +103,7 @@ export class Chapter extends AggregateRoot {
     seasonId: string
     title: string
     releaseDate: Date
+    url: string
     duration: number
   } {
     return {
@@ -110,6 +111,7 @@ export class Chapter extends AggregateRoot {
       seasonId: this.seasonId.value,
       title: this.title.value,
       releaseDate: this.releaseDate.value,
+      url: this.url.value,
       duration: this.duration.value
     }
   }

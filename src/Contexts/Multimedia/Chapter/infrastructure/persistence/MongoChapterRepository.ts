@@ -9,6 +9,7 @@ interface ChapterDocument {
   seasonId: string
   title: string
   releaseDate: Date
+  url: string
   duration: number
 }
 
@@ -22,15 +23,16 @@ export class MongoChapterRepository
 
   public async matching(criteria: Criteria): Promise<Chapter[]> {
     const document = await this.searchByCriteria<ChapterDocument>(criteria)
-    return document.map((document) =>
-      Chapter.fromPrimitives({
+    return document.map((document) => {
+      return Chapter.fromPrimitives({
         id: document.id,
         seasonId: document.seasonId,
         title: document.title,
         releaseDate: document.releaseDate,
+        url: document.url,
         duration: document.duration
       })
-    )
+    })
   }
 
   protected collectionName(): string {
