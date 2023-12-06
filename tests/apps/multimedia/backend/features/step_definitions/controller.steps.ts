@@ -11,6 +11,18 @@ Given('I send a GET request to {string}', (route: string) => {
 })
 
 Given(
+  'I send a GET request to {string} with user registered',
+  (route: string) => {
+    _request = request(application.getHttpServer())
+      .get(route)
+      .set(
+        'Authorization',
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiYzRlODViMy1lYzEyLTQ1M2UtOTk4Mi0zZTk5MzhkN2RhNWIifQ.JUOH-i5gk8u0kj3fGyrX2dRD4hpMQP1sLAp3M8ylfiY'
+      )
+  }
+)
+
+Given(
   'I send a PUT request to {string} with body:',
   (route: string, body: string) => {
     _request = request(application.getHttpServer())

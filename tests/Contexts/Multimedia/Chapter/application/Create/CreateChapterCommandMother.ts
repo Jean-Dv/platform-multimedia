@@ -8,6 +8,8 @@ import { ChapterDurationMother } from '../../domain/ChapterDurationMother'
 import { ChapterIdMother } from '../../domain/ChapterIdMother'
 import { ChapterReleaseDateMother } from '../../domain/ChapterReleaseDateMother'
 import { ChapterTitleMother } from '../../domain/ChapterTitleMother'
+import { type ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
+import { ChapterUrlMother } from '../../domain/ChapterUrlMother'
 
 export class CreateChapterCommandMother {
   public static create(
@@ -15,6 +17,7 @@ export class CreateChapterCommandMother {
     seasonId: SeasonId,
     title: ChapterTitle,
     releaseDate: ChapterReleaseDate,
+    url: ChapterUrl,
     duration: ChapterDuration
   ): CreateChapterCommand {
     return {
@@ -22,6 +25,7 @@ export class CreateChapterCommandMother {
       seasonId: seasonId.value,
       title: title.value,
       releaseDate: releaseDate.value,
+      url: url.value,
       duration: duration.value
     }
   }
@@ -32,6 +36,7 @@ export class CreateChapterCommandMother {
       seasonId,
       ChapterTitleMother.random(),
       ChapterReleaseDateMother.random(),
+      ChapterUrlMother.random(),
       ChapterDurationMother.random()
     )
   }
@@ -42,6 +47,7 @@ export class CreateChapterCommandMother {
       seasonId: seasonId.value,
       title: ChapterTitleMother.invalid(),
       releaseDate: ChapterReleaseDateMother.random().value,
+      url: ChapterUrlMother.random().value,
       duration: ChapterDurationMother.random().value
     }
   }

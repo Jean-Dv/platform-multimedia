@@ -1,4 +1,5 @@
 import { type Movie } from '@Multimedia/Movies/domain/Movie'
+import { type MovieId } from '@Multimedia/Movies/domain/MovieId'
 import { type MovieRepository } from '@Multimedia/Movies/domain/MovieRepository'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 
@@ -6,12 +7,14 @@ export class MovieRepositoryMock implements MovieRepository {
   private readonly saveMock: jest.Mock
   private readonly searchAllMock: jest.Mock
   private readonly searchByCriteriaMock: jest.Mock
+  private readonly searchMock: jest.Mock
   private readonly movies: Movie[] = []
 
   constructor() {
     this.saveMock = jest.fn()
     this.searchAllMock = jest.fn()
     this.searchByCriteriaMock = jest.fn()
+    this.searchMock = jest.fn()
   }
 
   public async save(movie: Movie): Promise<void> {
@@ -28,6 +31,11 @@ export class MovieRepositoryMock implements MovieRepository {
     return this.movies
   }
 
+  public async search(id: MovieId): Promise<Movie | null> {
+    this.searchMock(id)
+    return this.movies.find((movie) => movie.id.value === id.value) ?? null
+  }
+
   public assertMatchingHaveBeenCalled(): void {
     expect(this.searchByCriteriaMock).toHaveBeenCalled()
   }
@@ -38,6 +46,10 @@ export class MovieRepositoryMock implements MovieRepository {
 
   public assertSaveHaveBeenCalledWith(movie: Movie): void {
     expect(this.saveMock).toHaveBeenCalledWith(movie)
+  }
+
+  public assertSearchHaveBeenCalledWith(id: MovieId): void {
+    expect(this.searchMock).toHaveBeenCalledWith(id)
   }
 
   public searchMockReturnValue(movie: Movie): void {

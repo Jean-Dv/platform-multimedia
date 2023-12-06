@@ -24,7 +24,15 @@
       "class": "../../../../../Contexts/Multimedia/Movies/application/SearchByCriteria/SearchMoviesByCriteriaQueryHandler",
       "arguments": ["@Multimedia.Movies.application.MoviesByCriteriaSearcher"],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Movies.application.MovieByIdSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/SearchById/MovieByIdSearcher",
+      "arguments": ["@Multimedia.Movies.domain.MovieRepository"]
+    },
+    "Multimedia.Movies.SearchMoviesByIdQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/SearchById/SearchMovieByIdQueryHandler",
+      "arguments": ["@Multimedia.Movies.application.MovieByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
     }
   }
 }
-

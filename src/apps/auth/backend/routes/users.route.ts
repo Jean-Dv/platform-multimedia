@@ -8,7 +8,14 @@ export function register(router: Router): void {
     body('firstName').exists().isString(),
     body('lastName').exists().isString(),
     body('email').exists().isEmail(),
-    body('password').exists().isString(),
+    body('password').exists().isString().isStrongPassword({
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 2,
+      returnScore: false
+    }),
     body('repeatPassword')
       .exists()
       .isString()

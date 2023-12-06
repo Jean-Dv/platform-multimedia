@@ -3,6 +3,7 @@ import { DomainEvent } from '@Shared/domain/DomainEvent'
 interface CreateMovieDomainEventAttributes {
   readonly title: string
   readonly releaseDate: Date
+  readonly url: string
   readonly duration: number
 }
 
@@ -15,12 +16,14 @@ export class MovieCreatedDomainEvent extends DomainEvent {
 
   public readonly title: string
   public readonly releaseDate: Date
+  public readonly url: string
   public readonly duration: number
 
   constructor({
     aggregateId,
     title,
     releaseDate,
+    url,
     duration,
     eventId,
     occurredOn
@@ -28,6 +31,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
     aggregateId: string
     title: string
     releaseDate: Date
+    url: string
     duration: number
     eventId?: string
     occurredOn?: Date
@@ -40,6 +44,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
     })
     this.title = title
     this.releaseDate = releaseDate
+    this.url = url
     this.duration = duration
   }
 
@@ -60,6 +65,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
       aggregateId: params.aggregateId,
       title: params.attributes.title,
       releaseDate: params.attributes.releaseDate,
+      url: params.attributes.url,
       duration: params.attributes.duration,
       eventId: params.eventId,
       occurredOn: params.occurredOn
@@ -76,6 +82,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
     return {
       title: this.title,
       releaseDate: this.releaseDate,
+      url: this.url,
       duration: this.duration
     }
   }

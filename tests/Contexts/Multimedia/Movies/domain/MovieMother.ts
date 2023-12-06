@@ -8,15 +8,18 @@ import { MovieIdMother } from './MovieIdMother'
 import { MovieTitleMother } from './MovieTitleMother'
 import { MovieReleaseDateMother } from './MovieReleaseDateMother'
 import { MovieDurationMother } from './MovieDurationMother'
+import { MovieUrl } from '@Multimedia/Movies/domain/MovieUrl'
+import { MovieUrlMother } from './MovieUrlMother'
 
 export class MovieMother {
   public static create(
     id: MovieId,
     title: MovieTitle,
     releaseDate: MovieReleaseDate,
+    url: MovieUrl,
     duration: MovieDuration
   ): Movie {
-    return new Movie(id, title, releaseDate, duration)
+    return new Movie(id, title, releaseDate, url, duration)
   }
 
   public static from(command: CreateMovieCommand): Movie {
@@ -24,6 +27,7 @@ export class MovieMother {
       new MovieId(command.id),
       new MovieTitle(command.title),
       new MovieReleaseDate(new Date(command.releaseDate)),
+      new MovieUrl(command.url),
       new MovieDuration(command.duration)
     )
   }
@@ -33,6 +37,7 @@ export class MovieMother {
       MovieIdMother.random(),
       MovieTitleMother.random(),
       MovieReleaseDateMother.random(),
+      MovieUrlMother.random(),
       MovieDurationMother.random()
     )
   }

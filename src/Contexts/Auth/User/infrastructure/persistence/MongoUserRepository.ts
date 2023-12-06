@@ -1,7 +1,17 @@
-import { type User } from '@Auth/User/domain/User'
-import { UserPassword } from '@Auth/User/domain/UserPassword'
+import { User } from '@Auth/User/domain/User'
 import { type UserRepository } from '@Auth/Shared/domain/User/UserRepository'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
+import { type UserEmail } from '@Auth/User/domain/UserEmail'
+import { type Nullable } from '@Shared/domain/Nullable'
+
+interface UserDocument {
+  _id: string
+  id: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
 
 /**
  * Repository implementation for storing and retrieving user entities
@@ -17,8 +27,23 @@ export class MongoUserRepository
    * @param user The user to save.
    */
   public async save(user: User): Promise<void> {
-    user.setPassword(UserPassword.encrypt(user.getPassword()))
     await this.persist(user.id.value, user)
+  }
+
+  public async searchByEmail(email: UserEmail): Promise<Nullable<User>> {
+    const collection = await this.collection()
+    const document = await collection.findOne<UserDocument>({
+      email: email.value
+    })
+    return document !== null
+      ? User.fromPrimitives({
+          id: document.id,
+          firstName: document.firstName,
+          lastName: document.lastName,
+          email: document.email,
+          password: document.password
+        })
+      : null
   }
 
   /**

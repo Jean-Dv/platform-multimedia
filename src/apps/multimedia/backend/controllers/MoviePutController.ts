@@ -3,14 +3,14 @@ import { type Controller } from './Controller'
 import { type Request, type Response } from 'express'
 import { CreateMovieCommand } from '@Multimedia/Movies/domain/CreateMovieCommand'
 import httpStatus from 'http-status'
-import { MovieTitleLengthExceeded } from '@Multimedia/Movies/domain/MovieTitleLengthExceeded'
-import { MovieDurationIsNotPositive } from '@Multimedia/Movies/domain/MovieDurationIsNotPositive'
+import { InvalidArgumentError } from '@Shared/domain/value-objects/InvalidArgumentError'
 
 type MoviePutRequest = Request & {
   body: {
     id: string
     title: string
     releaseDate: Date
+    url: string
     duration: number
   }
 }
@@ -31,12 +31,13 @@ export class MoviePutController implements Controller {
    */
   public async run(req: MoviePutRequest, res: Response): Promise<void> {
     try {
-      const { id, title, releaseDate, duration } = req.body
+      const { id, title, releaseDate, url, duration } = req.body
       const releaseDateParse = new Date(releaseDate)
       const createMovieCommand = new CreateMovieCommand({
         id,
         title,
         releaseDate: releaseDateParse,
+        url,
         duration
       })
       await this.commandBus.dispatch(createMovieCommand)
@@ -45,14 +46,7 @@ export class MoviePutController implements Controller {
       })
     } catch (error) {
       console.log(error)
-      if (error instanceof MovieTitleLengthExceeded) {
-        res.status(httpStatus.BAD_REQUEST).json({
-          ok: false,
-          error: error.message
-        })
-        return
-      }
-      if (error instanceof MovieDurationIsNotPositive) {
+      if (error instanceof InvalidArgumentError) {
         res.status(httpStatus.BAD_REQUEST).json({
           ok: false,
           error: error.message

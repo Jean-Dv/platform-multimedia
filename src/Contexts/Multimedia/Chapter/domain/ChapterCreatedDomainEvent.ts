@@ -4,6 +4,7 @@ interface CreateChapterDomainEventAttributes {
   seasonId: string
   title: string
   releaseDate: Date
+  url: string
   duration: number
 }
 
@@ -17,6 +18,7 @@ export class ChapterCreatedDomainEvent extends DomainEvent {
   public readonly seasonId: string
   public readonly title: string
   public readonly releaseDate: Date
+  public readonly url: string
   public readonly duration: number
 
   constructor({
@@ -24,6 +26,7 @@ export class ChapterCreatedDomainEvent extends DomainEvent {
     seasonId,
     title,
     releaseDate,
+    url,
     duration,
     eventId,
     occurredOn
@@ -32,6 +35,7 @@ export class ChapterCreatedDomainEvent extends DomainEvent {
     seasonId: string
     title: string
     releaseDate: Date
+    url: string
     duration: number
     eventId?: string
     occurredOn?: Date
@@ -45,6 +49,7 @@ export class ChapterCreatedDomainEvent extends DomainEvent {
     this.seasonId = seasonId
     this.title = title
     this.releaseDate = releaseDate
+    this.url = url
     this.duration = duration
   }
 
@@ -66,6 +71,7 @@ export class ChapterCreatedDomainEvent extends DomainEvent {
       seasonId: params.attributes.seasonId,
       title: params.attributes.title,
       releaseDate: params.attributes.releaseDate,
+      url: params.attributes.url,
       duration: params.attributes.duration,
       eventId: params.eventId,
       occurredOn: params.occurredOn
@@ -83,6 +89,7 @@ export class ChapterCreatedDomainEvent extends DomainEvent {
       seasonId: this.seasonId,
       title: this.title,
       releaseDate: this.releaseDate,
+      url: this.url,
       duration: this.duration
     }
   }

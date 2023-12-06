@@ -57,6 +57,14 @@
     "Auth.Shared.domain.CommandBus": {
       "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus",
       "arguments": ["@Auth.Shared.CommandHandlers"]
+    },
+    "Auth.Shared.QueryHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers",
+      "arguments": ["!tagged queryHandler"]
+    },
+    "Auth.Shared.domain.QueryBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus",
+      "arguments": ["@Auth.Shared.QueryHandlers"]
     }
   }
 }

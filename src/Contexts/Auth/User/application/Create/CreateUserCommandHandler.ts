@@ -6,7 +6,6 @@ import { UserFirstName } from '@Auth/User/domain/UserFirstName'
 import { UserLastName } from '@Auth/User/domain/UserLastName'
 import { UserEmail } from '@Auth/User/domain/UserEmail'
 import { UserPassword } from '@Auth/User/domain/UserPassword'
-import { InvalidArgumentError } from '@Shared/domain/value-objects/InvalidArgumentError'
 import { UserId } from '@Auth/Shared/domain/User/UserId'
 
 export class CreateUserCommandHandler
@@ -24,9 +23,6 @@ export class CreateUserCommandHandler
     const lastName = new UserLastName(command.lastName)
     const email = new UserEmail(command.email)
     const password = new UserPassword(command.password)
-    if (!password.equals(new UserPassword(command.repeatPassword))) {
-      throw new InvalidArgumentError('Passwords do not match')
-    }
     await this.userCreator.run({ id, firstName, lastName, email, password })
   }
 }

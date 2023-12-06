@@ -7,6 +7,7 @@ export class MovieCreatedDomainEventMother {
     eventId,
     title,
     releaseDate,
+    url,
     duration,
     occurredOn
   }: {
@@ -14,6 +15,7 @@ export class MovieCreatedDomainEventMother {
     eventId?: string
     title: string
     releaseDate: Date
+    url: string
     duration: number
     occurredOn?: Date
   }): MovieCreatedDomainEvent {
@@ -22,6 +24,7 @@ export class MovieCreatedDomainEventMother {
       eventId,
       title,
       releaseDate,
+      url,
       duration,
       occurredOn
     })
@@ -32,6 +35,7 @@ export class MovieCreatedDomainEventMother {
       aggregateId: movie.id.value,
       title: movie.title.value,
       releaseDate: movie.releaseDate.value,
+      url: movie.url.value,
       duration: movie.duration.value
     })
   }

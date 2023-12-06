@@ -8,6 +8,7 @@ export class ChapterCreatedDomainEventMother {
     seasonId,
     title,
     releaseDate,
+    url,
     duration,
     occurredOn
   }: {
@@ -16,6 +17,7 @@ export class ChapterCreatedDomainEventMother {
     seasonId: string
     title: string
     releaseDate: Date
+    url: string
     duration: number
     occurredOn?: Date
   }): ChapterCreatedDomainEvent {
@@ -25,6 +27,7 @@ export class ChapterCreatedDomainEventMother {
       seasonId,
       title,
       releaseDate,
+      url,
       duration,
       occurredOn
     })
@@ -36,6 +39,7 @@ export class ChapterCreatedDomainEventMother {
       seasonId: chapter.seasonId.value,
       title: chapter.title.value,
       releaseDate: chapter.releaseDate.value,
+      url: chapter.url.value,
       duration: chapter.duration.value
     })
   }

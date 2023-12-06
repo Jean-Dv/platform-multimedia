@@ -16,6 +16,15 @@
       "arguments": ["@Auth.User.application.UserCreator"],
       "tags": [{ "name": "commandHandler" }]
     },
+    "Auth.User.application.UserByEmailSearcher": {
+      "class": "../../../../../Contexts/Auth/User/application/SearchByEmail/UserByEmailSearcher",
+      "arguments": ["@Auth.User.domain.UserRepository"]
+    },
+    "Auth.User.SearchUserByEmailQueryHandler": {
+      "class": "../../../../../Contexts/Auth/User/application/SearchByEmail/SearchUserByEmailQueryHandler",
+      "arguments": ["@Auth.User.application.UserByEmailSearcher"],
+      "tags": [{ "name": "queryHandler" }]
+    },
     "Auth.User.application.UserAuthenticator": {
       "class": "../../../../../Contexts/Auth/UserAuth/application/authenticate/UserAuthenticator",
       "arguments": ["@Auth.User.domain.AuthRepository"]

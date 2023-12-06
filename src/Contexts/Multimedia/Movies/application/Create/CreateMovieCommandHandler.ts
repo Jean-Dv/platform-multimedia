@@ -6,6 +6,7 @@ import { MovieId } from '../../domain/MovieId'
 import { MovieTitle } from '../../domain/MovieTitle'
 import { MovieReleaseDate } from '../../domain/MovieReleaseDate'
 import { MovieDuration } from '../../domain/MovieDuration'
+import { MovieUrl } from '../../domain/MovieUrl'
 
 /**
  * Command handler for the CreateMovieCommand.
@@ -34,11 +35,13 @@ export class CreateMovieCommandHandler
     const id = new MovieId(command.id)
     const title = new MovieTitle(command.title)
     const releaseDate = new MovieReleaseDate(command.releaseDate)
+    const url = new MovieUrl(command.url)
     const duration = new MovieDuration(command.duration)
     await this.movieCreator.run({
       id,
       title,
       releaseDate,
+      url,
       duration
     })
   }

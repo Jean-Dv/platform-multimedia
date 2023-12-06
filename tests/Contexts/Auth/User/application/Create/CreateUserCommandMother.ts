@@ -15,28 +15,24 @@ export class CreateUserCommandMother {
     firstName: UserFirstName,
     lastName: UserLastName,
     email: UserEmail,
-    password: UserPassword,
-    repeatPassword: UserPassword
+    password: UserPassword
   ): CreateUserCommand {
     return {
       id: id.value,
       firstName: firstName.value,
       lastName: lastName.value,
       email: email.value,
-      password: password.value,
-      repeatPassword: repeatPassword.value
+      password: password.value
     }
   }
 
   public static random(): CreateUserCommand {
-    const password = UserPasswordMother.random()
     return this.create(
       UserId.random(),
       UserFirstNameMother.random(),
       UserLastNameMother.random(),
       UserEmailMother.random(),
-      password,
-      password
+      UserPasswordMother.random()
     )
   }
 
@@ -46,8 +42,7 @@ export class CreateUserCommandMother {
       firstName: UserFirstNameMother.random().value,
       lastName: UserLastNameMother.random().value,
       email: UserEmailMother.invalid(),
-      password: UserPasswordMother.invalid(),
-      repeatPassword: UserPasswordMother.invalid()
+      password: UserPasswordMother.invalid()
     }
   }
 }
