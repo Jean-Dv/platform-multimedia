@@ -5,8 +5,15 @@ import { application } from './hooks.steps'
 
 let _request: request.Test
 let _response: request.Response
+let _refreshToken: string
 
 Given('I send a GET request to {string}', (route: string) => {
+  if (_refreshToken !== undefined) {
+    _request = request(application.getHttpServer()).get(
+      `${route}?refreshToken=${_refreshToken}`
+    )
+    return
+  }
   _request = request(application.getHttpServer()).get(route)
 })
 
@@ -42,6 +49,11 @@ Then('the response content should be:', (body: string) => {
 
 Then('the response contains a refresh token', () => {
   assert.notEqual(_response.body.data.refreshToken, undefined)
+  _refreshToken = _response.body.data.refreshToken
+})
+
+Then('the response contains an access token', () => {
+  assert.notEqual(_response.body.data.accessToken, undefined)
 })
 
 Then('the response content should be an array', () => {
