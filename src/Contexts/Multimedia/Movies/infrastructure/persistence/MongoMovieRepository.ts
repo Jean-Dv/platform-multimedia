@@ -2,6 +2,7 @@ import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoR
 import { Movie } from '../../domain/Movie'
 import { type MovieRepository } from '../../domain/MovieRepository'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
+import { type MovieId } from '@Multimedia/Movies/domain/MovieId'
 
 interface MovieDocument {
   _id: string
@@ -44,6 +45,20 @@ export class MongoMovieRepository
         duration: document.duration
       })
     )
+  }
+
+  public async search(id: MovieId): Promise<Movie | null> {
+    const collection = await this.collection()
+    const document = await collection.findOne<MovieDocument>({ id: id.value })
+    return document !== null
+      ? Movie.fromPrimitives({
+          id: document.id,
+          title: document.title,
+          releaseDate: document.releaseDate,
+          url: document.url,
+          duration: document.duration
+        })
+      : null
   }
 
   /**

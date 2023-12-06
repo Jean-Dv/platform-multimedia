@@ -1,5 +1,6 @@
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { type Movie } from './Movie'
+import { type MovieId } from './MovieId'
 
 /**
  * Interface for a movie repository, defining methods for saving movie entities.
@@ -27,4 +28,12 @@ export interface MovieRepository {
    * @returns A promise that resolves to an array of matched movies.
    */
   matching: (criteria: Criteria) => Promise<Movie[]>
+
+  /**
+   * Retrieves a movie by its id.
+   *
+   * @param id - The id of the movie to be retrieved.
+   * @returns A promise that resolves to the movie with the specified id, or null if not found.
+   */
+  search: (id: MovieId) => Promise<Movie | null>
 }
