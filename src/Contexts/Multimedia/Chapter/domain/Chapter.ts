@@ -5,6 +5,7 @@ import { ChapterDuration } from './ChapterDuration'
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
 import { SeasonId } from '../../Shared/domain/Season/SeasonId'
 import { ChapterCreatedDomainEvent } from './ChapterCreatedDomainEvent'
+import { ChapterUrl } from './ChapterUrl'
 
 /**
  * Represents a chapter aggregate root entity.
@@ -14,6 +15,7 @@ export class Chapter extends AggregateRoot {
   public readonly seasonId: SeasonId
   public readonly title: ChapterTitle
   public readonly releaseDate: ChapterReleaseDate
+  public readonly url: ChapterUrl
   public readonly duration: ChapterDuration
 
   constructor(
@@ -21,6 +23,7 @@ export class Chapter extends AggregateRoot {
     seasonId: SeasonId,
     title: ChapterTitle,
     releaseDate: ChapterReleaseDate,
+    url: ChapterUrl,
     duration: ChapterDuration
   ) {
     super()
@@ -28,6 +31,7 @@ export class Chapter extends AggregateRoot {
     this.seasonId = seasonId
     this.title = title
     this.releaseDate = releaseDate
+    this.url = url
     this.duration = duration
   }
 
@@ -39,6 +43,7 @@ export class Chapter extends AggregateRoot {
    * @param seasonId - The id of the season.
    * @param title - The name of the chapter.
    * @param releaseDate - The release date of the chapter.
+   * @param url - The url of the chapter.
    * @param duration - The duration of the chapter.
    * @returns A new Chapter instance.
    */
@@ -47,15 +52,17 @@ export class Chapter extends AggregateRoot {
     seasonId: SeasonId,
     title: ChapterTitle,
     releaseDate: ChapterReleaseDate,
+    url: ChapterUrl,
     duration: ChapterDuration
   ): Chapter {
-    const chapter = new Chapter(id, seasonId, title, releaseDate, duration)
+    const chapter = new Chapter(id, seasonId, title, releaseDate, url, duration)
     chapter.record(
       new ChapterCreatedDomainEvent({
         aggregateId: id.value,
         seasonId: seasonId.value,
         title: title.value,
         releaseDate: releaseDate.value,
+        url: url.value,
         duration: duration.value
       })
     )
@@ -73,6 +80,7 @@ export class Chapter extends AggregateRoot {
     seasonId: string
     title: string
     releaseDate: Date
+    url: string
     duration: number
   }): Chapter {
     return new Chapter(
@@ -80,6 +88,7 @@ export class Chapter extends AggregateRoot {
       new SeasonId(plainData.seasonId),
       new ChapterTitle(plainData.title),
       new ChapterReleaseDate(plainData.releaseDate),
+      new ChapterUrl(plainData.url),
       new ChapterDuration(plainData.duration)
     )
   }

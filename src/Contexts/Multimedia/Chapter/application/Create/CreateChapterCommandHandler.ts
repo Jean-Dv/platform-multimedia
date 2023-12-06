@@ -7,6 +7,7 @@ import { SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
 import { ChapterTitle } from '../../domain/ChapterTitle'
 import { ChapterDuration } from '../../domain/ChapterDuration'
 import { ChapterReleaseDate } from '../../domain/ChapterReleaseDate'
+import { ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
 
 export class CreateChapterCommandHandler
   implements CommandHandler<CreateChapterCommand>
@@ -23,12 +24,14 @@ export class CreateChapterCommandHandler
     const title = new ChapterTitle(command.title)
     const duration = new ChapterDuration(command.duration)
     const releaseDate = new ChapterReleaseDate(command.releaseDate)
+    const url = new ChapterUrl(command.url)
     await this.chapterCreator.run({
       id,
       seasonId,
       title,
       duration,
-      releaseDate
+      releaseDate,
+      url
     })
   }
 }

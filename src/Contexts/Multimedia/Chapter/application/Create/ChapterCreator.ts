@@ -6,6 +6,7 @@ import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
 import { type ChapterReleaseDate } from '../../domain/ChapterReleaseDate'
 import { type ChapterDuration } from '../../domain/ChapterDuration'
 import { Chapter } from '../../domain/Chapter'
+import { type ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
 
 export class ChapterCreator {
   constructor(
@@ -25,6 +26,7 @@ export class ChapterCreator {
     seasonId: SeasonId
     title: ChapterTitle
     releaseDate: ChapterReleaseDate
+    url: ChapterUrl
     duration: ChapterDuration
   }): Promise<void> {
     const chapter = Chapter.create(
@@ -32,6 +34,7 @@ export class ChapterCreator {
       params.seasonId,
       params.title,
       params.releaseDate,
+      params.url,
       params.duration
     )
     await this.repository.save(chapter)
