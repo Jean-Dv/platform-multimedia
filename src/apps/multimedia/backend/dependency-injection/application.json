@@ -17,6 +17,9 @@
     },
     {
       "resource": "./Chapters/application.json"
+    },
+    {
+      "resource": "./Playlist/application.json"
     }
   ]
 }
