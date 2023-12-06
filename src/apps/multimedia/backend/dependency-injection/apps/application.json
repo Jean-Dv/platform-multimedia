@@ -16,6 +16,10 @@
       "class": "../../controllers/ChapterGetByIdController",
       "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     },
+    "Apps.multimedia.controllers.MovieGetByIdController": {
+      "class": "../../controllers/MovieGetByIdController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
     "Apps.multimedia.middlewares.AuthenticateMiddleware": {
       "class": "../../middlewares/AuthenticateMiddleware"
     }
