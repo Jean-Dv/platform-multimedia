@@ -39,7 +39,7 @@ export class MongoChapterRepository
   public async search(id: ChapterId): Promise<Chapter | null> {
     const collection = await this.collection()
     const document = await collection.findOne<ChapterDocument>({
-      id
+      id: id.value
     })
     return document !== null
       ? Chapter.fromPrimitives({
