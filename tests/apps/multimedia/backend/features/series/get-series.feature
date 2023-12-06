@@ -98,6 +98,7 @@ Feature: Get Series
       "seasonId": "bb7f05ae-4469-474f-a5cd-5ac3fe14d657",
       "title": "Simpsons Roasting on an Open Fire",
       "releaseDate": "1989-12-17",
+      "url": "https://www.youtube.com/watch?v=2SZ0ywxewZg",
       "duration": 1200
     }
     """
@@ -108,6 +109,7 @@ Feature: Get Series
       "seasonId": "bb7f05ae-4469-474f-a5cd-5ac3fe14d657",
       "title": "Bart the Genius",
       "releaseDate": "1990-01-14",
+      "url": "https://www.youtube.com/watch?v=2SZ0ywxewZg",
       "duration": 1200
     }
     """

@@ -23,6 +23,7 @@ import { ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
 import { ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseDate'
 import { ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
 import { MovieUrl } from '@Multimedia/Movies/domain/MovieUrl'
+import { ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
@@ -77,13 +78,15 @@ Given('there is the season:', async (season: string) => {
 })
 
 Given('there is the chapter:', async (chapter: string) => {
-  const { id, seasonId, title, releaseDate, duration } = JSON.parse(chapter)
+  const { id, seasonId, title, releaseDate, url, duration } =
+    JSON.parse(chapter)
   await chaptersRepository.save(
     new Chapter(
       new ChapterId(id),
       new SeasonId(seasonId),
       new ChapterTitle(title),
       new ChapterReleaseDate(releaseDate),
+      new ChapterUrl(url),
       new ChapterDuration(duration)
     )
   )
