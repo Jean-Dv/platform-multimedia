@@ -7,7 +7,7 @@
         "@Multimedia.Shared.domain.EventBus"
       ]
     },
-    "Multimedia.Playlists.domain.MovieRepository": {
+    "Multimedia.Playlists.domain.PlaylistRepository": {
       "class": "../../../../../Contexts/Multimedia/Playlists/infrastructure/persistence/MongoPlaylistRepository",
       "arguments": ["@Multimedia.Shared.ConnectionManager"]
     },
