@@ -5,6 +5,7 @@ import { AggregateRoot } from '@Shared/domain/AggregateRoot'
 import { PlaylistId } from './PlaylistId'
 import { PlaylistName } from './PlaylistName'
 import { PlaylistCreatedDomainEvent } from './PlaylistCreatedDomainEvent'
+import { PlaylistDeletedDomainEvent } from './PlaylistDeletedDomainEvent'
 
 export class Playlist extends AggregateRoot {
   public readonly id: PlaylistId
@@ -38,6 +39,26 @@ export class Playlist extends AggregateRoot {
     const playlist = new Playlist(id, name, userId, seriesIds, moviesIds)
     playlist.record(
       new PlaylistCreatedDomainEvent({
+        aggregateId: id.value,
+        name: name.value,
+        userId: userId.value,
+        seriesIds: seriesIds.map((id) => id.value),
+        moviesIds: moviesIds.map((id) => id.value)
+      })
+    )
+    return playlist
+  }
+
+  public static delete(
+    id: PlaylistId,
+    name: PlaylistName,
+    userId: UserId,
+    seriesIds: SerieId[],
+    moviesIds: MovieId[]
+  ): Playlist {
+    const playlist = new Playlist(id, name, userId, seriesIds, moviesIds)
+    playlist.record(
+      new PlaylistDeletedDomainEvent({
         aggregateId: id.value,
         name: name.value,
         userId: userId.value,

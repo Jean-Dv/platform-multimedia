@@ -50,7 +50,8 @@ export abstract class MongoRepository<T extends AggregateRoot> {
   protected async persist(id: string, aggregateRoot: T): Promise<void> {
     const collection = await this.collection()
     const document = {
-      ...aggregateRoot.toPrimitives()
+      ...aggregateRoot.toPrimitives(),
+      createdAt: new Date()
     }
     await collection.updateOne({ id }, { $set: document }, { upsert: true })
   }
@@ -66,5 +67,19 @@ export abstract class MongoRepository<T extends AggregateRoot> {
       .skip(query.skip)
       .limit(query.limit)
       .toArray()
+  }
+
+  /**
+   * This method delete soft a aggregate root.
+   *
+   * @param {string} id The id of the aggregate root.
+   * @returns {T} The aggregate root.
+   */
+  protected async erase(id: string): Promise<void> {
+    const collection = await this.collection()
+    const document = {
+      deletedAt: new Date()
+    }
+    await collection.updateOne({ id }, { $set: document }, { upsert: false })
   }
 }
