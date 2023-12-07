@@ -1,5 +1,5 @@
 import { type Router } from 'express'
-import { body } from 'express-validator'
+import { body, param } from 'express-validator'
 import { container } from '../dependency-injection'
 import { validateReqSchema } from '.'
 
@@ -26,6 +26,24 @@ function registerPutPlaylist(router: Router): void {
   )
 }
 
+function registerDeletePlaylist(router: Router): void {
+  const reqSchema = [param('id').exists().isString().isUUID()]
+  const middleware = container.get(
+    'Apps.multimedia.middlewares.AuthenticateMiddleware'
+  )
+  const controller = container.get(
+    'Apps.multimedia.controllers.PlaylistDeleteController'
+  )
+  router.delete(
+    '/multimedia/playlist/:id',
+    reqSchema,
+    validateReqSchema,
+    middleware.run,
+    controller.run.bind(controller)
+  )
+}
+
 export function register(router: Router): void {
   registerPutPlaylist(router)
+  registerDeletePlaylist(router)
 }

@@ -15,6 +15,18 @@
       "class": "../../../../../Contexts/Multimedia/Playlists/application/Create/CreatePlaylistCommandHandler",
       "arguments": ["@Multimedia.Playlists.application.PlaylistCreator"],
       "tags": [{ "name": "commandHandler" }]
+    },
+    "Multimedia.Playlists.application.PlaylistDeletor": {
+      "class": "../../../../../Contexts/Multimedia/Playlists/application/Delete/PlaylistDeletor",
+      "arguments": [
+        "@Multimedia.Playlists.domain.PlaylistRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Playlists.DeletePlaylistCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Playlists/application/Delete/DeletePlaylistCommandHandler",
+      "arguments": ["@Multimedia.Playlists.application.PlaylistDeletor"],
+      "tags": [{ "name": "commandHandler" }]
     }
   }
 }
