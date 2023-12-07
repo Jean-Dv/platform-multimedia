@@ -60,6 +60,16 @@ Given(
   }
 )
 
+Given('I send a DELETE request to {string}', (route: string) => {
+  if (_token !== undefined) {
+    _request = request(application.getHttpServer())
+      .delete(route)
+      .set('Authorization', `Bearer ${_token}`)
+    return
+  }
+  _request = request(application.getHttpServer()).delete(route)
+})
+
 Then('the response status code should be {int}', async (status: number) => {
   _response = await _request.expect(status)
 })
