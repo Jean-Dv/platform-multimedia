@@ -22,6 +22,14 @@
     },
     "Apps.multimedia.middlewares.AuthenticateMiddleware": {
       "class": "../../middlewares/AuthenticateMiddleware"
+    },
+    "Apps.multimedia.controllers.PlaylistPutController": {
+      "class": "../../controllers/PlaylistPutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.PlaylistDeleteController": {
+      "class": "../../controllers/PlaylistDeleteController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
     }
   }
 }

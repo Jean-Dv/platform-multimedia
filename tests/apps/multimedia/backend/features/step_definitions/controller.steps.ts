@@ -1,10 +1,23 @@
+import jwt from 'jsonwebtoken'
 import { Given, Then } from '@cucumber/cucumber'
 import assert from 'assert'
 import request from 'supertest'
 import { application } from './hooks.steps'
+import authConfig from '@Auth/Shared/infrastructure/config'
 
 let _request: request.Test
 let _response: request.Response
+let _token: string
+
+Given('I have a valid token', () => {
+  _token = jwt.sign(
+    { userId: 'bc4e85b3-ec12-453e-9982-3e9938d7da5b' },
+    authConfig.get('auth.secret'),
+    {
+      expiresIn: 15 * 60 * 1000
+    }
+  )
+})
 
 Given('I send a GET request to {string}', (route: string) => {
   _request = request(application.getHttpServer()).get(route)
@@ -25,6 +38,13 @@ Given(
 Given(
   'I send a PUT request to {string} with body:',
   (route: string, body: string) => {
+    if (_token !== undefined) {
+      _request = request(application.getHttpServer())
+        .put(route)
+        .set('Authorization', `Bearer ${_token}`)
+        .send(JSON.parse(body))
+      return
+    }
     _request = request(application.getHttpServer())
       .put(route)
       .send(JSON.parse(body))
@@ -39,6 +59,16 @@ Given(
       .send(JSON.parse(body))
   }
 )
+
+Given('I send a DELETE request to {string}', (route: string) => {
+  if (_token !== undefined) {
+    _request = request(application.getHttpServer())
+      .delete(route)
+      .set('Authorization', `Bearer ${_token}`)
+    return
+  }
+  _request = request(application.getHttpServer()).delete(route)
+})
 
 Then('the response status code should be {int}', async (status: number) => {
   _response = await _request.expect(status)

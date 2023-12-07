@@ -1,0 +1,32 @@
+{
+  "services": {
+    "Multimedia.Playlists.application.PlaylistCreator": {
+      "class": "../../../../../Contexts/Multimedia/Playlists/application/Create/PlaylistCreator",
+      "arguments": [
+        "@Multimedia.Playlists.domain.PlaylistRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Playlists.domain.PlaylistRepository": {
+      "class": "../../../../../Contexts/Multimedia/Playlists/infrastructure/persistence/MongoPlaylistRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Playlists.CreatePlaylistCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Playlists/application/Create/CreatePlaylistCommandHandler",
+      "arguments": ["@Multimedia.Playlists.application.PlaylistCreator"],
+      "tags": [{ "name": "commandHandler" }]
+    },
+    "Multimedia.Playlists.application.PlaylistDeletor": {
+      "class": "../../../../../Contexts/Multimedia/Playlists/application/Delete/PlaylistDeletor",
+      "arguments": [
+        "@Multimedia.Playlists.domain.PlaylistRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Playlists.DeletePlaylistCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Playlists/application/Delete/DeletePlaylistCommandHandler",
+      "arguments": ["@Multimedia.Playlists.application.PlaylistDeletor"],
+      "tags": [{ "name": "commandHandler" }]
+    }
+  }
+}

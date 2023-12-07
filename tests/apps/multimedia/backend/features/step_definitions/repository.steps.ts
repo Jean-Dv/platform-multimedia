@@ -24,6 +24,11 @@ import { ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseDat
 import { ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
 import { MovieUrl } from '@Multimedia/Movies/domain/MovieUrl'
 import { ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
+import { type PlaylistRepository } from '@Multimedia/Playlists/domain/PlaylistRepository'
+import { Playlist } from '@Multimedia/Playlists/domain/Playlist'
+import { PlaylistId } from '@Multimedia/Playlists/domain/PlaylistId'
+import { UserId } from '@Auth/Shared/domain/User/UserId'
+import { PlaylistName } from '@Multimedia/Playlists/domain/PlaylistName'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
@@ -39,6 +44,10 @@ const seasonsRepository: SeasonRepository = container.get(
 
 const chaptersRepository: ChapterRepository = container.get(
   'Multimedia.Chapters.domain.ChapterRepository'
+)
+
+const playlistsRepository: PlaylistRepository = container.get(
+  'Multimedia.Playlists.domain.PlaylistRepository'
 )
 
 Given('there is the movie:', async (movie: string) => {
@@ -88,6 +97,19 @@ Given('there is the chapter:', async (chapter: string) => {
       new ChapterReleaseDate(releaseDate),
       new ChapterUrl(url),
       new ChapterDuration(duration)
+    )
+  )
+})
+
+Given('there is the playlist:', async (playlist: string) => {
+  const { id, userId, name, movies, series } = JSON.parse(playlist)
+  await playlistsRepository.save(
+    new Playlist(
+      new PlaylistId(id),
+      new PlaylistName(name),
+      new UserId(userId),
+      series.map((serieId: string) => new SerieId(serieId)),
+      movies.map((movieId: string) => new MovieId(movieId))
     )
   )
 })
