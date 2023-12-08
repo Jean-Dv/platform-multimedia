@@ -8,6 +8,10 @@
     },
     {
       "resource": "./User/application.json"
+    },
+    {
+      "resource": "./Roles/application.json"
     }
   ]
 }
+

@@ -1,0 +1,20 @@
+{
+  "services": {
+    "Auth.Roles.application.RoleCreator": {
+      "class": "../../../../../Contexts/Auth/Roles/application/Create/RoleCreator",
+      "arguments": [
+        "@Auth.Roles.domain.RoleRepository",
+        "@Auth.Shared.domain.EventBus"
+      ]
+    },
+    "Auth.Roles.domain.RoleRepository": {
+      "class": "../../../../../Contexts/Auth/Roles/infrastructure/persistence/MongoRoleRepository",
+      "arguments": ["@Auth.Shared.ConnectionManager"]
+    },
+    "Auth.Roles.CreateRoleCommandHandler": {
+      "class": "../../../../../Contexts/Auth/Roles/application/Create/CreateRoleCommandHandler",
+      "arguments": ["@Auth.Roles.application.RoleCreator"],
+      "tags": [{ "name": "commandHandler" }]
+    }
+  }
+}
