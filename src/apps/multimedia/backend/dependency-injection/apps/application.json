@@ -21,7 +21,12 @@
       "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     },
     "Apps.multimedia.middlewares.AuthenticateMiddleware": {
-      "class": "../../middlewares/AuthenticateMiddleware"
+      "class": "../../middlewares/AuthenticateMiddleware",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.middlewares.IsAdminMiddleware": {
+      "class": "../../middlewares/IsAdminMiddleware",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     },
     "Apps.multimedia.controllers.PlaylistPutController": {
       "class": "../../controllers/PlaylistPutController",
