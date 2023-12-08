@@ -1,0 +1,17 @@
+import { RoleName } from '@Auth/Roles/domain/RoleName'
+
+export class RoleNameMother {
+  public static create(value: string): RoleName {
+    return RoleName.fromValue(value)
+  }
+
+  public static random(): RoleName {
+    const number = Math.floor(Math.random() * 2)
+    const values = ['admin', 'user']
+    return this.create(values[number])
+  }
+
+  public static invalid(): string {
+    return 'invalid-role-name'
+  }
+}
