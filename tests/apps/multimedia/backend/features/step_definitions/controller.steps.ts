@@ -11,7 +11,10 @@ let _token: string
 
 Given('I have a valid token', () => {
   _token = jwt.sign(
-    { userId: 'bc4e85b3-ec12-453e-9982-3e9938d7da5b' },
+    {
+      userId: '050d3d09-0ffc-40a9-bb66-cd9cabae60b8',
+      roleId: '050d3d09-0ffc-40a9-bb66-cd9cabae60b6'
+    },
     authConfig.get('auth.secret'),
     {
       expiresIn: 15 * 60 * 1000
@@ -20,20 +23,14 @@ Given('I have a valid token', () => {
 })
 
 Given('I send a GET request to {string}', (route: string) => {
-  _request = request(application.getHttpServer()).get(route)
-})
-
-Given(
-  'I send a GET request to {string} with user registered',
-  (route: string) => {
+  if (_token !== undefined) {
     _request = request(application.getHttpServer())
       .get(route)
-      .set(
-        'Authorization',
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiYzRlODViMy1lYzEyLTQ1M2UtOTk4Mi0zZTk5MzhkN2RhNWIifQ.JUOH-i5gk8u0kj3fGyrX2dRD4hpMQP1sLAp3M8ylfiY'
-      )
+      .set('Authorization', `Bearer ${_token}`)
+    return
   }
-)
+  _request = request(application.getHttpServer()).get(route)
+})
 
 Given(
   'I send a PUT request to {string} with body:',
