@@ -3,6 +3,19 @@ Feature: Obtain access token
   I want to obtain an access token
 
   Scenario: A valid existing user
+    Given there is the roles:
+    """
+    [
+      {
+        "id": "d6cf9cbc-0ffd-4b02-ae5e-de2585b0cdfe",
+        "name": "admin"
+      },
+      {
+        "id": "d58ce366-05ae-4ce3-8e98-bf323aee9dbd",
+        "name": "registered"
+      }
+    ]
+    """
     Given I send a PUT request to "/auth/register" with body:
     """
     {

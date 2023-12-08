@@ -15,6 +15,15 @@
       "class": "../../../../../Contexts/Auth/Roles/application/Create/CreateRoleCommandHandler",
       "arguments": ["@Auth.Roles.application.RoleCreator"],
       "tags": [{ "name": "commandHandler" }]
+    },
+    "Auth.Roles.application.RoleByNameSearcher": {
+      "class": "../../../../../Contexts/Auth/Roles/application/SearchByName/RoleByNameSearcher",
+      "arguments": ["@Auth.Roles.domain.RoleRepository"]
+    },
+    "Auth.Roles.SearchRoleByNameQueryHandler": {
+      "class": "../../../../../Contexts/Auth/Roles/application/SearchByName/SearchRoleByNameQueryHandler",
+      "arguments": ["@Auth.Roles.application.RoleByNameSearcher"],
+      "tags": [{ "name": "queryHandler" }]
     }
   }
 }

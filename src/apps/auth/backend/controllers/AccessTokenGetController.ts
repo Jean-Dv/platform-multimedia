@@ -6,6 +6,9 @@ import authConfig from '@Auth/Shared/infrastructure/config'
 import { SearchUserByEmailQuery } from '@Auth/User/application/SearchByEmail/SearchUserByEmailQuery'
 import httpStatus from 'http-status'
 import { UserNotFound } from '@Auth/User/domain/UserNotFound'
+import { type UserResponse } from '@Auth/User/application/UserResponse'
+import { SearchRoleByNameQuery } from '@Auth/Roles/application/SearchByName/SearchRoleByNameQuery'
+import { type RoleResponse } from '@Auth/Roles/application/RoleResponse'
 
 /**
  * Controller for handling GET requests related to access tokens.
@@ -21,10 +24,19 @@ export class AccessTokenGetController implements Controller {
         refreshToken as string
       )
       const query = new SearchUserByEmailQuery(userEmail)
-      const userId = await this.queryBus.ask(query)
-      const accessToken = jwt.sign({ userId }, authConfig.get('auth.secret'), {
-        expiresIn: 15 * 60 * 1000
-      })
+      const { id: userId, roleName } =
+        await this.queryBus.ask<UserResponse>(query)
+      const searchRoleByNameQuery = new SearchRoleByNameQuery(roleName)
+      const { role } = await this.queryBus.ask<RoleResponse>(
+        searchRoleByNameQuery
+      )
+      const accessToken = jwt.sign(
+        { userId, roleId: role.id },
+        authConfig.get('auth.secret'),
+        {
+          expiresIn: 15 * 60 * 1000
+        }
+      )
       res.status(httpStatus.OK).json({
         ok: true,
         data: {

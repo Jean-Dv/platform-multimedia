@@ -7,6 +7,7 @@ import { type Nullable } from '@Shared/domain/Nullable'
 interface UserDocument {
   _id: string
   id: string
+  roleName: string
   firstName: string
   lastName: string
   email: string
@@ -38,6 +39,7 @@ export class MongoUserRepository
     return document !== null
       ? User.fromPrimitives({
           id: document.id,
+          roleName: document.roleName,
           firstName: document.firstName,
           lastName: document.lastName,
           email: document.email,
