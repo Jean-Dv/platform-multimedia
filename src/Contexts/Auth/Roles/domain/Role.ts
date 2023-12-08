@@ -1,6 +1,6 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
 import { RoleId } from './RoleId'
-import { RoleName } from './RoleName'
+import { RoleName } from '../../Shared/domain/Roles/RoleName'
 import { RoleCreatedDomainEvent } from './RoleCreatedDomainEvent'
 
 export class Role extends AggregateRoot {

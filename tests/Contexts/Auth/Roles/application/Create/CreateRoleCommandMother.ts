@@ -1,6 +1,6 @@
 import { type CreateRoleCommand } from '@Auth/Roles/application/Create/CreateRoleCommand'
 import { type RoleId } from '@Auth/Roles/domain/RoleId'
-import { type RoleName } from '@Auth/Roles/domain/RoleName'
+import { type RoleName } from '@Auth/Shared/domain/Roles/RoleName'
 import { RoleIdMother } from '../../domain/RoleIdMother'
 import { RoleNameMother } from '../../domain/RoleNameMother'
 

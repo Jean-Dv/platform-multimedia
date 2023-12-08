@@ -3,7 +3,7 @@ import { CreateRoleCommand } from './CreateRoleCommand'
 import { type RoleCreator } from './RoleCreator'
 import { type Command } from '@Shared/domain/Command'
 import { RoleId } from '@Auth/Roles/domain/RoleId'
-import { RoleName } from '@Auth/Roles/domain/RoleName'
+import { RoleName } from '@Auth/Shared/domain/Roles/RoleName'
 
 export class CreateRoleCommandHandler
   implements CommandHandler<CreateRoleCommand>

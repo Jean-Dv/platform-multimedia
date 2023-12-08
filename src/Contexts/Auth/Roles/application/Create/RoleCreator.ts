@@ -1,6 +1,6 @@
 import { Role } from '@Auth/Roles/domain/Role'
 import { type RoleId } from '@Auth/Roles/domain/RoleId'
-import { type RoleName } from '@Auth/Roles/domain/RoleName'
+import { type RoleName } from '@Auth/Shared/domain/Roles/RoleName'
 import { type RoleRepository } from '@Auth/Roles/domain/RoleRepository'
 import { type EventBus } from '@Shared/domain/EventBus'
 

@@ -1,4 +1,4 @@
-import { RoleName } from '@Auth/Roles/domain/RoleName'
+import { RoleName } from '@Auth/Shared/domain/Roles/RoleName'
 
 export class RoleNameMother {
   public static create(value: string): RoleName {
