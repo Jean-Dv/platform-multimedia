@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
-import { RoleId } from '@Auth/Shared/domain/Roles/RoleId'
+import { RoleId } from './RoleId'
 import { RoleName } from './RoleName'
 import { RoleCreatedDomainEvent } from './RoleCreatedDomainEvent'
 
