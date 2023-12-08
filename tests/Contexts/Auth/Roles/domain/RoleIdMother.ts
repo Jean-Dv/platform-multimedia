@@ -1,4 +1,4 @@
-import { RoleId } from '@Auth/Roles/domain/RoleId'
+import { RoleId } from '@Auth/Shared/domain/Roles/RoleId'
 import { UuidMother } from '../../../Shared/domain/UuidMother'
 
 export class RoleIdMother {
