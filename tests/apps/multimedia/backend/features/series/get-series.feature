@@ -3,10 +3,25 @@ Feature: Get Series
   I want to get a list of movies
 
   Scenario: All existing series
+    Given there is the category:
+    """
+    {
+      "id": "2841a509-4895-48ca-ae61-411b518d4781",
+      "name": "comedy"
+    }
+    """
+    And there is the category:
+    """
+    {
+      "id": "2841a509-4895-48ca-ae61-411b518d4782",
+      "name": "action"
+    }
+    """
     Given there is the serie:
     """
     {
       "id": "2841a509-4895-48ca-ae61-411b518d4783",
+      "category": "action",
       "title": "The Walking Dead",
       "releaseDate": "2010-10-31"
     }
@@ -15,6 +30,7 @@ Feature: Get Series
     """
     {
       "id": "2841a509-4895-48ca-ae61-411b518d4784",
+      "category": "comedy",
       "title": "The Simpsons",
       "releaseDate": "1989-12-17"
     }
@@ -28,11 +44,13 @@ Feature: Get Series
       "data": [
         {
           "id": "2841a509-4895-48ca-ae61-411b518d4784",
+          "category": "comedy",
           "title": "The Simpsons",
           "releaseDate": "1989-12-17"
         },
         {
           "id": "2841a509-4895-48ca-ae61-411b518d4783",
+          "category": "action",
           "title": "The Walking Dead",
           "releaseDate": "2010-10-31"
         }
@@ -41,10 +59,25 @@ Feature: Get Series
     """
 
   Scenario: Filter by title
+    Given there is the category:
+    """
+    {
+      "id": "2841a509-4895-48ca-ae61-411b518d4781",
+      "name": "comedy"
+    }
+    """
+    And there is the category:
+    """
+    {
+      "id": "2841a509-4895-48ca-ae61-411b518d4782",
+      "name": "action"
+    }
+    """
     Given there is the serie:
     """
     {
       "id": "2841a509-4895-48ca-ae61-411b518d4783",
+      "category": "action",
       "title": "The Walking Dead",
       "releaseDate": "2010-10-31"
     }
@@ -53,6 +86,7 @@ Feature: Get Series
     """
     {
       "id": "2841a509-4895-48ca-ae61-411b518d4784",
+      "category": "comedy",
       "title": "The Simpsons",
       "releaseDate": "1989-12-17"
     }
@@ -66,6 +100,7 @@ Feature: Get Series
       "data": [
         {
           "id": "2841a509-4895-48ca-ae61-411b518d4784",
+          "category": "comedy",
           "title": "The Simpsons",
           "releaseDate": "1989-12-17"
         }
@@ -74,10 +109,18 @@ Feature: Get Series
     """
 
   Scenario: FilterBySpecificId
+    Given there is the category:
+    """
+    {
+      "id": "2841a509-4895-48ca-ae61-411b518d4781",
+      "name": "comedy"
+    }
+    """
     Given there is the serie:
     """
     {
       "id": "2841a509-4895-48ca-ae61-411b518d4783",
+      "category": "comedy",
       "title": "The Simpsons",
       "releaseDate": "1989-12-17"
     }
@@ -121,6 +164,7 @@ Feature: Get Series
       "ok": true,
       "data": {
         "id": "2841a509-4895-48ca-ae61-411b518d4783",
+        "category": "comedy",
         "title": "The Simpsons",
         "seasons": [
           {

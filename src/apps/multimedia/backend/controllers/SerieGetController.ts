@@ -39,6 +39,7 @@ export class SerieGetController implements Controller {
         data: {
           id: serie.id,
           title: serie.title,
+          category: serie.category,
           seasons: await Promise.all(
             seasons.seasons.map(async (season) => {
               const chapters = await this.getChaptersOfSeason(season.id)

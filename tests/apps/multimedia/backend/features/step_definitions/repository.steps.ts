@@ -88,10 +88,11 @@ Given('there is the movie:', async (movie: string) => {
 })
 
 Given('there is the serie:', async (serie: string) => {
-  const { id, title, releaseDate } = JSON.parse(serie)
+  const { id, category, title, releaseDate } = JSON.parse(serie)
   await seriesRepository.save(
     new Serie(
       new SerieId(id),
+      new CategoryName(category),
       new SerieTitle(title),
       new SerieReleaseDate(releaseDate)
     )
