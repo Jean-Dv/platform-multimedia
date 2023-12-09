@@ -5,6 +5,7 @@ export class MovieCreatedDomainEventMother {
   public static create({
     aggregateId,
     eventId,
+    category,
     title,
     releaseDate,
     url,
@@ -13,6 +14,7 @@ export class MovieCreatedDomainEventMother {
   }: {
     aggregateId: string
     eventId?: string
+    category: string
     title: string
     releaseDate: Date
     url: string
@@ -22,6 +24,7 @@ export class MovieCreatedDomainEventMother {
     return new MovieCreatedDomainEvent({
       aggregateId,
       eventId,
+      category,
       title,
       releaseDate,
       url,
@@ -33,6 +36,7 @@ export class MovieCreatedDomainEventMother {
   public static fromMovie(movie: Movie): MovieCreatedDomainEvent {
     return this.create({
       aggregateId: movie.id.value,
+      category: movie.category.value,
       title: movie.title.value,
       releaseDate: movie.releaseDate.value,
       url: movie.url.value,

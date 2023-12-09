@@ -1,6 +1,7 @@
 import { type Movie } from '@Multimedia/Movies/domain/Movie'
 import { type MovieId } from '@Multimedia/Movies/domain/MovieId'
 import { type MovieRepository } from '@Multimedia/Movies/domain/MovieRepository'
+import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 
 export class MovieRepositoryMock implements MovieRepository {
@@ -8,6 +9,7 @@ export class MovieRepositoryMock implements MovieRepository {
   private readonly searchAllMock: jest.Mock
   private readonly searchByCriteriaMock: jest.Mock
   private readonly searchMock: jest.Mock
+  private readonly updateMoviesByCategoryMock: jest.Mock
   private readonly movies: Movie[] = []
 
   constructor() {
@@ -15,6 +17,7 @@ export class MovieRepositoryMock implements MovieRepository {
     this.searchAllMock = jest.fn()
     this.searchByCriteriaMock = jest.fn()
     this.searchMock = jest.fn()
+    this.updateMoviesByCategoryMock = jest.fn()
   }
 
   public async save(movie: Movie): Promise<void> {
@@ -36,6 +39,10 @@ export class MovieRepositoryMock implements MovieRepository {
     return this.movies.find((movie) => movie.id.value === id.value) ?? null
   }
 
+  public async updateMoviesByCategory(name: CategoryName): Promise<void> {
+    this.updateMoviesByCategoryMock(name)
+  }
+
   public assertMatchingHaveBeenCalled(): void {
     expect(this.searchByCriteriaMock).toHaveBeenCalled()
   }
@@ -50,6 +57,12 @@ export class MovieRepositoryMock implements MovieRepository {
 
   public assertSearchHaveBeenCalledWith(id: MovieId): void {
     expect(this.searchMock).toHaveBeenCalledWith(id)
+  }
+
+  public assertUpdateMoviesByCategoryHaveBeenCalledWith(
+    name: CategoryName
+  ): void {
+    expect(this.updateMoviesByCategoryMock).toHaveBeenCalledWith(name)
   }
 
   public searchMockReturnValue(movie: Movie): void {
