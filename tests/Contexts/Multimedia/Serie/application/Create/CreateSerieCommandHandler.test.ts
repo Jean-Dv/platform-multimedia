@@ -41,7 +41,11 @@ describe('CreateSerieCommandHandler', () => {
 
   it('should throw an error when name is invalid', async () => {
     try {
-      const command = CreateSerieCommandMother.invalid()
+      const category = CategoryMother.random()
+      repositoryCategory.searchByNameMockReturnValue(category)
+      const command = CreateSerieCommandMother.invalidWithCategory(
+        category.name
+      )
       const serie = SerieMother.from(command)
       await handler.handle(command)
       repository.assertSaveHaveBeenCalledWith(serie)

@@ -49,4 +49,15 @@ export class CreateSerieCommandMother {
       releaseDate: SerieReleaseDateMother.random().value
     }
   }
+
+  public static invalidWithCategory(
+    category: CategoryName
+  ): CreateSerieCommand {
+    return {
+      id: SerieIdMother.random().value,
+      category: category.value,
+      title: SerieTitleMother.invalid(),
+      releaseDate: SerieReleaseDateMother.random().value
+    }
+  }
 }

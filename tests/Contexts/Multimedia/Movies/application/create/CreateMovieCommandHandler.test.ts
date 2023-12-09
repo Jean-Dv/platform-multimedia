@@ -40,7 +40,11 @@ describe('CreateMovieCommandHandler', () => {
 
   it('should throw an error when name is invalid', async () => {
     try {
-      const command = CreateMovieCommandMother.invalid()
+      const category = CategoryMother.random()
+      categoryRepository.searchByNameMockReturnValue(category)
+      const command = CreateMovieCommandMother.invalidWithCategory(
+        category.name
+      )
       const movie = MovieMother.from(command)
       await handler.handle(command)
       repository.assertSaveHaveBeenCalledWith(movie)

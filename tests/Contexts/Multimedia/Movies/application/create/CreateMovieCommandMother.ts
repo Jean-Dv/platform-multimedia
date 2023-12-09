@@ -63,4 +63,17 @@ export class CreateMovieCommandMother {
       duration: MovieDurationMother.random().value
     }
   }
+
+  public static invalidWithCategory(
+    category: CategoryName
+  ): CreateMovieCommand {
+    return {
+      id: MovieIdMother.random().value,
+      category: category.value,
+      title: MovieTitleMother.invalid(),
+      releaseDate: MovieReleaseDateMother.random().value,
+      url: MovieUrlMother.invalid(),
+      duration: MovieDurationMother.random().value
+    }
+  }
 }
