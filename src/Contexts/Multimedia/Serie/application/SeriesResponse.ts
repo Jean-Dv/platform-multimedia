@@ -2,6 +2,7 @@ import { type Serie } from '../domain/Serie'
 
 export interface SerieResponse {
   id: string
+  category: string
   title: string
   releaseDate: Date
 }

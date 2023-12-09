@@ -1,6 +1,7 @@
 import { DomainEvent } from '@Shared/domain/DomainEvent'
 
 interface SerieCreatedDomainEventAttributes {
+  category: string
   title: string
   releaseDate: Date
 }
@@ -8,17 +9,20 @@ interface SerieCreatedDomainEventAttributes {
 export class SerieCreatedDomainEvent extends DomainEvent {
   public static readonly EVENT_NAME = 'serie.created'
 
+  public readonly category: string
   public readonly title: string
   public readonly releaseDate: Date
 
   constructor({
     aggregateId,
+    category,
     title,
     releaseDate,
     eventId,
     occurredOn
   }: {
     aggregateId: string
+    category: string
     title: string
     releaseDate: Date
     eventId?: string
@@ -30,6 +34,7 @@ export class SerieCreatedDomainEvent extends DomainEvent {
       eventId,
       occurredOn
     })
+    this.category = category
     this.title = title
     this.releaseDate = releaseDate
   }
@@ -49,6 +54,7 @@ export class SerieCreatedDomainEvent extends DomainEvent {
   }): DomainEvent {
     return new SerieCreatedDomainEvent({
       aggregateId: params.aggregateId,
+      category: params.attributes.category,
       title: params.attributes.title,
       releaseDate: params.attributes.releaseDate,
       eventId: params.eventId,
@@ -63,6 +69,7 @@ export class SerieCreatedDomainEvent extends DomainEvent {
    */
   public toPrimitives(): SerieCreatedDomainEventAttributes {
     return {
+      category: this.category,
       title: this.title,
       releaseDate: this.releaseDate
     }
