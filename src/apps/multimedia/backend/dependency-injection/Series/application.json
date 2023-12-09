@@ -21,6 +21,19 @@
       "class": "../../../../../Contexts/Multimedia/Serie/application/UpdateCategory/UpdateSerieOnCategoryDeleted",
       "arguments": ["@Multimedia.Series.application.SerieUpdaterCategory"],
       "tags": [{ "name": "domainEventSubscriber" }]
+    },
+    "Multimedia.Series.application.SerieCreator": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/Create/SerieCreator",
+      "arguments": [
+        "@Multimedia.Series.domain.SerieRepository",
+        "@Multimedia.Categories.domain.CategoryRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Series.CreateSerieCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/Create/CreateSerieCommandHandler",
+      "arguments": ["@Multimedia.Series.application.SerieCreator"],
+      "tags": [{ "name": "commandHandler" }]
     }
   }
 }
