@@ -39,6 +39,10 @@
     "Apps.multimedia.controllers.CategoryPutController": {
       "class": "../../controllers/CategoryPutController",
       "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.CategoryDeleteController": {
+      "class": "../../controllers/CategoryDeleteController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
     }
   }
 }
