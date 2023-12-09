@@ -29,6 +29,10 @@ import { Playlist } from '@Multimedia/Playlists/domain/Playlist'
 import { PlaylistId } from '@Multimedia/Playlists/domain/PlaylistId'
 import { UserId } from '@Auth/Shared/domain/User/UserId'
 import { PlaylistName } from '@Multimedia/Playlists/domain/PlaylistName'
+import { type CategoryRepository } from '@Multimedia/Categories/domain/CategoryRepository'
+import { Category } from '@Multimedia/Categories/domain/Category'
+import { CategoryId } from '@Multimedia/Categories/domain/CategoryId'
+import { CategoryName } from '@Multimedia/Categories/domain/CategoryName'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
@@ -48,6 +52,10 @@ const chaptersRepository: ChapterRepository = container.get(
 
 const playlistsRepository: PlaylistRepository = container.get(
   'Multimedia.Playlists.domain.PlaylistRepository'
+)
+
+const categoriesRepository: CategoryRepository = container.get(
+  'Multimedia.Categories.domain.CategoryRepository'
 )
 
 Given('there is the movie:', async (movie: string) => {
@@ -111,5 +119,12 @@ Given('there is the playlist:', async (playlist: string) => {
       series.map((serieId: string) => new SerieId(serieId)),
       movies.map((movieId: string) => new MovieId(movieId))
     )
+  )
+})
+
+Given('there is the category:', async (category: string) => {
+  const { id, name } = JSON.parse(category)
+  await categoriesRepository.save(
+    new Category(new CategoryId(id), new CategoryName(name))
   )
 })
