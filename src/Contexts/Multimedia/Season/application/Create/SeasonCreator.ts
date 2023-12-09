@@ -4,7 +4,6 @@ import { type SeasonRepository } from '@Multimedia/Season/domain/SeasonRepositor
 import { type SeasonTitle } from '@Multimedia/Season/domain/SeasonTitle'
 import { SearchSerieByIdQuery } from '@Multimedia/Serie/application/SearchById/SearchSerieByIdQuery'
 import { type SerieResponse } from '@Multimedia/Serie/application/SerieResponse'
-import { SerieNotFound } from '@Multimedia/Serie/domain/SerieNotFound'
 import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
 import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { type EventBus } from '@Shared/domain/EventBus'
@@ -29,20 +28,16 @@ export class SeasonCreator {
     title: SeasonTitle
     releaseDate: SeasonReleaseDate
   }): Promise<void> {
-    try {
-      const query = new SearchSerieByIdQuery(params.serieId.value)
-      await this.queryBus.ask<SerieResponse>(query) // Check if serie exists
+    const query = new SearchSerieByIdQuery(params.serieId.value)
+    await this.queryBus.ask<SerieResponse>(query) // Check if serie exists
 
-      const season = Season.create(
-        params.id,
-        params.serieId,
-        params.title,
-        params.releaseDate
-      )
-      await this.repository.save(season)
-      await this.eventBus.publish(season.pullDomainEvents())
-    } catch (error) {
-      throw new SerieNotFound()
-    }
+    const season = Season.create(
+      params.id,
+      params.serieId,
+      params.title,
+      params.releaseDate
+    )
+    await this.repository.save(season)
+    await this.eventBus.publish(season.pullDomainEvents())
   }
 }
