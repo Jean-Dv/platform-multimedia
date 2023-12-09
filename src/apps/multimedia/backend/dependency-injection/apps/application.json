@@ -51,6 +51,10 @@
     "Apps.multimedia.controllers.SeasonPutController": {
       "class": "../../controllers/SeasonPutController",
       "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.ChapterPutController": {
+      "class": "../../controllers/ChapterPutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
     }
   }
 }
