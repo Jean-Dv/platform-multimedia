@@ -191,3 +191,52 @@ Feature: Get Series
       }
     }
     """
+    Given the following event is received:
+    """
+    {
+      "data": {
+        "eventId": "9a790ebf-cf35-487c-9644-7b2af2ae3585",
+        "type": "category.deleted",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "2841a509-4895-48ca-ae61-411b518d4781",
+        "attributes": {
+          "name": "comedy"
+        }
+      }
+    }
+    """
+    When I send a GET request to "/multimedia/series?filters[]={'field': 'id', 'operator': '=', 'value': '2841a509-4895-48ca-ae61-411b518d4783'}"
+    Then the response status code should be 200
+    And the response content should be:
+    """
+    {
+      "ok": true,
+      "data": {
+        "id": "2841a509-4895-48ca-ae61-411b518d4783",
+        "category": "other",
+        "title": "The Simpsons",
+        "seasons": [
+          {
+            "id": "bb7f05ae-4469-474f-a5cd-5ac3fe14d657",
+            "title": "Season 1",
+            "chapters": [
+              {
+                "id": "72545b03-f5f2-4fc1-81c8-5ed174ac7c4d",
+                "title": "Simpsons Roasting on an Open Fire",
+                "releaseDate": "1989-12-17",
+                "duration": 1200
+              },
+              {
+                "id": "72545b03-f5f2-4fc1-81c8-5ed174ac7c4e",
+                "title": "Bart the Genius",
+                "releaseDate": "1990-01-14",
+                "duration": 1200
+              }
+            ],
+            "releaseDate": "1989-12-17"
+          }
+        ],
+        "releaseDate": "1989-12-17"
+      }
+    }
+    """
