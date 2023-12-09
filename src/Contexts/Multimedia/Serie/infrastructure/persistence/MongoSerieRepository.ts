@@ -1,11 +1,13 @@
 import { Serie } from '@Multimedia/Serie/domain/Serie'
 import { type SerieRepository } from '@Multimedia/Serie/domain/SerieRepository'
+import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
 
 interface SerieDocument {
   _id: string
   id: string
+  category: string
   title: string
   releaseDate: Date
 }
@@ -26,9 +28,18 @@ export class MongoSerieRepository
     return documents.map((document) =>
       Serie.fromPrimitive({
         id: document.id,
+        category: document.category,
         title: document.title,
         releaseDate: document.releaseDate
       })
+    )
+  }
+
+  public async updateSeriesByCategory(category: CategoryName): Promise<void> {
+    const collection = await this.collection()
+    await collection.updateMany(
+      { category: { $eq: category.value } },
+      { $set: { category: 'other' } }
     )
   }
 
