@@ -7,7 +7,7 @@ export class RoleNameMother {
 
   public static random(): RoleName {
     const number = Math.floor(Math.random() * 2)
-    const values = ['admin', 'user']
+    const values = ['admin', 'registered']
     return this.create(values[number])
   }
 
