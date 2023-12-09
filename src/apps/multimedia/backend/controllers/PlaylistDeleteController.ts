@@ -16,7 +16,6 @@ export class PlaylistDeleteController implements Controller {
         ok: true
       })
     } catch (error) {
-      console.log(error)
       if (error instanceof NotFound) {
         res.status(404).json({
           ok: false,
@@ -24,6 +23,7 @@ export class PlaylistDeleteController implements Controller {
         })
         return
       }
+      console.log(error)
       res.status(500).json({
         ok: false
       })

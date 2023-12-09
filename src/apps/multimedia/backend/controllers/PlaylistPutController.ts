@@ -33,7 +33,6 @@ export class PlaylistPutController implements Controller {
         ok: true
       })
     } catch (error) {
-      console.log(error)
       if (error instanceof InvalidArgumentError) {
         res.status(httpStatus.BAD_REQUEST).json({
           ok: false,
@@ -41,6 +40,7 @@ export class PlaylistPutController implements Controller {
         })
         return
       }
+      console.log(error)
       res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
         ok: false
       })

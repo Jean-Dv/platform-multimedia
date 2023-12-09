@@ -22,7 +22,6 @@ export class MovieGetByIdController implements Controller {
         }
       })
     } catch (error) {
-      console.log(error)
       if (error instanceof InvalidArgumentError) {
         res.status(400).json({
           ok: false,
@@ -37,6 +36,7 @@ export class MovieGetByIdController implements Controller {
         })
         return
       }
+      console.log(error)
       res.status(500).json({
         ok: false
       })
