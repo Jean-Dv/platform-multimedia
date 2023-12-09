@@ -3,7 +3,7 @@ import { CreateCategoryCommand } from './CreateCategoryCommand'
 import { type CategoryCreator } from './CategoryCreator'
 import { type Command } from '@Shared/domain/Command'
 import { CategoryId } from '@Multimedia/Categories/domain/CategoryId'
-import { CategoryName } from '@Multimedia/Categories/domain/CategoryName'
+import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 
 export class CreateCategoryCommandHandler
   implements CommandHandler<CreateCategoryCommand>

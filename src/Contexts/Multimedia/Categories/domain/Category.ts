@@ -1,6 +1,6 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
 import { CategoryId } from './CategoryId'
-import { CategoryName } from './CategoryName'
+import { CategoryName } from '../../Shared/domain/Category/CategoryName'
 import { CategoryCreatedDomainEvent } from './CategoryCreatedDomainEvent'
 import { CategoryDeletedDomainEvent } from './CategoryDeletedDomainEvent'
 

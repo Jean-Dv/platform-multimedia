@@ -1,4 +1,4 @@
-import { CategoryName } from '@Multimedia/Categories/domain/CategoryName'
+import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 import { WordMother } from '../../../Shared/domain/WordMother'
 
 export class CategoryNameMother {

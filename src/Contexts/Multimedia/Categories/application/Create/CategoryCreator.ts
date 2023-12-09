@@ -1,6 +1,6 @@
 import { Category } from '@Multimedia/Categories/domain/Category'
 import { type CategoryId } from '@Multimedia/Categories/domain/CategoryId'
-import { type CategoryName } from '@Multimedia/Categories/domain/CategoryName'
+import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 import { type CategoryRepository } from '@Multimedia/Categories/domain/CategoryRepository'
 import { type EventBus } from '@Shared/domain/EventBus'
 

@@ -32,7 +32,7 @@ import { PlaylistName } from '@Multimedia/Playlists/domain/PlaylistName'
 import { type CategoryRepository } from '@Multimedia/Categories/domain/CategoryRepository'
 import { Category } from '@Multimedia/Categories/domain/Category'
 import { CategoryId } from '@Multimedia/Categories/domain/CategoryId'
-import { CategoryName } from '@Multimedia/Categories/domain/CategoryName'
+import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'

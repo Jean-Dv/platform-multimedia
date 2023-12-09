@@ -1,6 +1,6 @@
 import { type CreateCategoryCommand } from '@Multimedia/Categories/application/Create/CreateCategoryCommand'
 import { type CategoryId } from '@Multimedia/Categories/domain/CategoryId'
-import { type CategoryName } from '@Multimedia/Categories/domain/CategoryName'
+import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 import { CategoryIdMother } from '../domain/CategoryIdMother'
 import { CategoryNameMother } from '../domain/CategoryNameMother'
 

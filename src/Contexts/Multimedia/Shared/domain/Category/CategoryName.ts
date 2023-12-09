@@ -1,5 +1,5 @@
 import { StringValueObject } from '@Shared/domain/value-objects/StringValueObject'
-import { CategoryNameLengthIsExceeded } from './CategoryNameLengthIsExceeded'
+import { CategoryNameLengthIsExceeded } from '../../../Categories/domain/CategoryNameLengthIsExceeded'
 
 export class CategoryName extends StringValueObject {
   constructor(value: string) {
