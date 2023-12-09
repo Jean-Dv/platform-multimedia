@@ -34,6 +34,15 @@
       "class": "../../../../../Contexts/Multimedia/Serie/application/Create/CreateSerieCommandHandler",
       "arguments": ["@Multimedia.Series.application.SerieCreator"],
       "tags": [{ "name": "commandHandler" }]
+    },
+    "Multimedia.Series.application.SerieByIdSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/SearchById/SerieByIdSearcher",
+      "arguments": ["@Multimedia.Series.domain.SerieRepository"]
+    },
+    "Multimedia.Series.SearchSerieByIdQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/SearchById/SearchSerieByIdQueryHandler",
+      "arguments": ["@Multimedia.Series.application.SerieByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
     }
   }
 }
