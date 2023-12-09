@@ -4,6 +4,7 @@ import { type Request, type Response } from 'express'
 import { CreateMovieCommand } from '@Multimedia/Movies/domain/CreateMovieCommand'
 import httpStatus from 'http-status'
 import { InvalidArgumentError } from '@Shared/domain/value-objects/InvalidArgumentError'
+import { NotFound } from '@Shared/domain/NotFound'
 
 type MoviePutRequest = Request & {
   body: {
@@ -49,6 +50,13 @@ export class MoviePutController implements Controller {
     } catch (error) {
       if (error instanceof InvalidArgumentError) {
         res.status(httpStatus.BAD_REQUEST).json({
+          ok: false,
+          error: error.message
+        })
+        return
+      }
+      if (error instanceof NotFound) {
+        res.status(httpStatus.NOT_FOUND).json({
           ok: false,
           error: error.message
         })
