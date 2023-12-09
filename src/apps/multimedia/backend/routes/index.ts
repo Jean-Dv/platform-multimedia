@@ -52,6 +52,7 @@ export function validateReqSchema(
   const validationErrors = validationResult(req)
   if (!validationErrors.isEmpty()) {
     const errors = validationErrors.mapped()
+    console.log(errors)
     res.status(httpStatus.UNPROCESSABLE_ENTITY).json({ errors })
     return
   }

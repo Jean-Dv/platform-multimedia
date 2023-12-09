@@ -1,6 +1,7 @@
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { type Serie } from './Serie'
 import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 
 export interface SerieRepository {
   /**
@@ -19,4 +20,6 @@ export interface SerieRepository {
   matching: (criteria: Criteria) => Promise<Serie[]>
 
   updateSeriesByCategory: (category: CategoryName) => Promise<void>
+
+  searchById: (id: SerieId) => Promise<Serie | null>
 }

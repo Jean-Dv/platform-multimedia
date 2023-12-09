@@ -23,6 +23,19 @@
       "class": "../../../../../Contexts/Multimedia/Chapter/application/SearchById/SearchChapterByIdQueryHandler",
       "arguments": ["@Multimedia.Chapters.application.ChapterByIdSearcher"],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Chapters.application.ChapterCreator": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Create/ChapterCreator",
+      "arguments": [
+        "@Multimedia.Chapters.domain.ChapterRepository",
+        "@Multimedia.Shared.domain.QueryBus",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Chapters.CreateChapterCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Create/CreateChapterCommandHandler",
+      "arguments": ["@Multimedia.Chapters.application.ChapterCreator"],
+      "tags": [{ "name": "commandHandler" }]
     }
   }
 }

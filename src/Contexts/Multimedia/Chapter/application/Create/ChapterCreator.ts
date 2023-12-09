@@ -7,10 +7,13 @@ import { type ChapterReleaseDate } from '../../domain/ChapterReleaseDate'
 import { type ChapterDuration } from '../../domain/ChapterDuration'
 import { Chapter } from '../../domain/Chapter'
 import { type ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
+import { type QueryBus } from '@Shared/domain/QueryBus'
+import { SearchSeasonByIdQuery } from '@Multimedia/Season/application/SearchById/SearchSeasonByIdQuery'
 
 export class ChapterCreator {
   constructor(
     private readonly repository: ChapterRepository,
+    private readonly queryBus: QueryBus,
     private readonly eventBus: EventBus
   ) {}
 
@@ -29,6 +32,9 @@ export class ChapterCreator {
     url: ChapterUrl
     duration: ChapterDuration
   }): Promise<void> {
+    const query = new SearchSeasonByIdQuery(params.seasonId.value)
+    await this.queryBus.ask(query) // Check if season exists
+
     const chapter = Chapter.create(
       params.id,
       params.seasonId,

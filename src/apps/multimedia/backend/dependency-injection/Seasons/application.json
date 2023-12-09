@@ -14,6 +14,28 @@
         "@Multimedia.Seasons.application.SeasonsByCriteriaSearcher"
       ],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Seasons.application.SeasonCreator": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/Create/SeasonCreator",
+      "arguments": [
+        "@Multimedia.Seasons.domain.SeasonRepository",
+        "@Multimedia.Shared.domain.QueryBus",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Seasons.CreateSeasonCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/Create/CreateSeasonCommandHandler",
+      "arguments": ["@Multimedia.Seasons.application.SeasonCreator"],
+      "tags": [{ "name": "commandHandler" }]
+    },
+    "Multimedia.Seasons.application.SeasonByIdSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/SearchById/SeasonByIdSearcher",
+      "arguments": ["@Multimedia.Seasons.domain.SeasonRepository"]
+    },
+    "Multimedia.Seasons.SearchSeasonByIdQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/SearchById/SearchSeasonByIdQueryHandler",
+      "arguments": ["@Multimedia.Seasons.application.SeasonByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
     }
   }
 }

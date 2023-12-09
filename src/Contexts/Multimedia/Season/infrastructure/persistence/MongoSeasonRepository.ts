@@ -1,5 +1,6 @@
 import { Season } from '@Multimedia/Season/domain/Season'
 import { type SeasonRepository } from '@Multimedia/Season/domain/SeasonRepository'
+import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
 
@@ -29,6 +30,19 @@ export class MongoSeasonRepository
         releaseDate: document.releaseDate
       })
     )
+  }
+
+  public async searchById(id: SeasonId): Promise<Season | null> {
+    const collection = await this.collection()
+    const document = await collection.findOne<SeasonDocument>({ id: id.value })
+    return document !== null
+      ? Season.fromPrimitives({
+          id: document.id,
+          serieId: document.serieId,
+          title: document.title,
+          releaseDate: document.releaseDate
+        })
+      : null
   }
 
   protected collectionName(): string {
