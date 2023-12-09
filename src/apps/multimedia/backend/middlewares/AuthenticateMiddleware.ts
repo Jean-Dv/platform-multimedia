@@ -8,6 +8,7 @@ import { SearchMultimediaUserByIdQuery } from '@Multimedia/Users/application/Sea
 import { type MultimediaUserResponse } from '@Multimedia/Users/application/MultimediaUserResponse'
 import { SearchMultimediaRoleByIdQuery } from '@Multimedia/Roles/application/SearchById/SearchMultimediaRoleByIdQuery'
 import { type MultimediaRoleResponse } from '@Multimedia/Roles/application/MultimediaRoleResponse'
+import { NotFound } from '@Shared/domain/NotFound'
 
 export class AuthenticateMiddleware implements Middleware {
   constructor(private readonly queryBus: QueryBus) {}
@@ -57,17 +58,14 @@ export class AuthenticateMiddleware implements Middleware {
       }
       next()
     } catch (error) {
-      if (error instanceof jwt.TokenExpiredError) {
+      if (
+        error instanceof jwt.TokenExpiredError ||
+        error instanceof NotFound ||
+        error instanceof jwt.JsonWebTokenError
+      ) {
         res.status(httpStatus.UNAUTHORIZED).json({
           ok: false,
           error: 'Token expired'
-        })
-        return
-      }
-      if (error instanceof jwt.JsonWebTokenError) {
-        res.status(httpStatus.UNAUTHORIZED).json({
-          ok: false,
-          error: 'Invalid token'
         })
         return
       }
