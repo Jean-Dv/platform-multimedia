@@ -2,6 +2,7 @@ import { AggregateRoot } from '@Shared/domain/AggregateRoot'
 import { CategoryId } from './CategoryId'
 import { CategoryName } from './CategoryName'
 import { CategoryCreatedDomainEvent } from './CategoryCreatedDomainEvent'
+import { CategoryDeletedDomainEvent } from './CategoryDeletedDomainEvent'
 
 export class Category extends AggregateRoot {
   public readonly id: CategoryId
@@ -17,6 +18,17 @@ export class Category extends AggregateRoot {
     const category = new Category(id, name)
     category.record(
       new CategoryCreatedDomainEvent({
+        aggregateId: id.value,
+        name: name.value
+      })
+    )
+    return category
+  }
+
+  public static delete(id: CategoryId, name: CategoryName): Category {
+    const category = new Category(id, name)
+    category.record(
+      new CategoryDeletedDomainEvent({
         aggregateId: id.value,
         name: name.value
       })
