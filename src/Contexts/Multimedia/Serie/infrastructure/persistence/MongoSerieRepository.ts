@@ -1,6 +1,7 @@
 import { Serie } from '@Multimedia/Serie/domain/Serie'
 import { type SerieRepository } from '@Multimedia/Serie/domain/SerieRepository'
 import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
 
@@ -41,6 +42,19 @@ export class MongoSerieRepository
       { category: { $eq: category.value } },
       { $set: { category: 'other' } }
     )
+  }
+
+  public async searchById(id: SerieId): Promise<Serie | null> {
+    const collection = await this.collection()
+    const document = await collection.findOne<SerieDocument>({ id: id.value })
+    return document !== null
+      ? Serie.fromPrimitive({
+          id: document.id,
+          category: document.category,
+          title: document.title,
+          releaseDate: document.releaseDate
+        })
+      : null
   }
 
   protected collectionName(): string {
