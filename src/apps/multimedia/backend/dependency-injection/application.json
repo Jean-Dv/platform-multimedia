@@ -1,0 +1,34 @@
+{
+  "imports": [
+    {
+      "resource": "./apps/application.json"
+    },
+    {
+      "resource": "./Shared/application.json"
+    },
+    {
+      "resource": "./Movies/application.json"
+    },
+    {
+      "resource": "./Series/application.json"
+    },
+    {
+      "resource": "./Seasons/application.json"
+    },
+    {
+      "resource": "./Chapters/application.json"
+    },
+    {
+      "resource": "./Playlist/application.json"
+    },
+    {
+      "resource": "./Categories/application.json"
+    },
+    {
+      "resource": "./Users/application.json"
+    },
+    {
+      "resource": "./Roles/application.json"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "services": {
+    "Multimedia.Movies.application.MovieCreator": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Create/MovieCreator",
+      "arguments": [
+        "@Multimedia.Movies.domain.MovieRepository",
+        "@Multimedia.Categories.domain.CategoryRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Movies.domain.MovieRepository": {
+      "class": "../../../../../Contexts/Multimedia/Movies/infrastructure/persistence/MongoMovieRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Movies.CreateMovieCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Create/CreateMovieCommandHandler",
+      "arguments": ["@Multimedia.Movies.application.MovieCreator"],
+      "tags": [{ "name": "commandHandler" }]
+    },
+    "Multimedia.Movies.application.MoviesByCriteriaSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/SearchByCriteria/MoviesByCriteriaSearcher",
+      "arguments": ["@Multimedia.Movies.domain.MovieRepository"]
+    },
+    "Multimedia.Movies.SearchMoviesByCriteriaQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/SearchByCriteria/SearchMoviesByCriteriaQueryHandler",
+      "arguments": ["@Multimedia.Movies.application.MoviesByCriteriaSearcher"],
+      "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Movies.application.MovieByIdSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/SearchById/MovieByIdSearcher",
+      "arguments": ["@Multimedia.Movies.domain.MovieRepository"]
+    },
+    "Multimedia.Movies.SearchMoviesByIdQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/SearchById/SearchMovieByIdQueryHandler",
+      "arguments": ["@Multimedia.Movies.application.MovieByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Movies.application.MovieUpdaterCategory": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/UpdateCategory/MovieUpdaterCategory",
+      "arguments": [
+        "@Multimedia.Movies.domain.MovieRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Movies.UpdateMovieOnCategoryDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/UpdateCategory/UpdateMovieOnCategoryDeleted",
+      "arguments": ["@Multimedia.Movies.application.MovieUpdaterCategory"],
+      "tags": [{ "name": "domainEventSubscriber" }]
+    }
+  }
+}

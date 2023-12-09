@@ -1,0 +1,26 @@
+{
+  "services": {
+    "Multimedia.Roles.application.MultimediaRoleCreator": {
+      "class": "../../../../../Contexts/Multimedia/Roles/application/Create/MultimediaRoleCreator",
+      "arguments": ["@Multimedia.Roles.domain.MultimediaRoleRepository"]
+    },
+    "Multimedia.Roles.CreateMultimediaRoleOnRoleCreated": {
+      "class": "../../../../../Contexts/Multimedia/Roles/application/Create/CreateMultimediaRoleOnRoleCreated",
+      "arguments": ["@Multimedia.Roles.application.MultimediaRoleCreator"],
+      "tags": [{ "name": "domainEventSubscriber" }]
+    },
+    "Multimedia.Roles.domain.MultimediaRoleRepository": {
+      "class": "../../../../../Contexts/Multimedia/Roles/infrastructure/persistence/MongoMultimediaRoleRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Roles.application.MultimediaRoleByIdSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Roles/application/SearchById/MultimediaRoleByIdSearcher",
+      "arguments": ["@Multimedia.Roles.domain.MultimediaRoleRepository"]
+    },
+    "Multimedia.Roles.SearchMultimediaRoleByIdQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Roles/application/SearchById/SearchMultimediaRoleByIdQueryHandler",
+      "arguments": ["@Multimedia.Roles.application.MultimediaRoleByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
+    }
+  }
+}

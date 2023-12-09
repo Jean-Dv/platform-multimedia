@@ -96,3 +96,43 @@ jobs:
         run: pnpm install
       - name: Unit tests
         run: pnpm run test:unit
+
+  e2e:
+    strategy:
+      matrix:
+        node-version: [18.x]
+        mongodb-version: [5.0.0]
+        rabbitmq-version: ['3.8.2-management-alpine']
+    name: 🧪 E2E Testing
+    needs: [lint, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - name: Launch mongodb
+        uses: wbari/start-mongoDB@v0.2
+        with:
+          mongoDBVersion: ${{ matrix.mongodb-version }}
+      - name: Launch RabbitMQ
+        uses: nijel/rabbitmq-action@v1.0.0
+        with:
+          rabbitmq version: ${{ matrix.rabbitmq-version }}
+      - name: Configure systcl limits
+        run: |
+          sudo swapoff -a
+          sudo sysctl -w vm.swappiness=1
+          sudo sysctl -w fs.file-max=262144
+          sudo sysctl -w vm.max_map_count=262144
+      - name: Install dependencies
+        run: pnpm install
+      - name: Configure rabbitmq production
+        run: pnpm run command:auth:rabbitmq && pnpm run command:multimedia:rabbitmq
+      - name: E2E tests
+        run: pnpm run test:features

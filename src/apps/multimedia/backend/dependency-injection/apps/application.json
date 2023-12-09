@@ -1,0 +1,60 @@
+{
+  "services": {
+    "Apps.multimedia.controllers.MoviePutController": {
+      "class": "../../controllers/MoviePutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.MovieGetController": {
+      "class": "../../controllers/MoviesGetController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.SerieGetController": {
+      "class": "../../controllers/SerieGetController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.ChapterGetByIdController": {
+      "class": "../../controllers/ChapterGetByIdController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.MovieGetByIdController": {
+      "class": "../../controllers/MovieGetByIdController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.middlewares.AuthenticateMiddleware": {
+      "class": "../../middlewares/AuthenticateMiddleware",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.middlewares.IsAdminMiddleware": {
+      "class": "../../middlewares/IsAdminMiddleware",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.PlaylistPutController": {
+      "class": "../../controllers/PlaylistPutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.PlaylistDeleteController": {
+      "class": "../../controllers/PlaylistDeleteController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.CategoryPutController": {
+      "class": "../../controllers/CategoryPutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.CategoryDeleteController": {
+      "class": "../../controllers/CategoryDeleteController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.SeriePutController": {
+      "class": "../../controllers/SeriePutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.SeasonPutController": {
+      "class": "../../controllers/SeasonPutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.ChapterPutController": {
+      "class": "../../controllers/ChapterPutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    }
+  }
+}

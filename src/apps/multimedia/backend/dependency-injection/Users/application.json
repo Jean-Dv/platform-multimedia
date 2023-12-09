@@ -1,0 +1,26 @@
+{
+  "services": {
+    "Multimedia.Users.application.MultimediaUserCreator": {
+      "class": "../../../../../Contexts/Multimedia/Users/application/Create/MultimediaUserCreator",
+      "arguments": ["@Multimedia.Users.domain.MultimediaUserRepository"]
+    },
+    "Multimedia.Users.CreateMultimediaUserOnUserCreated": {
+      "class": "../../../../../Contexts/Multimedia/Users/application/Create/CreateMultimediaUserOnUserCreated",
+      "arguments": ["@Multimedia.Users.application.MultimediaUserCreator"],
+      "tags": [{ "name": "domainEventSubscriber" }]
+    },
+    "Multimedia.Users.domain.MultimediaUserRepository": {
+      "class": "../../../../../Contexts/Multimedia/Users/infrastructure/persistence/MongoMultimediaUserRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Users.application.MultimediaUserByIdSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Users/application/SearchById/MultimediaUserByIdSearcher",
+      "arguments": ["@Multimedia.Users.domain.MultimediaUserRepository"]
+    },
+    "Multimedia.Users.SearchMultimediaUserByIdQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Users/application/SearchById/SearchMultimediaUserByIdQueryHandler",
+      "arguments": ["@Multimedia.Users.application.MultimediaUserByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
+    }
+  }
+}

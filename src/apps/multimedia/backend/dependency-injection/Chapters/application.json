@@ -1,0 +1,41 @@
+{
+  "services": {
+    "Multimedia.Chapters.domain.ChapterRepository": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/infrastructure/persistence/MongoChapterRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Chapters.application.ChaptersByCriteriaSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/SearchByCriteria/ChaptersByCriteriaSearcher",
+      "arguments": ["@Multimedia.Chapters.domain.ChapterRepository"]
+    },
+    "Multimedia.Chapters.SearchChaptersByCriteriaQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/SearchByCriteria/SearchChaptersByCriteriaQueryHandler",
+      "arguments": [
+        "@Multimedia.Chapters.application.ChaptersByCriteriaSearcher"
+      ],
+      "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Chapters.application.ChapterByIdSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/SearchById/ChapterByIdSearcher",
+      "arguments": ["@Multimedia.Chapters.domain.ChapterRepository"]
+    },
+    "Multimedia.Chapters.SearchChapterByIdQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/SearchById/SearchChapterByIdQueryHandler",
+      "arguments": ["@Multimedia.Chapters.application.ChapterByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Chapters.application.ChapterCreator": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Create/ChapterCreator",
+      "arguments": [
+        "@Multimedia.Chapters.domain.ChapterRepository",
+        "@Multimedia.Shared.domain.QueryBus",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Chapters.CreateChapterCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Create/CreateChapterCommandHandler",
+      "arguments": ["@Multimedia.Chapters.application.ChapterCreator"],
+      "tags": [{ "name": "commandHandler" }]
+    }
+  }
+}

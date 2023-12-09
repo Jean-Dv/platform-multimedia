@@ -1,0 +1,20 @@
+{
+  "services": {
+    "Apps.auth.controllers.UserPutController": {
+      "class": "../../controllers/UserPutController",
+      "arguments": ["@Auth.Shared.domain.CommandBus"]
+    },
+    "Apps.auth.controllers.LoginPostController": {
+      "class": "../../controllers/LoginPostController",
+      "arguments": ["@Auth.Shared.domain.CommandBus"]
+    },
+    "Apps.auth.controllers.AccessTokenGetController": {
+      "class": "../../controllers/AccessTokenGetController",
+      "arguments": ["@Auth.Shared.domain.QueryBus"]
+    },
+    "Apps.auth.controllers.RolePutController": {
+      "class": "../../controllers/RolePutController",
+      "arguments": ["@Auth.Shared.domain.CommandBus"]
+    }
+  }
+}

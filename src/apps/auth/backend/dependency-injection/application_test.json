@@ -1,0 +1,13 @@
+{
+  "imports": [
+    {
+      "resource": "./application.json"
+    }
+  ],
+  "services": {
+    "Auth.EnvironmentArranger": {
+      "class": "../../../../../tests/Contexts/Shared/infrastructure/persistence/mongo/MongoEnvironmentArranger",
+      "arguments": ["@Auth.Shared.ConnectionManager"]
+    }
+  }
+}

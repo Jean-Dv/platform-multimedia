@@ -1,0 +1,42 @@
+{
+  "services": {
+    "Auth.User.application.UserCreator": {
+      "class": "../../../../../Contexts/Auth/User/application/Create/UserCreator",
+      "arguments": [
+        "@Auth.User.domain.UserRepository",
+        "@Auth.Shared.domain.EventBus"
+      ]
+    },
+    "Auth.User.domain.UserRepository": {
+      "class": "../../../../../Contexts/Auth/User/infrastructure/persistence/MongoUserRepository",
+      "arguments": ["@Auth.Shared.ConnectionManager"]
+    },
+    "Auth.User.CreateUserCommandHandler": {
+      "class": "../../../../../Contexts/Auth/User/application/Create/CreateUserCommandHandler",
+      "arguments": ["@Auth.User.application.UserCreator"],
+      "tags": [{ "name": "commandHandler" }]
+    },
+    "Auth.User.application.UserByEmailSearcher": {
+      "class": "../../../../../Contexts/Auth/User/application/SearchByEmail/UserByEmailSearcher",
+      "arguments": ["@Auth.User.domain.UserRepository"]
+    },
+    "Auth.User.SearchUserByEmailQueryHandler": {
+      "class": "../../../../../Contexts/Auth/User/application/SearchByEmail/SearchUserByEmailQueryHandler",
+      "arguments": ["@Auth.User.application.UserByEmailSearcher"],
+      "tags": [{ "name": "queryHandler" }]
+    },
+    "Auth.User.application.UserAuthenticator": {
+      "class": "../../../../../Contexts/Auth/UserAuth/application/authenticate/UserAuthenticator",
+      "arguments": ["@Auth.User.domain.AuthRepository"]
+    },
+    "Auth.User.domain.AuthRepository": {
+      "class": "../../../../../Contexts/Auth/UserAuth/infrastructure/persistence/MongoAuthRepository",
+      "arguments": ["@Auth.Shared.ConnectionManager"]
+    },
+    "Auth.User.AuthenticateUserCommandHandler": {
+      "class": "../../../../../Contexts/Auth/UserAuth/application/authenticate/AuthenticateUserCommandHandler",
+      "arguments": ["@Auth.User.application.UserAuthenticator"],
+      "tags": [{ "name": "commandHandler" }]
+    }
+  }
+}
