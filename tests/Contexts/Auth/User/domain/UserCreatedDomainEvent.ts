@@ -5,6 +5,7 @@ export class UserCreatedDomainEventMother {
   public static create({
     aggregateId,
     eventId,
+    roleName,
     firstName,
     lastName,
     email,
@@ -12,6 +13,7 @@ export class UserCreatedDomainEventMother {
   }: {
     aggregateId: string
     eventId?: string
+    roleName: string
     firstName: string
     lastName: string
     email: string
@@ -20,6 +22,7 @@ export class UserCreatedDomainEventMother {
     return new UserCreatedDomainEvent({
       aggregateId,
       eventId,
+      roleName,
       firstName,
       lastName,
       email,
@@ -30,6 +33,7 @@ export class UserCreatedDomainEventMother {
   public static fromUser(user: User): UserCreatedDomainEvent {
     return this.create({
       aggregateId: user.id.value,
+      roleName: user.roleName.value,
       firstName: user.firstName.value,
       lastName: user.lastName.value,
       email: user.email.value

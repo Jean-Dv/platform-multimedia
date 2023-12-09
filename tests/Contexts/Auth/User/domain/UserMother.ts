@@ -10,21 +10,25 @@ import { UserFirstNameMother } from './UserFirstNameMother'
 import { UserLastNameMother } from './UserLastNameMother'
 import { UserEmailMother } from './UserEmailMother'
 import { UserPasswordMother } from './UserPasswordMother'
+import { type RoleName } from '@Auth/Shared/domain/Roles/RoleName'
+import { RoleNameMother } from '../../Roles/domain/RoleNameMother'
 
 export class UserMother {
   public static create(
     id: UserId,
+    roleName: RoleName,
     firstName: UserFirstName,
     lastName: UserLastName,
     email: UserEmail,
     password: UserPassword
   ): User {
-    return new User(id, firstName, lastName, email, password)
+    return new User(id, roleName, firstName, lastName, email, password)
   }
 
   public static from(command: CreateUserCommand): User {
     return this.create(
       UserIdMother.create(command.id),
+      RoleNameMother.create('registered'),
       UserFirstNameMother.create(command.firstName),
       UserLastNameMother.create(command.lastName),
       UserEmailMother.create(command.email),
@@ -35,6 +39,7 @@ export class UserMother {
   public static random(): User {
     return this.create(
       UserIdMother.random(),
+      RoleNameMother.create('registered'),
       UserFirstNameMother.random(),
       UserLastNameMother.random(),
       UserEmailMother.random(),
