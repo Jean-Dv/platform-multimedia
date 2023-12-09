@@ -15,8 +15,7 @@ function registerGetChapterById(router: Router): void {
     '/multimedia/chapters/:id',
     reqSchema,
     validateReqSchema,
-    authMiddleware.run,
-    reqSchema,
+    authMiddleware.run.bind(authMiddleware),
     controller.run.bind(controller)
   )
 }

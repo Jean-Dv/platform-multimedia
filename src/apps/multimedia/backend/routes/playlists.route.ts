@@ -21,7 +21,7 @@ function registerPutPlaylist(router: Router): void {
     '/multimedia/playlists/:id',
     reqSchema,
     validateReqSchema,
-    middleware.run,
+    middleware.run.bind(middleware),
     controller.run.bind(controller)
   )
 }
@@ -38,7 +38,7 @@ function registerDeletePlaylist(router: Router): void {
     '/multimedia/playlist/:id',
     reqSchema,
     validateReqSchema,
-    middleware.run,
+    middleware.run.bind(middleware),
     controller.run.bind(controller)
   )
 }

@@ -48,7 +48,7 @@ function registerGetMovieById(router: Router): void {
     '/multimedia/movies/:id',
     reqSchema,
     validateReqSchema,
-    authMiddleware.run,
+    authMiddleware.run.bind(authMiddleware),
     reqSchema,
     controller.run.bind(controller)
   )
