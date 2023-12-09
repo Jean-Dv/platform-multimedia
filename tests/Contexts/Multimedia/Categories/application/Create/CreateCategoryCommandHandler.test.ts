@@ -1,10 +1,10 @@
-import EventBusMock from '../../../Shared/domain/EventBusMock'
-import { CategoryRepositoryMock } from '../__mocks__/CategoryRepositoryMock'
+import EventBusMock from '../../../../Shared/domain/EventBusMock'
+import { CategoryRepositoryMock } from '../../__mocks__/CategoryRepositoryMock'
 import { CreateCategoryCommandHandler } from '@Multimedia/Categories/application/Create/CreateCategoryCommandHandler'
 import { CategoryCreator } from '@Multimedia/Categories/application/Create/CategoryCreator'
-import { CategoryMother } from '../domain/CategoryMother'
+import { CategoryMother } from '../../domain/CategoryMother'
 import { CreateCategoryCommandMother } from './CreateCategoryCommandMother'
-import { CategoryCreatedDomainEventMother } from '../domain/CategoryCreatedDomainEventMother'
+import { CategoryCreatedDomainEventMother } from '../../domain/CategoryCreatedDomainEventMother'
 import { CategoryNameLengthIsExceeded } from '@Multimedia/Categories/domain/CategoryNameLengthIsExceeded'
 
 let repository: CategoryRepositoryMock
