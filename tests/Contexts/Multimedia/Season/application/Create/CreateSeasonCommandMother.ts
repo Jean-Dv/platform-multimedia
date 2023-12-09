@@ -23,7 +23,16 @@ export class CreateSeasonCommandMother {
     }
   }
 
-  public static random(serieId: SerieId): CreateSeasonCommand {
+  public static random(): CreateSeasonCommand {
+    return this.create(
+      SeasonIdMother.random(),
+      SerieIdMother.random(),
+      SeasonTitleMother.random(),
+      SeasonReleaseDateMother.random()
+    )
+  }
+
+  public static randomWithSerie(serieId: SerieId): CreateSeasonCommand {
     return this.create(
       SeasonIdMother.random(),
       serieId,
