@@ -9,13 +9,13 @@ Feature: Get by id movie
       "data": {
         "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
         "type": "role.created",
-        "occurred_on": "2019-08-08T08:37:32+00:00",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
         "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
         "attributes": {
           "name": "admin"
         },
         "meta": {
-          "host": "localhost",
+          "host": "localhost"
         }
       }
     }
@@ -26,13 +26,13 @@ Feature: Get by id movie
       "data": {
         "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
         "type": "role.created",
-        "occurred_on": "2019-08-08T08:37:32+00:00",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
         "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
         "attributes": {
           "name": "registered"
         },
         "meta": {
-          "host": "localhost",
+          "host": "localhost"
         }
       }
     }
@@ -43,8 +43,14 @@ Feature: Get by id movie
       "data": {
         "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
         "type": "user.created",
-        "occurred_on": "2019-08-08T08:37:32+00:00",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
         "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8",
+        "attributes": {
+          "roleName": "admin",
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "jonhdoe1@gmail.com"
+        }
       }
     }
     """

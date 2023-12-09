@@ -4,6 +4,57 @@ Feature: Create a new playlist
   I want to create a new playlist
 
   Scenario: A valid non existing playlist
+    Given the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "role.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+        "attributes": {
+          "name": "admin"
+        },
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "role.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+        "attributes": {
+          "name": "registered"
+        },
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "user.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8",
+        "attributes": {
+          "roleName": "registered",
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "jonhdoe1@gmail.com"
+        }
+      }
+    }
+    """
     Given I have a valid token
     When I send a PUT request to "/multimedia/playlists/c646297b-ef92-440f-bf8c-c726b0a6809a" with body:
     """

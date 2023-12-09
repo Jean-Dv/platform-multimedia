@@ -10,13 +10,13 @@ Feature: Create a new movie
       "data": {
         "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
         "type": "role.created",
-        "occurred_on": "2019-08-08T08:37:32+00:00",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
         "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
         "attributes": {
           "name": "admin"
         },
         "meta": {
-          "host": "localhost",
+          "host": "localhost"
         }
       }
     }
@@ -27,13 +27,13 @@ Feature: Create a new movie
       "data": {
         "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
         "type": "role.created",
-        "occurred_on": "2019-08-08T08:37:32+00:00",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
         "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
         "attributes": {
           "name": "registered"
         },
         "meta": {
-          "host": "localhost",
+          "host": "localhost"
         }
       }
     }
@@ -44,8 +44,14 @@ Feature: Create a new movie
       "data": {
         "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
         "type": "user.created",
-        "occurred_on": "2019-08-08T08:37:32+00:00",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
         "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8",
+        "attributes": {
+          "roleName": "admin",
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "jonhdoe1@gmail.com"
+        }
       }
     }
     """
@@ -69,6 +75,58 @@ Feature: Create a new movie
     """
 
   Scenario: A invalid non existing movie
+    Given the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "role.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+        "attributes": {
+          "name": "admin"
+        },
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "role.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+        "attributes": {
+          "name": "registered"
+        },
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "user.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8",
+        "attributes": {
+          "roleName": "admin",
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "jonhdoe1@gmail.com"
+        }
+      }
+    }
+    """
+    Given I have a valid token
     Given I send a PUT request to "/multimedia/movies/544f3547-f5dd-453a-82df-b176e09ec0f4" with body:
     """
     {
@@ -82,6 +140,58 @@ Feature: Create a new movie
     Then the response status code should be 400
 
   Scenario: A invalid non existing movie with bad url
+    Given the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "role.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+        "attributes": {
+          "name": "admin"
+        },
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "role.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+        "attributes": {
+          "name": "registered"
+        },
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "user.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8",
+        "attributes": {
+          "roleName": "admin",
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "jonhdoe1@gmail.com"
+        }
+      }
+    }
+    """
+    Given I have a valid token
     Given I send a PUT request to "/multimedia/movies/544f3547-f5dd-453a-82df-b176e09ec0f4" with body:
     """
     {
