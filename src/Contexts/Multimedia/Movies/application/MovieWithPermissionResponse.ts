@@ -2,6 +2,7 @@ import { type Movie } from '../domain/Movie'
 
 interface MovieResponse {
   id: string
+  category: string
   title: string
   releaseDate: Date
   url: string

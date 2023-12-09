@@ -3,10 +3,18 @@ Feature: Get movies
   I want to get a list of movies
 
   Scenario: All existing courses
+    Given there is the category:
+    """
+    {
+      "id": "2f728ac4-8849-4e82-a184-0dab8e101a27",
+      "name": "Action"
+    }
+    """
     Given there is the movie:
     """
     {
       "id": "2f728ac4-8849-4e82-a184-0dab8e101a28",
+      "category": "Action",
       "title": "The Matrix",
       "releaseDate": "1999-05-21",
       "url": "https://www.youtube.com/watch?v=m8e-FF8MsqU",
@@ -17,6 +25,7 @@ Feature: Get movies
     """
     {
       "id": "2f728ac4-8849-4e82-a184-0dab8e101a29",
+      "category": "Action",
       "title": "The Matrix Reloaded",
       "releaseDate": "2003-05-16",
       "url": "https://www.youtube.com/watch?v=m8e-FF8MsqU",
@@ -32,12 +41,14 @@ Feature: Get movies
       "data": [
       {
         "id": "2f728ac4-8849-4e82-a184-0dab8e101a29",
+        "category": "Action",
         "title": "The Matrix Reloaded",
         "releaseDate": "2003-05-16",
         "duration": 8280
       },
       {
         "id": "2f728ac4-8849-4e82-a184-0dab8e101a28",
+        "category": "Action",
         "title": "The Matrix",
         "releaseDate": "1999-05-21",
         "duration": 8160
@@ -47,11 +58,19 @@ Feature: Get movies
     """
 
   Scenario: Filter by title
+    Given there is the category:
+    """
+    {
+      "id": "2f728ac4-8849-4e82-a184-0dab8e101a27",
+      "name": "Action"
+    }
+    """
     Given there is the movie:
     """
     {
       "id": "2f728ac4-8849-4e82-a184-0dab8e101a28",
       "title": "The Matrix",
+      "category": "Action",
       "releaseDate": "1999-05-21",
       "url": "https://www.youtube.com/watch?v=m8e-FF8MsqU",
       "duration": 8160
@@ -61,6 +80,7 @@ Feature: Get movies
     """
     {
       "id": "2f728ac4-8849-4e82-a184-0dab8e101a29",
+      "category": "Action",
       "title": "The Matrix Reloaded",
       "releaseDate": "2003-05-16",
       "url": "https://www.youtube.com/watch?v=m8e-FF8MsqU",
@@ -76,6 +96,7 @@ Feature: Get movies
       "data": [
       {
         "id": "2f728ac4-8849-4e82-a184-0dab8e101a29",
+        "category": "Action",
         "title": "The Matrix Reloaded",
         "releaseDate": "2003-05-16",
         "duration": 8280

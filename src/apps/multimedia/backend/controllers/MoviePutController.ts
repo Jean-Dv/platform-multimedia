@@ -8,6 +8,7 @@ import { InvalidArgumentError } from '@Shared/domain/value-objects/InvalidArgume
 type MoviePutRequest = Request & {
   body: {
     id: string
+    category: string
     title: string
     releaseDate: Date
     url: string
@@ -31,10 +32,11 @@ export class MoviePutController implements Controller {
    */
   public async run(req: MoviePutRequest, res: Response): Promise<void> {
     try {
-      const { id, title, releaseDate, url, duration } = req.body
+      const { id, category, title, releaseDate, url, duration } = req.body
       const releaseDateParse = new Date(releaseDate)
       const createMovieCommand = new CreateMovieCommand({
         id,
+        category,
         title,
         releaseDate: releaseDateParse,
         url,

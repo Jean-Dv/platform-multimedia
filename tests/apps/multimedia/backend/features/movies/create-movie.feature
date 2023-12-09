@@ -55,11 +55,19 @@ Feature: Create a new movie
       }
     }
     """
+    And there is the category:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b9",
+      "name": "action"
+    }
+    """
     Given I have a valid token
     Given I send a PUT request to "/multimedia/movies/544f3547-f5dd-453a-82df-b176e09ec0f4" with body:
     """
     {
       "id": "544f3547-f5dd-453a-82df-b176e09ec0f4",
+      "category": "action",
       "title": "The Matrix",
       "releaseDate": "1999-03-31",
       "url": "http://www.imdb.com/title/tt0133093",
@@ -75,55 +83,24 @@ Feature: Create a new movie
     """
 
   Scenario: A invalid non existing movie
-    Given the following event is received:
+    Given there is the role:
     """
     {
-      "data": {
-        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
-        "type": "role.created",
-        "occurredOn": "2019-08-08T08:37:32+00:00",
-        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
-        "attributes": {
-          "name": "admin"
-        },
-        "meta": {
-          "host": "localhost"
-        }
-      }
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+      "name": "admin"
     }
     """
-    And the following event is received:
+    And there is the role:
     """
     {
-      "data": {
-        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
-        "type": "role.created",
-        "occurredOn": "2019-08-08T08:37:32+00:00",
-        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
-        "attributes": {
-          "name": "registered"
-        },
-        "meta": {
-          "host": "localhost"
-        }
-      }
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+      "name": "registered"
     }
     """
-    And the following event is received:
+    And there is the user:
     """
     {
-      "data": {
-        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
-        "type": "user.created",
-        "occurredOn": "2019-08-08T08:37:32+00:00",
-        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8",
-        "attributes": {
-          "roleName": "admin",
-          "firstName": "John",
-          "lastName": "Doe",
-          "email": "jonhdoe1@gmail.com"
-        }
-      }
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8"
     }
     """
     Given I have a valid token
@@ -140,55 +117,31 @@ Feature: Create a new movie
     Then the response status code should be 400
 
   Scenario: A invalid non existing movie with bad url
-    Given the following event is received:
+    Given there is the role:
     """
     {
-      "data": {
-        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
-        "type": "role.created",
-        "occurredOn": "2019-08-08T08:37:32+00:00",
-        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
-        "attributes": {
-          "name": "admin"
-        },
-        "meta": {
-          "host": "localhost"
-        }
-      }
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+      "name": "admin"
     }
     """
-    And the following event is received:
+    And there is the role:
     """
     {
-      "data": {
-        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
-        "type": "role.created",
-        "occurredOn": "2019-08-08T08:37:32+00:00",
-        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
-        "attributes": {
-          "name": "registered"
-        },
-        "meta": {
-          "host": "localhost"
-        }
-      }
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+      "name": "registered"
     }
     """
-    And the following event is received:
+    And there is the user:
     """
     {
-      "data": {
-        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
-        "type": "user.created",
-        "occurredOn": "2019-08-08T08:37:32+00:00",
-        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8",
-        "attributes": {
-          "roleName": "admin",
-          "firstName": "John",
-          "lastName": "Doe",
-          "email": "jonhdoe1@gmail.com"
-        }
-      }
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8"
+    }
+    """
+    And there is the category:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b9",
+      "name": "action"
     }
     """
     Given I have a valid token
@@ -196,6 +149,7 @@ Feature: Create a new movie
     """
     {
       "id": "544f3547-f5dd-453a-82df-b176e09ec0f4",
+      "category": "action",
       "title": "The Matrix",
       "releaseDate": "1999-03-31",
       "url": "invalid url",

@@ -70,7 +70,7 @@ export class MongoMovieRepository
     const collection = await this.collection()
     await collection.updateMany(
       { category: { $eq: name.value } },
-      { $set: { category: '' } }
+      { $set: { category: 'other' } }
     )
   }
 
