@@ -12,6 +12,15 @@
       "class": "../../../../../Contexts/Multimedia/Serie/application/SearchByCriteria/SearchSeriesByCriteriaQueryHandler",
       "arguments": ["@Multimedia.Series.application.SeriesByCriteriaSearcher"],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Series.application.SerieUpdaterCategory": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/UpdateCategory/SerieUpdaterCategory",
+      "arguments": ["@Multimedia.Series.domain.SerieRepository"]
+    },
+    "Multimedia.Series.UpdateSerieOnCategoryDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/UpdateCategory/UpdateSerieOnCategoryDeleted",
+      "arguments": ["@Multimedia.Series.application.SerieUpdaterCategory"],
+      "tags": [{ "name": "domainEventSubscriber" }]
     }
   }
 }

@@ -1,6 +1,7 @@
 import { DomainEvent } from '@Shared/domain/DomainEvent'
 
 interface CreateMovieDomainEventAttributes {
+  readonly category: string
   readonly title: string
   readonly releaseDate: Date
   readonly url: string
@@ -14,6 +15,7 @@ interface CreateMovieDomainEventAttributes {
 export class MovieCreatedDomainEvent extends DomainEvent {
   public static readonly EVENT_NAME = 'movie.created'
 
+  public readonly category: string
   public readonly title: string
   public readonly releaseDate: Date
   public readonly url: string
@@ -21,6 +23,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
 
   constructor({
     aggregateId,
+    category,
     title,
     releaseDate,
     url,
@@ -29,6 +32,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
     occurredOn
   }: {
     aggregateId: string
+    category: string
     title: string
     releaseDate: Date
     url: string
@@ -42,6 +46,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
       eventId,
       occurredOn
     })
+    this.category = category
     this.title = title
     this.releaseDate = releaseDate
     this.url = url
@@ -63,6 +68,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
   }): DomainEvent {
     return new MovieCreatedDomainEvent({
       aggregateId: params.aggregateId,
+      category: params.attributes.category,
       title: params.attributes.title,
       releaseDate: params.attributes.releaseDate,
       url: params.attributes.url,
@@ -80,6 +86,7 @@ export class MovieCreatedDomainEvent extends DomainEvent {
    */
   public toPrimitives(): CreateMovieDomainEventAttributes {
     return {
+      category: this.category,
       title: this.title,
       releaseDate: this.releaseDate,
       url: this.url,

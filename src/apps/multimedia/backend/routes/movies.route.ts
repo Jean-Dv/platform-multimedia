@@ -17,6 +17,12 @@ function registerPutMovie(router: Router): void {
     body('releaseDate').exists().isISO8601().toDate(),
     body('duration').exists().isNumeric()
   ]
+  const authMiddleware = container.get(
+    'Apps.multimedia.middlewares.AuthenticateMiddleware'
+  )
+  const isAdminMiddleware = container.get(
+    'Apps.multimedia.middlewares.IsAdminMiddleware'
+  )
   const controller = container.get(
     'Apps.multimedia.controllers.MoviePutController'
   )
@@ -24,6 +30,8 @@ function registerPutMovie(router: Router): void {
     '/multimedia/movies/:id',
     reqSchema,
     validateReqSchema,
+    authMiddleware.run.bind(authMiddleware),
+    isAdminMiddleware.run.bind(isAdminMiddleware),
     controller.run.bind(controller)
   )
 }
@@ -40,7 +48,7 @@ function registerGetMovieById(router: Router): void {
     '/multimedia/movies/:id',
     reqSchema,
     validateReqSchema,
-    authMiddleware.run,
+    authMiddleware.run.bind(authMiddleware),
     reqSchema,
     controller.run.bind(controller)
   )

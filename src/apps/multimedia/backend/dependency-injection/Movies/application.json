@@ -4,6 +4,7 @@
       "class": "../../../../../Contexts/Multimedia/Movies/application/Create/MovieCreator",
       "arguments": [
         "@Multimedia.Movies.domain.MovieRepository",
+        "@Multimedia.Categories.domain.CategoryRepository",
         "@Multimedia.Shared.domain.EventBus"
       ]
     },
@@ -33,6 +34,18 @@
       "class": "../../../../../Contexts/Multimedia/Movies/application/SearchById/SearchMovieByIdQueryHandler",
       "arguments": ["@Multimedia.Movies.application.MovieByIdSearcher"],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Movies.application.MovieUpdaterCategory": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/UpdateCategory/MovieUpdaterCategory",
+      "arguments": [
+        "@Multimedia.Movies.domain.MovieRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Movies.UpdateMovieOnCategoryDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/UpdateCategory/UpdateMovieOnCategoryDeleted",
+      "arguments": ["@Multimedia.Movies.application.MovieUpdaterCategory"],
+      "tags": [{ "name": "domainEventSubscriber" }]
     }
   }
 }

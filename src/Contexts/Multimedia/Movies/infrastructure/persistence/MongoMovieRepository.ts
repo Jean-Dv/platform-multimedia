@@ -3,10 +3,12 @@ import { Movie } from '../../domain/Movie'
 import { type MovieRepository } from '../../domain/MovieRepository'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { type MovieId } from '@Multimedia/Movies/domain/MovieId'
+import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 
 interface MovieDocument {
   _id: string
   id: string
+  category: string
   title: string
   url: string
   releaseDate: Date
@@ -26,6 +28,7 @@ export class MongoMovieRepository
     return documents.map((document) =>
       Movie.fromPrimitives({
         id: document.id,
+        category: document.category,
         title: document.title,
         releaseDate: document.releaseDate,
         url: document.url,
@@ -39,6 +42,7 @@ export class MongoMovieRepository
     return documents.map((document) =>
       Movie.fromPrimitives({
         id: document.id,
+        category: document.category,
         title: document.title,
         releaseDate: document.releaseDate,
         url: document.url,
@@ -53,12 +57,21 @@ export class MongoMovieRepository
     return document !== null
       ? Movie.fromPrimitives({
           id: document.id,
+          category: document.category,
           title: document.title,
           releaseDate: document.releaseDate,
           url: document.url,
           duration: document.duration
         })
       : null
+  }
+
+  public async updateMoviesByCategory(name: CategoryName): Promise<void> {
+    const collection = await this.collection()
+    await collection.updateMany(
+      { category: { $eq: name.value } },
+      { $set: { category: 'other' } }
+    )
   }
 
   /**

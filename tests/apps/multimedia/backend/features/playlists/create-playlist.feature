@@ -4,6 +4,26 @@ Feature: Create a new playlist
   I want to create a new playlist
 
   Scenario: A valid non existing playlist
+    Given there is the role:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+      "name": "admin"
+    }
+    """
+    And there is the role:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+      "name": "registered"
+    }
+    """
+    And there is the user:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8"
+    }
+    """
     Given I have a valid token
     When I send a PUT request to "/multimedia/playlists/c646297b-ef92-440f-bf8c-c726b0a6809a" with body:
     """

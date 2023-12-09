@@ -2,6 +2,7 @@ import { type Movie } from '../domain/Movie'
 
 interface MovieResponse {
   id: string
+  category: string
   title: string
   releaseDate: Date
   duration: number
@@ -17,6 +18,7 @@ export class MoviesResponse {
     this.movies = movies.map((movie) => {
       return {
         id: movie.id.value,
+        category: movie.category.value,
         title: movie.title.value,
         releaseDate: movie.releaseDate.value,
         duration: movie.duration.value

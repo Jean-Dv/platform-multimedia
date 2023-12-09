@@ -1,6 +1,7 @@
 import { DomainEvent } from '@Shared/domain/DomainEvent'
 
 interface CreateUserDomainEventAttributes {
+  readonly roleName: string
   readonly firstName: string
   readonly lastName: string
   readonly email: string
@@ -15,12 +16,14 @@ interface CreateUserDomainEventAttributes {
 export class UserCreatedDomainEvent extends DomainEvent {
   public static readonly EVENT_NAME = 'user.created'
 
+  public readonly roleName: string
   public readonly firstName: string
   public readonly lastName: string
   public readonly email: string
 
   constructor({
     aggregateId,
+    roleName,
     firstName,
     lastName,
     email,
@@ -28,6 +31,7 @@ export class UserCreatedDomainEvent extends DomainEvent {
     occurredOn
   }: {
     aggregateId: string
+    roleName: string
     firstName: string
     lastName: string
     email: string
@@ -40,6 +44,7 @@ export class UserCreatedDomainEvent extends DomainEvent {
       eventId,
       occurredOn
     })
+    this.roleName = roleName
     this.firstName = firstName
     this.lastName = lastName
     this.email = email
@@ -61,6 +66,7 @@ export class UserCreatedDomainEvent extends DomainEvent {
     const { aggregateId, eventId, occurredOn, attributes } = params
     return new UserCreatedDomainEvent({
       aggregateId,
+      roleName: attributes.roleName,
       firstName: attributes.firstName,
       lastName: attributes.lastName,
       email: attributes.email,
@@ -76,8 +82,9 @@ export class UserCreatedDomainEvent extends DomainEvent {
    * @returns The attributes of the domain event.
    */
   public toPrimitives(): CreateUserDomainEventAttributes {
-    const { firstName, lastName, email, aggregateId } = this
+    const { roleName, firstName, lastName, email, aggregateId } = this
     return {
+      roleName,
       firstName,
       lastName,
       email,

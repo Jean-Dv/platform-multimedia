@@ -20,6 +20,15 @@
     },
     {
       "resource": "./Playlist/application.json"
+    },
+    {
+      "resource": "./Categories/application.json"
+    },
+    {
+      "resource": "./Users/application.json"
+    },
+    {
+      "resource": "./Roles/application.json"
     }
   ]
 }

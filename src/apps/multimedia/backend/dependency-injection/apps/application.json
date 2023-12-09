@@ -21,7 +21,12 @@
       "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     },
     "Apps.multimedia.middlewares.AuthenticateMiddleware": {
-      "class": "../../middlewares/AuthenticateMiddleware"
+      "class": "../../middlewares/AuthenticateMiddleware",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.middlewares.IsAdminMiddleware": {
+      "class": "../../middlewares/IsAdminMiddleware",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     },
     "Apps.multimedia.controllers.PlaylistPutController": {
       "class": "../../controllers/PlaylistPutController",
@@ -29,6 +34,14 @@
     },
     "Apps.multimedia.controllers.PlaylistDeleteController": {
       "class": "../../controllers/PlaylistDeleteController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.CategoryPutController": {
+      "class": "../../controllers/CategoryPutController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.CategoryDeleteController": {
+      "class": "../../controllers/CategoryDeleteController",
       "arguments": ["@Multimedia.Shared.domain.CommandBus"]
     }
   }

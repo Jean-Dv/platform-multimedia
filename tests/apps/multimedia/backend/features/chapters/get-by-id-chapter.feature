@@ -3,6 +3,26 @@ Feature: Get by id chapter
   I want to get a chapter by id with url
 
   Scenario: Get by id chapter
+    Given there is the role:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+      "name": "admin"
+    }
+    """
+    And there is the role:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+      "name": "registered"
+    }
+    """
+    And there is the user:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8"
+    }
+    """
     Given there is the chapter:
     """
     {
@@ -14,7 +34,8 @@ Feature: Get by id chapter
       "duration": 1200
     }
     """
-    When I send a GET request to "/multimedia/chapters/72545b03-f5f2-4fc1-81c8-5ed174ac7c4e" with user registered
+    Given I have a valid token
+    When I send a GET request to "/multimedia/chapters/72545b03-f5f2-4fc1-81c8-5ed174ac7c4e"
     Then the response status code should be 200
     And the response content should be:
     """

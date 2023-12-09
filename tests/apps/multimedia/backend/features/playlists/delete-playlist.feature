@@ -4,6 +4,26 @@ Feature: Delete a playlist
   I want to delete a playlist
 
   Scenario: A valid user deletes a playlist
+    Given there is the role:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+      "name": "admin"
+    }
+    """
+    And there is the role:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+      "name": "registered"
+    }
+    """
+    And there is the user:
+    """
+    {
+      "id": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8"
+    }
+    """
     Given I have a valid token
     And there is the playlist:
     """
@@ -31,6 +51,57 @@ Feature: Delete a playlist
     """
 
   Scenario: A invalid because playlist does not exist
+    Given the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "role.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b6",
+        "attributes": {
+          "name": "admin"
+        },
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "role.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b7",
+        "attributes": {
+          "name": "registered"
+        },
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "50a2b4ed-c060-4684-b439-de14bcea1419",
+        "type": "user.created",
+        "occurredOn": "2019-08-08T08:37:32+00:00",
+        "aggregateId": "050d3d09-0ffc-40a9-bb66-cd9cabae60b8",
+        "attributes": {
+          "roleName": "registered",
+          "firstName": "John",
+          "lastName": "Doe",
+          "email": "jonhdoe1@gmail.com"
+        }
+      }
+    }
+    """
     Given I have a valid token
     When I send a DELETE request to "/multimedia/playlist/1ca4ea9d-eea2-4bb0-a66d-541623d270f4"
     Then the response status code should be 404

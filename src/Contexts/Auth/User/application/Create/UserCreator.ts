@@ -6,6 +6,7 @@ import { type UserLastName } from '@Auth/User/domain/UserLastName'
 import { type UserPassword } from '@Auth/User/domain/UserPassword'
 import { type UserRepository } from '@Auth/Shared/domain/User/UserRepository'
 import { type EventBus } from '@Shared/domain/EventBus'
+import { RoleName } from '@Auth/Shared/domain/Roles/RoleName'
 
 /**
  * Class responsible for creating and storing user entities.
@@ -32,6 +33,7 @@ export class UserCreator {
   }): Promise<void> {
     const user = User.create(
       params.id,
+      RoleName.fromValue('registered'),
       params.firstName,
       params.lastName,
       params.email,
