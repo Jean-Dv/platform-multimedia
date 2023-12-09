@@ -1,0 +1,20 @@
+{
+  "services": {
+    "Multimedia.Categories.application.CategoryCreator": {
+      "class": "../../../../../Contexts/Multimedia/Categories/application/Create/CategoryCreator",
+      "arguments": [
+        "@Multimedia.Categories.domain.CategoryRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Categories.domain.CategoryRepository": {
+      "class": "../../../../../Contexts/Multimedia/Categories/infrastructure/persistence/MongoCategoryRepository",
+      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+    },
+    "Multimedia.Categories.CreateCategoryCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Categories/application/Create/CreateCategoryCommandHandler",
+      "arguments": ["@Multimedia.Categories.application.CategoryCreator"],
+      "tags": [{ "name": "commandHandler" }]
+    }
+  }
+}
