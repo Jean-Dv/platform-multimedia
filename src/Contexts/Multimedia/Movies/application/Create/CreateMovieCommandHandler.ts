@@ -7,6 +7,7 @@ import { MovieTitle } from '../../domain/MovieTitle'
 import { MovieReleaseDate } from '../../domain/MovieReleaseDate'
 import { MovieDuration } from '../../domain/MovieDuration'
 import { MovieUrl } from '../../domain/MovieUrl'
+import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 
 /**
  * Command handler for the CreateMovieCommand.
@@ -33,12 +34,14 @@ export class CreateMovieCommandHandler
    */
   public async handle(command: CreateMovieCommand): Promise<void> {
     const id = new MovieId(command.id)
+    const category = new CategoryName(command.category)
     const title = new MovieTitle(command.title)
     const releaseDate = new MovieReleaseDate(command.releaseDate)
     const url = new MovieUrl(command.url)
     const duration = new MovieDuration(command.duration)
     await this.movieCreator.run({
       id,
+      category,
       title,
       releaseDate,
       url,

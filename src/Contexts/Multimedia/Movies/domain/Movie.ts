@@ -5,9 +5,11 @@ import { MovieReleaseDate } from './MovieReleaseDate'
 import { MovieDuration } from './MovieDuration'
 import { MovieCreatedDomainEvent } from './MovieCreatedDomainEvent'
 import { MovieUrl } from './MovieUrl'
+import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 
 export class Movie extends AggregateRoot {
   public readonly id: MovieId
+  public readonly category: CategoryName
   public readonly title: MovieTitle
   public readonly releaseDate: MovieReleaseDate
   public readonly url: MovieUrl
@@ -15,6 +17,7 @@ export class Movie extends AggregateRoot {
 
   constructor(
     id: MovieId,
+    category: CategoryName,
     title: MovieTitle,
     releaseDate: MovieReleaseDate,
     url: MovieUrl,
@@ -22,6 +25,7 @@ export class Movie extends AggregateRoot {
   ) {
     super()
     this.id = id
+    this.category = category
     this.title = title
     this.releaseDate = releaseDate
     this.url = url
@@ -39,15 +43,17 @@ export class Movie extends AggregateRoot {
    */
   public static create(
     id: MovieId,
+    category: CategoryName,
     title: MovieTitle,
     releaseDate: MovieReleaseDate,
     url: MovieUrl,
     duration: MovieDuration
   ): Movie {
-    const movie = new Movie(id, title, releaseDate, url, duration)
+    const movie = new Movie(id, category, title, releaseDate, url, duration)
     movie.record(
       new MovieCreatedDomainEvent({
         aggregateId: movie.id.value,
+        category: movie.category.value,
         title: movie.title.value,
         releaseDate: movie.releaseDate.value,
         url: movie.url.value,
@@ -65,6 +71,7 @@ export class Movie extends AggregateRoot {
    */
   public static fromPrimitives(plainData: {
     id: string
+    category: string
     title: string
     releaseDate: Date
     url: string
@@ -72,6 +79,7 @@ export class Movie extends AggregateRoot {
   }): Movie {
     return new Movie(
       new MovieId(plainData.id),
+      new CategoryName(plainData.category),
       new MovieTitle(plainData.title),
       new MovieReleaseDate(plainData.releaseDate),
       new MovieUrl(plainData.url),
@@ -86,6 +94,7 @@ export class Movie extends AggregateRoot {
    */
   public toPrimitives(): {
     id: string
+    category: string
     title: string
     releaseDate: Date
     url: string
@@ -93,6 +102,7 @@ export class Movie extends AggregateRoot {
   } {
     return {
       id: this.id.value,
+      category: this.category.value,
       title: this.title.value,
       releaseDate: this.releaseDate.value,
       url: this.url.value,
