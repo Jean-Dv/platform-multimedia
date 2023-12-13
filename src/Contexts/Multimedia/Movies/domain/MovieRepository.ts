@@ -44,4 +44,11 @@ export interface MovieRepository {
    * @param nameCategory - The name of the category.
    */
   updateMoviesByCategory: (name: CategoryName) => Promise<void>
+
+  /**
+   * Deletes a movie from the repository.
+   *
+   * @param id - The id of the movie to be deleted.
+   */
+  delete: (id: MovieId) => Promise<void>
 }

@@ -10,6 +10,7 @@ export class MovieRepositoryMock implements MovieRepository {
   private readonly searchByCriteriaMock: jest.Mock
   private readonly searchMock: jest.Mock
   private readonly updateMoviesByCategoryMock: jest.Mock
+  private readonly deleteMock: jest.Mock
   private readonly movies: Movie[] = []
 
   constructor() {
@@ -18,6 +19,7 @@ export class MovieRepositoryMock implements MovieRepository {
     this.searchByCriteriaMock = jest.fn()
     this.searchMock = jest.fn()
     this.updateMoviesByCategoryMock = jest.fn()
+    this.deleteMock = jest.fn()
   }
 
   public async save(movie: Movie): Promise<void> {
@@ -43,6 +45,10 @@ export class MovieRepositoryMock implements MovieRepository {
     this.updateMoviesByCategoryMock(name)
   }
 
+  public async delete(id: MovieId): Promise<void> {
+    this.deleteMock(id)
+  }
+
   public assertMatchingHaveBeenCalled(): void {
     expect(this.searchByCriteriaMock).toHaveBeenCalled()
   }
@@ -63,6 +69,10 @@ export class MovieRepositoryMock implements MovieRepository {
     name: CategoryName
   ): void {
     expect(this.updateMoviesByCategoryMock).toHaveBeenCalledWith(name)
+  }
+
+  public assertDeleteHaveBeenCalledWith(id: MovieId): void {
+    expect(this.deleteMock).toHaveBeenCalledWith(id)
   }
 
   public searchMockReturnValue(movie: Movie): void {
