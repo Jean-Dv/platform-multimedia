@@ -55,6 +55,10 @@
     "Apps.multimedia.controllers.ChapterPutController": {
       "class": "../../controllers/ChapterPutController",
       "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.MovieDeleteController": {
+      "class": "../../controllers/MovieDeleteController",
+      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
     }
   }
 }
