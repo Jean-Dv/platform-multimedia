@@ -46,6 +46,18 @@
       "class": "../../../../../Contexts/Multimedia/Movies/application/UpdateCategory/UpdateMovieOnCategoryDeleted",
       "arguments": ["@Multimedia.Movies.application.MovieUpdaterCategory"],
       "tags": [{ "name": "domainEventSubscriber" }]
+    },
+    "Multimedia.Movies.application.MovieDeletor": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Delete/MovieDeletor",
+      "arguments": [
+        "@Multimedia.Movies.domain.MovieRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Movies.DeleteMovieCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Delete/DeleteMovieCommandHandler",
+      "arguments": ["@Multimedia.Movies.application.MovieDeletor"],
+      "tags": [{ "name": "commandHandler" }]
     }
   }
 }

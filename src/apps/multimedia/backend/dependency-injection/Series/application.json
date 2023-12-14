@@ -43,6 +43,18 @@
       "class": "../../../../../Contexts/Multimedia/Serie/application/SearchById/SearchSerieByIdQueryHandler",
       "arguments": ["@Multimedia.Series.application.SerieByIdSearcher"],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Series.application.SerieDeletor": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/Delete/SerieDeletor",
+      "arguments": [
+        "@Multimedia.Series.domain.SerieRepository",
+        "@Multimedia.Shared.domain.EventBus"
+      ]
+    },
+    "Multimedia.Series.DeleteSerieCommandHandler": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/Delete/DeleteSerieCommandHandler",
+      "arguments": ["@Multimedia.Series.application.SerieDeletor"],
+      "tags": [{ "name": "commandHandler" }]
     }
   }
 }

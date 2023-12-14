@@ -22,4 +22,6 @@ export interface SerieRepository {
   updateSeriesByCategory: (category: CategoryName) => Promise<void>
 
   searchById: (id: SerieId) => Promise<Serie | null>
+
+  delete: (id: SerieId) => Promise<void>
 }

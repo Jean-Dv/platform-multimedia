@@ -74,6 +74,10 @@ export class MongoMovieRepository
     )
   }
 
+  public async delete(id: MovieId): Promise<void> {
+    await this.erase(id.value)
+  }
+
   /**
    * This method is used to save a user in the database.
    *

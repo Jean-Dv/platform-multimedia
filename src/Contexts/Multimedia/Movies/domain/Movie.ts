@@ -6,6 +6,7 @@ import { MovieDuration } from './MovieDuration'
 import { MovieCreatedDomainEvent } from './MovieCreatedDomainEvent'
 import { MovieUrl } from './MovieUrl'
 import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { MovieDeletedDomainEvent } from './MovieDeletedDomainEvent'
 
 export class Movie extends AggregateRoot {
   public readonly id: MovieId
@@ -52,6 +53,28 @@ export class Movie extends AggregateRoot {
     const movie = new Movie(id, category, title, releaseDate, url, duration)
     movie.record(
       new MovieCreatedDomainEvent({
+        aggregateId: movie.id.value,
+        category: movie.category.value,
+        title: movie.title.value,
+        releaseDate: movie.releaseDate.value,
+        url: movie.url.value,
+        duration: movie.duration.value
+      })
+    )
+    return movie
+  }
+
+  public static delete(
+    id: MovieId,
+    category: CategoryName,
+    title: MovieTitle,
+    releaseDate: MovieReleaseDate,
+    url: MovieUrl,
+    duration: MovieDuration
+  ): Movie {
+    const movie = new Movie(id, category, title, releaseDate, url, duration)
+    movie.record(
+      new MovieDeletedDomainEvent({
         aggregateId: movie.id.value,
         category: movie.category.value,
         title: movie.title.value,

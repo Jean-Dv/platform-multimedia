@@ -10,6 +10,27 @@ function registerGetMovies(router: Router): void {
   router.get('/multimedia/movies', controller.run.bind(controller))
 }
 
+function registerDeleteMovie(router: Router): void {
+  const reqSchema = [param('id').exists().isString().isUUID()]
+  const authMiddleware = container.get(
+    'Apps.multimedia.middlewares.AuthenticateMiddleware'
+  )
+  const isAdminMiddleware = container.get(
+    'Apps.multimedia.middlewares.IsAdminMiddleware'
+  )
+  const controller = container.get(
+    'Apps.multimedia.controllers.MovieDeleteController'
+  )
+  router.delete(
+    '/multimedia/movies/:id',
+    authMiddleware.run.bind(authMiddleware),
+    isAdminMiddleware.run.bind(isAdminMiddleware),
+    reqSchema,
+    validateReqSchema,
+    controller.run.bind(controller)
+  )
+}
+
 function registerPutMovie(router: Router): void {
   const reqSchema = [
     body('id').exists().isString(),
@@ -58,4 +79,5 @@ export function register(router: Router): void {
   registerGetMovies(router)
   registerPutMovie(router)
   registerGetMovieById(router)
+  registerDeleteMovie(router)
 }

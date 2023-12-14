@@ -1,3 +1,4 @@
+import { type UserId } from '@Auth/Shared/domain/User/UserId'
 import { type Playlist } from '@Multimedia/Playlists/domain/Playlist'
 import { type PlaylistId } from '@Multimedia/Playlists/domain/PlaylistId'
 import { type PlaylistRepository } from '@Multimedia/Playlists/domain/PlaylistRepository'
@@ -6,12 +7,14 @@ export class PlaylistRepositoryMock implements PlaylistRepository {
   private readonly saveMock: jest.Mock
   private readonly searchMock: jest.Mock
   private readonly deleteMock: jest.Mock
+  private readonly searchAllByUserMock: jest.Mock
   private readonly playlists: Playlist[] = []
 
   constructor() {
     this.saveMock = jest.fn()
     this.searchMock = jest.fn()
     this.deleteMock = jest.fn()
+    this.searchAllByUserMock = jest.fn()
   }
 
   public async save(playlist: Playlist): Promise<void> {
@@ -27,6 +30,13 @@ export class PlaylistRepositoryMock implements PlaylistRepository {
 
   public async delete(id: PlaylistId): Promise<void> {
     this.deleteMock(id)
+  }
+
+  public async searchAllByUser(userId: UserId): Promise<Playlist[]> {
+    this.searchAllByUserMock(userId)
+    return this.playlists.filter(
+      (playlist) => playlist.userId.value === userId.value
+    )
   }
 
   public assertSearchHaveBeenCalledWith(id: PlaylistId): void {

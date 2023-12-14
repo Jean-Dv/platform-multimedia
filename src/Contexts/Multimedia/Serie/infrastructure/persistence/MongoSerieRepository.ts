@@ -57,6 +57,10 @@ export class MongoSerieRepository
       : null
   }
 
+  public async delete(id: SerieId): Promise<void> {
+    await this.erase(id.value)
+  }
+
   protected collectionName(): string {
     return 'series'
   }
