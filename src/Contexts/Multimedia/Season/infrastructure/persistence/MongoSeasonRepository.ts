@@ -1,6 +1,7 @@
 import { Season } from '@Multimedia/Season/domain/Season'
 import { type SeasonRepository } from '@Multimedia/Season/domain/SeasonRepository'
 import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
+import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
 
@@ -43,6 +44,19 @@ export class MongoSeasonRepository
           releaseDate: document.releaseDate
         })
       : null
+  }
+
+  public async deleteBySerie(id: SerieId): Promise<void> {
+    const collection = await this.collection()
+    const document = {
+      deltedAt: new Date()
+    }
+    await collection.updateMany(
+      {
+        serieId: { $eq: id.value }
+      },
+      { $set: document }
+    )
   }
 
   protected collectionName(): string {

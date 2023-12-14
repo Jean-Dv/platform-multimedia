@@ -1,6 +1,7 @@
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { type Season } from './Season'
 import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
+import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 
 export interface SeasonRepository {
   /**
@@ -19,4 +20,6 @@ export interface SeasonRepository {
   matching: (criteria: Criteria) => Promise<Season[]>
 
   searchById: (id: SeasonId) => Promise<Season | null>
+
+  deleteBySerie: (id: SerieId) => Promise<void>
 }

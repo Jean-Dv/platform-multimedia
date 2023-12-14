@@ -36,6 +36,15 @@
       "class": "../../../../../Contexts/Multimedia/Season/application/SearchById/SearchSeasonByIdQueryHandler",
       "arguments": ["@Multimedia.Seasons.application.SeasonByIdSearcher"],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Multimedia.Seasons.application.SeasonDeletor": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/Delete/SeasonDeletor",
+      "arguments": ["@Multimedia.Seasons.domain.SeasonRepository"]
+    },
+    "Multimedia.Seasons.DeleteSeasonOnSerieDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/Delete/DeleteSeasonOnSerieDeleted",
+      "arguments": ["@Multimedia.Seasons.application.SeasonDeletor"],
+      "tags": [{ "name": "domainEventSubscriber" }]
     }
   }
 }
