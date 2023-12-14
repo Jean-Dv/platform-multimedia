@@ -63,6 +63,10 @@
     "Apps.multimedia.controllers.SerieDeleteController": {
       "class": "../../controllers/SerieDeleteController",
       "arguments": ["@Multimedia.Shared.domain.CommandBus"]
+    },
+    "Apps.multimedia.controllers.PlaylistsGetController": {
+      "class": "../../controllers/PlaylistsGetController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     }
   }
 }
