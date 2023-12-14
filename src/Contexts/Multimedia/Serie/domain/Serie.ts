@@ -4,6 +4,7 @@ import { SerieTitle } from './SerieTitle'
 import { SerieReleaseDate } from './SerieReleaseDate'
 import { SerieCreatedDomainEvent } from './SerieCreatedDomainEvent'
 import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { SerieDeletedDomainEvent } from './SerieDeletedDomainEvent'
 
 /**
  * Serie aggregate root entity.
@@ -45,6 +46,24 @@ export class Serie extends AggregateRoot {
     const serie = new Serie(id, category, title, releaseDate)
     serie.record(
       new SerieCreatedDomainEvent({
+        aggregateId: id.value,
+        category: category.value,
+        title: title.value,
+        releaseDate: releaseDate.value
+      })
+    )
+    return serie
+  }
+
+  public static delete(
+    id: SerieId,
+    category: CategoryName,
+    title: SerieTitle,
+    releaseDate: SerieReleaseDate
+  ): Serie {
+    const serie = new Serie(id, category, title, releaseDate)
+    serie.record(
+      new SerieDeletedDomainEvent({
         aggregateId: id.value,
         category: category.value,
         title: title.value,
