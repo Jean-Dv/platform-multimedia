@@ -6,7 +6,7 @@ export class MovieDurationMother {
   }
 
   public static random(): MovieDuration {
-    return this.create(Math.floor(Math.random() * 1000))
+    return this.create(Math.abs(Math.floor(Math.random() * 1000)))
   }
 
   public static invalid(): number {
