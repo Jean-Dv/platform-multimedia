@@ -2,6 +2,9 @@ import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoR
 import { type BackofficeCategory } from '../../domain/BackofficeCategory'
 import { type BackofficeCategoryRepository } from '../../domain/BackofficeCategoryRepository'
 
+/**
+ * MongoDB repository implementation backoffice categories.
+ */
 export class MongoBackofficeCategoryRepository
   extends MongoRepository<BackofficeCategory>
   implements BackofficeCategoryRepository
