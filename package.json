@@ -97,6 +97,7 @@
     "@Shared": "src/Contexts/Shared",
     "@Apps": "src/apps",
     "@Auth": "src/Contexts/Auth",
-    "@Multimedia": "src/Contexts/Multimedia"
+    "@Multimedia": "src/Contexts/Multimedia",
+    "@BackofficeMultimedia": "src/Contexts/BackofficeMultimedia"
   }
 }
