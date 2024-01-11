@@ -1,16 +1,19 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
-import { BackofficeCategoryId } from './BackofficeCategoryId'
-import { BackofficeCategoryName } from './BackofficeCategoryName'
-import { BackofficeCategoryCreatedDomainEvent } from './BackofficeCategoryCreatedDomainEvent'
+import { BackofficeMultimediaCategoryId } from './BackofficeMultimediaCategoryId'
+import { BackofficeMultimediaCategoryName } from './BackofficeMultimediaCategoryName'
+import { BackofficeMultimediaCategoryCreatedDomainEvent } from './BackofficeMultimediaCategoryCreatedDomainEvent'
 
 /**
  * BackofficeCategory is an aggregate root representing a category in the backoffice.
  */
-export class BackofficeCategory extends AggregateRoot {
-  public readonly id: BackofficeCategoryId
-  public readonly name: BackofficeCategoryName
+export class BackofficeMultimediaCategory extends AggregateRoot {
+  public readonly id: BackofficeMultimediaCategoryId
+  public readonly name: BackofficeMultimediaCategoryName
 
-  constructor(id: BackofficeCategoryId, name: BackofficeCategoryName) {
+  constructor(
+    id: BackofficeMultimediaCategoryId,
+    name: BackofficeMultimediaCategoryName
+  ) {
     super()
     this.id = id
     this.name = name
@@ -24,12 +27,12 @@ export class BackofficeCategory extends AggregateRoot {
    * @returns An instance of the created backoffice category.
    */
   public static create(
-    id: BackofficeCategoryId,
-    name: BackofficeCategoryName
-  ): BackofficeCategory {
-    const category = new BackofficeCategory(id, name)
+    id: BackofficeMultimediaCategoryId,
+    name: BackofficeMultimediaCategoryName
+  ): BackofficeMultimediaCategory {
+    const category = new BackofficeMultimediaCategory(id, name)
     category.record(
-      new BackofficeCategoryCreatedDomainEvent({
+      new BackofficeMultimediaCategoryCreatedDomainEvent({
         aggregateId: id.value,
         name: name.value
       })
@@ -46,10 +49,10 @@ export class BackofficeCategory extends AggregateRoot {
   public static fromPrimitives(plainData: {
     id: string
     name: string
-  }): BackofficeCategory {
-    return new BackofficeCategory(
-      new BackofficeCategoryId(plainData.id),
-      new BackofficeCategoryName(plainData.name)
+  }): BackofficeMultimediaCategory {
+    return new BackofficeMultimediaCategory(
+      new BackofficeMultimediaCategoryId(plainData.id),
+      new BackofficeMultimediaCategoryName(plainData.name)
     )
   }
 

@@ -8,7 +8,7 @@ interface Params {
 /**
  * Command to create a new backoffice category.
  */
-export class CreateBackofficeCategoryCommand extends Command {
+export class CreateBackofficeMultimediaCategoryCommand extends Command {
   public readonly id: string
   public readonly name: string
 

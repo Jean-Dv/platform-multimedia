@@ -5,4 +5,4 @@ import { Uuid } from '@Shared/domain/value-objects/Uuid'
  * Inherits from the Uuid class, ensuring it is a universally unique identifier.
  * Used to uniquely identify Backoffice categories within the application.
  */
-export class BackofficeCategoryId extends Uuid {}
+export class BackofficeMultimediaCategoryId extends Uuid {}

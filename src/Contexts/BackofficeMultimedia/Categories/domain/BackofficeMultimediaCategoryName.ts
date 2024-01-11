@@ -5,7 +5,7 @@ import { StringValueObject } from '@Shared/domain/value-objects/StringValueObjec
  * Inherits from the StringValueObject class, providing a standardized value object for string properties.
  * The maximum allowed length for the category name is set to 50 characters.
  */
-export class BackofficeCategoryName extends StringValueObject {
+export class BackofficeMultimediaCategoryName extends StringValueObject {
   constructor(value: string) {
     super(value)
     this.ensureLengthIsLessThan50Characters(value)

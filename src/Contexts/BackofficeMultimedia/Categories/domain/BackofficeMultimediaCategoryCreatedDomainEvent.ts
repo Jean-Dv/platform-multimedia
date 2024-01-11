@@ -1,10 +1,13 @@
 import { DomainEvent } from '@Shared/domain/DomainEvent'
 
-interface CreateBackofficeCategoryDomainEventAttributes {
+interface CreateBackofficeMultimediaCategoryDomainEventAttributes {
   name: string
 }
 
-export class BackofficeCategoryCreatedDomainEvent extends DomainEvent {
+/**
+ * Domain event representing the creation of a backoffice multimedia category.
+ */
+export class BackofficeMultimediaCategoryCreatedDomainEvent extends DomainEvent {
   public static readonly EVENT_NAME = 'backoffice.category.created'
 
   public readonly name: string
@@ -21,7 +24,7 @@ export class BackofficeCategoryCreatedDomainEvent extends DomainEvent {
     occurredOn?: Date
   }) {
     super({
-      eventName: BackofficeCategoryCreatedDomainEvent.EVENT_NAME,
+      eventName: BackofficeMultimediaCategoryCreatedDomainEvent.EVENT_NAME,
       aggregateId,
       eventId,
       occurredOn
@@ -33,9 +36,9 @@ export class BackofficeCategoryCreatedDomainEvent extends DomainEvent {
     aggregateId: string
     eventId: string
     occurredOn: Date
-    attributes: CreateBackofficeCategoryDomainEventAttributes
+    attributes: CreateBackofficeMultimediaCategoryDomainEventAttributes
   }): DomainEvent {
-    return new BackofficeCategoryCreatedDomainEvent({
+    return new BackofficeMultimediaCategoryCreatedDomainEvent({
       aggregateId: params.aggregateId,
       name: params.attributes.name,
       eventId: params.eventId,
@@ -43,7 +46,7 @@ export class BackofficeCategoryCreatedDomainEvent extends DomainEvent {
     })
   }
 
-  public toPrimitives(): CreateBackofficeCategoryDomainEventAttributes {
+  public toPrimitives(): CreateBackofficeMultimediaCategoryDomainEventAttributes {
     return {
       name: this.name
     }
