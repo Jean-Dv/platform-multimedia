@@ -1,4 +1,5 @@
 import { StringValueObject } from '@Shared/domain/value-objects/StringValueObject'
+import { BackofficeMultimediaCategoryNameLengthIsExceeded } from './BackofficeMultimediaCategoryNameLengthIsExceeded'
 
 /**
  * Represents the name of a Backoffice category, ensuring it does not exceed a specified length.
@@ -19,7 +20,7 @@ export class BackofficeMultimediaCategoryName extends StringValueObject {
    */
   private ensureLengthIsLessThan50Characters(value: string): void {
     if (value.length > 50) {
-      throw new Error(
+      throw new BackofficeMultimediaCategoryNameLengthIsExceeded(
         `The category name <${value}> has more than 50 characters`
       )
     }
