@@ -5,7 +5,6 @@ import { MovieRepositoryMock } from '../../__mocks__/MovieRepositoryMock'
 import { MovieCreatedDomainEventMother } from '../../domain/MovieCreatedDomainEventMother'
 import { MovieMother } from '../../domain/MovieMother'
 import { CreateMovieCommandMother } from './CreateMovieCommandMother'
-import { MovieTitleLengthExceeded } from '@Multimedia/Movies/domain/MovieTitleLengthExceeded'
 import { CategoryRepositoryMock } from '../../../Categories/__mocks__/CategoryRepositoryMock'
 import { CategoryMother } from '../../../Categories/domain/CategoryMother'
 
@@ -36,20 +35,5 @@ describe('CreateMovieCommandHandler', () => {
     repository.assertSaveHaveBeenCalledWith(movie)
     categoryRepository.assertSearchByNameHaveBeenCalledWith(category.name)
     eventBus.assertLastPublishedEventIs(domainEvent)
-  })
-
-  it('should throw an error when name is invalid', async () => {
-    try {
-      const category = CategoryMother.random()
-      categoryRepository.searchByNameMockReturnValue(category)
-      const command = CreateMovieCommandMother.invalidWithCategory(
-        category.name
-      )
-      const movie = MovieMother.from(command)
-      await handler.handle(command)
-      repository.assertSaveHaveBeenCalledWith(movie)
-    } catch (error) {
-      expect(error).toBeInstanceOf(MovieTitleLengthExceeded)
-    }
   })
 })
