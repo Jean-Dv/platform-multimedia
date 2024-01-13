@@ -14,6 +14,6 @@ export class MongoBackofficeMultimediaCategoryRepository
   }
 
   public collectionName(): string {
-    return 'categories'
+    return 'backoffice-multimedia-categories'
   }
 }
