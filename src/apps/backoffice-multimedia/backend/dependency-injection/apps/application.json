@@ -1,0 +1,7 @@
+{
+  "services": {
+    "Apps.backoffice-multimedia.controllers.StatusGetController": {
+      "class": "../../controllers/StatusGetController"
+    }
+  }
+}

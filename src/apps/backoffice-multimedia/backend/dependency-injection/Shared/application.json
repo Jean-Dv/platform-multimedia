@@ -1,0 +1,87 @@
+{
+  "services": {
+    "BackofficeMultimedia.Shared.MongoConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/BackofficeMultimedia/Shared/infrastructure/persistence/mongo/MongoConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "BackofficeMultimedia.Shared.RabbitMQConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/BackofficeMultimedia/Shared/infrastructure/RabbitMQ/RabbitMQConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "BackofficeMultimedia.Shared.domain.EventBus": {
+      "factory": {
+        "class": "../../../../../Contexts/BackofficeMultimedia/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory",
+        "method": "create"
+      },
+      "arguments": [
+        "@BackofficeMultimedia.Shared.DomainEventFailoverPublisher",
+        "@BackofficeMultimedia.Shared.RabbitMQConnection",
+        "@BackofficeMultimedia.Shared.RabbitMQqueueFormatter",
+        "@BackofficeMultimedia.Shared.RabbitMQConfig"
+      ]
+    },
+    "BackofficeMultimedia.Shared.ConnectionManager": {
+      "factory": {
+        "class": "../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory",
+        "method": "createClient"
+      },
+      "arguments": [
+        "backofficeMultimedia",
+        "@BackofficeMultimedia.Shared.MongoConfig"
+      ]
+    },
+    "BackofficeMultimedia.Shared.RabbitMQqueueFormatter": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter",
+      "arguments": [
+        "BackofficeMultimedia"
+      ]
+    },
+    "BackofficeMultimedia.Shared.RabbitMQConnection": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConnection",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.RabbitMQConfig"
+      ]
+    },
+    "BackofficeMultimedia.Shared.RabbitMQConfigurer": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConfigurer",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.RabbitMQConnection",
+        "@BackofficeMultimedia.Shared.RabbitMQqueueFormatter"
+      ]
+    },
+    "BackofficeMultimedia.Shared.DomainEventFailoverPublisher": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/FailoverPublisher/FailoverPublisher",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.ConnectionManager"
+      ]
+    },
+    "BackofficeMultimedia.Shared.CommandHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers",
+      "arguments": [
+        "!tagged commandHandler"
+      ]
+    },
+    "BackofficeMultimedia.Shared.domain.CommandBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.CommandHandlers"
+      ]
+    },
+    "BackofficeMultimedia.Shared.QueryHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers",
+      "arguments": [
+        "!tagged queryHandler"
+      ]
+    },
+    "BackofficeMultimedia.Shared.domain.QueryBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.QueryHandlers"
+      ]
+    }
+  }
+}

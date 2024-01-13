@@ -78,6 +78,12 @@ const backofficeMultimediaConfig = convict({
       env: 'RABBITMQ_RETRY_TTL',
       default: 1000
     }
+  },
+  port: {
+    doc: 'The port to bind.',
+    format: String,
+    env: 'PORT',
+    default: '8080'
   }
 })
 
