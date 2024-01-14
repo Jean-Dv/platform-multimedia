@@ -5,6 +5,9 @@
     },
     {
       "resource": "./Shared/application.json"
+    },
+    {
+      "resource": "./Videos/application.json"
     }
   ]
 }

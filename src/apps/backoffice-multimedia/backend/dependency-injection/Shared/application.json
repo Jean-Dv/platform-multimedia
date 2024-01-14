@@ -82,6 +82,22 @@
       "arguments": [
         "@BackofficeMultimedia.Shared.QueryHandlers"
       ]
+    },
+    "BackofficeMultimedia.Shared.AWSBucketConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/BackofficeMultimedia/Shared/infrastructure/persistence/aws-s3/AWSBucketConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "BackofficeMultimedia.Shared.AWSConnectionManager": {
+      "factory": {
+        "class": "../../../../../Contexts/Shared/infrastructure/persistence/aws-s3/AWSBucketClientFactory",
+        "method": "createClient"
+      },
+      "arguments": [
+        "backofficeMultimedia",
+        "@BackofficeMultimedia.Shared.AWSBucketConfig"
+      ]
     }
   }
 }

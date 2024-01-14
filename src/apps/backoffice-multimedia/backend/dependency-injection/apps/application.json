@@ -2,6 +2,18 @@
   "services": {
     "Apps.backoffice-multimedia.controllers.StatusGetController": {
       "class": "../../controllers/StatusGetController"
+    },
+    "Apps.backoffice-multimedia.controllers.MoviePutController": {
+      "class": "../../controllers/MoviePutController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.VideoPostController": {
+      "class": "../../controllers/VideoPostController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
     }
   }
 }
