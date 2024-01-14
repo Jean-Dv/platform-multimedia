@@ -8,7 +8,7 @@ import { BackofficeMultimediaMovieTitleMother } from '../../domain/BackofficeMul
 import { BackofficeMultimediaMovieReleaseYearMother } from '../../domain/BackofficeMultimediaMovieReleaseYearMother'
 import { BackofficeMultimediaMovieSynopsisMother } from '../../domain/BackofficeMultimediaMovieSynopsisMother'
 import { type BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
-import { BackofficeMultimediaVideoIdMother } from 'tests/Contexts/BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoIdMother'
+import { BackofficeMultimediaVideoIdMother } from '../../../Shared/domain/BackofficeMultimediaVideoIdMother'
 
 /**
  * Utility class for creating `CreateBackofficeMultimediaMovieCommand` instances for testing.
