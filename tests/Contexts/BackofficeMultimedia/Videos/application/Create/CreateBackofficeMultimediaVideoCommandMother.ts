@@ -1,7 +1,7 @@
 import { type BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 import { type CreateBackofficeMultimediaVideoCommand } from '@BackofficeMultimedia/Videos/application/Create/CreateBackofficeMultimediaVideoCommand'
 import { type BackofficeMultimediaVideoPath } from '@BackofficeMultimedia/Videos/domain/BackofficeMultimediaVideoPath'
-import { BackofficeMultimediaVideoIdMother } from '../../domain/BackofficeMultimediaVideoIdMother'
+import { BackofficeMultimediaVideoIdMother } from '../../../Shared/domain/BackofficeMultimediaVideoIdMother'
 import { BackofficeMultimediaVideoPathMother } from '../../domain/BackofficeMultimediaVideoPathMother'
 
 /**

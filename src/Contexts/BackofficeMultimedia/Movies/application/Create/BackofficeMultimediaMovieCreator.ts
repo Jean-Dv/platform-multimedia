@@ -4,6 +4,7 @@ import { type BackofficeMultimediaMovieReleaseYear } from '@BackofficeMultimedia
 import { type BackofficeMultimediaMovieRepository } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieRepository'
 import { type BackofficeMultimediaMovieSynopsis } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieSynopsis'
 import { type BackofficeMultimediaMovieTitle } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieTitle'
+import { type BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 import { type EventBus } from '@Shared/domain/EventBus'
 
 /**
@@ -26,12 +27,14 @@ export class BackofficeMultimediaMovieCreator {
     title: BackofficeMultimediaMovieTitle
     releaseYear: BackofficeMultimediaMovieReleaseYear
     synopsis: BackofficeMultimediaMovieSynopsis
+    videoId: BackofficeMultimediaVideoId
   }): Promise<void> {
     const movie = BackofficeMultimediaMovie.create(
       params.id,
       params.title,
       params.releaseYear,
-      params.synopsis
+      params.synopsis,
+      params.videoId
     )
 
     await this.repository.save(movie)

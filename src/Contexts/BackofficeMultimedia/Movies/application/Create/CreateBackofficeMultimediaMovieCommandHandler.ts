@@ -6,6 +6,7 @@ import { BackofficeMultimediaMovieId } from '@BackofficeMultimedia/Movies/domain
 import { BackofficeMultimediaMovieTitle } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieTitle'
 import { BackofficeMultimediaMovieReleaseYear } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieReleaseYear'
 import { BackofficeMultimediaMovieSynopsis } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieSynopsis'
+import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 
 /**
  * Command handler for creating backoffice multimedia movies.
@@ -28,11 +29,13 @@ export class CreateBackofficeMultimediaMovieCommandHandler
       command.releaseYear
     )
     const synopsis = new BackofficeMultimediaMovieSynopsis(command.synopsis)
+    const videoId = new BackofficeMultimediaVideoId(command.videoId)
     await this.creator.run({
       id,
       title,
       releaseYear,
-      synopsis
+      synopsis,
+      videoId
     })
   }
 }

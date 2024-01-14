@@ -16,6 +16,7 @@ export class BackofficeMultimediaMovieCreatedDomainEventMother {
     title,
     releaseYear,
     synopsis,
+    videoId,
     eventId,
     occurredOn
   }: {
@@ -23,6 +24,7 @@ export class BackofficeMultimediaMovieCreatedDomainEventMother {
     title: string
     releaseYear: number
     synopsis: string
+    videoId: string
     eventId?: string
     occurredOn?: Date
   }): BackofficeMultimediaMovieCreatedDomainEvent {
@@ -31,6 +33,7 @@ export class BackofficeMultimediaMovieCreatedDomainEventMother {
       title,
       releaseYear,
       synopsis,
+      videoId,
       eventId,
       occurredOn
     })
@@ -49,7 +52,8 @@ export class BackofficeMultimediaMovieCreatedDomainEventMother {
       aggregateId: movie.id.value,
       title: movie.title.value,
       releaseYear: movie.releaseYear.value,
-      synopsis: movie.synopsis.value
+      synopsis: movie.synopsis.value,
+      videoId: movie.videoId.value
     })
   }
 }

@@ -7,6 +7,8 @@ import { BackofficeMultimediaMovieIdMother } from '../../domain/BackofficeMultim
 import { BackofficeMultimediaMovieTitleMother } from '../../domain/BackofficeMultimediaMovieTitleMother'
 import { BackofficeMultimediaMovieReleaseYearMother } from '../../domain/BackofficeMultimediaMovieReleaseYearMother'
 import { BackofficeMultimediaMovieSynopsisMother } from '../../domain/BackofficeMultimediaMovieSynopsisMother'
+import { type BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
+import { BackofficeMultimediaVideoIdMother } from 'tests/Contexts/BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoIdMother'
 
 /**
  * Utility class for creating `CreateBackofficeMultimediaMovieCommand` instances for testing.
@@ -25,13 +27,15 @@ export class CreateBackofficeMultimediaMovieCommandMother {
     id: BackofficeMultimediaMovieId,
     title: BackofficeMultimediaMovieTitle,
     releaseYear: BackofficeMultimediaMovieReleaseYear,
-    synopsis: BackofficeMultimediaMovieSynopsis
+    synopsis: BackofficeMultimediaMovieSynopsis,
+    videoId: BackofficeMultimediaVideoId
   ): CreateBackofficeMultimediaMovieCommand {
     return {
       id: id.value,
       title: title.value,
       releaseYear: releaseYear.value,
-      synopsis: synopsis.value
+      synopsis: synopsis.value,
+      videoId: videoId.value
     }
   }
 
@@ -45,7 +49,8 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       BackofficeMultimediaMovieIdMother.random(),
       BackofficeMultimediaMovieTitleMother.random(),
       BackofficeMultimediaMovieReleaseYearMother.random(),
-      BackofficeMultimediaMovieSynopsisMother.random()
+      BackofficeMultimediaMovieSynopsisMother.random(),
+      BackofficeMultimediaVideoIdMother.random()
     )
   }
 
@@ -59,7 +64,8 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       id: BackofficeMultimediaMovieIdMother.random().value,
       title: BackofficeMultimediaMovieTitleMother.invalid(),
       releaseYear: BackofficeMultimediaMovieReleaseYearMother.random().value,
-      synopsis: BackofficeMultimediaMovieSynopsisMother.random().value
+      synopsis: BackofficeMultimediaMovieSynopsisMother.random().value,
+      videoId: BackofficeMultimediaVideoIdMother.random().value
     }
   }
 
@@ -73,7 +79,8 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       id: BackofficeMultimediaMovieIdMother.random().value,
       title: BackofficeMultimediaMovieTitleMother.random().value,
       releaseYear: BackofficeMultimediaMovieReleaseYearMother.invalid(),
-      synopsis: BackofficeMultimediaMovieSynopsisMother.random().value
+      synopsis: BackofficeMultimediaMovieSynopsisMother.random().value,
+      videoId: BackofficeMultimediaVideoIdMother.random().value
     }
   }
 }

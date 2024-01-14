@@ -8,15 +8,24 @@ import { BackofficeMultimediaMovieIdMother } from './BackofficeMultimediaMovieId
 import { BackofficeMultimediaMovieTitleMother } from './BackofficeMultimediaMovieTitleMother'
 import { BackofficeMultimediaMovieReleaseYearMother } from './BackofficeMultimediaMovieReleaseYearMother'
 import { BackofficeMultimediaMovieSynopsisMother } from './BackofficeMultimediaMovieSynopsisMother'
+import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
+import { BackofficeMultimediaVideoIdMother } from '../../Shared/domain/BackofficeMultimediaVideoIdMother'
 
 export class BackofficeMultimediaMovieMother {
   public static create(
     id: BackofficeMultimediaMovieId,
     title: BackofficeMultimediaMovieTitle,
     releaseYear: BackofficeMultimediaMovieReleaseYear,
-    synopsis: BackofficeMultimediaMovieSynopsis
+    synopsis: BackofficeMultimediaMovieSynopsis,
+    videoId: BackofficeMultimediaVideoId
   ): BackofficeMultimediaMovie {
-    return new BackofficeMultimediaMovie(id, title, releaseYear, synopsis)
+    return new BackofficeMultimediaMovie(
+      id,
+      title,
+      releaseYear,
+      synopsis,
+      videoId
+    )
   }
 
   public static from(
@@ -26,7 +35,8 @@ export class BackofficeMultimediaMovieMother {
       new BackofficeMultimediaMovieId(command.id),
       new BackofficeMultimediaMovieTitle(command.title),
       new BackofficeMultimediaMovieReleaseYear(command.releaseYear),
-      new BackofficeMultimediaMovieSynopsis(command.synopsis)
+      new BackofficeMultimediaMovieSynopsis(command.synopsis),
+      new BackofficeMultimediaVideoId(command.videoId)
     )
   }
 
@@ -35,7 +45,8 @@ export class BackofficeMultimediaMovieMother {
       BackofficeMultimediaMovieIdMother.random(),
       BackofficeMultimediaMovieTitleMother.random(),
       BackofficeMultimediaMovieReleaseYearMother.random(),
-      BackofficeMultimediaMovieSynopsisMother.random()
+      BackofficeMultimediaMovieSynopsisMother.random(),
+      BackofficeMultimediaVideoIdMother.random()
     )
   }
 }

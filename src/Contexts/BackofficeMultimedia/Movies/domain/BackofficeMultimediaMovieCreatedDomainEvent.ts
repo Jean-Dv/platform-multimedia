@@ -4,23 +4,26 @@ interface CreateBackofficeMultimediaMovieDomainEventAttributes {
   readonly title: string
   readonly releaseYear: number
   readonly synopsis: string
+  readonly videoId: string
 }
 
 /**
  * This class is used to represent the domain which is emitted when a movie is created.
  */
 export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
-  public static readonly EVENT_NAME = 'backofficeMultimedia.movie.created'
+  public static readonly EVENT_NAME = 'backoffice.multimedia.movie.created'
 
   public readonly title: string
   public readonly releaseYear: number
   public readonly synopsis: string
+  public readonly videoId: string
 
   constructor({
     aggregateId,
     title,
     releaseYear,
     synopsis,
+    videoId,
     eventId,
     occurredOn
   }: {
@@ -28,6 +31,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
     title: string
     releaseYear: number
     synopsis: string
+    videoId: string
     eventId?: string
     occurredOn?: Date
   }) {
@@ -40,6 +44,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
     this.title = title
     this.releaseYear = releaseYear
     this.synopsis = synopsis
+    this.videoId = videoId
   }
 
   /**
@@ -60,6 +65,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
       title: params.attributes.title,
       releaseYear: params.attributes.releaseYear,
       synopsis: params.attributes.synopsis,
+      videoId: params.attributes.videoId,
       eventId: params.eventId,
       occurredOn: params.occurredOn
     })
@@ -74,7 +80,8 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
     return {
       title: this.title,
       releaseYear: this.releaseYear,
-      synopsis: this.synopsis
+      synopsis: this.synopsis,
+      videoId: this.videoId
     }
   }
 }

@@ -12,6 +12,7 @@ type MoviePutRequest = Request & {
     title: string
     releaseYear: string
     synopsis: string
+    videoId: string
   }
 }
 
@@ -20,12 +21,13 @@ export class MoviePutController implements Controller {
 
   public async run(req: MoviePutRequest, res: Response): Promise<void> {
     try {
-      const { id, title, releaseYear, synopsis } = req.body
+      const { id, title, releaseYear, synopsis, videoId } = req.body
       const createMovieCommand = new CreateBackofficeMultimediaMovieCommand({
         id,
         title,
         releaseYear,
-        synopsis
+        synopsis,
+        videoId
       })
       await this.commandBus.dispatch(createMovieCommand)
       res.status(httpStatus.CREATED).json({

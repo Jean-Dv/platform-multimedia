@@ -1,4 +1,4 @@
-import { UuidMother } from './../../../Shared/domain/UuidMother'
+import { UuidMother } from '../../../Shared/domain/UuidMother'
 import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 
 /**
