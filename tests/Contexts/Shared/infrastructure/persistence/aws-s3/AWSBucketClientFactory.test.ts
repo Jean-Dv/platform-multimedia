@@ -9,8 +9,9 @@ describe('AWSBucketClientFactory', () => {
     client = await factory.createClient('test', {
       bucketName: 'test',
       region: 'us-west-1',
-      accessKeyId: '123',
-      secretAccessKey: '123'
+      accessKeyId: 'test',
+      secretAccessKey: 'test',
+      endpoint: 'http://localhost:4566'
     })
   })
 
@@ -26,8 +27,9 @@ describe('AWSBucketClientFactory', () => {
     const newClient = await factory.createClient('test2', {
       bucketName: 'tes2',
       region: 'us-west-1',
-      accessKeyId: '123',
-      secretAccessKey: '123'
+      accessKeyId: 'test',
+      secretAccessKey: 'test',
+      endpoint: 'http://localhost:4566'
     })
     expect(newClient).toBeInstanceOf(S3Client)
     expect(newClient).not.toBe(client)
@@ -38,8 +40,9 @@ describe('AWSBucketClientFactory', () => {
     const newClient = await factory.createClient('test', {
       bucketName: 'test',
       region: 'us-west-1',
-      accessKeyId: '123',
-      secretAccessKey: '123'
+      accessKeyId: 'test',
+      secretAccessKey: 'test',
+      endpoint: 'http://localhost:4566'
     })
     expect(newClient).toBeInstanceOf(S3Client)
     expect(newClient).toBe(client)

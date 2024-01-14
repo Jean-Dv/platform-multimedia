@@ -53,7 +53,9 @@ export class AWSBucketClientFactory {
       credentials: {
         accessKeyId: config.accessKeyId,
         secretAccessKey: config.secretAccessKey
-      }
+      },
+      endpoint: config.endpoint,
+      forcePathStyle: true
     })
     return client
   }

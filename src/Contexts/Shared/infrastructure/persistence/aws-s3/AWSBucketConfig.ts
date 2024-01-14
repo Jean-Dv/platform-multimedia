@@ -8,6 +8,7 @@
  * @property region - The region of the AWS S3 bucket.
  * @property accessKeyId - The access key ID for the AWS S3 bucket.
  * @property secretAccessKey - The secret access key for the AWS S3 bucket.
+ * @property endpoint - The endpoint for the AWS S3 bucket.
  */
 
 interface AWSBucketConfig {
@@ -15,6 +16,7 @@ interface AWSBucketConfig {
   region: string
   accessKeyId: string
   secretAccessKey: string
+  endpoint: string
 }
 
 export default AWSBucketConfig

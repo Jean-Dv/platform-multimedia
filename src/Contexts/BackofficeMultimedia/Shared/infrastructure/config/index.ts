@@ -84,6 +84,40 @@ const backofficeMultimediaConfig = convict({
     format: String,
     env: 'PORT',
     default: '8080'
+  },
+  aws: {
+    s3: {
+      bucketName: {
+        doc: 'AWS S3 bucket name',
+        format: String,
+        env: 'AWS_S3_BUCKET_NAME',
+        default: 'backoffice-multimedia'
+      },
+      accessKeyId: {
+        doc: 'AWS S3 access key id',
+        format: String,
+        env: 'AWS_S3_ACCESS_KEY_ID',
+        default: '123'
+      },
+      secretAccessKey: {
+        doc: 'AWS S3 secret access key',
+        format: String,
+        env: 'AWS_S3_SECRET_ACCESS_KEY',
+        default: '123'
+      },
+      region: {
+        doc: 'AWS S3 region',
+        format: String,
+        env: 'AWS_S3_REGION',
+        default: 'eu-west-1'
+      },
+      endpoint: {
+        doc: 'AWS S3 endpoint',
+        format: String,
+        env: 'AWS_S3_ENDPOINT',
+        default: 'http://localhost:4566'
+      }
+    }
   }
 })
 

@@ -33,14 +33,18 @@ export abstract class AWSS3Repository<T extends BackofficeMultimediaVideo> {
    * @param aggregateRoot - The aggregate root to persist.
    */
   protected async persist(id: string, aggregateRoot: T): Promise<void> {
-    const client = await this.client()
-    const stream = fs.createReadStream(aggregateRoot.path.value)
-    const uploadParams = {
-      Bucket: this.bucketName(),
-      Key: id,
-      Body: stream
+    try {
+      const client = await this.client()
+      const stream = fs.createReadStream(aggregateRoot.path.value)
+      const uploadParams = {
+        Bucket: this.bucketName(),
+        Key: id,
+        Body: stream
+      }
+      const command = new PutObjectCommand(uploadParams)
+      await client.send(command)
+    } catch (error) {
+      console.log(error)
     }
-    const command = new PutObjectCommand(uploadParams)
-    await client.send(command)
   }
 }
