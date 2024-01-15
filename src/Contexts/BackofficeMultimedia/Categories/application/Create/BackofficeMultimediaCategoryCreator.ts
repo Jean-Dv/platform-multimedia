@@ -1,6 +1,6 @@
 import { type EventBus } from '@Shared/domain/EventBus'
 import { type BackofficeMultimediaCategoryRepository } from '../../domain/BackofficeMultimediaCategoryRepository'
-import { type BackofficeMultimediaCategoryId } from '../../domain/BackofficeMultimediaCategoryId'
+import { type BackofficeMultimediaCategoryId } from '../../../Shared/domain/BackofficeMultimediaCategoryId'
 import { type BackofficeMultimediaCategoryName } from '../../domain/BackofficeMultimediaCategoryName'
 import { BackofficeMultimediaCategory } from '../../domain/BackofficeMultimediaCategory'
 

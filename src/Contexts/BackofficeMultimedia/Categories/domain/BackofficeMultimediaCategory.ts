@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
-import { BackofficeMultimediaCategoryId } from './BackofficeMultimediaCategoryId'
+import { BackofficeMultimediaCategoryId } from '../../Shared/domain/BackofficeMultimediaCategoryId'
 import { BackofficeMultimediaCategoryName } from './BackofficeMultimediaCategoryName'
 import { BackofficeMultimediaCategoryCreatedDomainEvent } from './BackofficeMultimediaCategoryCreatedDomainEvent'
 

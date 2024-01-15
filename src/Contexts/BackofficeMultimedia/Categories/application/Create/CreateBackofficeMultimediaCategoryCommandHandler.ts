@@ -2,7 +2,7 @@ import { type CommandHandler } from '@Shared/domain/CommandHandler'
 import { CreateBackofficeMultimediaCategoryCommand } from './CreateBackofficeMultimediaCategoryCommand'
 import { type BackofficeMultimediaCategoryCreator } from './BackofficeMultimediaCategoryCreator'
 import { type Command } from '@Shared/domain/Command'
-import { BackofficeMultimediaCategoryId } from '../../domain/BackofficeMultimediaCategoryId'
+import { BackofficeMultimediaCategoryId } from '../../../Shared/domain/BackofficeMultimediaCategoryId'
 import { BackofficeMultimediaCategoryName } from '../../domain/BackofficeMultimediaCategoryName'
 
 /**

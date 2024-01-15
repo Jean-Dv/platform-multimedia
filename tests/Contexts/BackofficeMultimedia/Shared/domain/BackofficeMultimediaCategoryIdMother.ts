@@ -1,4 +1,4 @@
-import { BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Categories/domain/BackofficeMultimediaCategoryId'
+import { BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
 import { UuidMother } from '../../../Shared/domain/UuidMother'
 
 /**

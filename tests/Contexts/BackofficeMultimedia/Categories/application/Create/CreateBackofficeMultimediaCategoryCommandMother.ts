@@ -1,7 +1,7 @@
 import { type CreateBackofficeMultimediaCategoryCommand } from '@BackofficeMultimedia/Categories/application/Create/CreateBackofficeMultimediaCategoryCommand'
-import { type BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Categories/domain/BackofficeMultimediaCategoryId'
+import { type BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
 import { type BackofficeMultimediaCategoryName } from '@BackofficeMultimedia/Categories/domain/BackofficeMultimediaCategoryName'
-import { BackofficeMultimediaCategoryIdMother } from '../../domain/BackofficeMultimediaCategoryIdMother'
+import { BackofficeMultimediaCategoryIdMother } from '../../../Shared/domain/BackofficeMultimediaCategoryIdMother'
 import { BackofficeMultimediaCategoryNameMother } from '../../domain/BackofficeMultimediaCategoryNameMother'
 
 /**
