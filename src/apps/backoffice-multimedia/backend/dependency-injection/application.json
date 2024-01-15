@@ -8,6 +8,9 @@
     },
     {
       "resource": "./Videos/application.json"
+    },
+    {
+      "resource": "./Movies/application.json"
     }
   ]
 }
