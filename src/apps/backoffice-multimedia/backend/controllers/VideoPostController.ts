@@ -7,7 +7,9 @@ import httpStatus from 'http-status'
 import { NotFound } from '@Shared/domain/NotFound'
 
 type VideoPostRequest = Request & {
-  id?: string
+  body: {
+    id: string
+  }
   file?: {
     fieldname: string
     originalname: string
@@ -28,11 +30,11 @@ export class VideoPostController implements Controller {
       if (req.file === undefined) {
         throw new InvalidArgumentError('Video file is required')
       }
-      if (req.id === undefined) {
+      if (req.body.id === undefined) {
         throw new InvalidArgumentError('Video id is required')
       }
       const createVideoCommand = new CreateBackofficeMultimediaVideoCommand({
-        id: req.id,
+        id: req.body.id,
         path: req.file.path
       })
       await this.commandBus.dispatch(createVideoCommand)
