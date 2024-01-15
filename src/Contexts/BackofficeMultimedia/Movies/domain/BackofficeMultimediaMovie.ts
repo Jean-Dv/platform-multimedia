@@ -5,6 +5,7 @@ import { BackofficeMultimediaMovieReleaseYear } from './BackofficeMultimediaMovi
 import { BackofficeMultimediaMovieSynopsis } from './BackofficeMultimediaMovieSynopsis'
 import { BackofficeMultimediaMovieCreatedDomainEvent } from './BackofficeMultimediaMovieCreatedDomainEvent'
 import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
+import { BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
 
 /**
  * BackofficeMultimediaMovie is an aggregate root representing a movie in the backoffice.
@@ -14,6 +15,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
   public readonly title: BackofficeMultimediaMovieTitle
   public readonly releaseYear: BackofficeMultimediaMovieReleaseYear
   public readonly synopsis: BackofficeMultimediaMovieSynopsis
+  public readonly categories: BackofficeMultimediaCategoryId[] = []
   public readonly videoId: BackofficeMultimediaVideoId
 
   constructor(
@@ -21,6 +23,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
     title: BackofficeMultimediaMovieTitle,
     releaseYear: BackofficeMultimediaMovieReleaseYear,
     synopsis: BackofficeMultimediaMovieSynopsis,
+    categories: BackofficeMultimediaCategoryId[],
     videoId: BackofficeMultimediaVideoId
   ) {
     super()
@@ -28,6 +31,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
     this.title = title
     this.releaseYear = releaseYear
     this.synopsis = synopsis
+    this.categories = categories
     this.videoId = videoId
   }
 
@@ -36,6 +40,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
     title: BackofficeMultimediaMovieTitle,
     releaseYear: BackofficeMultimediaMovieReleaseYear,
     synopsis: BackofficeMultimediaMovieSynopsis,
+    categories: BackofficeMultimediaCategoryId[],
     videoId: BackofficeMultimediaVideoId
   ): BackofficeMultimediaMovie {
     const movie = new BackofficeMultimediaMovie(
@@ -43,6 +48,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
       title,
       releaseYear,
       synopsis,
+      categories,
       videoId
     )
     movie.record(
@@ -51,6 +57,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
         title: movie.title.value,
         releaseYear: movie.releaseYear.value,
         synopsis: movie.synopsis.value,
+        categories: movie.categories.map((category) => category.value),
         videoId: movie.videoId.value
       })
     )
@@ -68,6 +75,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
     title: string
     releaseYear: number
     synopsis: string
+    categories: string[]
     videoId: string
   }): BackofficeMultimediaMovie {
     return new BackofficeMultimediaMovie(
@@ -75,6 +83,9 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
       new BackofficeMultimediaMovieTitle(plainData.title),
       new BackofficeMultimediaMovieReleaseYear(plainData.releaseYear),
       new BackofficeMultimediaMovieSynopsis(plainData.synopsis),
+      plainData.categories.map(
+        (categoryId) => new BackofficeMultimediaCategoryId(categoryId)
+      ),
       new BackofficeMultimediaVideoId(plainData.videoId)
     )
   }
@@ -89,6 +100,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
     title: string
     releaseYear: number
     synopsis: string
+    categories: string[]
     videoId: string
   } {
     return {
@@ -96,6 +108,7 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
       title: this.title.value,
       releaseYear: this.releaseYear.value,
       synopsis: this.synopsis.value,
+      categories: this.categories.map((category) => category.value),
       videoId: this.videoId.value
     }
   }

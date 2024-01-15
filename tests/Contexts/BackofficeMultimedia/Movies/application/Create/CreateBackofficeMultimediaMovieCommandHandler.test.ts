@@ -21,7 +21,7 @@ beforeEach(() => {
 })
 
 describe('CreateBackofficeMultimediaMovieCommandHandler', () => {
-  it('should create a valid category', async () => {
+  it('should create a valid movie', async () => {
     const command = CreateBackofficeMultimediaMovieCommandMother.random()
     const movie = BackofficeMultimediaMovieMother.from(command)
     const domainEvent =

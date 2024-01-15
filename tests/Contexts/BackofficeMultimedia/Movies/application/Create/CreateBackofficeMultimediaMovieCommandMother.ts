@@ -1,3 +1,4 @@
+import { BackofficeMultimediaCategoryIdMother } from './../../../Shared/domain/BackofficeMultimediaCategoryIdMother'
 import { type CreateBackofficeMultimediaMovieCommand } from '@BackofficeMultimedia/Movies/application/Create/CreateBackofficeMultimediaMovieCommand'
 import { type BackofficeMultimediaMovieId } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieId'
 import { type BackofficeMultimediaMovieReleaseYear } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieReleaseYear'
@@ -9,6 +10,7 @@ import { BackofficeMultimediaMovieReleaseYearMother } from '../../domain/Backoff
 import { BackofficeMultimediaMovieSynopsisMother } from '../../domain/BackofficeMultimediaMovieSynopsisMother'
 import { type BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 import { BackofficeMultimediaVideoIdMother } from '../../../Shared/domain/BackofficeMultimediaVideoIdMother'
+import { type BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
 
 /**
  * Utility class for creating `CreateBackofficeMultimediaMovieCommand` instances for testing.
@@ -28,6 +30,7 @@ export class CreateBackofficeMultimediaMovieCommandMother {
     title: BackofficeMultimediaMovieTitle,
     releaseYear: BackofficeMultimediaMovieReleaseYear,
     synopsis: BackofficeMultimediaMovieSynopsis,
+    categories: BackofficeMultimediaCategoryId[],
     videoId: BackofficeMultimediaVideoId
   ): CreateBackofficeMultimediaMovieCommand {
     return {
@@ -35,6 +38,7 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       title: title.value,
       releaseYear: releaseYear.value,
       synopsis: synopsis.value,
+      categories: categories.map((category) => category.value),
       videoId: videoId.value
     }
   }
@@ -50,6 +54,9 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       BackofficeMultimediaMovieTitleMother.random(),
       BackofficeMultimediaMovieReleaseYearMother.random(),
       BackofficeMultimediaMovieSynopsisMother.random(),
+      Array.from({ length: 3 }, () =>
+        BackofficeMultimediaCategoryIdMother.random()
+      ),
       BackofficeMultimediaVideoIdMother.random()
     )
   }
@@ -65,6 +72,9 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       title: BackofficeMultimediaMovieTitleMother.invalid(),
       releaseYear: BackofficeMultimediaMovieReleaseYearMother.random().value,
       synopsis: BackofficeMultimediaMovieSynopsisMother.random().value,
+      categories: Array.from({ length: 3 }, () =>
+        BackofficeMultimediaCategoryIdMother.random()
+      ).map((category) => category.value),
       videoId: BackofficeMultimediaVideoIdMother.random().value
     }
   }
@@ -80,6 +90,9 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       title: BackofficeMultimediaMovieTitleMother.random().value,
       releaseYear: BackofficeMultimediaMovieReleaseYearMother.invalid(),
       synopsis: BackofficeMultimediaMovieSynopsisMother.random().value,
+      categories: Array.from({ length: 3 }, () =>
+        BackofficeMultimediaCategoryIdMother.random()
+      ).map((category) => category.value),
       videoId: BackofficeMultimediaVideoIdMother.random().value
     }
   }

@@ -16,6 +16,7 @@ export class BackofficeMultimediaMovieCreatedDomainEventMother {
     title,
     releaseYear,
     synopsis,
+    categories,
     videoId,
     eventId,
     occurredOn
@@ -24,6 +25,7 @@ export class BackofficeMultimediaMovieCreatedDomainEventMother {
     title: string
     releaseYear: number
     synopsis: string
+    categories: string[]
     videoId: string
     eventId?: string
     occurredOn?: Date
@@ -33,6 +35,7 @@ export class BackofficeMultimediaMovieCreatedDomainEventMother {
       title,
       releaseYear,
       synopsis,
+      categories,
       videoId,
       eventId,
       occurredOn
@@ -53,6 +56,7 @@ export class BackofficeMultimediaMovieCreatedDomainEventMother {
       title: movie.title.value,
       releaseYear: movie.releaseYear.value,
       synopsis: movie.synopsis.value,
+      categories: movie.categories.map((category) => category.value),
       videoId: movie.videoId.value
     })
   }

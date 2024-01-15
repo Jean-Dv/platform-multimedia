@@ -10,6 +10,8 @@ import { BackofficeMultimediaMovieReleaseYearMother } from './BackofficeMultimed
 import { BackofficeMultimediaMovieSynopsisMother } from './BackofficeMultimediaMovieSynopsisMother'
 import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 import { BackofficeMultimediaVideoIdMother } from '../../Shared/domain/BackofficeMultimediaVideoIdMother'
+import { BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
+import { BackofficeMultimediaCategoryIdMother } from '../../Shared/domain/BackofficeMultimediaCategoryIdMother'
 
 export class BackofficeMultimediaMovieMother {
   public static create(
@@ -17,6 +19,7 @@ export class BackofficeMultimediaMovieMother {
     title: BackofficeMultimediaMovieTitle,
     releaseYear: BackofficeMultimediaMovieReleaseYear,
     synopsis: BackofficeMultimediaMovieSynopsis,
+    categories: BackofficeMultimediaCategoryId[],
     videoId: BackofficeMultimediaVideoId
   ): BackofficeMultimediaMovie {
     return new BackofficeMultimediaMovie(
@@ -24,6 +27,7 @@ export class BackofficeMultimediaMovieMother {
       title,
       releaseYear,
       synopsis,
+      categories,
       videoId
     )
   }
@@ -36,6 +40,9 @@ export class BackofficeMultimediaMovieMother {
       new BackofficeMultimediaMovieTitle(command.title),
       new BackofficeMultimediaMovieReleaseYear(command.releaseYear),
       new BackofficeMultimediaMovieSynopsis(command.synopsis),
+      command.categories.map(
+        (categoryId) => new BackofficeMultimediaCategoryId(categoryId)
+      ),
       new BackofficeMultimediaVideoId(command.videoId)
     )
   }
@@ -46,6 +53,9 @@ export class BackofficeMultimediaMovieMother {
       BackofficeMultimediaMovieTitleMother.random(),
       BackofficeMultimediaMovieReleaseYearMother.random(),
       BackofficeMultimediaMovieSynopsisMother.random(),
+      Array.from({ length: 3 }, () =>
+        BackofficeMultimediaCategoryIdMother.random()
+      ),
       BackofficeMultimediaVideoIdMother.random()
     )
   }

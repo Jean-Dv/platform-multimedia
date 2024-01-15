@@ -4,6 +4,7 @@ interface CreateBackofficeMultimediaMovieDomainEventAttributes {
   readonly title: string
   readonly releaseYear: number
   readonly synopsis: string
+  readonly categories: string[]
   readonly videoId: string
 }
 
@@ -16,6 +17,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
   public readonly title: string
   public readonly releaseYear: number
   public readonly synopsis: string
+  public readonly categories: string[] = []
   public readonly videoId: string
 
   constructor({
@@ -23,6 +25,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
     title,
     releaseYear,
     synopsis,
+    categories,
     videoId,
     eventId,
     occurredOn
@@ -31,6 +34,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
     title: string
     releaseYear: number
     synopsis: string
+    categories: string[]
     videoId: string
     eventId?: string
     occurredOn?: Date
@@ -45,6 +49,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
     this.releaseYear = releaseYear
     this.synopsis = synopsis
     this.videoId = videoId
+    this.categories = categories
   }
 
   /**
@@ -66,6 +71,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
       releaseYear: params.attributes.releaseYear,
       synopsis: params.attributes.synopsis,
       videoId: params.attributes.videoId,
+      categories: params.attributes.categories,
       eventId: params.eventId,
       occurredOn: params.occurredOn
     })
@@ -81,6 +87,7 @@ export class BackofficeMultimediaMovieCreatedDomainEvent extends DomainEvent {
       title: this.title,
       releaseYear: this.releaseYear,
       synopsis: this.synopsis,
+      categories: this.categories,
       videoId: this.videoId
     }
   }

@@ -1,3 +1,4 @@
+import { type BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
 import { BackofficeMultimediaMovie } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovie'
 import { type BackofficeMultimediaMovieId } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieId'
 import { type BackofficeMultimediaMovieReleaseYear } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieReleaseYear'
@@ -27,6 +28,7 @@ export class BackofficeMultimediaMovieCreator {
     title: BackofficeMultimediaMovieTitle
     releaseYear: BackofficeMultimediaMovieReleaseYear
     synopsis: BackofficeMultimediaMovieSynopsis
+    categories: BackofficeMultimediaCategoryId[]
     videoId: BackofficeMultimediaVideoId
   }): Promise<void> {
     const movie = BackofficeMultimediaMovie.create(
@@ -34,6 +36,7 @@ export class BackofficeMultimediaMovieCreator {
       params.title,
       params.releaseYear,
       params.synopsis,
+      params.categories,
       params.videoId
     )
 
