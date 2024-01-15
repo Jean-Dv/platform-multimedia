@@ -9,6 +9,8 @@ function registerPutMovie(router: Router): void {
     body('title').exists().isString(),
     body('releaseYear').exists().isNumeric(),
     body('synopsis').exists().isString(),
+    body('categories').exists().isArray(),
+    body('categories.id').isUUID(),
     body('videoId').exists().isUUID()
   ]
   const controller = container.get(

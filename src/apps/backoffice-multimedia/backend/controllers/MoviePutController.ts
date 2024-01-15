@@ -12,6 +12,9 @@ type MoviePutRequest = Request & {
     title: string
     releaseYear: string
     synopsis: string
+    categories: {
+      id: string
+    }
     videoId: string
   }
 }
@@ -27,6 +30,9 @@ export class MoviePutController implements Controller {
         title,
         releaseYear,
         synopsis,
+        categories: req.body.categories.map(
+          (category: { id: string }) => category.id
+        ),
         videoId
       })
       await this.commandBus.dispatch(createMovieCommand)
