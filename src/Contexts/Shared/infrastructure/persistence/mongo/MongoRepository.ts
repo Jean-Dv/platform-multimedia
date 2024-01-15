@@ -1,7 +1,12 @@
-import { type Document, type Collection, type MongoClient } from 'mongodb'
+import { type Document, type Collection, type MongoClient, UUID } from 'mongodb'
 import { type AggregateRoot } from '../../../domain/AggregateRoot'
 import { MongoCriteriaConverter } from './MongoCriteriaConverter'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
+
+interface UUIDMongoDocument {
+  _id: UUID
+  [key: string]: unknown
+}
 
 /**
  * This class is a base class for mongo repositories.
@@ -36,8 +41,10 @@ export abstract class MongoRepository<T extends AggregateRoot> {
    *
    * @returns {Collection} The mongo collection.
    */
-  protected async collection(): Promise<Collection> {
-    return (await this._client).db().collection(this.collectionName())
+  protected async collection(): Promise<Collection<UUIDMongoDocument>> {
+    return (await this._client)
+      .db()
+      .collection<UUIDMongoDocument>(this.collectionName())
   }
 
   /**
@@ -53,7 +60,15 @@ export abstract class MongoRepository<T extends AggregateRoot> {
       ...aggregateRoot.toPrimitives(),
       createdAt: new Date()
     }
-    await collection.updateOne({ id }, { $set: document }, { upsert: true })
+    await collection.updateOne(
+      {
+        _id: {
+          $eq: new UUID(id)
+        }
+      },
+      { $set: document },
+      { upsert: true }
+    )
   }
 
   protected async searchByCriteria<D extends Document>(
