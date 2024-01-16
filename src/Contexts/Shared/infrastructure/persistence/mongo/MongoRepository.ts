@@ -71,6 +71,12 @@ export abstract class MongoRepository<T extends AggregateRoot> {
     )
   }
 
+  /**
+   * This method search an aggregate root by criteria specific.
+   *
+   * @param criteria - The criteria to search.
+   * @returns A promise that resolves the aggregate root list.
+   */
   protected async searchByCriteria<D extends Document>(
     criteria: Criteria
   ): Promise<D[]> {
