@@ -11,6 +11,7 @@ import { BackofficeMultimediaMovieSynopsisMother } from '../../domain/Backoffice
 import { type BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 import { BackofficeMultimediaVideoIdMother } from '../../../Shared/domain/BackofficeMultimediaVideoIdMother'
 import { type BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
+import { type BackofficeMultimediaCategory } from '@BackofficeMultimedia/Categories/domain/BackofficeMultimediaCategory'
 
 /**
  * Utility class for creating `CreateBackofficeMultimediaMovieCommand` instances for testing.
@@ -48,15 +49,15 @@ export class CreateBackofficeMultimediaMovieCommandMother {
    *
    * @returns A random valid command.
    */
-  public static random(): CreateBackofficeMultimediaMovieCommand {
+  public static random(
+    categories: BackofficeMultimediaCategory[]
+  ): CreateBackofficeMultimediaMovieCommand {
     return this.create(
       BackofficeMultimediaMovieIdMother.random(),
       BackofficeMultimediaMovieTitleMother.random(),
       BackofficeMultimediaMovieReleaseYearMother.random(),
       BackofficeMultimediaMovieSynopsisMother.random(),
-      Array.from({ length: 3 }, () =>
-        BackofficeMultimediaCategoryIdMother.random()
-      ),
+      categories.map((category) => category.id),
       BackofficeMultimediaVideoIdMother.random()
     )
   }
@@ -93,6 +94,22 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       categories: Array.from({ length: 3 }, () =>
         BackofficeMultimediaCategoryIdMother.random()
       ).map((category) => category.value),
+      videoId: BackofficeMultimediaVideoIdMother.random().value
+    }
+  }
+
+  /**
+   * Creates an invalid `CreateBackofficeMultimediaMovieCommand` with an invalid category.
+   *
+   * @returns An invalid command.
+   */
+  public static invalidCategory(): CreateBackofficeMultimediaMovieCommand {
+    return {
+      id: BackofficeMultimediaMovieIdMother.random().value,
+      title: BackofficeMultimediaMovieTitleMother.random().value,
+      releaseYear: BackofficeMultimediaMovieReleaseYearMother.random().value,
+      synopsis: BackofficeMultimediaMovieSynopsisMother.random().value,
+      categories: [BackofficeMultimediaCategoryIdMother.random().value],
       videoId: BackofficeMultimediaVideoIdMother.random().value
     }
   }

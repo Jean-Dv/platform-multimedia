@@ -8,6 +8,7 @@ import { BackofficeMultimediaMovieReleaseYear } from '@BackofficeMultimedia/Movi
 import { BackofficeMultimediaMovieSynopsis } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieSynopsis'
 import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 import { BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
+import { type BackofficeMultimediaCategoryFinder } from '@BackofficeMultimedia/Categories/application/Find/BackofficeMultimediaCategoryFinder'
 
 /**
  * Command handler for creating backoffice multimedia movies.
@@ -15,7 +16,10 @@ import { BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/dom
 export class CreateBackofficeMultimediaMovieCommandHandler
   implements CommandHandler<CreateBackofficeMultimediaMovieCommand>
 {
-  constructor(private readonly creator: BackofficeMultimediaMovieCreator) {}
+  constructor(
+    private readonly creator: BackofficeMultimediaMovieCreator,
+    private readonly finderCategory: BackofficeMultimediaCategoryFinder
+  ) {}
 
   public subscribedTo(): Command {
     return CreateBackofficeMultimediaMovieCommand
@@ -34,6 +38,10 @@ export class CreateBackofficeMultimediaMovieCommandHandler
       (categoryId) => new BackofficeMultimediaCategoryId(categoryId)
     )
     const videoId = new BackofficeMultimediaVideoId(command.videoId)
+
+    // We ensure that the categories exist.
+    await this.ensureCategoryExists(command.categories)
+
     await this.creator.run({
       id,
       title,
@@ -42,5 +50,20 @@ export class CreateBackofficeMultimediaMovieCommandHandler
       categories,
       videoId
     })
+  }
+
+  /**
+   * Ensures that the categories exist.
+   *
+   * @param categories - The categories to be checked.
+   */
+  private async ensureCategoryExists(categories: string[]): Promise<void> {
+    await Promise.all(
+      categories.map(async (categoryId) => {
+        await this.finderCategory.run(
+          new BackofficeMultimediaCategoryId(categoryId)
+        )
+      })
+    )
   }
 }

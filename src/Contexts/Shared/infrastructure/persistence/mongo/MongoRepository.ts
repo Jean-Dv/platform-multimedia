@@ -91,6 +91,18 @@ export abstract class MongoRepository<T extends AggregateRoot> {
   }
 
   /**
+   * This method search an aggregate root by id.
+   *
+   * @param id - The id of the aggregate root.
+   * @returns A promise that resolves the aggregate root.
+   */
+  protected async findById<D extends Document>(id: string): Promise<D | null> {
+    const collection = await this.collection()
+    const document = await collection.findOne<D>({ _id: new UUID(id) })
+    return document
+  }
+
+  /**
    * This method delete soft a aggregate root.
    *
    * @param {string} id The id of the aggregate root.
