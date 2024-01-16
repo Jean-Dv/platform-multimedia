@@ -12,9 +12,9 @@ type MoviePutRequest = Request & {
     title: string
     releaseYear: string
     synopsis: string
-    categories: {
+    categories: Array<{
       id: string
-    }
+    }>
     videoId: string
   }
 }
