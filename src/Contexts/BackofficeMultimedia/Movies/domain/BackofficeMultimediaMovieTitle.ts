@@ -9,7 +9,7 @@ import { BackofficeMultimediaMovieTitleLengthIsExceeded } from './BackofficeMult
 export class BackofficeMultimediaMovieTitle extends StringValueObject {
   constructor(value: string) {
     super(value)
-    this.ensureLengthIsLessThan255Characters(value)
+    this.ensureLengthIsLessThan100Characters(value)
   }
 
   /**
@@ -18,7 +18,7 @@ export class BackofficeMultimediaMovieTitle extends StringValueObject {
    * @param value - The movie title to be validated.
    * @throws Thrown if the length exceeds 100 characters.
    */
-  private ensureLengthIsLessThan255Characters(value: string): void {
+  private ensureLengthIsLessThan100Characters(value: string): void {
     if (value.length > 100) {
       throw new BackofficeMultimediaMovieTitleLengthIsExceeded(
         `The movie title <${value}> has more than 100 characters`
