@@ -56,7 +56,7 @@ export class BackofficeMultimediaSerieMother {
       new BackofficeMultimediaSerieReleaseYear(command.releaseYear),
       new BackofficeMultimediaSerieSynopsis(command.synopsis),
       command.categories.map(
-        (categoryId) => new BackofficeMultimediaCategoryId(categoryId)
+        (category) => new BackofficeMultimediaCategoryId(category.id)
       )
     )
   }

@@ -39,7 +39,9 @@ export class CreateBackofficeMultimediaSerieCommandMother {
       title: title.value,
       releaseYear: releaseYear.value,
       synopsis: synopsis.value,
-      categories: categories.map((category) => category.value)
+      categories: categories.map((category) => {
+        return { id: category.value }
+      })
     }
   }
 
@@ -69,7 +71,9 @@ export class CreateBackofficeMultimediaSerieCommandMother {
       title: BackofficeMultimediaSerieTitleMother.invalid(),
       releaseYear: BackofficeMultimediaSerieReleaseYearMother.random().value,
       synopsis: BackofficeMultimediaSerieSynopsisMother.random().value,
-      categories: this.categories.map((category) => category.id.value)
+      categories: this.categories.map((category) => {
+        return { id: category.id.value }
+      })
     }
   }
 
@@ -84,7 +88,9 @@ export class CreateBackofficeMultimediaSerieCommandMother {
       title: BackofficeMultimediaSerieTitleMother.random().value,
       releaseYear: BackofficeMultimediaSerieReleaseYearMother.invalid(),
       synopsis: BackofficeMultimediaSerieSynopsisMother.random().value,
-      categories: this.categories.map((category) => category.id.value)
+      categories: this.categories.map((category) => {
+        return { id: category.id.value }
+      })
     }
   }
 
@@ -99,7 +105,7 @@ export class CreateBackofficeMultimediaSerieCommandMother {
       title: BackofficeMultimediaSerieTitleMother.random().value,
       releaseYear: BackofficeMultimediaSerieReleaseYearMother.random().value,
       synopsis: BackofficeMultimediaSerieSynopsisMother.random().value,
-      categories: [BackofficeMultimediaCategoryIdMother.random().value]
+      categories: [{ id: BackofficeMultimediaCategoryIdMother.random().value }]
     }
   }
 }

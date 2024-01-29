@@ -34,7 +34,7 @@ export class CreateBackofficeMultimediaSerieCommandHandler
     )
     const synopsis = new BackofficeMultimediaSerieSynopsis(command.synopsis)
     const categories = command.categories.map(
-      (categoryId) => new BackofficeMultimediaCategoryId(categoryId)
+      (category) => new BackofficeMultimediaCategoryId(category.id)
     )
 
     // We ensure that the categories exist.
@@ -54,11 +54,13 @@ export class CreateBackofficeMultimediaSerieCommandHandler
    *
    * @param categories - The categories to be checked.
    */
-  private async ensureCategoryExists(categories: string[]): Promise<void> {
+  private async ensureCategoryExists(
+    categories: Array<{ id: string }>
+  ): Promise<void> {
     await Promise.all(
-      categories.map(async (categoryId) => {
+      categories.map(async (category) => {
         await this.finderCategory.run(
-          new BackofficeMultimediaCategoryId(categoryId)
+          new BackofficeMultimediaCategoryId(category.id)
         )
       })
     )

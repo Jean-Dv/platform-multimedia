@@ -5,7 +5,7 @@ interface Params {
   title: string
   releaseYear: number
   synopsis: string
-  categories: string[]
+  categories: Array<{ id: string }>
   videoId: string
 }
 
@@ -17,7 +17,7 @@ export class CreateBackofficeMultimediaMovieCommand extends Command {
   public readonly title: string
   public readonly releaseYear: number
   public readonly synopsis: string
-  public readonly categories: string[]
+  public readonly categories: Array<{ id: string }>
   public readonly videoId: string
 
   constructor({

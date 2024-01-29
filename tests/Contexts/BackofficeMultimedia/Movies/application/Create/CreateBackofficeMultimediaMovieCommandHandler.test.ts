@@ -38,6 +38,7 @@ beforeEach(() => {
     BackofficeMultimediaCategoryMother.random()
   ]
   repositoryCategory.searchMockReturnValue(categories)
+  CreateBackofficeMultimediaMovieCommandMother.categories = categories
 })
 
 describe('CreateBackofficeMultimediaMovieCommandHandler', () => {

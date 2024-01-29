@@ -17,6 +17,8 @@ import { type BackofficeMultimediaCategory } from '@BackofficeMultimedia/Categor
  * Utility class for creating `CreateBackofficeMultimediaMovieCommand` instances for testing.
  */
 export class CreateBackofficeMultimediaMovieCommandMother {
+  public static categories: BackofficeMultimediaCategory[] = []
+
   /**
    * Creates a valid `CreateBackofficeMultimediaMovieCommand`.
    *
@@ -39,7 +41,11 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       title: title.value,
       releaseYear: releaseYear.value,
       synopsis: synopsis.value,
-      categories: categories.map((category) => category.value),
+      categories: categories.map((category) => {
+        return {
+          id: category.value
+        }
+      }),
       videoId: videoId.value
     }
   }
@@ -73,9 +79,9 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       title: BackofficeMultimediaMovieTitleMother.invalid(),
       releaseYear: BackofficeMultimediaMovieReleaseYearMother.random().value,
       synopsis: BackofficeMultimediaMovieSynopsisMother.random().value,
-      categories: Array.from({ length: 3 }, () =>
-        BackofficeMultimediaCategoryIdMother.random()
-      ).map((category) => category.value),
+      categories: this.categories.map((category) => {
+        return { id: category.id.value }
+      }),
       videoId: BackofficeMultimediaVideoIdMother.random().value
     }
   }
@@ -91,9 +97,9 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       title: BackofficeMultimediaMovieTitleMother.random().value,
       releaseYear: BackofficeMultimediaMovieReleaseYearMother.invalid(),
       synopsis: BackofficeMultimediaMovieSynopsisMother.random().value,
-      categories: Array.from({ length: 3 }, () =>
-        BackofficeMultimediaCategoryIdMother.random()
-      ).map((category) => category.value),
+      categories: this.categories.map((category) => {
+        return { id: category.id.value }
+      }),
       videoId: BackofficeMultimediaVideoIdMother.random().value
     }
   }
@@ -109,7 +115,7 @@ export class CreateBackofficeMultimediaMovieCommandMother {
       title: BackofficeMultimediaMovieTitleMother.random().value,
       releaseYear: BackofficeMultimediaMovieReleaseYearMother.random().value,
       synopsis: BackofficeMultimediaMovieSynopsisMother.random().value,
-      categories: [BackofficeMultimediaCategoryIdMother.random().value],
+      categories: [{ id: BackofficeMultimediaCategoryIdMother.random().value }],
       videoId: BackofficeMultimediaVideoIdMother.random().value
     }
   }
