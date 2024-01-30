@@ -11,6 +11,18 @@
     },
     {
       "resource": "./Movies/application.json"
+    },
+    {
+      "resource": "./Categories/application.json"
+    },
+    {
+      "resource": "./Series/application.json"
+    },
+    {
+      "resource": "./Seasons/application.json"
+    },
+    {
+      "resource": "./Chapters/application.json"
     }
   ]
 }
