@@ -2,9 +2,10 @@ import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoR
 import { BackofficeMultimediaCategory } from '../../domain/BackofficeMultimediaCategory'
 import { type BackofficeMultimediaCategoryRepository } from '../../domain/BackofficeMultimediaCategoryRepository'
 import { type BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
+import { type UUID } from 'mongodb'
 
 interface BackofficeMultimediaCategoryMongoDocument {
-  _id: string
+  _id: UUID
   name: string
 }
 
@@ -26,7 +27,7 @@ export class MongoBackofficeMultimediaCategoryRepository
       await this.findById<BackofficeMultimediaCategoryMongoDocument>(id.value)
     return category !== null
       ? BackofficeMultimediaCategory.fromPrimitives({
-          id: category._id,
+          id: category._id.toString(),
           name: category.name
         })
       : null

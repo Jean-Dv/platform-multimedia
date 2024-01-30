@@ -2,9 +2,10 @@ import { BackofficeMultimediaSeason } from '@BackofficeMultimedia/Seasons/domain
 import { type BackofficeMultimediaSeasonRepository } from '@BackofficeMultimedia/Seasons/domain/BackofficeMultimediaSeasonRepository'
 import { type BackofficeMultimediaSeasonId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaSeasonId'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
+import { type UUID } from 'mongodb'
 
 interface BackofficeMultimediaSeasonMongoDocument {
-  _id: string
+  _id: UUID
   title: string
   releaseYear: number
   serie: string
@@ -26,7 +27,7 @@ export class MongoBackofficeMultimediaSeasonRepository
     )
     return season !== null
       ? BackofficeMultimediaSeason.fromPrimitives({
-          id: season._id,
+          id: season._id.toString(),
           title: season.title,
           releaseYear: season.releaseYear,
           serie: season.serie

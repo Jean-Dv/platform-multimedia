@@ -2,9 +2,10 @@ import { BackofficeMultimediaSerie } from '@BackofficeMultimedia/Series/domain/B
 import { type BackofficeMultimediaSerieRepository } from '@BackofficeMultimedia/Series/domain/BackofficeMultimediaSerieRepository'
 import { type BackofficeMultimediaSerieId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaSerieId'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
+import { type UUID } from 'mongodb'
 
 interface BackofficeMultimediaSerieMongoDocument {
-  _id: string
+  _id: UUID
   title: string
   releaseYear: number
   synopsis: string
@@ -30,7 +31,7 @@ export class MongoBackofficeMultimediaSerieRepository
     )
     return serie !== null
       ? BackofficeMultimediaSerie.fromPrimitives({
-          id: serie._id,
+          id: serie._id.toString(),
           title: serie.title,
           releaseYear: serie.releaseYear,
           synopsis: serie.synopsis,
