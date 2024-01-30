@@ -16,7 +16,8 @@
     "BackofficeMultimedia.Movies.CreateMovieCommandHandler": {
       "class": "../../../../../Contexts/BackofficeMultimedia/Movies/application/Create/CreateBackofficeMultimediaMovieCommandHandler",
       "arguments": [
-        "@BackofficeMultimedia.Movies.application.MovieCreator"
+        "@BackofficeMultimedia.Movies.application.MovieCreator",
+        "@BackofficeMultimedia.Categories.application.CategoryFinder"
       ],
       "tags": [
         {

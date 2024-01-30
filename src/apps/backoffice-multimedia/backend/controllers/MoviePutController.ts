@@ -24,15 +24,13 @@ export class MoviePutController implements Controller {
 
   public async run(req: MoviePutRequest, res: Response): Promise<void> {
     try {
-      const { id, title, releaseYear, synopsis, videoId } = req.body
+      const { id, title, releaseYear, synopsis, categories, videoId } = req.body
       const createMovieCommand = new CreateBackofficeMultimediaMovieCommand({
         id,
         title,
         releaseYear,
         synopsis,
-        categories: req.body.categories.map(
-          (category: { id: string }) => category.id
-        ),
+        categories,
         videoId
       })
       await this.commandBus.dispatch(createMovieCommand)
