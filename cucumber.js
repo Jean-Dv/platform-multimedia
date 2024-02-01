@@ -12,7 +12,14 @@ const multimediaBackend = [
   '--require tests/apps/multimedia/backend/features/step_definitions/*.steps.ts'
 ].join(' ')
 
+const backofficeMultimediaBackend = [
+  ...common,
+  'tests/apps/backoffice-multimedia/backend/features/**/*.feature',
+  '--require tests/apps/backoffice-multimedia/backend/features/step_definitions/*.steps.ts'
+].join(' ')
+
 module.exports = {
   authBackend,
-  multimediaBackend
+  multimediaBackend,
+  backofficeMultimediaBackend
 }
