@@ -3,18 +3,12 @@
     "Multimedia.Categories.application.CategoryCreator": {
       "class": "../../../../../Contexts/Multimedia/Categories/application/Create/CategoryCreator",
       "arguments": [
-        "@Multimedia.Categories.domain.CategoryRepository",
-        "@Multimedia.Shared.domain.EventBus"
+        "@Multimedia.Categories.domain.CategoryRepository"
       ]
     },
     "Multimedia.Categories.domain.CategoryRepository": {
       "class": "../../../../../Contexts/Multimedia/Categories/infrastructure/persistence/MongoCategoryRepository",
       "arguments": ["@Multimedia.Shared.ConnectionManager"]
-    },
-    "Multimedia.Categories.CreateCategoryCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Categories/application/Create/CreateCategoryCommandHandler",
-      "arguments": ["@Multimedia.Categories.application.CategoryCreator"],
-      "tags": [{ "name": "commandHandler" }]
     },
     "Multimedia.Categories.application.CategoryDeletor": {
       "class": "../../../../../Contexts/Multimedia/Categories/application/Delete/CategoryDeletor",
@@ -27,6 +21,20 @@
       "class": "../../../../../Contexts/Multimedia/Categories/application/Delete/DeleteCategoryCommandHandler",
       "arguments": ["@Multimedia.Categories.application.CategoryDeletor"],
       "tags": [{ "name": "commandHandler" }]
+    },
+    "Multimedia.Categories.CreateCategoryOnBackofficeMultimediaCategoryCreated": {
+      "class": "../../../../../Contexts/Multimedia/Categories/application/Create/CreateCategoryOnBackofficeMultimediaCategoryCreated",
+      "arguments": ["@Multimedia.Categories.application.CategoryCreator"],
+      "tags": [{ "name": "domainEventSubscriber" }]
+    },
+    "Multimedia.Categories.application.CategoriesByCriteriaSearcher": {
+      "class": "../../../../../Contexts/Multimedia/Categories/application/SearchByCriteria/CategoriesByCriteriaSearcher",
+      "arguments": ["@Multimedia.Categories.domain.CategoryRepository"]
+    },
+    "Multimedia.Categories.SearchCategoriesByCriteriaQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Categories/application/SearchByCriteria/SearchCategoriesByCriteriaQueryHandler",
+      "arguments": ["@Multimedia.Categories.application.CategoriesByCriteriaSearcher"],
+      "tags": [{ "name": "queryHandler" }]
     }
   }
 }

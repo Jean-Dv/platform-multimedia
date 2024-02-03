@@ -2,12 +2,14 @@ import { type Category } from '@Multimedia/Categories/domain/Category'
 import { type CategoryId } from '@Multimedia/Categories/domain/CategoryId'
 import { type CategoryRepository } from '@Multimedia/Categories/domain/CategoryRepository'
 import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { type Criteria } from '@Shared/domain/criteria/Criteria'
 
 export class CategoryRepositoryMock implements CategoryRepository {
   private readonly mockSave: jest.Mock
   private readonly searchMock: jest.Mock
   private readonly deleteMock: jest.Mock
   private readonly searchByNameMock: jest.Mock
+  private readonly matchingMock: jest.Mock
   private readonly categories: Category[] = []
 
   constructor() {
@@ -15,6 +17,7 @@ export class CategoryRepositoryMock implements CategoryRepository {
     this.searchMock = jest.fn()
     this.deleteMock = jest.fn()
     this.searchByNameMock = jest.fn()
+    this.matchingMock = jest.fn()
   }
 
   public async save(category: Category): Promise<void> {
@@ -40,6 +43,11 @@ export class CategoryRepositoryMock implements CategoryRepository {
     )
   }
 
+  public async matching(criteria: Criteria): Promise<Category[]> {
+    this.matchingMock(criteria)
+    return this.categories
+  }
+
   public assertSaveHaveBeenCalledWith(category: Category): void {
     expect(this.mockSave).toHaveBeenCalledWith(category)
   }
@@ -56,6 +64,10 @@ export class CategoryRepositoryMock implements CategoryRepository {
     expect(this.searchByNameMock).toHaveBeenCalledWith(name)
   }
 
+  public assertMatchingHaveBeenCalled(): void {
+    expect(this.matchingMock).toHaveBeenCalled()
+  }
+
   public searchMockReturnValue(category: Category): void {
     this.categories.push(category)
   }
@@ -65,6 +77,10 @@ export class CategoryRepositoryMock implements CategoryRepository {
   }
 
   public searchMockReturnValues(categories: Category[]): void {
+    this.categories.push(...categories)
+  }
+
+  public matchingMockReturnValue(categories: Category[]): void {
     this.categories.push(...categories)
   }
 }
