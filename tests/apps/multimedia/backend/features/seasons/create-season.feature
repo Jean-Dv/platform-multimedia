@@ -27,9 +27,10 @@ Feature: Create a new season
     """
     {
       "id": "80d1eec1-aa71-4151-bad9-63e704b01f50",
-      "category": "action",
       "title": "The Walking Dead",
-      "releaseDate": "2010-10-31"
+      "releaseYear": 2010,
+      "synopsis": "The Walking Dead is an American post-apocalyptic horror television series for AMC based on the comic book series by Robert Kirkman, Tony Moore.",
+      "categories": ["d4124abc-8de3-4581-9976-d83e9ee98a54"]
     }
     """
     Given I have a valid token

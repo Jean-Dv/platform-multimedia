@@ -1,57 +1,33 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
 import { SerieId } from '../../Shared/domain/Serie/SerieId'
 import { SerieTitle } from './SerieTitle'
-import { SerieReleaseDate } from './SerieReleaseDate'
-import { SerieCreatedDomainEvent } from './SerieCreatedDomainEvent'
-import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { SerieReleaseYear } from './SerieReleaseYear'
+import { CategoryId } from '@Multimedia/Categories/domain/CategoryId'
+import { SerieSynopsis } from './SerieSynopsis'
 
 /**
  * Serie aggregate root entity.
  */
 export class Serie extends AggregateRoot {
   public readonly id: SerieId
-  public readonly category: CategoryName
   public readonly title: SerieTitle
-  public readonly releaseDate: SerieReleaseDate
+  public readonly releaseYear: SerieReleaseYear
+  public readonly synopsis: SerieSynopsis
+  public readonly categories: CategoryId[] = []
 
   constructor(
     id: SerieId,
-    category: CategoryName,
     title: SerieTitle,
-    releaseDate: SerieReleaseDate
+    releaseYear: SerieReleaseYear,
+    synopsis: SerieSynopsis,
+    categories: CategoryId[]
   ) {
     super()
     this.id = id
-    this.category = category
     this.title = title
-    this.releaseDate = releaseDate
-  }
-
-  /**
-   * Creates a new Serie instance with the provided information and
-   * publishes a SerieCreatedDomainEvent.
-   *
-   * @param id - The id of the serie.
-   * @param title - The name of the serie.
-   * @param releaseDate - The release date of the serie.
-   * @returns A new Serie instance.
-   */
-  public static create(
-    id: SerieId,
-    category: CategoryName,
-    title: SerieTitle,
-    releaseDate: SerieReleaseDate
-  ): Serie {
-    const serie = new Serie(id, category, title, releaseDate)
-    serie.record(
-      new SerieCreatedDomainEvent({
-        aggregateId: id.value,
-        category: category.value,
-        title: title.value,
-        releaseDate: releaseDate.value
-      })
-    )
-    return serie
+    this.releaseYear = releaseYear
+    this.synopsis = synopsis
+    this.categories = categories
   }
 
   /**
@@ -60,17 +36,19 @@ export class Serie extends AggregateRoot {
    * @param plainDate - The plain object containing the serie information.
    * @returns A new Serie instance.
    */
-  public static fromPrimitive(plainData: {
+  public static fromPrimitives(plainData: {
     id: string
-    category: string
     title: string
-    releaseDate: Date
+    releaseYear: number
+    synopsis: string
+    categories: string[]
   }): Serie {
     return new Serie(
       new SerieId(plainData.id),
-      new CategoryName(plainData.category),
       new SerieTitle(plainData.title),
-      new SerieReleaseDate(plainData.releaseDate)
+      new SerieReleaseYear(plainData.releaseYear),
+      new SerieSynopsis(plainData.synopsis),
+      plainData.categories.map((category) => new CategoryId(category))
     )
   }
 
@@ -81,15 +59,17 @@ export class Serie extends AggregateRoot {
    */
   public toPrimitives(): {
     id: string
-    category: string
     title: string
-    releaseDate: Date
+    releaseYear: number
+    synopsis: string
+    categories: string[]
   } {
     return {
       id: this.id.value,
-      category: this.category.value,
       title: this.title.value,
-      releaseDate: this.releaseDate.value
+      releaseYear: this.releaseYear.value,
+      synopsis: this.synopsis.value,
+      categories: this.categories.map((category) => category.value)
     }
   }
 }

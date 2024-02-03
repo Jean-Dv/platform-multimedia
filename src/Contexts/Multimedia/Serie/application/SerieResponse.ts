@@ -2,14 +2,16 @@ import { type Serie } from '../domain/Serie'
 
 export class SerieResponse {
   public readonly id: string
-  public readonly category: string
   public readonly title: string
-  public readonly releaseDate: Date
+  public readonly releaseYear: number
+  public readonly synopsis: string
+  public readonly categories: string[]
 
   constructor(serie: Serie) {
     this.id = serie.id.value
-    this.category = serie.category.value
     this.title = serie.title.value
-    this.releaseDate = serie.releaseDate.value
+    this.releaseYear = serie.releaseYear.value
+    this.synopsis = serie.synopsis.value
+    this.categories = serie.categories.map((category) => category.value)
   }
 }

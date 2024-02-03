@@ -40,10 +40,6 @@
       "class": "../../controllers/CategoryDeleteController",
       "arguments": ["@Multimedia.Shared.domain.CommandBus"]
     },
-    "Apps.multimedia.controllers.SeriePutController": {
-      "class": "../../controllers/SeriePutController",
-      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
-    },
     "Apps.multimedia.controllers.SeasonPutController": {
       "class": "../../controllers/SeasonPutController",
       "arguments": ["@Multimedia.Shared.domain.CommandBus"]

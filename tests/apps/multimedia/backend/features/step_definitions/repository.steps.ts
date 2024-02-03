@@ -10,7 +10,7 @@ import { type SerieRepository } from '@Multimedia/Serie/domain/SerieRepository'
 import { Serie } from '@Multimedia/Serie/domain/Serie'
 import { SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
-import { SerieReleaseDate } from '@Multimedia/Serie/domain/SerieReleaseDate'
+import { SerieReleaseYear } from '@Multimedia/Serie/domain/SerieReleaseYear'
 import { type SeasonRepository } from '@Multimedia/Season/domain/SeasonRepository'
 import { type ChapterRepository } from '@Multimedia/Chapter/domain/ChapterRepository'
 import { Season } from '@Multimedia/Season/domain/Season'
@@ -40,6 +40,7 @@ import { MultimediaRoleName } from '@Multimedia/Roles/domain/MultimediaRoleName'
 import { MultimediaUser } from '@Multimedia/Users/domain/MultimediaUser'
 import { type MultimediaUserRepository } from '@Multimedia/Users/domain/MultimediaUserRepository'
 import { MultimediaUserId } from '@Multimedia/Users/domain/MultimediaUserId'
+import { SerieSynopsis } from '@Multimedia/Serie/domain/SerieSynopsis'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
@@ -88,13 +89,14 @@ Given('there is the movie:', async (movie: string) => {
 })
 
 Given('there is the serie:', async (serie: string) => {
-  const { id, category, title, releaseDate } = JSON.parse(serie)
+  const { id, title, releaseYear, synopsis, categories } = JSON.parse(serie)
   await seriesRepository.save(
     new Serie(
       new SerieId(id),
-      new CategoryName(category),
       new SerieTitle(title),
-      new SerieReleaseDate(releaseDate)
+      new SerieReleaseYear(releaseYear),
+      new SerieSynopsis(synopsis),
+      categories.map((category: string) => new CategoryId(category))
     )
   )
 })

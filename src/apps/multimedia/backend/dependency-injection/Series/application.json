@@ -30,10 +30,10 @@
         "@Multimedia.Shared.domain.EventBus"
       ]
     },
-    "Multimedia.Series.CreateSerieCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Serie/application/Create/CreateSerieCommandHandler",
+    "Multimedia.Series.application.CreateSerieOnBackofficeMultimediaSerieCreated": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/Create/CreateSerieOnBackofficeMultimediaSerieCreated",
       "arguments": ["@Multimedia.Series.application.SerieCreator"],
-      "tags": [{ "name": "commandHandler" }]
+      "tags": [{ "name": "domainEventSubscriber" }]
     },
     "Multimedia.Series.application.SerieByIdSearcher": {
       "class": "../../../../../Contexts/Multimedia/Serie/application/SearchById/SerieByIdSearcher",
