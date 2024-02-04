@@ -1,5 +1,4 @@
 import { Movie } from '@Multimedia/Movies/domain/Movie'
-import { MovieDuration } from '@Multimedia/Movies/domain/MovieDuration'
 import { MovieId } from '@Multimedia/Movies/domain/MovieId'
 import { MovieReleaseYear } from '@Multimedia/Movies/domain/MovieReleaseYear'
 import { type MovieRepository } from '@Multimedia/Movies/domain/MovieRepository'
@@ -22,7 +21,6 @@ import { ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
 import { ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
 import { ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseDate'
 import { ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
-import { MovieUrl } from '@Multimedia/Movies/domain/MovieUrl'
 import { ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
 import { type PlaylistRepository } from '@Multimedia/Playlists/domain/PlaylistRepository'
 import { Playlist } from '@Multimedia/Playlists/domain/Playlist'
@@ -41,6 +39,8 @@ import { MultimediaUser } from '@Multimedia/Users/domain/MultimediaUser'
 import { type MultimediaUserRepository } from '@Multimedia/Users/domain/MultimediaUserRepository'
 import { MultimediaUserId } from '@Multimedia/Users/domain/MultimediaUserId'
 import { SerieSynopsis } from '@Multimedia/Serie/domain/SerieSynopsis'
+import { MovieSynopsis } from '@Multimedia/Movies/domain/MovieSynopsis'
+import { VideoId } from '@Multimedia/Shared/domain/Video/VideoId'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
@@ -75,15 +75,16 @@ const usersRepository: MultimediaUserRepository = container.get(
 )
 
 Given('there is the movie:', async (movie: string) => {
-  const { id, category, title, releaseDate, url, duration } = JSON.parse(movie)
+  const { id, title, releaseYear, synopsis, categories, videoId } =
+    JSON.parse(movie)
   await moviesRepository.save(
     new Movie(
       new MovieId(id),
-      new CategoryName(category),
       new MovieTitle(title),
-      new MovieReleaseYear(releaseDate),
-      new MovieUrl(url),
-      new MovieDuration(duration)
+      new MovieReleaseYear(releaseYear),
+      new MovieSynopsis(synopsis),
+      categories.map((category: string) => new CategoryId(category)),
+      new VideoId(videoId)
     )
   )
 })
