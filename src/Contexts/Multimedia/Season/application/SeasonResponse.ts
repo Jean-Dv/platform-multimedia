@@ -10,6 +10,6 @@ export class SeasonResponse {
     this.id = season.id.value
     this.serieId = season.serieId.value
     this.title = season.title.value
-    this.releaseDate = season.releaseDate.value
+    this.releaseDate = season.releaseYear.value
   }
 }

@@ -16,7 +16,7 @@ import { type ChapterRepository } from '@Multimedia/Chapter/domain/ChapterReposi
 import { Season } from '@Multimedia/Season/domain/Season'
 import { SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
 import { SeasonTitle } from '@Multimedia/Season/domain/SeasonTitle'
-import { SeasonReleaseDate } from '@Multimedia/Season/domain/SeasonReleaseDate'
+import { SeasonReleaseYear } from '@Multimedia/Season/domain/SeasonReleaseYear'
 import { Chapter } from '@Multimedia/Chapter/domain/Chapter'
 import { ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
 import { ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
@@ -108,7 +108,7 @@ Given('there is the season:', async (season: string) => {
       new SeasonId(id),
       new SerieId(serieId),
       new SeasonTitle(title),
-      new SeasonReleaseDate(releaseDate)
+      new SeasonReleaseYear(releaseDate)
     )
   )
 })
