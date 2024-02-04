@@ -36,16 +36,16 @@
       "class": "../../controllers/CategoryDeleteController",
       "arguments": ["@Multimedia.Shared.domain.CommandBus"]
     },
-    "Apps.multimedia.controllers.ChapterPutController": {
-      "class": "../../controllers/ChapterPutController",
-      "arguments": ["@Multimedia.Shared.domain.CommandBus"]
-    },
     "Apps.multimedia.controllers.CategoryGetController": {
       "class": "../../controllers/CategoryGetController",
       "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     },
     "Apps.multimedia.controllers.SeasonGetController": {
       "class": "../../controllers/SeasonGetController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.ChaptersGetController": {
+      "class": "../../controllers/ChaptersGetController",
       "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     }
   }

@@ -19,9 +19,7 @@ import { SeasonReleaseYear } from '@Multimedia/Season/domain/SeasonReleaseYear'
 import { Chapter } from '@Multimedia/Chapter/domain/Chapter'
 import { ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
 import { ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
-import { ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseYear'
-import { ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
-import { ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
+import { ChapterReleaseYear } from '@Multimedia/Chapter/domain/ChapterReleaseYear'
 import { type PlaylistRepository } from '@Multimedia/Playlists/domain/PlaylistRepository'
 import { Playlist } from '@Multimedia/Playlists/domain/Playlist'
 import { PlaylistId } from '@Multimedia/Playlists/domain/PlaylistId'
@@ -115,16 +113,14 @@ Given('there is the season:', async (season: string) => {
 })
 
 Given('there is the chapter:', async (chapter: string) => {
-  const { id, seasonId, title, releaseDate, url, duration } =
-    JSON.parse(chapter)
+  const { id, title, releaseYear, season, video } = JSON.parse(chapter)
   await chaptersRepository.save(
     new Chapter(
       new ChapterId(id),
-      new SeasonId(seasonId),
       new ChapterTitle(title),
-      new ChapterReleaseDate(releaseDate),
-      new ChapterUrl(url),
-      new ChapterDuration(duration)
+      new ChapterReleaseYear(releaseYear),
+      new SeasonId(season),
+      new VideoId(video)
     )
   )
 })
