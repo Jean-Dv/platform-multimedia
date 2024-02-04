@@ -4,15 +4,16 @@ import { type MovieRepository } from '../../domain/MovieRepository'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { type MovieId } from '@Multimedia/Movies/domain/MovieId'
 import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { type UUID } from 'mongodb'
 
 interface MovieDocument {
-  _id: string
+  _id: UUID
   id: string
-  category: string
   title: string
-  url: string
-  releaseDate: Date
-  duration: number
+  releaseYear: number
+  synopsis: string
+  categories: string[]
+  videoId: string
 }
 
 /**
@@ -27,12 +28,12 @@ export class MongoMovieRepository
     const documents = await collection.find<MovieDocument>({}, {}).toArray()
     return documents.map((document) =>
       Movie.fromPrimitives({
-        id: document.id,
-        category: document.category,
+        id: document._id.toString(),
         title: document.title,
-        releaseDate: document.releaseDate,
-        url: document.url,
-        duration: document.duration
+        releaseYear: document.releaseYear,
+        synopsis: document.synopsis,
+        categories: document.categories,
+        videoId: document.videoId
       })
     )
   }
@@ -41,12 +42,12 @@ export class MongoMovieRepository
     const documents = await this.searchByCriteria<MovieDocument>(criteria)
     return documents.map((document) =>
       Movie.fromPrimitives({
-        id: document.id,
-        category: document.category,
+        id: document._id.toString(),
         title: document.title,
-        releaseDate: document.releaseDate,
-        url: document.url,
-        duration: document.duration
+        releaseYear: document.releaseYear,
+        synopsis: document.synopsis,
+        categories: document.categories,
+        videoId: document.videoId
       })
     )
   }
@@ -56,12 +57,12 @@ export class MongoMovieRepository
     const document = await collection.findOne<MovieDocument>({ id: id.value })
     return document !== null
       ? Movie.fromPrimitives({
-          id: document.id,
-          category: document.category,
+          id: document._id.toString(),
           title: document.title,
-          releaseDate: document.releaseDate,
-          url: document.url,
-          duration: document.duration
+          releaseYear: document.releaseYear,
+          synopsis: document.synopsis,
+          categories: document.categories,
+          videoId: document.videoId
         })
       : null
   }

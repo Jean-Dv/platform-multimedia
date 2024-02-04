@@ -1,7 +1,7 @@
 import { Movie } from '@Multimedia/Movies/domain/Movie'
 import { MovieDuration } from '@Multimedia/Movies/domain/MovieDuration'
 import { MovieId } from '@Multimedia/Movies/domain/MovieId'
-import { MovieReleaseDate } from '@Multimedia/Movies/domain/MovieReleaseDate'
+import { MovieReleaseYear } from '@Multimedia/Movies/domain/MovieReleaseYear'
 import { type MovieRepository } from '@Multimedia/Movies/domain/MovieRepository'
 import { MovieTitle } from '@Multimedia/Movies/domain/MovieTitle'
 import { Given } from '@cucumber/cucumber'
@@ -81,7 +81,7 @@ Given('there is the movie:', async (movie: string) => {
       new MovieId(id),
       new CategoryName(category),
       new MovieTitle(title),
-      new MovieReleaseDate(releaseDate),
+      new MovieReleaseYear(releaseDate),
       new MovieUrl(url),
       new MovieDuration(duration)
     )

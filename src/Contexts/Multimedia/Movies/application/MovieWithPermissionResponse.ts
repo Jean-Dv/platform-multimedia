@@ -2,11 +2,11 @@ import { type Movie } from '../domain/Movie'
 
 interface MovieResponse {
   id: string
-  category: string
   title: string
-  releaseDate: Date
-  url: string
-  duration: number
+  releaseYear: number
+  synopsis: string
+  categories: string[]
+  videoId: string
 }
 
 export class MovieWithPermissionResponse {
