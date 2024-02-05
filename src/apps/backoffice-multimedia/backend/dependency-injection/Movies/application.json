@@ -1,0 +1,29 @@
+{
+  "services": {
+    "BackofficeMultimedia.Movies.application.MovieCreator": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Movies/application/Create/BackofficeMultimediaMovieCreator",
+      "arguments": [
+        "@BackofficeMultimedia.Movies.domain.MovieRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Movies.domain.MovieRepository": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Movies/infrastructure/persistence/MongoBackofficeMultimediaMovieRepository",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.ConnectionManager"
+      ]
+    },
+    "BackofficeMultimedia.Movies.CreateMovieCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Movies/application/Create/CreateBackofficeMultimediaMovieCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Movies.application.MovieCreator",
+        "@BackofficeMultimedia.Categories.application.CategoryFinder"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}

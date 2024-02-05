@@ -1,49 +1,51 @@
-import { type CreateChapterCommand } from '@Multimedia/Chapter/application/Create/CreateChapterCommand'
 import { Chapter } from '@Multimedia/Chapter/domain/Chapter'
-import { ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
-import { ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
-import { ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseDate'
-import { ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
-import { SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
+import { type ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
+import { type ChapterReleaseYear } from '@Multimedia/Chapter/domain/ChapterReleaseYear'
+import { type ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
+import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
 import { ChapterIdMother } from './ChapterIdMother'
 import { SeasonIdMother } from '../../Shared/domain/SeasonIdMother'
 import { ChapterTitleMother } from './ChapterTitleMother'
-import { ChapterReleaseDateMother } from './ChapterReleaseDateMother'
-import { ChapterDurationMother } from './ChapterDurationMother'
-import { ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
-import { ChapterUrlMother } from './ChapterUrlMother'
+import { ChapterReleaseYearMother } from './ChapterReleaseYearMother'
+import { type VideoId } from '@Multimedia/Shared/domain/Video/VideoId'
+import { VideoIdMother } from '../../Shared/domain/VideoIdMother'
 
+/**
+ * Factory class for Chapter entity.
+ */
 export class ChapterMother {
+  /**
+   * Creates a new instance of the Chapter entity.
+   *
+   * @param id - The id of the chapter.
+   * @param title - The title of the chapter.
+   * @param releaseYear - The release year of the chapter.
+   * @param season - The season of the chapter.
+   * @param video - The video of the chapter.
+   * @returns A new instance of the Chapter entity.
+   */
   public static create(
     id: ChapterId,
-    seasonId: SeasonId,
     title: ChapterTitle,
-    releaseDate: ChapterReleaseDate,
-    url: ChapterUrl,
-    duration: ChapterDuration
+    releaseYear: ChapterReleaseYear,
+    season: SeasonId,
+    video: VideoId
   ): Chapter {
-    return new Chapter(id, seasonId, title, releaseDate, url, duration)
+    return new Chapter(id, title, releaseYear, season, video)
   }
 
-  public static from(command: CreateChapterCommand): Chapter {
-    return this.create(
-      new ChapterId(command.id),
-      new SeasonId(command.seasonId),
-      new ChapterTitle(command.title),
-      new ChapterReleaseDate(new Date(command.releaseDate)),
-      new ChapterUrl(command.url),
-      new ChapterDuration(command.duration)
-    )
-  }
-
+  /**
+   * Creates a random instance of the Chapter entity.
+   *
+   * @returns A random instance of Chapter.
+   */
   public static random(): Chapter {
     return this.create(
       ChapterIdMother.random(),
-      SeasonIdMother.random(),
       ChapterTitleMother.random(),
-      ChapterReleaseDateMother.random(),
-      ChapterUrlMother.random(),
-      ChapterDurationMother.random()
+      ChapterReleaseYearMother.random(),
+      SeasonIdMother.random(),
+      VideoIdMother.random()
     )
   }
 }

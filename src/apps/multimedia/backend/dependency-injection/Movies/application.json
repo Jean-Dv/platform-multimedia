@@ -12,10 +12,10 @@
       "class": "../../../../../Contexts/Multimedia/Movies/infrastructure/persistence/MongoMovieRepository",
       "arguments": ["@Multimedia.Shared.ConnectionManager"]
     },
-    "Multimedia.Movies.CreateMovieCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Movies/application/Create/CreateMovieCommandHandler",
+    "Multimedia.Movies.CreateMovieOnBackofficeMultimediaMovieCreated": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Create/CreateMovieOnBackofficeMultimediaMovieCreated",
       "arguments": ["@Multimedia.Movies.application.MovieCreator"],
-      "tags": [{ "name": "commandHandler" }]
+      "tags": [{ "name": "domainEventSubscriber" }]
     },
     "Multimedia.Movies.application.MoviesByCriteriaSearcher": {
       "class": "../../../../../Contexts/Multimedia/Movies/application/SearchByCriteria/MoviesByCriteriaSearcher",

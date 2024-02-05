@@ -8,7 +8,7 @@ describe('MovieUpdaterCategory', () => {
     const repository = new MovieRepositoryMock()
     const updater = new MovieUpdaterCategory(repository)
 
-    const name = movie.category
+    const name = movie.categories[0]
     await updater.run(name.value)
     repository.assertUpdateMoviesByCategoryHaveBeenCalledWith(name)
   })

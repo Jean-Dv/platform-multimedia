@@ -1,39 +1,51 @@
-import { type CreateSerieCommand } from '@Multimedia/Serie/application/Create/CreateSerieCommand'
 import { Serie } from '@Multimedia/Serie/domain/Serie'
-import { SerieReleaseDate } from '@Multimedia/Serie/domain/SerieReleaseDate'
-import { SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
-import { SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
+import { type SerieReleaseYear } from '@Multimedia/Serie/domain/SerieReleaseYear'
+import { type SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
+import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { SerieIdMother } from '../../Shared/domain/SerieIdMother'
 import { SerieTitleMother } from './SerieTitleMother'
-import { SerieReleaseDateMother } from './SerieReleaseDateMother'
-import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
-import { CategoryNameMother } from '../../Categories/domain/CategoryNameMother'
+import { type SerieSynopsis } from '@Multimedia/Serie/domain/SerieSynopsis'
+import { type CategoryId } from '@Multimedia/Categories/domain/CategoryId'
+import { SerieReleaseYearMother } from './SerieReleaseYearMother'
+import { SerieSynopsisMother } from './SerieSynopsisMother'
+import { CategoryIdMother } from '../../Categories/domain/CategoryIdMother'
 
+/**
+ * Factory class for creating instances of `Serie` for testing.
+ */
 export class SerieMother {
+  /**
+   * Creates a `Serie` with the specified values.
+   *
+   * @param id - The ID to be used for creating the instance.
+   * @param title - The title to be used for creating the instance.
+   * @param releaseYear - The release year to be used for creating the instance.
+   * @param synopsis - The synopsis to be used for creating the instance.
+   * @param categories - The categories to be used for creating the instance.
+   * @returns An instance of `Serie`.
+   */
   public static create(
     id: SerieId,
-    category: CategoryName,
     title: SerieTitle,
-    releaseDate: SerieReleaseDate
+    releaseYear: SerieReleaseYear,
+    synopsis: SerieSynopsis,
+    categories: CategoryId[]
   ): Serie {
-    return new Serie(id, category, title, releaseDate)
+    return new Serie(id, title, releaseYear, synopsis, categories)
   }
 
-  public static from(command: CreateSerieCommand): Serie {
-    return this.create(
-      new SerieId(command.id),
-      new CategoryName(command.category),
-      new SerieTitle(command.title),
-      new SerieReleaseDate(new Date(command.releaseDate))
-    )
-  }
-
+  /**
+   * Creates a random `Serie`.
+   *
+   * @returns A random instance of `Serie`.
+   */
   public static random(): Serie {
     return this.create(
       SerieIdMother.random(),
-      CategoryNameMother.random(),
       SerieTitleMother.random(),
-      SerieReleaseDateMother.random()
+      SerieReleaseYearMother.random(),
+      SerieSynopsisMother.random(),
+      Array.from({ length: 3 }, () => CategoryIdMother.random())
     )
   }
 }

@@ -2,10 +2,10 @@ import { type Chapter } from '../domain/Chapter'
 
 interface ChapterResponse {
   id: string
-  seasonId: string
   title: string
-  duration: number
-  releaseDate: Date
+  releaseYear: number
+  season: string
+  video: string
 }
 
 /**
@@ -16,14 +16,13 @@ export class ChaptersResponse {
 
   constructor(chapters: Chapter[]) {
     this.chapters = chapters.map((chapter) => {
-      const { id, seasonId, title, duration, releaseDate } =
-        chapter.toPrimitives()
+      const { id, title, releaseYear, season, video } = chapter.toPrimitives()
       return {
         id,
-        seasonId,
         title,
-        duration,
-        releaseDate
+        releaseYear,
+        season,
+        video
       }
     })
   }

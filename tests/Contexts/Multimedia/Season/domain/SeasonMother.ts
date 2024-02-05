@@ -1,39 +1,45 @@
-import { type CreateSeasonCommand } from '@Multimedia/Season/application/Create/CreateSeasonCommand'
 import { Season } from '@Multimedia/Season/domain/Season'
-import { SeasonReleaseDate } from '@Multimedia/Season/domain/SeasonReleaseDate'
-import { SeasonTitle } from '@Multimedia/Season/domain/SeasonTitle'
-import { SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
-import { SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
+import { type SeasonReleaseYear } from '@Multimedia/Season/domain/SeasonReleaseYear'
+import { type SeasonTitle } from '@Multimedia/Season/domain/SeasonTitle'
+import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
+import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { SeasonIdMother } from '../../Shared/domain/SeasonIdMother'
 import { SerieIdMother } from '../../Shared/domain/SerieIdMother'
-import { SeasonReleaseDateMother } from './SeasonReleaseDateMother'
+import { SeasonReleaseYearMother } from './SeasonReleaseYearMother'
 import { SeasonTitleMother } from './SeasonTitleMother'
 
+/**
+ * Factory class for creating instances of `Season` for testing.
+ */
 export class SeasonMother {
+  /**
+   * Creates a `Season` with the specified values.
+   *
+   * @param id - The ID to be used for creating the instance.
+   * @param serieId - The serie ID to be used for creating the instance.
+   * @param title - The title to be used for creating the instance.
+   * @param releaseYear - The release year to be used for creating the instance.
+   * @returns An instance of `Season`.
+   */
   public static create(
     id: SeasonId,
     serieId: SerieId,
     title: SeasonTitle,
-    releaseDate: SeasonReleaseDate
+    releaseYear: SeasonReleaseYear
   ): Season {
-    return new Season(id, serieId, title, releaseDate)
+    return new Season(id, serieId, title, releaseYear)
   }
 
-  public static from(command: CreateSeasonCommand): Season {
-    return this.create(
-      new SeasonId(command.id),
-      new SerieId(command.serieId),
-      new SeasonTitle(command.title),
-      new SeasonReleaseDate(new Date(command.releaseDate))
-    )
-  }
-
+  /**
+   * Creates a random `Season`.
+   * @returns An random instance of `Season`.
+   */
   public static random(): Season {
     return this.create(
       SeasonIdMother.random(),
       SerieIdMother.random(),
       SeasonTitleMother.random(),
-      SeasonReleaseDateMother.random()
+      SeasonReleaseYearMother.random()
     )
   }
 }

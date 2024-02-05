@@ -1,21 +1,8 @@
-import { type EventBus } from '@Shared/domain/EventBus'
 import { type ChapterRepository } from '../../domain/ChapterRepository'
-import { type ChapterId } from '../../domain/ChapterId'
-import { type ChapterTitle } from '../../domain/ChapterTitle'
-import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
-import { type ChapterReleaseDate } from '../../domain/ChapterReleaseDate'
-import { type ChapterDuration } from '../../domain/ChapterDuration'
 import { Chapter } from '../../domain/Chapter'
-import { type ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
-import { type QueryBus } from '@Shared/domain/QueryBus'
-import { SearchSeasonByIdQuery } from '@Multimedia/Season/application/SearchById/SearchSeasonByIdQuery'
 
 export class ChapterCreator {
-  constructor(
-    private readonly repository: ChapterRepository,
-    private readonly queryBus: QueryBus,
-    private readonly eventBus: EventBus
-  ) {}
+  constructor(private readonly repository: ChapterRepository) {}
 
   /**
    * Creates a new chapter with the provided information, saves it to the repository,
@@ -24,26 +11,21 @@ export class ChapterCreator {
    * @param params - The parameters needed to create the chapter.
    * @returns A new Chapter instance.
    */
-  public async run(params: {
-    id: ChapterId
-    seasonId: SeasonId
-    title: ChapterTitle
-    releaseDate: ChapterReleaseDate
-    url: ChapterUrl
-    duration: ChapterDuration
-  }): Promise<void> {
-    const query = new SearchSeasonByIdQuery(params.seasonId.value)
-    await this.queryBus.ask(query) // Check if season exists
+  public async run(
+    id: string,
+    title: string,
+    releaseYear: number,
+    season: string,
+    video: string
+  ): Promise<void> {
+    const chapter = Chapter.fromPrimitives({
+      id,
+      title,
+      releaseYear,
+      season,
+      video
+    })
 
-    const chapter = Chapter.create(
-      params.id,
-      params.seasonId,
-      params.title,
-      params.releaseDate,
-      params.url,
-      params.duration
-    )
     await this.repository.save(chapter)
-    await this.eventBus.publish(chapter.pullDomainEvents())
   }
 }

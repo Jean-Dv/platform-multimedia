@@ -1,0 +1,35 @@
+{
+  "services": {
+    "BackofficeMultimedia.Series.application.SerieCreator": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Series/application/Create/BackofficeMultimediaSerieCreator",
+      "arguments": [
+        "@BackofficeMultimedia.Series.domain.SerieRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Series.application.SerieFinder": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Series/application/Find/BackofficeMultimediaSerieFinder",
+      "arguments": [
+        "@BackofficeMultimedia.Series.domain.SerieRepository"
+      ]
+    },
+    "BackofficeMultimedia.Series.domain.SerieRepository": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Series/infrastructure/persistence/MongoBackofficeMultimediaSerieRepository",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.ConnectionManager"
+      ]
+    },
+    "BackofficeMultimedia.Series.CreateSerieCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Series/application/Create/CreateBackofficeMultimediaSerieCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Series.application.SerieCreator",
+        "@BackofficeMultimedia.Categories.application.CategoryFinder"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}

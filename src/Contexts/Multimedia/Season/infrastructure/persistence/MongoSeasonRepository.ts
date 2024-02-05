@@ -3,13 +3,14 @@ import { type SeasonRepository } from '@Multimedia/Season/domain/SeasonRepositor
 import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
+import { type UUID } from 'mongodb'
 
 interface SeasonDocument {
-  _id: string
+  _id: UUID
   id: string
   serieId: string
   title: string
-  releaseDate: Date
+  releaseYear: number
 }
 
 export class MongoSeasonRepository
@@ -24,10 +25,10 @@ export class MongoSeasonRepository
     const documents = await this.searchByCriteria<SeasonDocument>(criteria)
     return documents.map((document) =>
       Season.fromPrimitives({
-        id: document.id,
+        id: document._id.toString(),
         serieId: document.serieId,
         title: document.title,
-        releaseDate: document.releaseDate
+        releaseYear: document.releaseYear
       })
     )
   }
@@ -40,7 +41,7 @@ export class MongoSeasonRepository
           id: document.id,
           serieId: document.serieId,
           title: document.title,
-          releaseDate: document.releaseDate
+          releaseYear: document.releaseYear
         })
       : null
   }

@@ -27,3 +27,19 @@ services:
       retries: 3
     networks:
       - auth-network
+
+  s3-storage:
+    image: localstack/localstack:0.12.5
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DEFAULT_REGION=eu-west-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - DISABLE_CORS_CHECKS=1
+      - DISABLE_CUSTOM_CORS_S3=1
+    ports:
+      - 4566:4566
+    volumes:
+      - './.docker/conf/s3/.init:/docker-entrypoint-initaws.d'
+      - './.docker/conf/s3/.localstack:/tmp/localstack'

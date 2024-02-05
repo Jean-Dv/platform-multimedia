@@ -1,0 +1,34 @@
+{
+  "services": {
+    "BackofficeMultimedia.Categories.application.CategoryFinder": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Categories/application/Find/BackofficeMultimediaCategoryFinder",
+      "arguments": [
+        "@BackofficeMultimedia.Categories.domain.CategoryRepository"
+      ]
+    },
+    "BackofficeMultimedia.Categories.domain.CategoryRepository": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Categories/infrastructure/persistence/MongoBackofficeMultimediaCategoryRepository",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.ConnectionManager"
+      ]
+    },
+    "BackofficeMultimedia.Categories.application.CategoryCreator": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Categories/application/Create/BackofficeMultimediaCategoryCreator",
+      "arguments": [
+        "@BackofficeMultimedia.Categories.domain.CategoryRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Categories.CreateCategoryCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Categories/application/Create/CreateBackofficeMultimediaCategoryCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Categories.application.CategoryCreator"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}

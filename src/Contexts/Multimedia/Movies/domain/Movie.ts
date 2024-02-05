@@ -1,66 +1,37 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
 import { MovieId } from './MovieId'
 import { MovieTitle } from './MovieTitle'
-import { MovieReleaseDate } from './MovieReleaseDate'
-import { MovieDuration } from './MovieDuration'
-import { MovieCreatedDomainEvent } from './MovieCreatedDomainEvent'
-import { MovieUrl } from './MovieUrl'
-import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { MovieReleaseYear } from './MovieReleaseYear'
+import { MovieSynopsis } from './MovieSynopsis'
+import { CategoryId } from '@Multimedia/Categories/domain/CategoryId'
+import { VideoId } from '@Multimedia/Shared/domain/Video/VideoId'
 
+/**
+ * Movie is an aggregate root representing a movie.
+ */
 export class Movie extends AggregateRoot {
   public readonly id: MovieId
-  public readonly category: CategoryName
   public readonly title: MovieTitle
-  public readonly releaseDate: MovieReleaseDate
-  public readonly url: MovieUrl
-  public readonly duration: MovieDuration
+  public readonly releaseYear: MovieReleaseYear
+  public readonly synopsis: MovieSynopsis
+  public readonly categories: CategoryId[] = []
+  public readonly videoId: VideoId
 
   constructor(
     id: MovieId,
-    category: CategoryName,
     title: MovieTitle,
-    releaseDate: MovieReleaseDate,
-    url: MovieUrl,
-    duration: MovieDuration
+    releaseYear: MovieReleaseYear,
+    synopsis: MovieSynopsis,
+    categories: CategoryId[],
+    videoId: VideoId
   ) {
     super()
     this.id = id
-    this.category = category
     this.title = title
-    this.releaseDate = releaseDate
-    this.url = url
-    this.duration = duration
-  }
-
-  /**
-   * Creates a new Movie instance with the provided information
-   * and publishes a MovieCreatedDomainEvent.
-   *
-   * @param id - The id of the movie.
-   * @param title - The name of the movie.
-   * @param releaseDate - The release date of the movie.
-   * @param duration - The duration of the movie.
-   */
-  public static create(
-    id: MovieId,
-    category: CategoryName,
-    title: MovieTitle,
-    releaseDate: MovieReleaseDate,
-    url: MovieUrl,
-    duration: MovieDuration
-  ): Movie {
-    const movie = new Movie(id, category, title, releaseDate, url, duration)
-    movie.record(
-      new MovieCreatedDomainEvent({
-        aggregateId: movie.id.value,
-        category: movie.category.value,
-        title: movie.title.value,
-        releaseDate: movie.releaseDate.value,
-        url: movie.url.value,
-        duration: movie.duration.value
-      })
-    )
-    return movie
+    this.releaseYear = releaseYear
+    this.synopsis = synopsis
+    this.categories = categories
+    this.videoId = videoId
   }
 
   /**
@@ -71,19 +42,19 @@ export class Movie extends AggregateRoot {
    */
   public static fromPrimitives(plainData: {
     id: string
-    category: string
     title: string
-    releaseDate: Date
-    url: string
-    duration: number
+    releaseYear: number
+    synopsis: string
+    categories: string[]
+    videoId: string
   }): Movie {
     return new Movie(
       new MovieId(plainData.id),
-      new CategoryName(plainData.category),
       new MovieTitle(plainData.title),
-      new MovieReleaseDate(plainData.releaseDate),
-      new MovieUrl(plainData.url),
-      new MovieDuration(plainData.duration)
+      new MovieReleaseYear(plainData.releaseYear),
+      new MovieSynopsis(plainData.synopsis),
+      plainData.categories.map((category) => new CategoryId(category)),
+      new VideoId(plainData.videoId)
     )
   }
 
@@ -94,19 +65,19 @@ export class Movie extends AggregateRoot {
    */
   public toPrimitives(): {
     id: string
-    category: string
     title: string
-    releaseDate: Date
-    url: string
-    duration: number
+    releaseYear: number
+    synopsis: string
+    categories: string[]
+    videoId: string
   } {
     return {
       id: this.id.value,
-      category: this.category.value,
       title: this.title.value,
-      releaseDate: this.releaseDate.value,
-      url: this.url.value,
-      duration: this.duration.value
+      releaseYear: this.releaseYear.value,
+      synopsis: this.synopsis.value,
+      categories: this.categories.map((category) => category.value),
+      videoId: this.videoId.value
     }
   }
 }
