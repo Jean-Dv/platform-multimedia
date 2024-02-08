@@ -2,6 +2,19 @@ import 'dotenv/config'
 import convict from 'convict'
 import path from 'path'
 
+convict.addFormat({
+  name: 'routes-array',
+  validate: function (routes, schema) {
+    if (!Array.isArray(routes)) {
+      throw new Error('must be of type Array')
+    }
+
+    for (const route of routes) {
+      convict(schema.children).load(route).validate()
+    }
+  }
+})
+
 const authConfig = convict({
   env: {
     doc: 'The application environment.',
@@ -91,6 +104,60 @@ const authConfig = convict({
       format: String,
       env: 'AUTH_EXPIRES_IN',
       default: '2 days'
+    }
+  },
+  routes: {
+    doc: 'Routes for the application',
+    format: 'routes-array',
+    default: [],
+
+    children: {
+      url: {
+        doc: 'The url of the route',
+        format: String,
+        default: '/multimedia'
+      },
+      auth: {
+        doc: 'The authentication needed for the route',
+        format: 'object',
+        default: {},
+        children: {
+          user: {
+            doc: 'The user needed for the route',
+            format: Boolean,
+            default: false
+          },
+          admin: {
+            doc: 'The admin needed for the route',
+            format: Boolean,
+            default: false
+          }
+        }
+      },
+      proxy: {
+        doc: 'The proxy settings for the route',
+        format: 'object',
+        default: {},
+        children: {
+          target: {
+            doc: 'The target of the proxy',
+            format: String,
+            default: 'http://localhost:4000'
+          },
+          changeOrigin: {
+            doc: 'Change the origin of the request',
+            format: Boolean,
+            default: true
+          },
+          pathRewrite: {
+            doc: 'Rewrite the path of the request',
+            format: 'object',
+            default: {
+              '^/multimedia': ''
+            }
+          }
+        }
+      }
     }
   }
 })
