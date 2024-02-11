@@ -1,1 +1,46 @@
-{}
+{
+  "routes": [
+    {
+      "url": "/api/v1/video",
+      "auth": {
+        "user": true,
+        "admin": false
+      },
+      "proxy": {
+        "target": "http://localhost:8002",
+        "changeOrigin": true,
+        "pathRewrite": {
+          "^/video": "/video"
+        }
+      }
+    },
+    {
+      "url": "/api/v1/multimedia",
+      "auth": {
+        "user": false,
+        "admin": false
+      },
+      "proxy": {
+        "target": "http://localhost:8001",
+        "changeOrigin": true,
+        "pathRewrite": {
+          "^/multimedia": ""
+        }
+      }
+    },
+    {
+      "url": "/api/v1/backoffice/multimedia",
+      "auth": {
+        "user": false,
+        "admin": true
+      },
+      "proxy": {
+        "target": "http://localhost:8002",
+        "changeOrigin": true,
+        "pathRewrite": {
+          "^/backoffice/multimedia": ""
+        }
+      }
+    }
+  ]
+}
