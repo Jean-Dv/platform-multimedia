@@ -24,7 +24,7 @@ export class MultimediaBackendApp {
    * Starts the authentication backend application.
    */
   public async start(): Promise<void> {
-    const port = process.env.PORT ?? '5000'
+    const port = process.env.PORT ?? '8001'
     this.server = new Server(port)
     await this.configureEventBus()
     await this.server.listen()

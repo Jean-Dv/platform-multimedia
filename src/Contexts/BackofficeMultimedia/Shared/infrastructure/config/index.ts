@@ -83,7 +83,7 @@ const backofficeMultimediaConfig = convict({
     doc: 'The port to bind.',
     format: String,
     env: 'PORT',
-    default: '8080'
+    default: '8002'
   },
   aws: {
     s3: {

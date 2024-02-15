@@ -25,7 +25,7 @@ export class BackofficeMultimediaBackendApp {
    * Starts the authentication backend application.
    */
   public async start(): Promise<void> {
-    const port = backofficeMultimediaConfig.get('port') ?? '8080'
+    const port = backofficeMultimediaConfig.get('port') ?? '8002'
     this.server = new Server(port)
     await this.configureEventBus()
     await this.server.listen()
