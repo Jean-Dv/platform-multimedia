@@ -13,6 +13,7 @@ import helmet from 'helmet'
 import type * as http from 'http'
 import httpStatus from 'http-status'
 import { registerRoutes } from './routes'
+import morgan from 'morgan'
 
 /**
  * Represents a server instance using Express.js.
@@ -33,6 +34,7 @@ export class Server {
     this.express.use(helmet.frameguard({ action: 'deny' }))
     this.express.use(cors())
     this.express.use(compression())
+    this.express.use(morgan('combined'))
     const router = Router()
     router.use(errorHandler())
     this.express.use(router)

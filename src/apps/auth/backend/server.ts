@@ -14,8 +14,9 @@ import type * as http from 'http'
 import httpStatus from 'http-status'
 import { registerRoutes } from './routes'
 import authConfig from '@Auth/Shared/infrastructure/config'
-import { createProxyMiddleware } from 'http-proxy-middleware'
+import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware'
 import { container } from './dependency-injection'
+import morgan from 'morgan'
 
 /**
  * Represents a server instance using Express.js.
@@ -38,12 +39,14 @@ export class Server {
     this.express.use(compression())
     const router = Router()
     router.use(errorHandler())
+    this.express.use(morgan('combined'))
     this.setupAuth()
     this.setupProxies()
     this.express.use(router)
     registerRoutes(router)
     router.use(
       (err: Error, _req: Request, res: Response, _next: NextFunction) => {
+        console.log(err)
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message)
       }
     )
@@ -110,7 +113,11 @@ export class Server {
           pathRewrite: Record<string, string>
         }
       }) => {
-        this.express.use(route.url, createProxyMiddleware(route.proxy))
+        const options = {
+          ...route.proxy,
+          onProxyReq: fixRequestBody
+        }
+        this.express.use(route.url, createProxyMiddleware(options))
       }
     )
   }
