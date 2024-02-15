@@ -37,6 +37,15 @@
       "class": "../../../../../Contexts/Auth/UserAuth/application/authenticate/AuthenticateUserCommandHandler",
       "arguments": ["@Auth.User.application.UserAuthenticator"],
       "tags": [{ "name": "commandHandler" }]
+    },
+    "Auth.User.application.UserByIdSearcher": {
+      "class": "../../../../../Contexts/Auth/User/application/SearchById/UserByIdSearcher",
+      "arguments": ["@Auth.User.domain.UserRepository"]
+    },
+    "Auth.User.SearchUserByIdQueryHandler": {
+      "class": "../../../../../Contexts/Auth/User/application/SearchById/SearchUserByIdQueryHandler",
+      "arguments": ["@Auth.User.application.UserByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
     }
   }
 }
