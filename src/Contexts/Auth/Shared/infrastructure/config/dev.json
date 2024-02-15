@@ -24,7 +24,7 @@
         "target": "http://localhost:8001",
         "changeOrigin": true,
         "pathRewrite": {
-          "^/multimedia": ""
+          "^/api/v1/multimedia": ""
         }
       }
     },
@@ -38,7 +38,7 @@
         "target": "http://localhost:8002",
         "changeOrigin": true,
         "pathRewrite": {
-          "^/backoffice/multimedia": ""
+          "^/api/v1/backoffice/multimedia": ""
         }
       }
     }
