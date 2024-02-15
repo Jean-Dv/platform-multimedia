@@ -3,15 +3,5 @@
     {
       "resource": "./application.json"
     }
-  ],
-  "services": {
-    "BackofficeMultimedia.EnvironmentArranger": {
-      "Multimedia.EnvironmentArranger": {
-        "class": "../../../../../tests/Contexts/Shared/infrastructure/persistence/mongo/MongoEnvironmentArranger",
-        "arguments": [
-          "@BackofficeMultimedia.Shared.ConnectionManager"
-        ]
-      }
-    }
-  }
+  ]
 }
