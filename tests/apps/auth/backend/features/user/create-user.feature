@@ -43,3 +43,28 @@ Feature: Create a new user
     }
     """
     Then the response status code should be 422
+  
+  Scenario: An invalid existing user
+    Given there is the user:
+    """
+    {
+      "id": "b29539c4-171f-42b3-be93-facb95c4f66b",
+      "role": "registered",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "jonhdoe1@gmail.com",
+      "password": "#3*7VXn33e9&!8*"
+    }
+    """
+    And I send a PUT request to "/auth/register" with body:
+    """
+    {
+      "id": "b29539c4-171f-42b3-be93-facb95c4f66a",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "jonhdoe1@gmail.com",
+      "password": "#3*7VXn33e9&!8*",
+      "repeatPassword": "#3*7VXn33e9&!8*"
+    }
+    """
+    Then the response status code should be 400
