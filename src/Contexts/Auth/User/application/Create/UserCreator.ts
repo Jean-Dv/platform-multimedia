@@ -32,7 +32,7 @@ export class UserCreator {
     email: UserEmail
     password: UserPassword
   }): Promise<void> {
-    if ((await this.repository.searchByEmail(params.email)) === null) {
+    if ((await this.repository.searchByEmail(params.email)) !== null) {
       throw new UserExists(
         `User with email ${params.email.value} already exists.`
       )
