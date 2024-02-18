@@ -4,6 +4,7 @@ import { type CommandBus } from '@Shared/domain/CommandBus'
 import { type Request, type Response } from 'express'
 import httpStatus from 'http-status'
 import { type Controller } from './Controller'
+import { InvalidArgumentError } from '@Shared/domain/value-objects/InvalidArgumentError'
 
 type UserPutRequest = Request & {
   body: {
@@ -46,6 +47,14 @@ export class UserPutController implements Controller {
         ok: true
       })
     } catch (error) {
+      if (error instanceof InvalidArgumentError) {
+        console.log(error)
+        res.status(httpStatus.BAD_REQUEST).json({
+          ok: false,
+          message: error.message
+        })
+        return
+      }
       console.log(error)
       res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
         ok: false

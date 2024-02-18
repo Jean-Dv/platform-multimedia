@@ -5,6 +5,7 @@ import EventBusMock from '../../../../Shared/domain/EventBusMock'
 import { CreateUserCommandHandler } from '@Auth/User/application/Create/CreateUserCommandHandler'
 import { UserMother } from '../../domain/UserMother'
 import { UserCreatedDomainEventMother } from '../../domain/UserCreatedDomainEvent'
+import { UserExists } from '@Auth/User/domain/UserExists'
 
 let repository: UserRepositoryMock
 let creator: UserCreator
@@ -28,5 +29,18 @@ describe('CreateUserCommandHandler', () => {
 
     repository.assertSaveHaveBeenCalledWith(user)
     eventBus.assertLastPublishedEventIs(domainEvent)
+  })
+
+  it('should throw an error if the user already exists', async () => {
+    try {
+      const command = CreateUserCommandMother.random()
+      const user = UserMother.from(command)
+
+      repository.searchMockReturnValue(user)
+
+      await handler.handle(command)
+    } catch (error) {
+      expect(error).toBeInstanceOf(UserExists)
+    }
   })
 })

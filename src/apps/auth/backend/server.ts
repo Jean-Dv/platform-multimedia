@@ -39,7 +39,9 @@ export class Server {
     this.express.use(compression())
     const router = Router()
     router.use(errorHandler())
-    this.express.use(morgan('combined'))
+    if (process.env.NODE_ENV === 'dev') {
+      this.express.use(morgan('combined'))
+    }
     this.setupAuth()
     this.setupProxies()
     this.express.use(router)

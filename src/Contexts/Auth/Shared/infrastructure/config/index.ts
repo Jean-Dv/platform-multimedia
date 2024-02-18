@@ -27,7 +27,7 @@ const authConfig = convict({
       doc: 'The url of the mongo database.',
       format: String,
       env: 'MONGO_URL',
-      default: 'mongodb://localhost:27017/mooc-backend-dev'
+      default: 'mongodb://localhost:27017/auth-backend-dev'
     }
   },
   rabbitmq: {
