@@ -1,5 +1,5 @@
 import 'module-alias/register'
-import { AfterAll, BeforeAll } from '@cucumber/cucumber'
+import { AfterAll, Before, BeforeAll } from '@cucumber/cucumber'
 import { type EnvironmentArranger } from '../../../../../Contexts/Shared/infrastructure/persistence/EnvironmentArranger'
 import { AuthBackendApp } from '../../../../../../src/apps/auth/backend/AuthBackendApp'
 import { container } from '../../../../../../src/apps/auth/backend/dependency-injection'
@@ -19,7 +19,12 @@ BeforeAll(async () => {
   await application.start()
 })
 
+Before(async () => {
+  await environmentArranger.arrange()
+})
+
 AfterAll(async () => {
+  await environmentArranger.arrange()
   await environmentArranger.close()
   await application.stop()
 })
