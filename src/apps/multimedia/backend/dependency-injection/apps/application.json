@@ -47,6 +47,10 @@
     "Apps.multimedia.controllers.ChaptersGetController": {
       "class": "../../controllers/ChaptersGetController",
       "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.VideoGetController": {
+      "class": "../../controllers/VideoGetController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     }
   }
 }
