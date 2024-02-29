@@ -1,5 +1,11 @@
-import { type BackofficeMultimediaVideo } from './../../../../BackofficeMultimedia/Videos/domain/BackofficeMultimediaVideo'
-import { PutObjectCommand, type S3Client } from '@aws-sdk/client-s3'
+import { type AggregateRoot } from '@Shared/domain/AggregateRoot'
+import { BackofficeMultimediaVideo } from './../../../../BackofficeMultimedia/Videos/domain/BackofficeMultimediaVideo'
+import {
+  GetObjectCommand,
+  PutObjectCommand,
+  type S3Client
+} from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import fs from 'fs'
 
 /**
@@ -7,7 +13,7 @@ import fs from 'fs'
  * It provides some basic methods to persist and retrieve
  * aggregate roots.
  */
-export abstract class AWSS3Repository<T extends BackofficeMultimediaVideo> {
+export abstract class AWSS3Repository<T extends AggregateRoot> {
   constructor(private readonly _client: Promise<S3Client>) {}
 
   /**
@@ -35,16 +41,28 @@ export abstract class AWSS3Repository<T extends BackofficeMultimediaVideo> {
   protected async persist(id: string, aggregateRoot: T): Promise<void> {
     try {
       const client = await this.client()
-      const stream = fs.createReadStream(aggregateRoot.path.value)
-      const uploadParams = {
-        Bucket: this.bucketName(),
-        Key: id,
-        Body: stream
+      if (aggregateRoot instanceof BackofficeMultimediaVideo) {
+        const stream = fs.createReadStream(aggregateRoot.path.value)
+        const uploadParams = {
+          Bucket: this.bucketName(),
+          Key: id,
+          Body: stream
+        }
+        const command = new PutObjectCommand(uploadParams)
+        await client.send(command)
       }
-      const command = new PutObjectCommand(uploadParams)
-      await client.send(command)
     } catch (error) {
       console.log(error)
     }
+  }
+
+  protected async retrieve(id: string): Promise<string> {
+    const command = new GetObjectCommand({
+      Bucket: this.bucketName(),
+      Key: id
+    })
+    return await getSignedUrl(await this.client(), command, {
+      expiresIn: 60 * 60
+    })
   }
 }

@@ -65,6 +65,19 @@
     "Multimedia.Shared.domain.QueryBus": {
       "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus",
       "arguments": ["@Multimedia.Shared.QueryHandlers"]
+    },
+    "Multimedia.Shared.AWSBucketConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/Multimedia/Shared/infrastructure/persistence/aws-s3/AWSBucketConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "Multimedia.Shared.AWSConnectionManager": {
+      "factory": {
+        "class": "../../../../../Contexts/Shared/infrastructure/persistence/aws-s3/AWSBucketClientFactory",
+        "method": "createClient"
+      },
+      "arguments": ["multimedia", "@Multimedia.Shared.AWSBucketConfig"]
     }
   }
 }

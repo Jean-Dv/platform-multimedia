@@ -10,7 +10,7 @@
         "target": "http://localhost:8002",
         "changeOrigin": true,
         "pathRewrite": {
-          "^/video": "/video"
+          "^/api/v1/video": "/video"
         }
       }
     },
@@ -44,3 +44,4 @@
     }
   ]
 }
+

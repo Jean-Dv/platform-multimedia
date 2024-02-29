@@ -1,0 +1,22 @@
+{
+  "services": {
+    "Multimedia.Videos.domain.VideoRepository": {
+      "class": "../../../../../Contexts/Multimedia/Videos/infrastructure/persistence/AWSS3VideoRepository",
+      "arguments": ["@Multimedia.Shared.AWSConnectionManager"]
+    },
+    "Multimedia.Videos.application.VideoFinder": {
+      "class": "../../../../../Contexts/Multimedia/Videos/application/Find/VideoFinder",
+      "arguments": ["@Multimedia.Videos.domain.VideoRepository"]
+    },
+    "Multimedia.Videos.FindVideoQueryHandler": {
+      "class": "../../../../../Contexts/Multimedia/Videos/application/Find/FindVideoQueryHandler",
+      "arguments": ["@Multimedia.Videos.application.VideoFinder"],
+      "tags": [
+        {
+          "name": "queryHandler"
+        }
+      ]
+    }
+  }
+}
+
