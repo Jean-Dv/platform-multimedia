@@ -108,6 +108,7 @@
     "@Apps": "src/apps",
     "@Auth": "src/Contexts/Auth",
     "@Multimedia": "src/Contexts/Multimedia",
-    "@BackofficeMultimedia": "src/Contexts/BackofficeMultimedia"
+    "@BackofficeMultimedia": "src/Contexts/BackofficeMultimedia",
+    "@Subscriptions": "src/Contexts/Subscriptions"
   }
 }
