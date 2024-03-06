@@ -34,7 +34,7 @@ export class SubscriptionBackendApp {
    */
   public async stop(): Promise<void> {
     const rabbitMQConnection = container.get<RabbitMQConnection>(
-      'Multimedia.Shared.RabbitMQConnection'
+      'Subscriptions.Shared.RabbitMQConnection'
     )
     await rabbitMQConnection.close()
     await this.server?.stop()
@@ -46,10 +46,10 @@ export class SubscriptionBackendApp {
    */
   private async configureEventBus(): Promise<void> {
     const eventBus = container.get<EventBus>(
-      'Multimedia.Shared.domain.EventBus'
+      'Subscriptions.Shared.domain.EventBus'
     )
     const rabbitMQConnection = container.get<RabbitMQConnection>(
-      'Multimedia.Shared.RabbitMQConnection'
+      'Subscriptions.Shared.RabbitMQConnection'
     )
     await rabbitMQConnection.connect()
     eventBus.addSubscribers(DomainEventSubscribers.from(container))

@@ -22,6 +22,7 @@
     "test:auth:backend:features": "NODE_ENV=test cucumber-js -p authBackend --exit",
     "test:multimedia:backend:features": "NODE_ENV=test cucumber-js -p multimediaBackend --exit",
     "test:backoffice_multimedia:backend:features": "NODE_ENV=test cucumber-js -p backofficeMultimediaBackend --exit",
+    "test:subscriptions:backend:features": "NODE_ENV=test cucumber-js -p subscriptionsBackend --exit",
     "command:auth:rabbitmq": "NODE_ENV=production ts-node src/apps/auth/backend/command/runConfigureRabbitMQCommand",
     "command:multimedia:rabbitmq": "NODE_ENV=production ts-node src/apps/multimedia/backend/command/runConfigureRabbitMQCommand",
     "command:backoffice_multimedia:rabbitmq": "NODE_ENV=production ts-node src/apps/backoffice-multimedia/backend/command/runConfigureRabbitMQCommand",
