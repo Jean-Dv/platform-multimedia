@@ -10,6 +10,7 @@ module.exports = {
     '@BackofficeMultimedia/(.*)':
       '<rootDir>/src/Contexts/BackofficeMultimedia/$1',
     '@BackofficeSubscriptions/(.*)':
-      '<rootDir>/src/Contexts/BackofficeSubscriptions/$1'
+      '<rootDir>/src/Contexts/BackofficeSubscriptions/$1',
+    '@Subscriptions/(.*)': '<rootDir>/src/Contexts/Subscriptions/$1'
   }
 }

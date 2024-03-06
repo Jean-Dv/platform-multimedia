@@ -111,6 +111,7 @@
     "@Auth": "src/Contexts/Auth",
     "@Multimedia": "src/Contexts/Multimedia",
     "@BackofficeMultimedia": "src/Contexts/BackofficeMultimedia",
-    "@BackofficeSubscriptions": "src/Contexts/BackofficeSubscriptions"
+    "@BackofficeSubscriptions": "src/Contexts/BackofficeSubscriptions",
+    "@Subscriptions": "src/Contexts/Subscriptions"
   }
 }
