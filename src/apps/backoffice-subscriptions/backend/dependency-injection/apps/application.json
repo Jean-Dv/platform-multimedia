@@ -1,0 +1,10 @@
+{
+  "services": {
+    "Apps.backoffice-subscriptions.controllers.PlanPutController": {
+      "class": "../../controllers/PlanPutController",
+      "arguments": [
+        "@BackofficeSubscriptions.Shared.domain.CommandBus"
+      ]
+    }
+  }
+}
