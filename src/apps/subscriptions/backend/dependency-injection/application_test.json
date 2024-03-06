@@ -5,9 +5,11 @@
     }
   ],
   "services": {
-    "Multimedia.EnvironmentArranger": {
+    "Subscriptions.EnvironmentArranger": {
       "class": "../../../../../tests/Contexts/Shared/infrastructure/persistence/mongo/MongoEnvironmentArranger",
-      "arguments": ["@Multimedia.Shared.ConnectionManager"]
+      "arguments": [
+        "@Subscriptions.Shared.ConnectionManager"
+      ]
     }
   }
 }

@@ -1,0 +1,28 @@
+{
+  "services": {
+    "Subscriptions.Plans.domain.PlanRepository": {
+      "class": "../../../../../Contexts/Subscriptions/Plans/infrastructure/persistence/MongoPlanRepository",
+      "arguments": [
+        "@Subscriptions.Shared.ConnectionManager"
+      ]
+    },
+    "Subscriptions.Plans.application.PlanCreator": {
+      "class": "../../../../../Contexts/Subscriptions/Plans/application/Create/PlanCreator",
+      "arguments": [
+        "@Subscriptions.Plans.domain.PlanRepository",
+        "@Subscriptions.Shared.domain.EventBus"
+      ]
+    },
+    "Subscriptions.Plans.CreatePlanCommandHandler": {
+      "class": "../../../../../Contexts/Subscriptions/Plans/application/Create/CreatePlanCommandHandler",
+      "arguments": [
+        "@Subscriptions.Plans.application.PlanCreator"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}

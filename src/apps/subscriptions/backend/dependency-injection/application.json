@@ -2,6 +2,12 @@
   "imports": [
     {
       "resource": "./Shared/application.json"
+    },
+    {
+      "resource": "./apps/application.json"
+    },
+    {
+      "resource": "./Plans/application.json"
     }
   ]
 }

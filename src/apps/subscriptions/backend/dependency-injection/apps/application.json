@@ -1,0 +1,10 @@
+{
+  "services": {
+    "Apps.subscriptions.controllers.PlanPutController": {
+      "class": "../../controllers/PlanPutController",
+      "arguments": [
+        "@Subscriptions.Shared.domain.CommandBus"
+      ]
+    }
+  }
+}
