@@ -18,15 +18,15 @@ const backofficeMultimediaBackend = [
   '--require tests/apps/backoffice-multimedia/backend/features/step_definitions/*.steps.ts'
 ].join(' ')
 
-const subscriptionsBackend = [
+const backofficeSubscriptionsBackend = [
   ...common,
-  'tests/apps/subscriptions/backend/features/**/*.feature',
-  '--require tests/apps/subscriptions/backend/features/step_definitions/*.steps.ts'
+  'tests/apps/backoffice-subscriptions/backend/features/**/*.feature',
+  '--require tests/apps/backoffice-subscriptions/backend/features/step_definitions/*.steps.ts'
 ].join(' ')
 
 module.exports = {
   authBackend,
   multimediaBackend,
   backofficeMultimediaBackend,
-  subscriptionsBackend
+  backofficeSubscriptionsBackend
 }
