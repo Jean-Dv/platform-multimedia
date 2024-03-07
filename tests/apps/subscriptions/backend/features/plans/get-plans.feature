@@ -36,6 +36,13 @@ Feature: Get Plans
             "price": 1000,
             "duration": 30,
             "description": "Basic plan"
+          },
+          {
+            "id": "6b2c04d2-859c-4c9f-ae0b-93c76b0054ec",
+            "name": "Basic",
+            "price": 1000,
+            "duration": 30,
+            "description": "Basic plan"
           }
         ]
       }
