@@ -1,3 +1,4 @@
+import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { type Plan } from './Plan'
 
 /**
@@ -10,4 +11,12 @@ export interface PlanRepository {
    * @param plan - The plan to be saved.
    */
   save: (plan: Plan) => Promise<void>
+
+  /**
+   * Returns the plans that match the given criteria.
+   *
+   * @param criteria - The criteria to be used.
+   * @returns The plans that match the given criteria.
+   */
+  matching: (criteria: Criteria) => Promise<Plan[]>
 }
