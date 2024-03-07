@@ -18,15 +18,17 @@
     "build:clean": "rm -r dist; exit 0",
     "test": "pnpm run test:unit && pnpm run test:features",
     "test:unit": "NODE_ENV=test jest",
-    "test:features": "pnpm run test:auth:backend:features && pnpm run test:multimedia:backend:features && pnpm run test:backoffice_multimedia:backend:features && pnpm run test:backoffice_subscriptions:backend:features",
+    "test:features": "pnpm run test:auth:backend:features && pnpm run test:multimedia:backend:features && pnpm run test:backoffice_multimedia:backend:features && pnpm run test:backoffice_subscriptions:backend:features && pnpm run test:subscriptions:backend:features",
     "test:auth:backend:features": "NODE_ENV=test cucumber-js -p authBackend --exit",
     "test:multimedia:backend:features": "NODE_ENV=test cucumber-js -p multimediaBackend --exit",
     "test:backoffice_multimedia:backend:features": "NODE_ENV=test cucumber-js -p backofficeMultimediaBackend --exit",
     "test:backoffice_subscriptions:backend:features": "NODE_ENV=test cucumber-js -p backofficeSubscriptionsBackend --exit",
+    "test:subscriptions:backend:features": "NODE_ENV=test cucumber-js -p subscriptionsBackend --exit",
     "command:auth:rabbitmq": "NODE_ENV=production ts-node src/apps/auth/backend/command/runConfigureRabbitMQCommand",
     "command:multimedia:rabbitmq": "NODE_ENV=production ts-node src/apps/multimedia/backend/command/runConfigureRabbitMQCommand",
     "command:backoffice_multimedia:rabbitmq": "NODE_ENV=production ts-node src/apps/backoffice-multimedia/backend/command/runConfigureRabbitMQCommand",
-    "command:backoffice_subscriptions:rabbitmq": "NODE_ENV=production ts-node src/apps/backoffice-subscriptions/backend/command/runConfigureRabbitMQCommand"
+    "command:backoffice_subscriptions:rabbitmq": "NODE_ENV=production ts-node src/apps/backoffice-subscriptions/backend/command/runConfigureRabbitMQCommand",
+    "command:subscriptions:rabbitmq": "NODE_ENV=production ts-node src/apps/subscriptions/backend/command/runConfigureRabbitMQCommand"
   },
   "keywords": [],
   "author": "",
@@ -111,6 +113,7 @@
     "@Auth": "src/Contexts/Auth",
     "@Multimedia": "src/Contexts/Multimedia",
     "@BackofficeMultimedia": "src/Contexts/BackofficeMultimedia",
-    "@BackofficeSubscriptions": "src/Contexts/BackofficeSubscriptions"
+    "@BackofficeSubscriptions": "src/Contexts/BackofficeSubscriptions",
+    "@Subscriptions": "src/Contexts/Subscriptions"
   }
 }

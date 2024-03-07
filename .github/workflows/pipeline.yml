@@ -149,6 +149,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Configure rabbitmq production
-        run: pnpm run command:auth:rabbitmq && pnpm run command:multimedia:rabbitmq
+        run: pnpm run command:auth:rabbitmq && pnpm run command:multimedia:rabbitmq && pnpm run command:backoffice_subscriptions:rabbitmq && pnpm run command:backoffice_multimedia:rabbitmq && pnpm run command:subscriptions:rabbitmq
       - name: E2E tests
         run: pnpm run test:features
