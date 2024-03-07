@@ -1,0 +1,87 @@
+{
+  "services": {
+    "Subscriptions.Shared.MongoConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/Subscriptions/Shared/infrastructure/persistence/mongo/MongoConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "Subscriptions.Shared.RabbitMQConfig": {
+      "factory": {
+        "class": "../../../../../Contexts/Subscriptions/Shared/infrastructure/RabbitMQ/RabbitMQConfigFactory",
+        "method": "createConfig"
+      }
+    },
+    "Subscriptions.Shared.domain.EventBus": {
+      "factory": {
+        "class": "../../../../../Contexts/Subscriptions/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory",
+        "method": "create"
+      },
+      "arguments": [
+        "@Subscriptions.Shared.DomainEventFailoverPublisher",
+        "@Subscriptions.Shared.RabbitMQConnection",
+        "@Subscriptions.Shared.RabbitMQqueueFormatter",
+        "@Subscriptions.Shared.RabbitMQConfig"
+      ]
+    },
+    "Subscriptions.Shared.ConnectionManager": {
+      "factory": {
+        "class": "../../../../../Contexts/Shared/infrastructure/persistence/mongo/MongoClientFactory",
+        "method": "createClient"
+      },
+      "arguments": [
+        "subscriptions",
+        "@Subscriptions.Shared.MongoConfig"
+      ]
+    },
+    "Subscriptions.Shared.RabbitMQqueueFormatter": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter",
+      "arguments": [
+        "subscriptions"
+      ]
+    },
+    "Subscriptions.Shared.RabbitMQConnection": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConnection",
+      "arguments": [
+        "@Subscriptions.Shared.RabbitMQConfig"
+      ]
+    },
+    "Subscriptions.Shared.RabbitMQConfigurer": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConfigurer",
+      "arguments": [
+        "@Subscriptions.Shared.RabbitMQConnection",
+        "@Subscriptions.Shared.RabbitMQqueueFormatter"
+      ]
+    },
+    "Subscriptions.Shared.DomainEventFailoverPublisher": {
+      "class": "../../../../../Contexts/Shared/infrastructure/EventBus/FailoverPublisher/FailoverPublisher",
+      "arguments": [
+        "@Subscriptions.Shared.ConnectionManager"
+      ]
+    },
+    "Subscriptions.Shared.CommandHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers",
+      "arguments": [
+        "!tagged commandHandler"
+      ]
+    },
+    "Subscriptions.Shared.domain.CommandBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus",
+      "arguments": [
+        "@Subscriptions.Shared.CommandHandlers"
+      ]
+    },
+    "Subscriptions.Shared.QueryHandlers": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers",
+      "arguments": [
+        "!tagged queryHandler"
+      ]
+    },
+    "Subscriptions.Shared.domain.QueryBus": {
+      "class": "../../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus",
+      "arguments": [
+        "@Subscriptions.Shared.QueryHandlers"
+      ]
+    }
+  }
+}

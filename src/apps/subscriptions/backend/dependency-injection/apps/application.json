@@ -1,0 +1,10 @@
+{
+  "services": {
+    "Apps.subscriptions.controllers.PlansGetController": {
+      "class": "../../controllers/PlansGetController",
+      "arguments": [
+        "@Subscriptions.Shared.domain.QueryBus"
+      ]
+    }
+  }
+}

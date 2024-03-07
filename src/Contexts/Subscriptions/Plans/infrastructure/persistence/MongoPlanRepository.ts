@@ -26,7 +26,7 @@ export class MongoPlanRepository
     const documents = await this.searchByCriteria<PlanDocument>(criteria)
     return documents.map((document) =>
       Plan.fromPrimitives({
-        id: document._id,
+        id: document._id.toString(),
         name: document.name,
         price: document.price,
         duration: document.duration,

@@ -1,0 +1,44 @@
+{
+  "services": {
+    "Subscriptions.Plans.application.PlanCreator": {
+      "class": "../../../../../Contexts/Subscriptions/Plans/application/Create/PlanCreator",
+      "arguments": [
+        "@Subscriptions.Plans.domain.PlanRepository"
+      ]
+    },
+    "Subscriptions.Plans.domain.PlanRepository": {
+      "class": "../../../../../Contexts/Subscriptions/Plans/infrastructure/persistence/MongoPlanRepository",
+      "arguments": [
+        "@Subscriptions.Shared.ConnectionManager"
+      ]
+    },
+    "Subscriptions.Plans.CreatePlanOnBackofficePlanCreated": {
+      "class": "../../../../../Contexts/Subscriptions/Plans/application/Create/CreatePlanOnBackofficePlanCreated",
+      "arguments": [
+        "@Subscriptions.Plans.application.PlanCreator"
+      ],
+      "tags": [
+        {
+          "name": "domainEventSubscriber"
+        }
+      ]
+    },
+    "Subscriptions.Plans.application.PlansByCriteriaSearcher": {
+      "class": "../../../../../Contexts/Subscriptions/Plans/application/SearchByCriteria/PlansByCriteriaSearcher",
+      "arguments": [
+        "@Subscriptions.Plans.domain.PlanRepository"
+      ]
+    },
+    "Subscriptions.Plans.SearchPlansByCriteriaQueryHandler": {
+      "class": "../../../../../Contexts/Subscriptions/Plans/application/SearchByCriteria/SearchPlansByCriteriaQueryHandler",
+      "arguments": [
+        "@Subscriptions.Plans.application.PlansByCriteriaSearcher"
+      ],
+      "tags": [
+        {
+          "name": "queryHandler"
+        }
+      ]
+    }
+  }
+}
