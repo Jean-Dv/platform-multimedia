@@ -11,7 +11,7 @@ interface CreatePlanDomainEventAttributes {
  * This class is used to represents the domain which is published when a new plan is created.
  */
 export class BackofficePlanCreatedDomainEvent extends DomainEvent {
-  public static readonly EVENT_NAME = 'subscriptions.plan.created'
+  public static readonly EVENT_NAME = 'backoffice.subscriptions.plan.created'
 
   public readonly name: string
   public readonly price: number
