@@ -20,7 +20,7 @@ export class BackofficePlanDaysDurationMother {
    * @returns A random PlanDaysDuration value object
    */
   public static random(): BackofficePlanDaysDuration {
-    return this.create(Math.floor(Math.random() * 31))
+    return this.create(Math.floor(Math.random() * (31 - 1 + 1)) + 1)
   }
 
   /**
