@@ -18,7 +18,7 @@
     "build:clean": "rm -r dist; exit 0",
     "test": "pnpm run test:unit && pnpm run test:features",
     "test:unit": "NODE_ENV=test jest",
-    "test:features": "pnpm run test:auth:backend:features && pnpm run test:multimedia:backend:features && pnpm run test:backoffice_multimedia:backend:features && pnpm run test:backoffice_subscriptions:backend:features",
+    "test:features": "pnpm run test:auth:backend:features && pnpm run test:multimedia:backend:features && pnpm run test:backoffice_multimedia:backend:features && pnpm run test:backoffice_subscriptions:backend:features && pnpm run test:subscriptions:backend:features",
     "test:auth:backend:features": "NODE_ENV=test cucumber-js -p authBackend --exit",
     "test:multimedia:backend:features": "NODE_ENV=test cucumber-js -p multimediaBackend --exit",
     "test:backoffice_multimedia:backend:features": "NODE_ENV=test cucumber-js -p backofficeMultimediaBackend --exit",
