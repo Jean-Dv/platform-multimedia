@@ -8,6 +8,8 @@
     "dev:auth:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/apps/auth/backend/start.ts",
     "dev:multimedia:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/apps/multimedia/backend/start.ts",
     "dev:backoffice_multimedia:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/apps/backoffice-multimedia/backend/start.ts",
+    "dev:backoffice_subscriptions:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/apps/backoffice-subscriptions/backend/start.ts",
+    "dev:subscriptions:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/apps/subscriptions/backend/start.ts",
     "lint": "eslint ./src/**/*.ts ./tests/**/*.ts",
     "lint:fix": "eslint ./src/**/*.ts ./tests/**/*.ts --fix",
     "prettier": "prettier --check ./src/**/*.ts ./tests/**/*.ts",
