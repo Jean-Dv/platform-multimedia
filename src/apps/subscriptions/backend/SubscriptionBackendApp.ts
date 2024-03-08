@@ -1,3 +1,4 @@
+import 'module-alias/register'
 import type * as http from 'http'
 import { Server } from './server'
 import { type RabbitMQConnection } from '@Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConnection'
@@ -23,7 +24,7 @@ export class SubscriptionBackendApp {
    * Starts the authentication backend application.
    */
   public async start(): Promise<void> {
-    const port = process.env.PORT ?? '8001'
+    const port = process.env.PORT ?? '8003'
     this.server = new Server(port)
     await this.configureEventBus()
     await this.server.listen()

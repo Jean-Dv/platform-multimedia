@@ -41,7 +41,34 @@
           "^/api/v1/backoffice/multimedia": ""
         }
       }
+    },
+    {
+      "url": "/api/v1/subscriptions",
+      "auth": {
+        "user": false,
+        "admin": false
+      },
+      "proxy": {
+        "target": "http://localhost:8003",
+        "changeOrigin": true,
+        "pathRewrite": {
+          "^/api/v1/subscriptions": ""
+        }
+      }
+    },
+    {
+      "url": "/api/v1/backoffice/subscriptions",
+      "auth": {
+        "user": false,
+        "admin": true
+      },
+      "proxy": {
+        "target": "http://localhost:8004",
+        "changeOrigin": true,
+        "pathRewrite": {
+          "^/api/v1/backoffice/subscriptions": ""
+        }
+      }
     }
   ]
 }
-
