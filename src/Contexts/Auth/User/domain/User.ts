@@ -6,6 +6,8 @@ import { UserEmail } from './UserEmail'
 import { UserPassword } from './UserPassword'
 import { UserCreatedDomainEvent } from './UserCreatedDomainEvent'
 import { RoleName } from '@Auth/Shared/domain/Roles/RoleName'
+import { UserStartPlan } from '@Auth/Shared/domain/Transactions/UserStartPlan'
+import { UserEndPlan } from '@Auth/Shared/domain/Transactions/UserEndPlan'
 
 export class User extends AggregateRoot {
   public readonly id: UserId
@@ -14,6 +16,8 @@ export class User extends AggregateRoot {
   public readonly lastName: UserLastName
   public readonly email: UserEmail
   private readonly password: UserPassword
+  public startPlan: UserStartPlan
+  public endPlan: UserEndPlan
 
   constructor(
     id: UserId,
@@ -21,7 +25,9 @@ export class User extends AggregateRoot {
     firstName: UserFirstName,
     lastName: UserLastName,
     email: UserEmail,
-    password: UserPassword
+    password: UserPassword,
+    startPlan: UserStartPlan,
+    endPlan: UserEndPlan
   ) {
     super()
     this.id = id
@@ -30,6 +36,8 @@ export class User extends AggregateRoot {
     this.lastName = lastName
     this.email = email
     this.password = password
+    this.startPlan = startPlan
+    this.endPlan = endPlan
   }
 
   /**
@@ -48,7 +56,16 @@ export class User extends AggregateRoot {
     email: UserEmail,
     password: UserPassword
   ): User {
-    const user = new User(id, roleName, firstName, lastName, email, password)
+    const user = new User(
+      id,
+      roleName,
+      firstName,
+      lastName,
+      email,
+      password,
+      new UserStartPlan(new Date()),
+      new UserEndPlan(new Date())
+    )
     user.record(
       new UserCreatedDomainEvent({
         aggregateId: id.value,
@@ -59,6 +76,18 @@ export class User extends AggregateRoot {
       })
     )
     return user
+  }
+
+  /**
+   * Updates the user plan.
+   *
+   * @param user - The user to update.
+   * @param startPlan - The start plan date.
+   * @param endPlan - The end plan date.
+   */
+  public updatePlan(startPlan: Date, endPlan: Date): void {
+    this.startPlan = new UserStartPlan(startPlan)
+    this.endPlan = new UserEndPlan(endPlan)
   }
 
   /**
@@ -74,6 +103,8 @@ export class User extends AggregateRoot {
     lastName: string
     email: string
     password: string
+    startPlan: Date
+    endPlan: Date
   }): User {
     return new User(
       new UserId(plainData.id),
@@ -81,7 +112,9 @@ export class User extends AggregateRoot {
       new UserFirstName(plainData.firstName),
       new UserLastName(plainData.lastName),
       new UserEmail(plainData.email),
-      new UserPassword(plainData.password)
+      new UserPassword(plainData.password),
+      new UserStartPlan(plainData.startPlan),
+      new UserEndPlan(plainData.endPlan)
     )
   }
 
@@ -97,7 +130,9 @@ export class User extends AggregateRoot {
       firstName: this.firstName.value,
       lastName: this.lastName.value,
       email: this.email.value,
-      password: this.password.value
+      password: this.password.value,
+      startPlan: this.startPlan.value,
+      endPlan: this.endPlan.value
     }
   }
 }

@@ -14,6 +14,8 @@ interface UserDocument {
   lastName: string
   email: string
   password: string
+  startPlan: Date
+  endPlan: Date
 }
 
 /**
@@ -45,7 +47,9 @@ export class MongoUserRepository
           firstName: document.firstName,
           lastName: document.lastName,
           email: document.email,
-          password: document.password
+          password: document.password,
+          startPlan: document.startPlan,
+          endPlan: document.endPlan
         })
       : null
   }
@@ -59,7 +63,9 @@ export class MongoUserRepository
           firstName: document.firstName,
           lastName: document.lastName,
           email: document.email,
-          password: document.password
+          password: document.password,
+          startPlan: document.startPlan,
+          endPlan: document.endPlan
         })
       : null
   }

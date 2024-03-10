@@ -12,6 +12,10 @@ import { UserEmailMother } from './UserEmailMother'
 import { UserPasswordMother } from './UserPasswordMother'
 import { type RoleName } from '@Auth/Shared/domain/Roles/RoleName'
 import { RoleNameMother } from '../../Roles/domain/RoleNameMother'
+import { type UserStartPlan } from '@Auth/Shared/domain/Transactions/UserStartPlan'
+import { type UserEndPlan } from '@Auth/Shared/domain/Transactions/UserEndPlan'
+import { UserStartPlanMother } from './UserStartPlanMother'
+import { UserEndPlanMother } from './UserEndPlanMother'
 
 export class UserMother {
   public static create(
@@ -20,9 +24,20 @@ export class UserMother {
     firstName: UserFirstName,
     lastName: UserLastName,
     email: UserEmail,
-    password: UserPassword
+    password: UserPassword,
+    startPlan: UserStartPlan,
+    endPlan: UserEndPlan
   ): User {
-    return new User(id, roleName, firstName, lastName, email, password)
+    return new User(
+      id,
+      roleName,
+      firstName,
+      lastName,
+      email,
+      password,
+      startPlan,
+      endPlan
+    )
   }
 
   public static from(command: CreateUserCommand): User {
@@ -32,7 +47,9 @@ export class UserMother {
       UserFirstNameMother.create(command.firstName),
       UserLastNameMother.create(command.lastName),
       UserEmailMother.create(command.email),
-      UserPasswordMother.create(command.password)
+      UserPasswordMother.create(command.password),
+      UserStartPlanMother.create(new Date()),
+      UserEndPlanMother.create(new Date())
     )
   }
 
@@ -43,7 +60,9 @@ export class UserMother {
       UserFirstNameMother.random(),
       UserLastNameMother.random(),
       UserEmailMother.random(),
-      UserPasswordMother.random()
+      UserPasswordMother.random(),
+      UserStartPlanMother.random(),
+      UserEndPlanMother.random()
     )
   }
 }
