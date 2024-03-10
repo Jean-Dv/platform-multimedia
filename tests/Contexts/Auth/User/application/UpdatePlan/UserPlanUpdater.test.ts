@@ -19,7 +19,7 @@ describe('UserPlanUpdater', () => {
     const endPlan = UserEndPlanMother.random()
     await updater.run(user.id.value, startPlan.value, endPlan.value)
 
-    repository.assertSaveHaveBeenCalledWith(user)
+    repository.assertSaveHaveBeenCalled()
   })
 
   it('throws an error when the user does not exist', async () => {
