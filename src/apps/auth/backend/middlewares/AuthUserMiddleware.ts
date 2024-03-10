@@ -56,6 +56,15 @@ export class AuthUserMiddleware implements Middleware {
         })
         return
       }
+      if (!(await this.validatePlan(userId))) {
+        res.status(httpStatus.UNAUTHORIZED).json({
+          ok: false,
+          data: {
+            message: 'Your plan has expired'
+          }
+        })
+        return
+      }
       next()
     } catch (error) {
       if (
@@ -87,5 +96,14 @@ export class AuthUserMiddleware implements Middleware {
     const { role } = await this.queryBus.ask<RoleResponse>(queryRole)
 
     return roleName === role.name && role.name === 'registered'
+  }
+
+  private async validatePlan(userId: string): Promise<boolean> {
+    const queryUser = new SearchUserByIdQuery(userId)
+    const { startPlan, endPlan } =
+      await this.queryBus.ask<UserResponse>(queryUser)
+
+    const currentDate = new Date()
+    return currentDate >= startPlan && currentDate <= endPlan
   }
 }

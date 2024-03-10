@@ -11,6 +11,7 @@ import { UserFirstName } from '@Auth/User/domain/UserFirstName'
 import { UserLastName } from '@Auth/User/domain/UserLastName'
 import { UserEmail } from '@Auth/User/domain/UserEmail'
 import { UserPassword } from '@Auth/User/domain/UserPassword'
+import { UserStartPlan } from '@Auth/Shared/domain/Transactions/UserStartPlan'
 
 const roleRepository: RoleRepository = container.get(
   'Auth.Roles.domain.RoleRepository'
@@ -37,7 +38,9 @@ Given('there is the user:', async (userStr: string) => {
     new UserFirstName(userObject.firstName),
     new UserLastName(userObject.lastName),
     new UserEmail(userObject.email),
-    new UserPassword(userObject.password)
+    new UserPassword(userObject.password),
+    new UserStartPlan(new Date(userObject.startPlan)),
+    new UserStartPlan(new Date(userObject.endPlan))
   )
   await userRepository.save(user)
 })
