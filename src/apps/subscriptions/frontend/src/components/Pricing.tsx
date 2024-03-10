@@ -1,75 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { useEffect, useState } from "react";
+"use client";
+import { PricingProps } from "@/types";
+import PricingItem from "./PricingItem";
+import useFetch from "@/hooks/useFetch";
 
-
-enum PopularPlanType {
-    NO = 0,
-    YES = 1,
-}
-
-interface PricingProps {
-    id?: string;
-    title: string;
-    price: number;
-    description: string;
-    duration: number;
-}
-
-const pricingList: PricingProps[] = [
-    {
-        id: "",
-        title: "Basic",
-        price: 1,
-        description:
-            "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
-        duration: 30,
-    },
-    {
-        id: "",
-        title: "Pro",
-        price: 5,
-        description:
-            "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
-        duration: 90,
-    },
-    {
-        id: "",
-        title: "Pro Plus",
-        price: 40,
-        description:
-            "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
-        duration: 365,
-    },
-]
-
-export function Pricing() {
-    const [isLoading, setIsLoading] = useState(true)
-    const [plans, setPlans] = useState<PricingProps[]>([])
+export default function Pricing() {
     let token = ""
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
         token = window.localStorage.getItem("token") as string
     }
-    useEffect(() => {
-        fetch("http://localhost:8000/api/v1/subscriptions/plans", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((response) => response.json())
-            .then(({ data, ok }: { data: PricingProps[], ok: boolean }) => {
-                setPlans(data)
-                setIsLoading(false)
-            });
-    }, [])
+
+    const { data: plans, isLoading } = useFetch<PricingProps[]>("http://localhost:8000/api/v1/subscriptions/plans", token)
+
+    if (isLoading) return <p>Loading...</p>
+
 
     return (
         <section
@@ -89,35 +32,8 @@ export function Pricing() {
                 reiciendis.
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {plans.map((pricing: PricingProps) => (
-                    <form key={pricing.id}>
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex item-center justify-between">
-                                    {pricing.title}
-                                </CardTitle>
-                                <div>
-                                    <span className="text-3xl font-bold">${pricing.price}</span>
-                                    <span className="text-muted-foreground"> /month</span>
-                                </div>
-
-                                <CardDescription>{pricing.description}</CardDescription>
-                            </CardHeader>
-
-                            <CardContent>
-                                <div className="space-y-4">
-                                    {pricing.duration}
-                                </div>
-
-                            </CardContent>
-
-                            <hr className="w-4/5 m-auto mb-4" />
-
-                            <CardFooter className="flex">
-                                <Button className="w-full">Subscribe</Button>
-                            </CardFooter>
-                        </Card>
-                    </form>
+                {plans!.map((pricing: PricingProps) => (
+                    <PricingItem key={pricing.id} {...pricing} />
                 ))}
             </div>
         </section>
