@@ -1,4 +1,4 @@
-import { PlanDaysDuration } from '@Subscriptions/Plans/domain/PlanDaysDuration'
+import { PlanDaysDuration } from '@Subscriptions/Shared/domain/PlanDaysDuration'
 
 /**
  * Factory to create PlanDaysDuration value objects
