@@ -1,0 +1,28 @@
+{
+  "services": {
+    "Subscriptions.Transactions.application.TransactionCreator": {
+      "class": "../../../../../Contexts/Subscriptions/Transactions/application/Create/TransactionCreator",
+      "arguments": [
+        "@Subscriptions.Transactions.domain.TransactionRepository",
+        "@Subscriptions.Shared.domain.EventBus"
+      ]
+    },
+    "Subscriptions.Transactions.domain.TransactionRepository": {
+      "class": "../../../../../Contexts/Subscriptions/Transactions/infrastructure/persistence/MongoTransactionRepository",
+      "arguments": [
+        "@Subscriptions.Shared.ConnectionManager"
+      ]
+    },
+    "Subscriptions.Transactions.CreateTransactionCommandHandler": {
+      "class": "../../../../../Contexts/Subscriptions/Transactions/application/Create/CreateTransactionCommandHandler",
+      "arguments": [
+        "@Subscriptions.Transactions.application.TransactionCreator"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}
