@@ -38,6 +38,12 @@
       "arguments": [
         "@BackofficeMultimedia.Shared.domain.CommandBus"
       ]
+    },
+    "Apps.backoffice-multimedia.controllers.ChapterDeleteController": {
+      "class": "../../controllers/ChapterDeleteController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
     }
   }
 }

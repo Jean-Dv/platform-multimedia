@@ -15,6 +15,12 @@ import { BackofficeMultimediaSeason } from '@BackofficeMultimedia/Seasons/domain
 import { BackofficeMultimediaSeasonId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaSeasonId'
 import { BackofficeMultimediaSeasonTitle } from '@BackofficeMultimedia/Seasons/domain/BackofficeMultimediaSeasonTitle'
 import { BackofficeMultimediaSeasonReleaseYear } from '@BackofficeMultimedia/Seasons/domain/BackofficeMultimediaSeasonReleaseYear'
+import { type BackofficeMultimediaChapterRepository } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapterRepository'
+import { BackofficeMultimediaChapter } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapter'
+import { BackofficeMultimediaChapterId } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapterId'
+import { BackofficeMultimediaChapterTitle } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapterTitle'
+import { BackofficeMultimediaChapterReleaseYear } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapterReleaseYear'
+import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 
 const categoriesRepository: BackofficeMultimediaCategoryRepository =
   container.get('BackofficeMultimedia.Categories.domain.CategoryRepository')
@@ -25,6 +31,10 @@ const serieRepository: BackofficeMultimediaSerieRepository = container.get(
 
 const seasonRepository: BackofficeMultimediaSeasonRepository = container.get(
   'BackofficeMultimedia.Seasons.domain.SeasonRepository'
+)
+
+const chapterRepository: BackofficeMultimediaChapterRepository = container.get(
+  'BackofficeMultimedia.Chapters.domain.ChapterRepository'
 )
 
 Given('there is the category:', async (category: string) => {
@@ -60,6 +70,19 @@ Given('there is the season:', async (season: string) => {
       new BackofficeMultimediaSeasonTitle(title),
       new BackofficeMultimediaSeasonReleaseYear(releaseYear),
       new BackofficeMultimediaSerieId(serie)
+    )
+  )
+})
+
+Given('there is the chapter:', async (chapter: string) => {
+  const { id, title, releaseYear, season, video } = JSON.parse(chapter)
+  await chapterRepository.save(
+    new BackofficeMultimediaChapter(
+      new BackofficeMultimediaChapterId(id),
+      new BackofficeMultimediaChapterTitle(title),
+      new BackofficeMultimediaChapterReleaseYear(releaseYear),
+      new BackofficeMultimediaSeasonId(season),
+      new BackofficeMultimediaVideoId(video)
     )
   )
 })
