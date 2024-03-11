@@ -6,6 +6,7 @@ import { BackofficeMultimediaMovieSynopsis } from './BackofficeMultimediaMovieSy
 import { BackofficeMultimediaMovieCreatedDomainEvent } from './BackofficeMultimediaMovieCreatedDomainEvent'
 import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 import { BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
+import { BackofficeMultimediaMovieDeletedDomainEvent } from './BackofficeMultimediaMovieDeletedDomainEvent'
 
 /**
  * BackofficeMultimediaMovie is an aggregate root representing a movie in the backoffice.
@@ -62,6 +63,17 @@ export class BackofficeMultimediaMovie extends AggregateRoot {
       })
     )
     return movie
+  }
+
+  /**
+   * Deletes the movie and publish the event.
+   */
+  public delete(): void {
+    this.record(
+      new BackofficeMultimediaMovieDeletedDomainEvent({
+        aggregateId: this.id.value
+      })
+    )
   }
 
   /**
