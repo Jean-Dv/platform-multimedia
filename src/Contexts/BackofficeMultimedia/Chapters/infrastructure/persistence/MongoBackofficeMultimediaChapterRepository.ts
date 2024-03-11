@@ -2,9 +2,10 @@ import { BackofficeMultimediaChapter } from '@BackofficeMultimedia/Chapters/doma
 import { type BackofficeMultimediaChapterId } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapterId'
 import { type BackofficeMultimediaChapterRepository } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapterRepository'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
+import { type UUID } from 'mongodb'
 
 interface BackofficeMultimediaChapterMongoDocument {
-  _id: string
+  _id: UUID
   title: string
   releaseYear: number
   season: string
@@ -26,7 +27,7 @@ export class MongoBackofficeMultimediaChapterRepository
       await this.findById<BackofficeMultimediaChapterMongoDocument>(id.value)
     return chapter !== null
       ? BackofficeMultimediaChapter.fromPrimitives({
-          id: chapter._id,
+          id: chapter._id.toString(),
           title: chapter.title,
           releaseYear: chapter.releaseYear,
           season: chapter.season,
