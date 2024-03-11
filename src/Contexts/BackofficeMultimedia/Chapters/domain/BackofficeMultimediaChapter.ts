@@ -5,6 +5,7 @@ import { BackofficeMultimediaChapterReleaseYear } from './BackofficeMultimediaCh
 import { BackofficeMultimediaSeasonId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaSeasonId'
 import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
 import { BackofficeMultimediaChapterCreatedDomainEvent } from './BackofficeMultimediaChapterCreatedDomainEvent'
+import { BackofficeMultimediaChapterDeletedDomainEvent } from './BackofficeMultimediaChapterDeletedDomainEvent'
 
 /**
  * BackofficeMultimediaChapter is an aggregate root representing a chapter in the backoffice.
@@ -66,6 +67,14 @@ export class BackofficeMultimediaChapter extends AggregateRoot {
       })
     )
     return chapter
+  }
+
+  public delete(): void {
+    this.record(
+      new BackofficeMultimediaChapterDeletedDomainEvent({
+        aggregateId: this.id.value
+      })
+    )
   }
 
   /**
