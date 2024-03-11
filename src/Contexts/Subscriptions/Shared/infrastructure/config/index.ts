@@ -78,6 +78,14 @@ const subscriptionsConfig = convict({
       env: 'RABBITMQ_RETRY_TTL',
       default: 1000
     }
+  },
+  mercadopago: {
+    accessToken: {
+      doc: 'MercadoPago access token',
+      format: String,
+      env: 'MERCADOPAGO_ACCESS',
+      default: 'TEST'
+    }
   }
 })
 

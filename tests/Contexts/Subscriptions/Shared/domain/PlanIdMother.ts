@@ -1,4 +1,4 @@
-import { PlanId } from '@Subscriptions/Plans/domain/PlanId'
+import { PlanId } from '@Subscriptions/Shared/domain/PlanId'
 import { UuidMother } from '../../../Shared/domain/UuidMother'
 
 /**

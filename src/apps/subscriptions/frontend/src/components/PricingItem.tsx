@@ -11,15 +11,17 @@ import { Button } from "@/components/ui/button";
 
 import { PricingProps } from "@/types";
 
-export default function PricingItem({ id, duration, description, price, title }: PricingProps) {
+export default function PricingItem({ id, duration, description, price, name, token }: PricingProps & { token: string }) {
     async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         const response = await fetch("/api/mercadopago", {
             method: "POST",
             body: JSON.stringify({
                 id,
-                title,
+                name,
                 price,
+                duration,
+                token
             }),
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +34,7 @@ export default function PricingItem({ id, duration, description, price, title }:
         <Card key={id}>
             <CardHeader>
                 <CardTitle className="flex item-center justify-between">
-                    {title}
+                    {name}
                 </CardTitle>
                 <div>
                     <span className="text-3xl font-bold">${price}</span>

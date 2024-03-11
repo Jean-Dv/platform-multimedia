@@ -33,7 +33,7 @@ export default function Pricing() {
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {plans!.map((pricing: PricingProps) => (
-                    <PricingItem key={pricing.id} {...pricing} />
+                    <PricingItem key={pricing.id} {...pricing} token={token} />
                 ))}
             </div>
         </section>

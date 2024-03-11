@@ -53,7 +53,9 @@ Feature: Create a new user
       "firstName": "John",
       "lastName": "Doe",
       "email": "jonhdoe1@gmail.com",
-      "password": "#3*7VXn33e9&!8*"
+      "password": "#3*7VXn33e9&!8*",
+      "startPlan": "2021-01-01",
+      "endPlan": "2021-12-31"
     }
     """
     And I send a PUT request to "/auth/register" with body:

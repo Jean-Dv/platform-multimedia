@@ -8,6 +8,9 @@
     },
     {
       "resource": "./Plans/application.json"
+    },
+    {
+      "resource": "./Transactions/application.json"
     }
   ]
 }

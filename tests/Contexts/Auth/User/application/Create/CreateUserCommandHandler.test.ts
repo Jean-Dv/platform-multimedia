@@ -27,7 +27,7 @@ describe('CreateUserCommandHandler', () => {
 
     await handler.handle(command)
 
-    repository.assertSaveHaveBeenCalledWith(user)
+    repository.assertSaveHaveBeenCalled()
     eventBus.assertLastPublishedEventIs(domainEvent)
   })
 

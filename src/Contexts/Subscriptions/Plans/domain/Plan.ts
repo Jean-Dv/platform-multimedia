@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
-import { PlanId } from './PlanId'
+import { PlanId } from '../../Shared/domain/PlanId'
 import { PlanName } from './PlanName'
 import { PlanPrice } from './PlanPrice'
-import { PlanDaysDuration } from './PlanDaysDuration'
+import { PlanDaysDuration } from '../../Shared/domain/PlanDaysDuration'
 import { PlanDescription } from './PlanDescription'
 
 /**

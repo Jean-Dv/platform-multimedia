@@ -1,13 +1,13 @@
 import { Plan } from '@Subscriptions/Plans/domain/Plan'
-import { type PlanDaysDuration } from '@Subscriptions/Plans/domain/PlanDaysDuration'
+import { type PlanDaysDuration } from '@Subscriptions/Shared/domain/PlanDaysDuration'
 import { type PlanDescription } from '@Subscriptions/Plans/domain/PlanDescription'
-import { type PlanId } from '@Subscriptions/Plans/domain/PlanId'
+import { type PlanId } from '@Subscriptions/Shared/domain/PlanId'
 import { type PlanName } from '@Subscriptions/Plans/domain/PlanName'
 import { type PlanPrice } from '@Subscriptions/Plans/domain/PlanPrice'
-import { PlanIdMother } from './PlanIdMother'
+import { PlanIdMother } from '../../Shared/domain/PlanIdMother'
 import { PlanNameMother } from './PlanNameMother'
 import { PlanPriceMother } from './PlanPriceMother'
-import { PlanDaysDurationMother } from './PlanDaysDurationMother'
+import { PlanDaysDurationMother } from '../../Shared/domain/PlanDaysDurationMother'
 import { PlanDescriptionMother } from './PlanDescriptionMother'
 
 /**

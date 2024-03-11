@@ -46,6 +46,15 @@
       "class": "../../../../../Contexts/Auth/User/application/SearchById/SearchUserByIdQueryHandler",
       "arguments": ["@Auth.User.application.UserByIdSearcher"],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Auth.User.application.UserPlanUpdater": {
+      "class": "../../../../../Contexts/Auth/User/application/UpdatePlan/UserPlanUpdater",
+      "arguments": ["@Auth.User.domain.UserRepository"]
+    },
+    "Auth.User.UpdateUserOnTransactionCreated": {
+      "class": "../../../../../Contexts/Auth/User/application/UpdatePlan/UpdateUserOnTransactionCreated",
+      "arguments": ["@Auth.User.application.UserPlanUpdater"],
+      "tags": [{ "name": "domainEventSubscriber" }]
     }
   }
 }
