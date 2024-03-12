@@ -18,5 +18,18 @@ export interface SeasonRepository {
    */
   matching: (criteria: Criteria) => Promise<Season[]>
 
+  /**
+   * Retrieves a season by its id.
+   *
+   * @param id - The id of the season to be searched.
+   * @returns A promise that resolves to the season with the specified id, or null if no season is found.
+   */
   searchById: (id: SeasonId) => Promise<Season | null>
+
+  /**
+   * Removes a season from the repository.
+   *
+   * @param id - The id of the season to be deleted.
+   */
+  delete: (id: SeasonId) => Promise<void>
 }

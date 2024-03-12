@@ -46,6 +46,10 @@ export class MongoSeasonRepository
       : null
   }
 
+  public async delete(id: SeasonId): Promise<void> {
+    await this.erase(id.value)
+  }
+
   protected collectionName(): string {
     return 'seasons'
   }

@@ -7,12 +7,14 @@ export class SeasonRepositoryMock implements SeasonRepository {
   private readonly mockSave: jest.Mock
   private readonly mockMatching: jest.Mock
   private readonly searchByIdMock: jest.Mock
+  private readonly mockDelete: jest.Mock
   private readonly seasons: Season[] = []
 
   constructor() {
     this.mockSave = jest.fn()
     this.mockMatching = jest.fn()
     this.searchByIdMock = jest.fn()
+    this.mockDelete = jest.fn()
   }
 
   public async save(season: Season): Promise<void> {
@@ -29,6 +31,10 @@ export class SeasonRepositoryMock implements SeasonRepository {
     return this.seasons.find((season) => season.id.value === id.value) ?? null
   }
 
+  public async delete(id: SeasonId): Promise<void> {
+    this.mockDelete(id)
+  }
+
   public assertSaveHaveBeenCalledWith(season: Season): void {
     expect(this.mockSave).toHaveBeenCalledWith(season)
   }
@@ -39,6 +45,10 @@ export class SeasonRepositoryMock implements SeasonRepository {
 
   public assertSearchByIdHaveBeenCalledWith(id: SeasonId): void {
     expect(this.searchByIdMock).toHaveBeenCalledWith(id)
+  }
+
+  public assertDeleteHaveBeenCalledWith(id: SeasonId): void {
+    expect(this.mockDelete).toHaveBeenCalledWith(id)
   }
 
   public searchByCriteriaMockReturnValue(seasons: Season[]): void {
