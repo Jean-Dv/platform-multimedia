@@ -56,6 +56,12 @@
       "arguments": [
         "@BackofficeMultimedia.Shared.domain.CommandBus"
       ]
+    },
+    "Apps.backoffice-multimedia.controllers.SeasonDeleteController": {
+      "class": "../../controllers/SeasonDeleteController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
     }
   }
 }
