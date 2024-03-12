@@ -22,4 +22,11 @@ export interface SerieRepository {
   updateSeriesByCategory: (category: CategoryName) => Promise<void>
 
   searchById: (id: SerieId) => Promise<Serie | null>
+
+  /**
+   * Removes a serie from the repository.
+   *
+   * @param id - The id of the serie to be deleted.
+   */
+  delete: (id: SerieId) => Promise<void>
 }
