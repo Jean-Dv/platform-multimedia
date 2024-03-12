@@ -1,4 +1,7 @@
 {
+  "mongo":{
+    "url": "mongodb://backoffice-multimedia-mongo:27017/backoffice-multimedia-prod"
+  },
   "aws": {
     "s3": {
       "bucketName": "com.github.jean-dv.storage",
@@ -6,6 +9,13 @@
       "secretAccessKey": "test",
       "region": "eu-west-1",
       "endpoint": "http://localhost:4566"
+    }
+  },
+  "rabbitmq": {
+    "connectionSettings": {
+      "connection": {
+        "hostname": "rabbitmq"
+      }
     }
   }
 }
