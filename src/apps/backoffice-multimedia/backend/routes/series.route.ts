@@ -1,5 +1,5 @@
 import { type Router } from 'express'
-import { body } from 'express-validator'
+import { body, param } from 'express-validator'
 import { container } from '../dependency-injection'
 import { validateReqSchema } from '.'
 
@@ -22,6 +22,20 @@ function registerPutSerie(router: Router): void {
   )
 }
 
+function registerDeleteSerie(router: Router): void {
+  const reqSchema = [param('id').exists().isString().isUUID()]
+  const controller = container.get(
+    'Apps.backoffice-multimedia.controllers.SerieDeleteController'
+  )
+  router.delete(
+    '/series/:id',
+    reqSchema,
+    validateReqSchema,
+    controller.run.bind(controller)
+  )
+}
+
 export function register(router: Router): void {
   registerPutSerie(router)
+  registerDeleteSerie(router)
 }
