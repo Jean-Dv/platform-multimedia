@@ -50,6 +50,12 @@
       "arguments": [
         "@BackofficeMultimedia.Shared.domain.CommandBus"
       ]
+    },
+    "Apps.backoffice-multimedia.controllers.SerieDeleteController": {
+      "class": "../../controllers/SerieDeleteController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
     }
   }
 }

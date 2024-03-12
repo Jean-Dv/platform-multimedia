@@ -30,6 +30,24 @@
           "name": "commandHandler"
         }
       ]
+    },
+    "BackofficeMultimedia.Series.application.SerieDeletor": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Series/application/Delete/BackofficeMultimediaSerieDeletor",
+      "arguments": [
+        "@BackofficeMultimedia.Series.domain.SerieRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Series.DeleteSerieCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Series/application/Delete/DeleteBackofficeMultimediaSerieCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Series.application.SerieDeletor"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
     }
   }
 }
