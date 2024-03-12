@@ -83,8 +83,12 @@ export abstract class MongoRepository<T extends AggregateRoot> {
   ): Promise<D[]> {
     const query = this.criteriaConverter.convert(criteria)
     const collection = await this.collection()
+    const filter = {
+      ...query.filter,
+      deletedAt: null
+    }
     return await collection
-      .find<D>(query.filter, {})
+      .find<D>(filter, {})
       .sort(query.sort)
       .skip(query.skip)
       .limit(query.limit)

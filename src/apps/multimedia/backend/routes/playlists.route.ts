@@ -3,6 +3,23 @@ import { body, param } from 'express-validator'
 import { container } from '../dependency-injection'
 import { validateReqSchema } from '.'
 
+function registerGetPlaylists(router: Router): void {
+  const reqSchema = [param('userId').exists().isString().isUUID()]
+  const middleware = container.get(
+    'Apps.multimedia.middlewares.AuthenticateMiddleware'
+  )
+  const controller = container.get(
+    'Apps.multimedia.controllers.PlaylistsGetController'
+  )
+  router.get(
+    '/multimedia/playlists/:userId',
+    middleware.run.bind(middleware),
+    reqSchema,
+    validateReqSchema,
+    controller.run.bind(controller)
+  )
+}
+
 function registerPutPlaylist(router: Router): void {
   const reqSchema = [
     body('id').exists().isString().isUUID(),
@@ -46,4 +63,5 @@ function registerDeletePlaylist(router: Router): void {
 export function register(router: Router): void {
   registerPutPlaylist(router)
   registerDeletePlaylist(router)
+  registerGetPlaylists(router)
 }
