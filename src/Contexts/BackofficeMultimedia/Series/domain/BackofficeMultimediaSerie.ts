@@ -5,6 +5,7 @@ import { BackofficeMultimediaSerieReleaseYear } from './BackofficeMultimediaSeri
 import { BackofficeMultimediaSerieSynopsis } from './BackofficeMultimediaSerieSynopsis'
 import { BackofficeMultimediaCategoryId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaCategoryId'
 import { BackofficeMultimediaSerieCreatedDomainEvent } from './BackofficeMultimediaSerieCreatedDomainEvent'
+import { BackofficeMultimediaSerieDeletedDomainEvent } from './BackofficeMultimediaSerieDeletedDomainEvent'
 
 /**
  * BackofficeMultimediaSerie is an aggregate root representing a serie in the backoffice.
@@ -66,6 +67,17 @@ export class BackofficeMultimediaSerie extends AggregateRoot {
       })
     )
     return serie
+  }
+
+  /**
+   * This method delete the current instance of the BackofficeMultimediaSerie aggregate
+   */
+  public delete(): void {
+    this.record(
+      new BackofficeMultimediaSerieDeletedDomainEvent({
+        aggregateId: this.id.value
+      })
+    )
   }
 
   /**
