@@ -1,6 +1,6 @@
 import { type Router } from 'express'
 import { container } from '../dependency-injection'
-import { body } from 'express-validator'
+import { param, body } from 'express-validator'
 import { validateReqSchema } from '.'
 
 function registerPutMovie(router: Router): void {
@@ -23,6 +23,20 @@ function registerPutMovie(router: Router): void {
   )
 }
 
+function registerDeleteMovie(router: Router): void {
+  const reqSchema = [param('id').exists().isString().isUUID()]
+  const controller = container.get(
+    'Apps.backoffice-multimedia.controllers.MovieDeleteController'
+  )
+  router.delete(
+    '/movies/:id',
+    reqSchema,
+    validateReqSchema,
+    controller.run.bind(controller)
+  )
+}
+
 export function register(router: Router): void {
   registerPutMovie(router)
+  registerDeleteMovie(router)
 }
