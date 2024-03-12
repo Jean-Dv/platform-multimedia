@@ -11,6 +11,15 @@ networks:
   gateway-network:
 
 services:
+  mongo:
+    image: mongo:5.0.0
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/platform-prod
+    networks:
+      - platform-network
+
   auth-mongo:
     image: mongo:5.0.0
     environment:
