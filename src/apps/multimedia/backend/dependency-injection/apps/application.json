@@ -51,6 +51,10 @@
     "Apps.multimedia.controllers.VideoGetController": {
       "class": "../../controllers/VideoGetController",
       "arguments": ["@Multimedia.Shared.domain.QueryBus"]
+    },
+    "Apps.multimedia.controllers.PlaylistsGetController": {
+      "class": "../../controllers/PlaylistsGetController",
+      "arguments": ["@Multimedia.Shared.domain.QueryBus"]
     }
   }
 }
