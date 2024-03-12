@@ -25,4 +25,11 @@ export interface ChapterRepository {
    * @returns A promise that resolves to the retrieved chapter, or null if no chapter was found.
    */
   search: (id: ChapterId) => Promise<Chapter | null>
+
+  /**
+   * Deletes a chapter from the repository.
+   *
+   * @param id - The id of the chapter to be deleted.
+   */
+  delete: (id: ChapterId) => Promise<void>
 }
