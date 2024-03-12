@@ -34,6 +34,15 @@
       "class": "../../../../../Contexts/Multimedia/Chapter/application/Create/CreateChapterOnBackofficeMultimediaChapterCreated",
       "arguments": ["@Multimedia.Chapters.application.ChapterCreator"],
       "tags": [{ "name": "domainEventSubscriber" }]
+    },
+    "Multimedia.Chapters.application.ChapterDeletor": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Delete/ChapterDeletor",
+      "arguments": ["@Multimedia.Chapters.domain.ChapterRepository"]
+    },
+    "Multimedia.Chapters.DeleteChapterOnBackofficeMultimediaChapterDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Delete/DeleteChapterOnBackofficeMultimediaChapterDeleted",
+      "arguments": ["@Multimedia.Chapters.application.ChapterDeletor"],
+      "tags": [{ "name": "domainEventSubscriber" }]
     }
   }
 }

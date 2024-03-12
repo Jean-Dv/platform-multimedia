@@ -58,7 +58,8 @@ export abstract class MongoRepository<T extends AggregateRoot> {
     const collection = await this.collection()
     const document = {
       ...aggregateRoot.toPrimitives(),
-      createdAt: new Date()
+      createdAt: new Date(),
+      deletedAt: null
     }
     await collection.updateOne(
       {
@@ -98,7 +99,10 @@ export abstract class MongoRepository<T extends AggregateRoot> {
    */
   protected async findById<D extends Document>(id: string): Promise<D | null> {
     const collection = await this.collection()
-    const document = await collection.findOne<D>({ _id: new UUID(id) })
+    const document = await collection.findOne<D>({
+      _id: new UUID(id),
+      deletedAt: null
+    })
     return document
   }
 

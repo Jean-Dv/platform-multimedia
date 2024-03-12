@@ -51,6 +51,10 @@ export class MongoChapterRepository
       : null
   }
 
+  public async delete(id: ChapterId): Promise<void> {
+    await this.erase(id.value)
+  }
+
   protected collectionName(): string {
     return 'chapters'
   }

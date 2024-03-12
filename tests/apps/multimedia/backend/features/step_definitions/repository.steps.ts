@@ -101,13 +101,13 @@ Given('there is the serie:', async (serie: string) => {
 })
 
 Given('there is the season:', async (season: string) => {
-  const { id, serieId, title, releaseDate } = JSON.parse(season)
+  const { id, serieId, title, releaseYear } = JSON.parse(season)
   await seasonsRepository.save(
     new Season(
       new SeasonId(id),
       new SerieId(serieId),
       new SeasonTitle(title),
-      new SeasonReleaseYear(releaseDate)
+      new SeasonReleaseYear(releaseYear)
     )
   )
 })

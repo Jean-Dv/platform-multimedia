@@ -24,6 +24,24 @@
           "name": "commandHandler"
         }
       ]
+    },
+    "BackofficeMultimedia.Chapters.application.ChapterDeletor": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Chapters/application/Delete/BackofficeMultimediaChapterDeletor",
+      "arguments": [
+        "@BackofficeMultimedia.Chapters.domain.ChapterRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Chapters.DeleteChapterCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Chapters/application/Delete/DeleteBackofficeMultimediaChapterCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Chapters.application.ChapterDeletor"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
     }
   }
 }

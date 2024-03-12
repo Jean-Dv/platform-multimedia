@@ -4,6 +4,7 @@ import { BackofficeMultimediaSeasonTitle } from './BackofficeMultimediaSeasonTit
 import { BackofficeMultimediaSeasonReleaseYear } from './BackofficeMultimediaSeasonReleaseYear'
 import { BackofficeMultimediaSerieId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaSerieId'
 import { BackofficeMultimediaSeasonCreatedDomainEvent } from './BackofficeMultimediaSeasonCreatedDomainEvent'
+import { BackofficeMultimediaSeasonDeletedDomainEvent } from './BackofficeMultimediaSeasonDeletedDomainEvent'
 
 /**
  * BackofficeMultimediaSeason is an aggregate root representing a season in the backoffice.
@@ -53,6 +54,17 @@ export class BackofficeMultimediaSeason extends AggregateRoot {
       })
     )
     return season
+  }
+
+  /**
+   * This method deletes the season and publish domain event.
+   */
+  public delete(): void {
+    this.record(
+      new BackofficeMultimediaSeasonDeletedDomainEvent({
+        aggregateId: this.id.value
+      })
+    )
   }
 
   /**

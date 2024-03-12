@@ -40,6 +40,10 @@ export class MongoBackofficeMultimediaSerieRepository
       : null
   }
 
+  public async delete(serie: BackofficeMultimediaSerie): Promise<void> {
+    await this.erase(serie.id.value)
+  }
+
   public collectionName(): string {
     return 'backoffice-multimedia-series'
   }

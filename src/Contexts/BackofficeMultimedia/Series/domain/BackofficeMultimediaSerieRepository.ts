@@ -18,4 +18,11 @@ export interface BackofficeMultimediaSerieRepository {
   search: (
     id: BackofficeMultimediaSerieId
   ) => Promise<BackofficeMultimediaSerie | null>
+
+  /**
+   * Deletes a backoffice multimedia serie from the repository.
+   *
+   * @param serie - The backoffice multimedia serie to be deleted.
+   */
+  delete: (serie: BackofficeMultimediaSerie) => Promise<void>
 }

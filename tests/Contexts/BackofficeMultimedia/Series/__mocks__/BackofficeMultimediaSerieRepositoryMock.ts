@@ -6,10 +6,14 @@ export class BackofficeMultimediaSerieRepositoryMock
   implements BackofficeMultimediaSerieRepository
 {
   private readonly mockSave: jest.Mock
+  private readonly mockSearch: jest.Mock
+  private readonly mockDelete: jest.Mock
   private readonly series: BackofficeMultimediaSerie[] = []
 
   constructor() {
     this.mockSave = jest.fn()
+    this.mockSearch = jest.fn()
+    this.mockDelete = jest.fn()
   }
 
   public async save(serie: BackofficeMultimediaSerie): Promise<void> {
@@ -19,7 +23,12 @@ export class BackofficeMultimediaSerieRepositoryMock
   public async search(
     id: BackofficeMultimediaSerieId
   ): Promise<BackofficeMultimediaSerie | null> {
+    this.mockSearch(id)
     return this.series.find((serie) => serie.id.value === id.value) ?? null
+  }
+
+  public async delete(serie: BackofficeMultimediaSerie): Promise<void> {
+    this.mockDelete(serie)
   }
 
   /**
@@ -29,6 +38,26 @@ export class BackofficeMultimediaSerieRepositoryMock
    */
   public assertSaveHaveBeenCalledWith(serie: BackofficeMultimediaSerie): void {
     expect(this.mockSave).toHaveBeenCalledWith(serie)
+  }
+
+  /**
+   * Asserts that the `search` method has been called with the specified id.
+   *
+   * @param id - The expected id.
+   */
+  public assertSearchHaveBeenCalledWith(id: BackofficeMultimediaSerieId): void {
+    expect(this.mockSearch).toHaveBeenCalledWith(id)
+  }
+
+  /**
+   * Asserts that the `delete` method has been called with the specified serie.
+   *
+   * @param serie - The expected serie.
+   */
+  public assertDeleteHaveBeenCalledWith(
+    serie: BackofficeMultimediaSerie
+  ): void {
+    expect(this.mockDelete).toHaveBeenCalledWith(serie)
   }
 
   /**

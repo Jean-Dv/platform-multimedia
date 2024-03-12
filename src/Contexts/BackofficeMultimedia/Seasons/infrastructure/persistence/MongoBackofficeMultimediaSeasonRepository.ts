@@ -35,6 +35,10 @@ export class MongoBackofficeMultimediaSeasonRepository
       : null
   }
 
+  public async delete(season: BackofficeMultimediaSeason): Promise<void> {
+    await this.erase(season.id.value)
+  }
+
   protected collectionName(): string {
     return 'backoffice-multimedia-seasons'
   }

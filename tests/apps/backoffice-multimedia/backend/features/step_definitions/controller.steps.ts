@@ -15,6 +15,10 @@ Given(
   }
 )
 
+Given('I send a DELETE request to {string}', (route: string) => {
+  _request = request(application.getHttpServer()).delete(route)
+})
+
 Then('the response status code should be {int}', async (statusCode: number) => {
   _response = await _request.expect(statusCode)
 })

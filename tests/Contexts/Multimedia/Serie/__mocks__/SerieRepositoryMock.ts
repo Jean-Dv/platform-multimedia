@@ -9,6 +9,7 @@ export class SerieRepositoryMock implements SerieRepository {
   private readonly searchByCriteriaMock: jest.Mock
   private readonly updateSeriesByCategoryMock: jest.Mock
   private readonly searchByIdMock: jest.Mock
+  private readonly deleteMock: jest.Mock
   private readonly series: Serie[] = []
 
   constructor() {
@@ -16,6 +17,7 @@ export class SerieRepositoryMock implements SerieRepository {
     this.searchByCriteriaMock = jest.fn()
     this.updateSeriesByCategoryMock = jest.fn()
     this.searchByIdMock = jest.fn()
+    this.deleteMock = jest.fn()
   }
 
   public async save(serie: Serie): Promise<void> {
@@ -36,6 +38,10 @@ export class SerieRepositoryMock implements SerieRepository {
     return this.series.find((serie) => serie.id.value === id.value) ?? null
   }
 
+  public async delete(id: SerieId): Promise<void> {
+    this.deleteMock(id)
+  }
+
   public assertSaveHaveBeenCalledWith(serie: Serie): void {
     expect(this.saveMock).toHaveBeenCalledWith(serie)
   }
@@ -52,6 +58,10 @@ export class SerieRepositoryMock implements SerieRepository {
 
   public assertSearchByIdHaveBeenCalledWith(id: SerieId): void {
     expect(this.searchByIdMock).toHaveBeenCalledWith(id)
+  }
+
+  public assertDeleteHaveBeenCalledWith(id: SerieId): void {
+    expect(this.deleteMock).toHaveBeenCalledWith(id)
   }
 
   public searchByCriteriaMockReturnValue(series: Serie[]): void {
