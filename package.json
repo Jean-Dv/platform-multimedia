@@ -35,7 +35,12 @@
     "command:multimedia:rabbitmq": "NODE_ENV=production ts-node src/apps/multimedia/backend/command/runConfigureRabbitMQCommand",
     "command:backoffice_multimedia:rabbitmq": "NODE_ENV=production ts-node src/apps/backoffice-multimedia/backend/command/runConfigureRabbitMQCommand",
     "command:backoffice_subscriptions:rabbitmq": "NODE_ENV=production ts-node src/apps/backoffice-subscriptions/backend/command/runConfigureRabbitMQCommand",
-    "command:subscriptions:rabbitmq": "NODE_ENV=production ts-node src/apps/subscriptions/backend/command/runConfigureRabbitMQCommand"
+    "command:subscriptions:rabbitmq": "NODE_ENV=production ts-node src/apps/subscriptions/backend/command/runConfigureRabbitMQCommand",
+    "command:auth:rabbitmq:test": "NODE_ENV=test ts-node src/apps/auth/backend/command/runConfigureRabbitMQCommand",
+    "command:multimedia:rabbitmq:test": "NODE_ENV=test ts-node src/apps/multimedia/backend/command/runConfigureRabbitMQCommand",
+    "command:backoffice_multimedia:rabbitmq:test": "NODE_ENV=test ts-node src/apps/backoffice-multimedia/backend/command/runConfigureRabbitMQCommand",
+    "command:backoffice_subscriptions:rabbitmq:test": "NODE_ENV=test ts-node src/apps/backoffice-subscriptions/backend/command/runConfigureRabbitMQCommand",
+    "command:subscriptions:rabbitmq:test": "NODE_ENV=test ts-node src/apps/subscriptions/backend/command/runConfigureRabbitMQCommand"
   },
   "keywords": [],
   "author": "",
