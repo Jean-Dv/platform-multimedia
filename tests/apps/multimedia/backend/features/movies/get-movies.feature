@@ -83,3 +83,39 @@ Feature: Get movies
       ]
     }
     """
+
+  Scenario: Get movies when delete a movie
+    Given there is the movie:
+    """
+    {
+      "id": "2f728ac4-8849-4e82-a184-0dab8e101a29",
+      "title": "The Matrix Reloaded",
+      "releaseYear": 2003,
+      "synopsis": "The Matrix Reloaded",
+      "categories": ["d4124abc-8de3-4581-9976-d83e9ee98a54"],
+      "videoId": "79da03fc-185b-414a-8744-595d351e29dc"
+    }
+    """
+    And the following event is received:
+    """
+    {
+      "data": {
+        "id": "2f728ac4-8849-4e82-a184-0dab8e101a29",
+        "type": "backoffice.multimedia.movie.deleted",
+        "occurredOn": "2020-05-16T00:00:00.000Z",
+        "aggregateId": "2f728ac4-8849-4e82-a184-0dab8e101a29",
+        "meta": {
+          "host": "localhost"
+        }
+      }
+    }
+    """
+    When I send a GET request to "/movies"
+    Then the response status code should be 200
+    And the response content should be:
+    """
+    {
+      "ok": true,
+      "data": []
+    }
+    """
