@@ -1,0 +1,28 @@
+{
+  "services": {
+    "BackofficeMultimedia.Videos.application.VideoCreator": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Videos/application/Create/BackofficeMultimediaVideoCreator",
+      "arguments": [
+        "@BackofficeMultimedia.Videos.domain.VideoRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Videos.domain.VideoRepository": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Videos/infrastructure/persistence/AWSS3BackofficeMultimediaVideoRepository",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.AWSConnectionManager"
+      ]
+    },
+    "BackofficeMultimedia.Videos.CreateVideoCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Videos/application/Create/CreateBackofficeMultimediaVideoCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Videos.application.VideoCreator"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}

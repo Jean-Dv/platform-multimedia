@@ -1,0 +1,28 @@
+{
+  "services": {
+    "BackofficeSubscriptions.Plans.domain.PlanRepository": {
+      "class": "../../../../../Contexts/BackofficeSubscriptions/Plans/infrastructure/persistence/MongoBackofficePlanRepository",
+      "arguments": [
+        "@BackofficeSubscriptions.Shared.ConnectionManager"
+      ]
+    },
+    "BackofficeSubscriptions.Plans.application.PlanCreator": {
+      "class": "../../../../../Contexts/BackofficeSubscriptions/Plans/application/Create/BackofficePlanCreator",
+      "arguments": [
+        "@BackofficeSubscriptions.Plans.domain.PlanRepository",
+        "@BackofficeSubscriptions.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeSubscriptions.Plans.CreatePlanCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeSubscriptions/Plans/application/Create/CreateBackofficePlanCommandHandler",
+      "arguments": [
+        "@BackofficeSubscriptions.Plans.application.PlanCreator"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}

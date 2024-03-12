@@ -13,6 +13,10 @@ import helmet from 'helmet'
 import type * as http from 'http'
 import httpStatus from 'http-status'
 import { registerRoutes } from './routes'
+import authConfig from '@Auth/Shared/infrastructure/config'
+import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware'
+import { container } from './dependency-injection'
+import morgan from 'morgan'
 
 /**
  * Represents a server instance using Express.js.
@@ -35,10 +39,16 @@ export class Server {
     this.express.use(compression())
     const router = Router()
     router.use(errorHandler())
+    if (process.env.NODE_ENV === 'dev') {
+      this.express.use(morgan('combined'))
+    }
+    this.setupAuth()
+    this.setupProxies()
     this.express.use(router)
     registerRoutes(router)
     router.use(
       (err: Error, _req: Request, res: Response, _next: NextFunction) => {
+        console.log(err)
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message)
       }
     )
@@ -86,5 +96,76 @@ export class Server {
       }
       resolve()
     })
+  }
+
+  /**
+   * Sets up the proxies for the server.
+   */
+  private setupProxies(): void {
+    authConfig.get('routes').forEach(
+      (route: {
+        url: string
+        auth: {
+          user: boolean
+          admin: boolean
+        }
+        proxy: {
+          target: string
+          changeOrigin: boolean
+          pathRewrite: Record<string, string>
+        }
+      }) => {
+        const options = {
+          ...route.proxy,
+          onProxyReq: fixRequestBody
+        }
+        this.express.use(route.url, createProxyMiddleware(options))
+      }
+    )
+  }
+
+  private setupAuth(): void {
+    authConfig.get('routes').forEach(
+      (route: {
+        url: string
+        auth: {
+          user: boolean
+          admin: boolean
+        }
+        proxy: {
+          target: string
+          changeOrigin: boolean
+          pathRewrite: Record<string, string>
+        }
+      }) => {
+        if (route.auth.user) {
+          const userMiddleware = container.get(
+            'Apps.auth.middlewares.AuthUserMiddleware'
+          )
+          this.express.use(
+            route.url,
+            userMiddleware.run.bind(userMiddleware),
+            function (_req, _res, next) {
+              next()
+            }
+          )
+        }
+        if (route.auth.admin) {
+          const adminMiddleware = container.get(
+            'Apps.auth.middlewares.AuthAdminMiddleware'
+          )
+          this.express.use(
+            route.url,
+            adminMiddleware.run.bind(adminMiddleware),
+            function (_req, _res, next) {
+              next()
+            }
+          )
+        }
+        this.express.use(route.url, function (_req, _res, next) {
+          next()
+        })
+      }
+    )
   }
 }

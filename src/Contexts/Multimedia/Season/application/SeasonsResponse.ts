@@ -4,7 +4,7 @@ interface SeasonResponse {
   id: string
   serieId: string
   title: string
-  releaseDate: Date
+  releaseYear: number
 }
 
 export class SeasonsResponse {

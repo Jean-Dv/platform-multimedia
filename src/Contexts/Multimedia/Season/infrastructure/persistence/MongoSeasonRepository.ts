@@ -1,16 +1,16 @@
 import { Season } from '@Multimedia/Season/domain/Season'
 import { type SeasonRepository } from '@Multimedia/Season/domain/SeasonRepository'
 import { type SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
-import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
+import { type UUID } from 'mongodb'
 
 interface SeasonDocument {
-  _id: string
+  _id: UUID
   id: string
   serieId: string
   title: string
-  releaseDate: Date
+  releaseYear: number
 }
 
 export class MongoSeasonRepository
@@ -25,10 +25,10 @@ export class MongoSeasonRepository
     const documents = await this.searchByCriteria<SeasonDocument>(criteria)
     return documents.map((document) =>
       Season.fromPrimitives({
-        id: document.id,
+        id: document._id.toString(),
         serieId: document.serieId,
         title: document.title,
-        releaseDate: document.releaseDate
+        releaseYear: document.releaseYear
       })
     )
   }
@@ -41,22 +41,13 @@ export class MongoSeasonRepository
           id: document.id,
           serieId: document.serieId,
           title: document.title,
-          releaseDate: document.releaseDate
+          releaseYear: document.releaseYear
         })
       : null
   }
 
-  public async deleteBySerie(id: SerieId): Promise<void> {
-    const collection = await this.collection()
-    const document = {
-      deltedAt: new Date()
-    }
-    await collection.updateMany(
-      {
-        serieId: { $eq: id.value }
-      },
-      { $set: document }
-    )
+  public async delete(id: SeasonId): Promise<void> {
+    await this.erase(id.value)
   }
 
   protected collectionName(): string {

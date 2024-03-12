@@ -3,15 +3,15 @@ import { type ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
 import { type ChapterRepository } from '@Multimedia/Chapter/domain/ChapterRepository'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
+import { type UUID } from 'mongodb'
 
 interface ChapterDocument {
-  _id: string
+  _id: UUID
   id: string
-  seasonId: string
   title: string
-  releaseDate: Date
-  url: string
-  duration: number
+  releaseYear: number
+  season: string
+  video: string
 }
 
 export class MongoChapterRepository
@@ -26,12 +26,11 @@ export class MongoChapterRepository
     const document = await this.searchByCriteria<ChapterDocument>(criteria)
     return document.map((document) => {
       return Chapter.fromPrimitives({
-        id: document.id,
-        seasonId: document.seasonId,
+        id: document._id.toString(),
         title: document.title,
-        releaseDate: document.releaseDate,
-        url: document.url,
-        duration: document.duration
+        releaseYear: document.releaseYear,
+        season: document.season,
+        video: document.video
       })
     })
   }
@@ -43,14 +42,17 @@ export class MongoChapterRepository
     })
     return document !== null
       ? Chapter.fromPrimitives({
-          id: document.id,
-          seasonId: document.seasonId,
+          id: document._id.toString(),
           title: document.title,
-          releaseDate: document.releaseDate,
-          url: document.url,
-          duration: document.duration
+          releaseYear: document.releaseYear,
+          season: document.season,
+          video: document.video
         })
       : null
+  }
+
+  public async delete(id: ChapterId): Promise<void> {
+    await this.erase(id.value)
   }
 
   protected collectionName(): string {

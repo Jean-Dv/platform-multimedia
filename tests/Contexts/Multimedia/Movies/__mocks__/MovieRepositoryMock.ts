@@ -1,3 +1,4 @@
+import { type CategoryId } from '@Multimedia/Categories/domain/CategoryId'
 import { type Movie } from '@Multimedia/Movies/domain/Movie'
 import { type MovieId } from '@Multimedia/Movies/domain/MovieId'
 import { type MovieRepository } from '@Multimedia/Movies/domain/MovieRepository'
@@ -65,10 +66,8 @@ export class MovieRepositoryMock implements MovieRepository {
     expect(this.searchMock).toHaveBeenCalledWith(id)
   }
 
-  public assertUpdateMoviesByCategoryHaveBeenCalledWith(
-    name: CategoryName
-  ): void {
-    expect(this.updateMoviesByCategoryMock).toHaveBeenCalledWith(name)
+  public assertUpdateMoviesByCategoryHaveBeenCalledWith(id: CategoryId): void {
+    expect(this.updateMoviesByCategoryMock).toHaveBeenCalledWith(id)
   }
 
   public assertDeleteHaveBeenCalledWith(id: MovieId): void {

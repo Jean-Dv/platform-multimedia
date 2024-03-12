@@ -1,0 +1,2 @@
+src/apps/subscriptions/frontend/**/*.ts
+src/apps/subscriptions/frontend/.eslintrc.json

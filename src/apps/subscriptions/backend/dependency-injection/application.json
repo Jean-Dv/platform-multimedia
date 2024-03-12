@@ -1,0 +1,16 @@
+{
+  "imports": [
+    {
+      "resource": "./Shared/application.json"
+    },
+    {
+      "resource": "./apps/application.json"
+    },
+    {
+      "resource": "./Plans/application.json"
+    },
+    {
+      "resource": "./Transactions/application.json"
+    }
+  ]
+}

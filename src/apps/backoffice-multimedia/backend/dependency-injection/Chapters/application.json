@@ -1,0 +1,47 @@
+{
+  "services": {
+    "BackofficeMultimedia.Chapters.application.ChapterCreator": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Chapters/application/Create/BackofficeMultimediaChapterCreator",
+      "arguments": [
+        "@BackofficeMultimedia.Chapters.domain.ChapterRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Chapters.domain.ChapterRepository": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Chapters/infrastructure/persistence/MongoBackofficeMultimediaChapterRepository",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.ConnectionManager"
+      ]
+    },
+    "BackofficeMultimedia.Chapters.CreateChapterCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Chapters/application/Create/CreateBackofficeMultimediaChapterCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Chapters.application.ChapterCreator",
+        "@BackofficeMultimedia.Seasons.application.SeasonFinder"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    },
+    "BackofficeMultimedia.Chapters.application.ChapterDeletor": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Chapters/application/Delete/BackofficeMultimediaChapterDeletor",
+      "arguments": [
+        "@BackofficeMultimedia.Chapters.domain.ChapterRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Chapters.DeleteChapterCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Chapters/application/Delete/DeleteBackofficeMultimediaChapterCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Chapters.application.ChapterDeletor"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}

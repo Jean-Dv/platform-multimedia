@@ -35,7 +35,10 @@
       "@Shared/*": ["src/Contexts/Shared/*"],
       "@Auth/*": ["src/Contexts/Auth/*"],
       "@Multimedia/*": ["src/Contexts/Multimedia/*"],
-      "@Apps/*": ["src/apps"]
+      "@Apps/*": ["src/apps"],
+      "@BackofficeMultimedia/*": ["src/Contexts/BackofficeMultimedia/*"],
+      "@BackofficeSubscriptions/*": ["src/Contexts/BackofficeSubscriptions/*"],
+      "@Subscriptions/*": ["src/Contexts/Subscriptions/*"],
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

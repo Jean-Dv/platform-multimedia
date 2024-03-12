@@ -1,29 +1,20 @@
-import { Movie } from '@Multimedia/Movies/domain/Movie'
-import { type MovieId } from '@Multimedia/Movies/domain/MovieId'
-import { MovieNotFound } from '@Multimedia/Movies/domain/MovieNotFound'
+import { MovieId } from '@Multimedia/Movies/domain/MovieId'
 import { type MovieRepository } from '@Multimedia/Movies/domain/MovieRepository'
-import { type EventBus } from '@Shared/domain/EventBus'
 
+/**
+ * Service for deleting a movie
+ */
 export class MovieDeletor {
-  constructor(
-    private readonly repository: MovieRepository,
-    private readonly eventBus: EventBus
-  ) {}
+  constructor(private readonly repository: MovieRepository) {}
 
-  public async run(id: MovieId): Promise<void> {
-    const movie = await this.repository.search(id)
-    if (movie === null) {
-      throw new MovieNotFound(`The movie <${id.value}> does not exist`)
-    }
-    const movieToDelete = Movie.delete(
-      movie.id,
-      movie.category,
-      movie.title,
-      movie.releaseDate,
-      movie.url,
-      movie.duration
-    )
-    await this.repository.delete(movieToDelete.id)
-    await this.eventBus.publish(movieToDelete.pullDomainEvents())
+  /**
+   * Removes a movie from the repository.
+   *
+   * @param idFromEvent - The id of the movie to be deleted.
+   */
+  public async run(idFromEvent: string): Promise<void> {
+    const id = new MovieId(idFromEvent)
+
+    await this.repository.delete(id)
   }
 }

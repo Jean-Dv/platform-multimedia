@@ -1,0 +1,12 @@
+{
+  "mongo": {
+    "url": "mongodb://backoffice-subscriptions-mongo:27017/backoffice-subscriptions-prod"
+  },
+  "rabbitmq": {
+    "connectionSettings": {
+      "connection": {
+        "hostname": "rabbitmq"
+      }
+    }
+  }
+}

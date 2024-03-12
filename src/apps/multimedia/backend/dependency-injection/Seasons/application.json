@@ -23,10 +23,10 @@
         "@Multimedia.Shared.domain.EventBus"
       ]
     },
-    "Multimedia.Seasons.CreateSeasonCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Season/application/Create/CreateSeasonCommandHandler",
+    "Multimedia.Seasons.CreateSeasonOnBackofficeMultimediaSeasonCreated": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/Create/CreateSeasonOnBackofficeMultimediaSeasonCreated",
       "arguments": ["@Multimedia.Seasons.application.SeasonCreator"],
-      "tags": [{ "name": "commandHandler" }]
+      "tags": [{ "name": "domainEventSubscriber" }]
     },
     "Multimedia.Seasons.application.SeasonByIdSearcher": {
       "class": "../../../../../Contexts/Multimedia/Season/application/SearchById/SeasonByIdSearcher",
@@ -39,10 +39,12 @@
     },
     "Multimedia.Seasons.application.SeasonDeletor": {
       "class": "../../../../../Contexts/Multimedia/Season/application/Delete/SeasonDeletor",
-      "arguments": ["@Multimedia.Seasons.domain.SeasonRepository"]
+      "arguments": [
+        "@Multimedia.Seasons.domain.SeasonRepository"
+      ]
     },
-    "Multimedia.Seasons.DeleteSeasonOnSerieDeleted": {
-      "class": "../../../../../Contexts/Multimedia/Season/application/Delete/DeleteSeasonOnSerieDeleted",
+    "Multimedia.Seasons.DeleteSeasonOnBackofficeMultimediaSeasonDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Season/application/Delete/DeleteSeasonOnBackofficeMultimediaSeasonDeleted",
       "arguments": ["@Multimedia.Seasons.application.SeasonDeletor"],
       "tags": [{ "name": "domainEventSubscriber" }]
     }

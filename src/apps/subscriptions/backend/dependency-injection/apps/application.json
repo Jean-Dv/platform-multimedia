@@ -1,0 +1,16 @@
+{
+  "services": {
+    "Apps.subscriptions.controllers.PlansGetController": {
+      "class": "../../controllers/PlansGetController",
+      "arguments": [
+        "@Subscriptions.Shared.domain.QueryBus"
+      ]
+    },
+    "Apps.subscriptions.controllers.TransactionPostController": {
+      "class": "../../controllers/TransactionPostController",
+      "arguments": [
+        "@Subscriptions.Shared.domain.CommandBus"
+      ]
+    }
+  }
+}

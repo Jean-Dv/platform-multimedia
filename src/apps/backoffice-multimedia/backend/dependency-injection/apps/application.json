@@ -1,0 +1,67 @@
+{
+  "services": {
+    "Apps.backoffice-multimedia.controllers.StatusGetController": {
+      "class": "../../controllers/StatusGetController"
+    },
+    "Apps.backoffice-multimedia.controllers.MoviePutController": {
+      "class": "../../controllers/MoviePutController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.VideoPostController": {
+      "class": "../../controllers/VideoPostController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.SeriePutController": {
+      "class": "../../controllers/SeriePutController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.SeasonPutController": {
+      "class": "../../controllers/SeasonPutController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.ChapterPutController": {
+      "class": "../../controllers/ChapterPutController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.CategoryPutController": {
+      "class": "../../controllers/CategoryPutController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.ChapterDeleteController": {
+      "class": "../../controllers/ChapterDeleteController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.MovieDeleteController": {
+      "class": "../../controllers/MovieDeleteController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.SerieDeleteController": {
+      "class": "../../controllers/SerieDeleteController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    },
+    "Apps.backoffice-multimedia.controllers.SeasonDeleteController": {
+      "class": "../../controllers/SeasonDeleteController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
+    }
+  }
+}

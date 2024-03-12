@@ -24,6 +24,15 @@
       "class": "../../../../../Contexts/Auth/Roles/application/SearchByName/SearchRoleByNameQueryHandler",
       "arguments": ["@Auth.Roles.application.RoleByNameSearcher"],
       "tags": [{ "name": "queryHandler" }]
+    },
+    "Auth.Roles.application.RoleByIdSearcher": {
+      "class": "../../../../../Contexts/Auth/Roles/application/SearchById/RoleByIdSearcher",
+      "arguments": ["@Auth.Roles.domain.RoleRepository"]
+    },
+    "Auth.Roles.SearchRoleByIdQueryHandler": {
+      "class": "../../../../../Contexts/Auth/Roles/application/SearchById/SearchRoleByIdQueryHandler",
+      "arguments": ["@Auth.Roles.application.RoleByIdSearcher"],
+      "tags": [{ "name": "queryHandler" }]
     }
   }
 }

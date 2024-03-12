@@ -1,21 +1,22 @@
 import { Category } from '@Multimedia/Categories/domain/Category'
-import { type CategoryId } from '@Multimedia/Categories/domain/CategoryId'
-import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
+import { CategoryId } from '@Multimedia/Categories/domain/CategoryId'
+import { CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
 import { type CategoryRepository } from '@Multimedia/Categories/domain/CategoryRepository'
-import { type EventBus } from '@Shared/domain/EventBus'
 
+/**
+ * Service responsible for creating a category.
+ */
 export class CategoryCreator {
-  constructor(
-    private readonly repository: CategoryRepository,
-    private readonly eventBus: EventBus
-  ) {}
+  constructor(private readonly repository: CategoryRepository) {}
 
-  public async run(params: {
-    id: CategoryId
-    name: CategoryName
-  }): Promise<void> {
-    const category = Category.create(params.id, params.name)
+  /**
+   * Runs the service.
+   *
+   * @param id - The category id.
+   * @param name - The category name.
+   */
+  public async run(id: string, name: string): Promise<void> {
+    const category = new Category(new CategoryId(id), new CategoryName(name))
     await this.repository.save(category)
-    await this.eventBus.publish(category.pullDomainEvents())
   }
 }

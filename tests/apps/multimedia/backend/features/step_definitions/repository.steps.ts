@@ -1,7 +1,6 @@
 import { Movie } from '@Multimedia/Movies/domain/Movie'
-import { MovieDuration } from '@Multimedia/Movies/domain/MovieDuration'
 import { MovieId } from '@Multimedia/Movies/domain/MovieId'
-import { MovieReleaseDate } from '@Multimedia/Movies/domain/MovieReleaseDate'
+import { MovieReleaseYear } from '@Multimedia/Movies/domain/MovieReleaseYear'
 import { type MovieRepository } from '@Multimedia/Movies/domain/MovieRepository'
 import { MovieTitle } from '@Multimedia/Movies/domain/MovieTitle'
 import { Given } from '@cucumber/cucumber'
@@ -10,20 +9,17 @@ import { type SerieRepository } from '@Multimedia/Serie/domain/SerieRepository'
 import { Serie } from '@Multimedia/Serie/domain/Serie'
 import { SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
-import { SerieReleaseDate } from '@Multimedia/Serie/domain/SerieReleaseDate'
+import { SerieReleaseYear } from '@Multimedia/Serie/domain/SerieReleaseYear'
 import { type SeasonRepository } from '@Multimedia/Season/domain/SeasonRepository'
 import { type ChapterRepository } from '@Multimedia/Chapter/domain/ChapterRepository'
 import { Season } from '@Multimedia/Season/domain/Season'
 import { SeasonId } from '@Multimedia/Shared/domain/Season/SeasonId'
 import { SeasonTitle } from '@Multimedia/Season/domain/SeasonTitle'
-import { SeasonReleaseDate } from '@Multimedia/Season/domain/SeasonReleaseDate'
+import { SeasonReleaseYear } from '@Multimedia/Season/domain/SeasonReleaseYear'
 import { Chapter } from '@Multimedia/Chapter/domain/Chapter'
 import { ChapterId } from '@Multimedia/Chapter/domain/ChapterId'
 import { ChapterTitle } from '@Multimedia/Chapter/domain/ChapterTitle'
-import { ChapterReleaseDate } from '@Multimedia/Chapter/domain/ChapterReleaseDate'
-import { ChapterDuration } from '@Multimedia/Chapter/domain/ChapterDuration'
-import { MovieUrl } from '@Multimedia/Movies/domain/MovieUrl'
-import { ChapterUrl } from '@Multimedia/Chapter/domain/ChapterUrl'
+import { ChapterReleaseYear } from '@Multimedia/Chapter/domain/ChapterReleaseYear'
 import { type PlaylistRepository } from '@Multimedia/Playlists/domain/PlaylistRepository'
 import { Playlist } from '@Multimedia/Playlists/domain/Playlist'
 import { PlaylistId } from '@Multimedia/Playlists/domain/PlaylistId'
@@ -40,6 +36,9 @@ import { MultimediaRoleName } from '@Multimedia/Roles/domain/MultimediaRoleName'
 import { MultimediaUser } from '@Multimedia/Users/domain/MultimediaUser'
 import { type MultimediaUserRepository } from '@Multimedia/Users/domain/MultimediaUserRepository'
 import { MultimediaUserId } from '@Multimedia/Users/domain/MultimediaUserId'
+import { SerieSynopsis } from '@Multimedia/Serie/domain/SerieSynopsis'
+import { MovieSynopsis } from '@Multimedia/Movies/domain/MovieSynopsis'
+import { VideoId } from '@Multimedia/Shared/domain/Video/VideoId'
 
 const moviesRepository: MovieRepository = container.get(
   'Multimedia.Movies.domain.MovieRepository'
@@ -74,54 +73,54 @@ const usersRepository: MultimediaUserRepository = container.get(
 )
 
 Given('there is the movie:', async (movie: string) => {
-  const { id, category, title, releaseDate, url, duration } = JSON.parse(movie)
+  const { id, title, releaseYear, synopsis, categories, videoId } =
+    JSON.parse(movie)
   await moviesRepository.save(
     new Movie(
       new MovieId(id),
-      new CategoryName(category),
       new MovieTitle(title),
-      new MovieReleaseDate(releaseDate),
-      new MovieUrl(url),
-      new MovieDuration(duration)
+      new MovieReleaseYear(releaseYear),
+      new MovieSynopsis(synopsis),
+      categories.map((category: string) => new CategoryId(category)),
+      new VideoId(videoId)
     )
   )
 })
 
 Given('there is the serie:', async (serie: string) => {
-  const { id, category, title, releaseDate } = JSON.parse(serie)
+  const { id, title, releaseYear, synopsis, categories } = JSON.parse(serie)
   await seriesRepository.save(
     new Serie(
       new SerieId(id),
-      new CategoryName(category),
       new SerieTitle(title),
-      new SerieReleaseDate(releaseDate)
+      new SerieReleaseYear(releaseYear),
+      new SerieSynopsis(synopsis),
+      categories.map((category: string) => new CategoryId(category))
     )
   )
 })
 
 Given('there is the season:', async (season: string) => {
-  const { id, serieId, title, releaseDate } = JSON.parse(season)
+  const { id, serieId, title, releaseYear } = JSON.parse(season)
   await seasonsRepository.save(
     new Season(
       new SeasonId(id),
       new SerieId(serieId),
       new SeasonTitle(title),
-      new SeasonReleaseDate(releaseDate)
+      new SeasonReleaseYear(releaseYear)
     )
   )
 })
 
 Given('there is the chapter:', async (chapter: string) => {
-  const { id, seasonId, title, releaseDate, url, duration } =
-    JSON.parse(chapter)
+  const { id, title, releaseYear, season, video } = JSON.parse(chapter)
   await chaptersRepository.save(
     new Chapter(
       new ChapterId(id),
-      new SeasonId(seasonId),
       new ChapterTitle(title),
-      new ChapterReleaseDate(releaseDate),
-      new ChapterUrl(url),
-      new ChapterDuration(duration)
+      new ChapterReleaseYear(releaseYear),
+      new SeasonId(season),
+      new VideoId(video)
     )
   )
 })

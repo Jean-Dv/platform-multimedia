@@ -55,7 +55,7 @@ describe('SearchSeasonsByCriteriaQueryHandler', () => {
     ])
 
     const filters = new Array<Map<string, string>>(filterTitle)
-    const orderBy = 'releaseDate'
+    const orderBy = 'releaseYear'
     const orderType = OrderTypes.DESC
     const query = new SearchSeasonsByCriteriaQuery(
       filters,

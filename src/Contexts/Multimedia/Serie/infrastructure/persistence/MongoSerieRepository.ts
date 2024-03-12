@@ -4,13 +4,15 @@ import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryNa
 import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 import { type Criteria } from '@Shared/domain/criteria/Criteria'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
+import { type UUID } from 'mongodb'
 
 interface SerieDocument {
-  _id: string
+  _id: UUID
   id: string
-  category: string
   title: string
-  releaseDate: Date
+  releaseYear: number
+  synopsis: string
+  categories: string[]
 }
 
 /**
@@ -27,11 +29,12 @@ export class MongoSerieRepository
   public async matching(criteria: Criteria): Promise<Serie[]> {
     const documents = await this.searchByCriteria<SerieDocument>(criteria)
     return documents.map((document) =>
-      Serie.fromPrimitive({
-        id: document.id,
-        category: document.category,
+      Serie.fromPrimitives({
+        id: document._id.toString(),
         title: document.title,
-        releaseDate: document.releaseDate
+        releaseYear: document.releaseYear,
+        synopsis: document.synopsis,
+        categories: document.categories
       })
     )
   }
@@ -48,11 +51,12 @@ export class MongoSerieRepository
     const collection = await this.collection()
     const document = await collection.findOne<SerieDocument>({ id: id.value })
     return document !== null
-      ? Serie.fromPrimitive({
-          id: document.id,
-          category: document.category,
+      ? Serie.fromPrimitives({
+          id: document._id.toString(),
           title: document.title,
-          releaseDate: document.releaseDate
+          releaseYear: document.releaseYear,
+          synopsis: document.synopsis,
+          categories: document.categories
         })
       : null
   }

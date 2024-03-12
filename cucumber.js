@@ -12,7 +12,28 @@ const multimediaBackend = [
   '--require tests/apps/multimedia/backend/features/step_definitions/*.steps.ts'
 ].join(' ')
 
+const backofficeMultimediaBackend = [
+  ...common,
+  'tests/apps/backoffice-multimedia/backend/features/**/*.feature',
+  '--require tests/apps/backoffice-multimedia/backend/features/step_definitions/*.steps.ts'
+].join(' ')
+
+const backofficeSubscriptionsBackend = [
+  ...common,
+  'tests/apps/backoffice-subscriptions/backend/features/**/*.feature',
+  '--require tests/apps/backoffice-subscriptions/backend/features/step_definitions/*.steps.ts'
+].join(' ')
+
+const subscriptionsBackend = [
+  ...common,
+  'tests/apps/subscriptions/backend/features/**/*.feature',
+  '--require tests/apps/subscriptions/backend/features/step_definitions/*.steps.ts'
+].join(' ')
+
 module.exports = {
   authBackend,
-  multimediaBackend
+  multimediaBackend,
+  backofficeMultimediaBackend,
+  backofficeSubscriptionsBackend,
+  subscriptionsBackend
 }

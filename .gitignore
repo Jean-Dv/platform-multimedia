@@ -131,3 +131,5 @@ dist
 
 # Custom
 .tmp/
+**/**/public/
+/.docker/conf/s3/.localstack/**

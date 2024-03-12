@@ -1,0 +1,12 @@
+{
+  "mongo": {
+    "url": "mongodb://subscriptions-mongo:27017/subscriptions-prod"
+  },
+  "rabbitmq": {
+    "connectionSettings": {
+      "connection": {
+        "hostname": "rabbitmq"
+      }
+    }
+  }
+}

@@ -1,17 +1,109 @@
 version: '3.9'
 
 networks:
+  platform-network:
   auth-network:
+  aws-network:
+  backoffice-multimedia-network:
+  backoffice-subscriptions-network:
+  multimedia-network:
+  subscriptions-network:
+  gateway-network:
 
 services:
-  mongo:
+  auth-mongo:
     image: mongo:5.0.0
     environment:
-      - MONGO_URL=mongodb://mongo:27017/auth-backend-test
-    ports:
-      - 27017:27017
+      - MONGO_URL=mongodb://auth-mongo:27017/auth-backend-prod
     networks:
       - auth-network
+
+  auth-backend:
+    build: .
+    command: bash -c "pnpm run command:auth:rabbitmq && pnpm run dev:auth:backend"
+    ports:
+      - 8000:8000
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - auth-network
+      - platform-network
+      - gateway-network
+
+  backoffice-multimedia-mongo:
+    image: mongo:5.0.0
+    environment:
+      - MONGO_URL=mongodb://backoffice-multimedia-mongo:27017/backoffice-multimedia-prod
+    networks:
+      - backoffice-multimedia-network
+
+  backoffice-multimedia-backend:
+    build: .
+    command: bash -c "pnpm run command:backoffice_multimedia:rabbitmq && pnpm run dev:backoffice_multimedia:backend"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - backoffice-multimedia-network
+      - platform-network
+      - gateway-network
+
+  backoffice-subscriptions-mongo:
+    image: mongo:5.0.0
+    environment:
+      - MONGO_URL=mongodb://backoffice-subscriptions-mongo:27017/backoffice-subscriptions-prod
+    networks:
+      - backoffice-subscriptions-network
+
+  backoffice-subscriptions-backend:
+    build: .
+    command: bash -c "pnpm run command:backoffice_subscriptions:rabbitmq && pnpm run dev:backoffice_subscriptions:backend"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - backoffice-subscriptions-network
+      - platform-network
+      - gateway-network
+
+  multimedia-mongo:
+    image: mongo:5.0.0
+    environment:
+      - MONGO_URL=mongodb://multimedia-mongo:27017/multimedia-prod
+    networks:
+      - multimedia-network
+
+  multimedia-backend:
+    build: .
+    ports:
+      - 8001:8001
+    command: bash -c "pnpm run command:multimedia:rabbitmq && pnpm run dev:multimedia:backend"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - multimedia-network
+      - platform-network
+      - gateway-network
+
+  subscriptions-mongo:
+    image: mongo:5.0.0
+    environment:
+      - MONGO_URL=mongodb://subscriptions-mongo:27017/subscriptions-prod
+    networks:
+      - subscriptions-network
+
+  subscriptions-backend:
+    build: .
+    command: bash -c "pnpm run command:subscriptions:rabbitmq && pnpm run start:subscriptions:backend"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - subscriptions-network
+      - platform-network
+      - gateway-network
 
   rabbitmq:
     image: 'rabbitmq:3.8-management'
@@ -26,4 +118,22 @@ services:
       timeout: 10s
       retries: 3
     networks:
-      - auth-network
+      - platform-network
+
+  s3-storage:
+    image: localstack/localstack:0.12.5
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DEFAULT_REGION=eu-west-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - DISABLE_CORS_CHECKS=1
+      - DISABLE_CUSTOM_CORS_S3=1
+    ports:
+      - 4566:4566
+    volumes:
+      - './.docker/conf/s3/.init:/docker-entrypoint-initaws.d'
+      - './.docker/conf/s3/.localstack:/tmp/localstack'
+    networks:
+      - aws-network

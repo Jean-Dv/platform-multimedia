@@ -1,9 +1,8 @@
 import { AggregateRoot } from '@Shared/domain/AggregateRoot'
 import { SeasonId } from '../../Shared/domain/Season/SeasonId'
-import { SeasonReleaseDate } from './SeasonReleaseDate'
+import { SeasonReleaseYear } from './SeasonReleaseYear'
 import { SeasonTitle } from './SeasonTitle'
 import { SerieId } from '../../Shared/domain/Serie/SerieId'
-import { SeasonCreatedDomainEvent } from './SeasonCreatedDomainEvent'
 
 /**
  * Represents a season aggregate root entity.
@@ -12,47 +11,19 @@ export class Season extends AggregateRoot {
   public readonly id: SeasonId
   public readonly serieId: SerieId
   public readonly title: SeasonTitle
-  public readonly releaseDate: SeasonReleaseDate
+  public readonly releaseYear: SeasonReleaseYear
 
   constructor(
     id: SeasonId,
     serieId: SerieId,
     title: SeasonTitle,
-    releaseDate: SeasonReleaseDate
+    releaseYear: SeasonReleaseYear
   ) {
     super()
     this.id = id
     this.serieId = serieId
     this.title = title
-    this.releaseDate = releaseDate
-  }
-
-  /**
-   * Creates a new Season instance with the provided information
-   * and publishes a SeasonCreatedDomainEvent.
-   *
-   * @param id - The id of the season.
-   * @param serieId - The id of the serie.
-   * @param title - The name of the season.
-   * @param releaseDate - The release date of the season.
-   * @returns A new Season instance.
-   */
-  public static create(
-    id: SeasonId,
-    serieId: SerieId,
-    title: SeasonTitle,
-    releaseDate: SeasonReleaseDate
-  ): Season {
-    const season = new Season(id, serieId, title, releaseDate)
-    season.record(
-      new SeasonCreatedDomainEvent({
-        aggregateId: id.value,
-        serieId: serieId.value,
-        title: title.value,
-        releaseDate: releaseDate.value
-      })
-    )
-    return season
+    this.releaseYear = releaseYear
   }
 
   /**
@@ -65,13 +36,13 @@ export class Season extends AggregateRoot {
     id: string
     serieId: string
     title: string
-    releaseDate: Date
+    releaseYear: number
   }): Season {
     return new Season(
       new SeasonId(plainData.id),
       new SerieId(plainData.serieId),
       new SeasonTitle(plainData.title),
-      new SeasonReleaseDate(plainData.releaseDate)
+      new SeasonReleaseYear(plainData.releaseYear)
     )
   }
 
@@ -84,13 +55,13 @@ export class Season extends AggregateRoot {
     id: string
     serieId: string
     title: string
-    releaseDate: Date
+    releaseYear: number
   } {
     return {
       id: this.id.value,
       serieId: this.serieId.value,
       title: this.title.value,
-      releaseDate: this.releaseDate.value
+      releaseYear: this.releaseYear.value
     }
   }
 }

@@ -2,10 +2,10 @@ import { type Chapter } from '../domain/Chapter'
 
 interface ChapterResponse {
   id: string
-  seasonId: string
   title: string
-  duration: number
-  releaseDate: Date
+  releaseYear: number
+  season: string
+  video: string
 }
 
 /**

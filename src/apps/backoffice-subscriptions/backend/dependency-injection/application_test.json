@@ -1,0 +1,15 @@
+{
+  "imports": [
+    {
+      "resource": "./application.json"
+    }
+  ],
+  "services": {
+    "BackofficeSubscriptions.EnvironmentArranger": {
+      "class": "../../../../../tests/Contexts/Shared/infrastructure/persistence/mongo/MongoEnvironmentArranger",
+      "arguments": [
+        "@BackofficeSubscriptions.Shared.ConnectionManager"
+      ]
+    }
+  }
+}

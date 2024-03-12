@@ -27,15 +27,22 @@
     "Multimedia.Chapters.application.ChapterCreator": {
       "class": "../../../../../Contexts/Multimedia/Chapter/application/Create/ChapterCreator",
       "arguments": [
-        "@Multimedia.Chapters.domain.ChapterRepository",
-        "@Multimedia.Shared.domain.QueryBus",
-        "@Multimedia.Shared.domain.EventBus"
+        "@Multimedia.Chapters.domain.ChapterRepository"
       ]
     },
-    "Multimedia.Chapters.CreateChapterCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Chapter/application/Create/CreateChapterCommandHandler",
+    "Multimedia.Chapters.CreateChapterOnBackofficeMultimediaChapterCreated": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Create/CreateChapterOnBackofficeMultimediaChapterCreated",
       "arguments": ["@Multimedia.Chapters.application.ChapterCreator"],
-      "tags": [{ "name": "commandHandler" }]
+      "tags": [{ "name": "domainEventSubscriber" }]
+    },
+    "Multimedia.Chapters.application.ChapterDeletor": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Delete/ChapterDeletor",
+      "arguments": ["@Multimedia.Chapters.domain.ChapterRepository"]
+    },
+    "Multimedia.Chapters.DeleteChapterOnBackofficeMultimediaChapterDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Chapter/application/Delete/DeleteChapterOnBackofficeMultimediaChapterDeleted",
+      "arguments": ["@Multimedia.Chapters.application.ChapterDeletor"],
+      "tags": [{ "name": "domainEventSubscriber" }]
     }
   }
 }

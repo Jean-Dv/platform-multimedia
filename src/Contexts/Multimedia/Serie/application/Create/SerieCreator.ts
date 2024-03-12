@@ -1,19 +1,16 @@
-import { CategoryNotFound } from '@Multimedia/Categories/domain/CategoryNotFound'
-import { type CategoryRepository } from '@Multimedia/Categories/domain/CategoryRepository'
+import { CategoryId } from '@Multimedia/Categories/domain/CategoryId'
 import { Serie } from '@Multimedia/Serie/domain/Serie'
-import { type SerieReleaseDate } from '@Multimedia/Serie/domain/SerieReleaseDate'
+import { SerieReleaseYear } from '@Multimedia/Serie/domain/SerieReleaseYear'
 import { type SerieRepository } from '@Multimedia/Serie/domain/SerieRepository'
-import { type SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
-import { type CategoryName } from '@Multimedia/Shared/domain/Category/CategoryName'
-import { type SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
-import { type EventBus } from '@Shared/domain/EventBus'
+import { SerieSynopsis } from '@Multimedia/Serie/domain/SerieSynopsis'
+import { SerieTitle } from '@Multimedia/Serie/domain/SerieTitle'
+import { SerieId } from '@Multimedia/Shared/domain/Serie/SerieId'
 
+/**
+ * Service responsible for creating a serie.
+ */
 export class SerieCreator {
-  constructor(
-    private readonly repository: SerieRepository,
-    private readonly repositoryCategory: CategoryRepository,
-    private readonly eventBus: EventBus
-  ) {}
+  constructor(private readonly repository: SerieRepository) {}
 
   /**
    * Creates a new serie with the provided information, saves it to the repository,
@@ -21,23 +18,21 @@ export class SerieCreator {
    *
    * @param params - The parameters needed to create the serie.
    */
-  public async run(params: {
-    id: SerieId
-    category: CategoryName
-    title: SerieTitle
-    releaseDate: SerieReleaseDate
-  }): Promise<void> {
-    const category = await this.repositoryCategory.searchByName(params.category)
-    if (category === null) {
-      throw new CategoryNotFound(`Category ${params.category.value} not found`)
-    }
-    const serie = Serie.create(
-      params.id,
-      params.category,
-      params.title,
-      params.releaseDate
+  public async run(
+    id: string,
+    title: string,
+    releaseYear: number,
+    synopsis: string,
+    categories: string[]
+  ): Promise<void> {
+    const serie = new Serie(
+      new SerieId(id),
+      new SerieTitle(title),
+      new SerieReleaseYear(releaseYear),
+      new SerieSynopsis(synopsis),
+      categories.map((category) => new CategoryId(category))
     )
+
     await this.repository.save(serie)
-    await this.eventBus.publish(serie.pullDomainEvents())
   }
 }

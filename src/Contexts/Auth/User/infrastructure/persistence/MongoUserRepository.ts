@@ -3,15 +3,19 @@ import { type UserRepository } from '@Auth/Shared/domain/User/UserRepository'
 import { MongoRepository } from '@Shared/infrastructure/persistence/mongo/MongoRepository'
 import { type UserEmail } from '@Auth/User/domain/UserEmail'
 import { type Nullable } from '@Shared/domain/Nullable'
+import { type UserId } from '@Auth/Shared/domain/User/UserId'
+import { type Uuid } from '@Shared/domain/value-objects/Uuid'
 
 interface UserDocument {
-  _id: string
+  _id: Uuid
   id: string
   roleName: string
   firstName: string
   lastName: string
   email: string
   password: string
+  startPlan: Date
+  endPlan: Date
 }
 
 /**
@@ -43,7 +47,25 @@ export class MongoUserRepository
           firstName: document.firstName,
           lastName: document.lastName,
           email: document.email,
-          password: document.password
+          password: document.password,
+          startPlan: document.startPlan,
+          endPlan: document.endPlan
+        })
+      : null
+  }
+
+  public async searchById(id: UserId): Promise<Nullable<User>> {
+    const document = await this.findById<UserDocument>(id.value)
+    return document !== null
+      ? User.fromPrimitives({
+          id: document.id,
+          roleName: document.roleName,
+          firstName: document.firstName,
+          lastName: document.lastName,
+          email: document.email,
+          password: document.password,
+          startPlan: document.startPlan,
+          endPlan: document.endPlan
         })
       : null
   }

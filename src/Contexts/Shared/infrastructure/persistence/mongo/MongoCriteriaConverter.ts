@@ -5,7 +5,7 @@ import { type Filters } from '@Shared/domain/criteria/Filters'
 import { type Order } from '@Shared/domain/criteria/Order'
 
 type MongoFilterOperator = '$eq' | '$ne' | '$gt' | '$lt' | '$regex' | '$not'
-type MongoFilterValue = string | number | boolean
+type MongoFilterValue = string | number | boolean | null
 type MongoFilterOperation = {
   [operator in MongoFilterOperator]?: MongoFilterValue
 }
@@ -48,7 +48,7 @@ export class MongoCriteriaConverter {
     return {
       filter: criteria.hasFilters()
         ? this.generateFilter(criteria.filters)
-        : {},
+        : { deletedAt: { $eq: null } },
       sort: criteria.order.hasOrder()
         ? this.generateSort(criteria.order)
         : { _id: -1 },
@@ -66,6 +66,10 @@ export class MongoCriteriaConverter {
       }
 
       return transformer(filter)
+    })
+
+    filter.push({
+      deletedAt: { $eq: null }
     })
 
     return Object.assign({}, ...filter)

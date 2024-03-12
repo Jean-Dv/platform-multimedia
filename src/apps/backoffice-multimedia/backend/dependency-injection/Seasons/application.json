@@ -1,0 +1,53 @@
+{
+  "services": {
+    "BackofficeMultimedia.Seasons.application.SeasonCreator": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Seasons/application/Create/BackofficeMultimediaSeasonCreator",
+      "arguments": [
+        "@BackofficeMultimedia.Seasons.domain.SeasonRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Seasons.application.SeasonFinder": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Seasons/application/Find/BackofficeMultimediaSeasonFinder",
+      "arguments": [
+        "@BackofficeMultimedia.Seasons.domain.SeasonRepository"
+      ]
+    },
+    "BackofficeMultimedia.Seasons.domain.SeasonRepository": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Seasons/infrastructure/persistence/MongoBackofficeMultimediaSeasonRepository",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.ConnectionManager"
+      ]
+    },
+    "BackofficeMultimedia.Seasons.CreateSeasonCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Seasons/application/Create/CreateBackofficeMultimediaSeasonCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Seasons.application.SeasonCreator",
+        "@BackofficeMultimedia.Series.application.SerieFinder"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    },
+    "BackofficeMultimedia.Seasons.application.SeasonDeletor": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Seasons/application/Delete/BackofficeMultimediaSeasonDeletor",
+      "arguments": [
+        "@BackofficeMultimedia.Seasons.domain.SeasonRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Seasons.DeleteSeasonCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Seasons/application/Delete/DeleteBackofficeMultimediaSeasonCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Seasons.application.SeasonDeletor"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
+    }
+  }
+}

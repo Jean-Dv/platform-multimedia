@@ -12,10 +12,10 @@
       "class": "../../../../../Contexts/Multimedia/Movies/infrastructure/persistence/MongoMovieRepository",
       "arguments": ["@Multimedia.Shared.ConnectionManager"]
     },
-    "Multimedia.Movies.CreateMovieCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Movies/application/Create/CreateMovieCommandHandler",
+    "Multimedia.Movies.CreateMovieOnBackofficeMultimediaMovieCreated": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Create/CreateMovieOnBackofficeMultimediaMovieCreated",
       "arguments": ["@Multimedia.Movies.application.MovieCreator"],
-      "tags": [{ "name": "commandHandler" }]
+      "tags": [{ "name": "domainEventSubscriber" }]
     },
     "Multimedia.Movies.application.MoviesByCriteriaSearcher": {
       "class": "../../../../../Contexts/Multimedia/Movies/application/SearchByCriteria/MoviesByCriteriaSearcher",
@@ -54,10 +54,10 @@
         "@Multimedia.Shared.domain.EventBus"
       ]
     },
-    "Multimedia.Movies.DeleteMovieCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Movies/application/Delete/DeleteMovieCommandHandler",
+    "Multimedia.Movies.DeleteMovieOnBackofficeMultimediaMovieDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Movies/application/Delete/DeleteMovieOnBackofficeMultimediaMovieDeleted",
       "arguments": ["@Multimedia.Movies.application.MovieDeletor"],
-      "tags": [{ "name": "commandHandler" }]
+      "tags": [{ "name": "domainEventSubscriber" }]
     }
   }
 }

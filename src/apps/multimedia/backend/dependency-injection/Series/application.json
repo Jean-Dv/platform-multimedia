@@ -30,10 +30,10 @@
         "@Multimedia.Shared.domain.EventBus"
       ]
     },
-    "Multimedia.Series.CreateSerieCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Serie/application/Create/CreateSerieCommandHandler",
+    "Multimedia.Series.application.CreateSerieOnBackofficeMultimediaSerieCreated": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/Create/CreateSerieOnBackofficeMultimediaSerieCreated",
       "arguments": ["@Multimedia.Series.application.SerieCreator"],
-      "tags": [{ "name": "commandHandler" }]
+      "tags": [{ "name": "domainEventSubscriber" }]
     },
     "Multimedia.Series.application.SerieByIdSearcher": {
       "class": "../../../../../Contexts/Multimedia/Serie/application/SearchById/SerieByIdSearcher",
@@ -46,15 +46,12 @@
     },
     "Multimedia.Series.application.SerieDeletor": {
       "class": "../../../../../Contexts/Multimedia/Serie/application/Delete/SerieDeletor",
-      "arguments": [
-        "@Multimedia.Series.domain.SerieRepository",
-        "@Multimedia.Shared.domain.EventBus"
-      ]
+      "arguments": ["@Multimedia.Series.domain.SerieRepository"]
     },
-    "Multimedia.Series.DeleteSerieCommandHandler": {
-      "class": "../../../../../Contexts/Multimedia/Serie/application/Delete/DeleteSerieCommandHandler",
+    "Multimedia.Series.DeleteSerieOnBackofficeMultimediaSerieDeleted": {
+      "class": "../../../../../Contexts/Multimedia/Serie/application/Delete/DeleteSerieOnBackofficeMultimediaSerieDeleted",
       "arguments": ["@Multimedia.Series.application.SerieDeletor"],
-      "tags": [{ "name": "commandHandler" }]
+      "tags": [{ "name": "domainEventSubscriber" }]
     }
   }
 }

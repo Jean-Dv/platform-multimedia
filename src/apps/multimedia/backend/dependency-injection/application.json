@@ -29,6 +29,9 @@
     },
     {
       "resource": "./Roles/application.json"
+    },
+    {
+      "resource": "./Videos/application.json"
     }
   ]
 }
