@@ -7,12 +7,14 @@ export class ChapterRepositoryMock implements ChapterRepository {
   private readonly saveMock: jest.Mock
   private readonly matchingMock: jest.Mock
   private readonly searchMock: jest.Mock
+  private readonly deleteMock: jest.Mock
   private readonly chapters: Chapter[] = []
 
   constructor() {
     this.saveMock = jest.fn()
     this.matchingMock = jest.fn()
     this.searchMock = jest.fn()
+    this.deleteMock = jest.fn()
   }
 
   public async save(chapter: Chapter): Promise<void> {
@@ -31,6 +33,10 @@ export class ChapterRepositoryMock implements ChapterRepository {
     )
   }
 
+  public async delete(chapter: ChapterId): Promise<void> {
+    this.deleteMock(chapter)
+  }
+
   public assertSaveHaveBeenCalledWith(chapter: Chapter): void {
     expect(this.saveMock).toHaveBeenCalledWith(chapter)
   }
@@ -41,6 +47,10 @@ export class ChapterRepositoryMock implements ChapterRepository {
 
   public assertSearchHaveBeenCalledWith(id: ChapterId): void {
     expect(this.searchMock).toHaveBeenCalledWith(id)
+  }
+
+  public assertDeleteHaveBeenCalledWith(id: ChapterId): void {
+    expect(this.deleteMock).toHaveBeenCalledWith(id)
   }
 
   public searchByCriteriaMockReturnValue(chapters: Chapter[]): void {
