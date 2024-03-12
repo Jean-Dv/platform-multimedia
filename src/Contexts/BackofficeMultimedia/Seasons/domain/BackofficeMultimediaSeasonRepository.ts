@@ -21,4 +21,11 @@ export interface BackofficeMultimediaSeasonRepository {
   search: (
     id: BackofficeMultimediaSeasonId
   ) => Promise<BackofficeMultimediaSeason | null>
+
+  /**
+   * Deletes a backoffice multimedia season from the repository.
+   *
+   * @param season - The backoffice multimedia season to be deleted.
+   */
+  delete: (season: BackofficeMultimediaSeason) => Promise<void>
 }
