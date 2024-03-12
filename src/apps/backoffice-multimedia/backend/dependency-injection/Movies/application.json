@@ -24,6 +24,24 @@
           "name": "commandHandler"
         }
       ]
+    },
+    "BackofficeMultimedia.Movies.application.ChapterDeletor": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Movies/application/Delete/BackofficeMultimediaMovieDeletor",
+      "arguments": [
+        "@BackofficeMultimedia.Movies.domain.MovieRepository",
+        "@BackofficeMultimedia.Shared.domain.EventBus"
+      ]
+    },
+    "BackofficeMultimedia.Movies.DeleteMovieCommandHandler": {
+      "class": "../../../../../Contexts/BackofficeMultimedia/Movies/application/Delete/DeleteBackofficeMultimediaMovieCommandHandler",
+      "arguments": [
+        "@BackofficeMultimedia.Movies.application.ChapterDeletor"
+      ],
+      "tags": [
+        {
+          "name": "commandHandler"
+        }
+      ]
     }
   }
 }

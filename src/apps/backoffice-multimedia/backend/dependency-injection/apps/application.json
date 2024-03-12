@@ -44,6 +44,12 @@
       "arguments": [
         "@BackofficeMultimedia.Shared.domain.CommandBus"
       ]
+    },
+    "Apps.backoffice-multimedia.controllers.MovieDeleteController": {
+      "class": "../../controllers/MovieDeleteController",
+      "arguments": [
+        "@BackofficeMultimedia.Shared.domain.CommandBus"
+      ]
     }
   }
 }
