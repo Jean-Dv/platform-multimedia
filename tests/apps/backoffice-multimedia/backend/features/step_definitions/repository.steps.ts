@@ -21,6 +21,12 @@ import { BackofficeMultimediaChapterId } from '@BackofficeMultimedia/Chapters/do
 import { BackofficeMultimediaChapterTitle } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapterTitle'
 import { BackofficeMultimediaChapterReleaseYear } from '@BackofficeMultimedia/Chapters/domain/BackofficeMultimediaChapterReleaseYear'
 import { BackofficeMultimediaVideoId } from '@BackofficeMultimedia/Shared/domain/BackofficeMultimediaVideoId'
+import { type BackofficeMultimediaMovieRepository } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieRepository'
+import { BackofficeMultimediaMovie } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovie'
+import { BackofficeMultimediaMovieId } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieId'
+import { BackofficeMultimediaMovieTitle } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieTitle'
+import { BackofficeMultimediaMovieReleaseYear } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieReleaseYear'
+import { BackofficeMultimediaMovieSynopsis } from '@BackofficeMultimedia/Movies/domain/BackofficeMultimediaMovieSynopsis'
 
 const categoriesRepository: BackofficeMultimediaCategoryRepository =
   container.get('BackofficeMultimedia.Categories.domain.CategoryRepository')
@@ -35,6 +41,10 @@ const seasonRepository: BackofficeMultimediaSeasonRepository = container.get(
 
 const chapterRepository: BackofficeMultimediaChapterRepository = container.get(
   'BackofficeMultimedia.Chapters.domain.ChapterRepository'
+)
+
+const movieRepository: BackofficeMultimediaMovieRepository = container.get(
+  'BackofficeMultimedia.Movies.domain.MovieRepository'
 )
 
 Given('there is the category:', async (category: string) => {
@@ -83,6 +93,23 @@ Given('there is the chapter:', async (chapter: string) => {
       new BackofficeMultimediaChapterReleaseYear(releaseYear),
       new BackofficeMultimediaSeasonId(season),
       new BackofficeMultimediaVideoId(video)
+    )
+  )
+})
+
+Given('there is the movie:', async (movie: string) => {
+  const { id, title, releaseYear, synopsis, categories, videoId } =
+    JSON.parse(movie)
+  await movieRepository.save(
+    new BackofficeMultimediaMovie(
+      new BackofficeMultimediaMovieId(id),
+      new BackofficeMultimediaMovieTitle(title),
+      new BackofficeMultimediaMovieReleaseYear(releaseYear),
+      new BackofficeMultimediaMovieSynopsis(synopsis),
+      categories.map(
+        (category: string) => new BackofficeMultimediaCategoryId(category)
+      ),
+      new BackofficeMultimediaVideoId(videoId)
     )
   )
 })
